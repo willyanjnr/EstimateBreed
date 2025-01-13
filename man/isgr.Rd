@@ -2,7 +2,7 @@
 % Please edit documentation in R/ISGR.R
 \name{isgr}
 \alias{isgr}
-\title{ISGR - Índice de Seleção Genético para Resiliência. Bandeira et al. (2024)}
+\title{ISGR - Índice de Seleção Genético para Resiliência.}
 \usage{
 isgr(GEN, ENV, NG, MG, CICLO, req = 3.5)
 }
@@ -22,7 +22,7 @@ ideal (valor de 3.5 mm por dia)}
 \item{req}{Valor da demanda hídrica diária média para a cultura da soja (padrão 3.5 mm)}
 }
 \description{
-Estimativa do índice de seleção para resiliência ambiental
+Estimativa do índice de seleção para resiliência ambiental (Bandeira et al., 2024).
 }
 \examples{
 \donttest{

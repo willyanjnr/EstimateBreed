@@ -40,9 +40,9 @@ desv_clim <- function(ENV,TMED,PREC) {
 }
 
 ################################################################################
-#' ISGR - Índice de Seleção Genético para Resiliência. Bandeira et al. (2024)
+#' ISGR - Índice de Seleção Genético para Resiliência.
 #' @description
-#' Estimativa do índice de seleção para resiliência ambiental
+#' Estimativa do índice de seleção para resiliência ambiental (Bandeira et al., 2024).
 #'@param GEN Coluna referente aos genótipos. As linhagens devem obrigatoriamente
 #'ter o prefixo "L" antes do número. Ex: L139.
 #'@param ENV Coluna referente ao ambiente de seleção.

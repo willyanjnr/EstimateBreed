@@ -26,8 +26,6 @@ gvri(GEN, C, L, E, stat = "all", plot = F, ylab = "GVRI", xlab = "Genótipo")
 \item{xlab}{Nome do eixo X}
 }
 \description{
-`r badge('stable')`
-
 Cálculo do Índice de Seleção para Volume de Grão
 
 Índice de seleção para volume de grão proposto por Carvalho et al. (2017).

@@ -4,7 +4,7 @@
 \alias{restr}
 \title{Restrição da variabilidade das testemunhas}
 \usage{
-restr(GEN, REP, Xi, scenario = "original")
+restr(GEN, REP, Xi, scenario = "original", approach = "apI")
 }
 \arguments{
 \item{GEN}{A coluna com o nome do genótipo}
@@ -13,7 +13,14 @@ restr(GEN, REP, Xi, scenario = "original")
 
 \item{Xi}{A coluna com o valor observado para determinado genótipo.}
 
-\item{scenario}{Cenário a ser utilizado para o cálculo.}
+\item{scenario}{Cenário a ser utilizado para o cálculo. Usar "original" para
+não restringir as testemunhas pela média mais ou menos os desvios padrões, ou
+"restr" para aplicar a restrição.}
+
+\item{approach}{Método a ser utilizado para estimativa dos componentes de
+variância. Usar "apI" para regressão genitor progênie, "apII" para o método
+da soma de quadrados de blocos aumentados com testemunhas intercalares, "apIII"
+para o método com modelos lineares mistos com efeitos genéticos aleatórios.}
 }
 \value{
 Retorna uma tabela com os genótipos e os índices selecionados.
@@ -21,7 +28,8 @@ Quanto maior o valor do índice, mais resiliente é o genótipo.
 }
 \description{
 Método para restrição da variabilidade das testemunhas proposta por
-Carvalho et al. (2023).
+Carvalho et al. (2023). Utiliza a restriçõa da média mais ou menos um desvio
+padrão, o que restringe a variação a partir da remoção de valores assimétricos.
 }
 \references{
 Carvalho, I. R., Silva, J. A. G. da, Moura, N. B., Ferreira, L. L.,

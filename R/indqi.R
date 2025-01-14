@@ -64,6 +64,7 @@ is_qindustrial <- function(GEN, NQ, W, PTN){
 #'# Calcular o rendimento industrial extraindo a média por genótipo
 #'with(aveia, rendind(GEN, NG2M, MG, MC, RG, stat = "mean"))
 #'}
+
 rend_ind <- function(GEN,NG2M,MG,MC,RG,stat="all",...){
   require(dplyr)
   GEN = as.factor(GEN)
@@ -143,15 +144,15 @@ indviab <- function(GEN,var1,var2,ylab="Índice",xlab="Genótipo",stat="all",plo
     print(media_gen)
   }}
 
-#' Determinação do peso do hectolitro de cereais
-#' @description
-#' Função útil para caracterizar o peso do hectolitro (PH) de experimentos com
-#' cereais.
-#' @param GEN A coluna com o nome do genótipo
-#' @param PESO Peso obtido em balança de 1qt lt
-#' @return Retorna o valor estimado do peso do hectolitro (PH).
-#' @author Willyan Jr. A. Bandeira, Ivan R. Carvalho
-#' @export
+#'Determinação do peso do hectolitro de cereais
+#'@description
+#'Função útil para caracterizar o peso do hectolitro (PH) de experimentos com
+#'cereais.
+#'@param GEN A coluna com o nome do genótipo
+#'@param PESO Peso obtido em balança de 1qt lt
+#'@return Retorna o valor estimado do peso do hectolitro (PH).
+#'@author Willyan Jr. A. Bandeira, Ivan R. Carvalho
+#'@export
 
 ph <- function(GEN, PESO, crop="trigo"){
   require(dplyr)

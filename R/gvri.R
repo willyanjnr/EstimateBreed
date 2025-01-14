@@ -1,6 +1,5 @@
 #' Índice de Seleção para Volume de Grão
 #' @description
-#' `r badge('stable')`
 #'
 #' Cálculo do Índice de Seleção para Volume de Grão
 #'

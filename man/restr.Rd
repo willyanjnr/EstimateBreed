@@ -4,7 +4,7 @@
 \alias{restr}
 \title{Restrição da variabilidade das testemunhas}
 \usage{
-restr(GEN, REP, Xi, scenario = "original", approach = "apI")
+restr(GEN, REP, Xi, scenario = NULL, zstat = NULL, approach = "apI")
 }
 \arguments{
 \item{GEN}{A coluna com o nome do genótipo}
@@ -16,6 +16,8 @@ restr(GEN, REP, Xi, scenario = "original", approach = "apI")
 \item{scenario}{Cenário a ser utilizado para o cálculo. Usar "original" para
 não restringir as testemunhas pela média mais ou menos os desvios padrões, ou
 "restr" para aplicar a restrição.}
+
+\item{zstat}{Argumento lógico. Aplica a normalização pela notação Z se "TRUE".}
 
 \item{approach}{Método a ser utilizado para estimativa dos componentes de
 variância. Usar "apI" para regressão genitor progênie, "apII" para o método

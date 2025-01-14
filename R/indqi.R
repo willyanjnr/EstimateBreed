@@ -82,6 +82,7 @@ rend_ind <- function(GEN,NG2M,MG,MC,RG,stat="all",...){
   }else if (stat=="mean"){
     ID = MC/MG
     RI = RG*(NG2M/100)*ID
+    dados <- data.frame(GEN,ID,RI)
     media_gen <- aggregate(cbind(ID, RI) ~ GEN,
                            data = dados,
                            FUN = mean,

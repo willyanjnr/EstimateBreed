@@ -44,6 +44,7 @@ restr <- function(GEN, REP, Xi, scenario = NULL, zstat=NULL, approach="apI"){
     rep_removidos <- REP[!dentro_limite]
     gen_rep_removidos <- paste(removidos, rep_removidos, sep = "R")
     n_desvio <- sd(ream$Xi)
+    n_media <- mean(ream$Xi)
     percent <- 100-((n_desvio*100)/desvio)
 
     cat("Genótipos e repetições removidos: \n")
@@ -55,11 +56,13 @@ restr <- function(GEN, REP, Xi, scenario = NULL, zstat=NULL, approach="apI"){
     cat("Desvio SR:",paste(round(desvio,digits = 4)),"\n")
     cat("Desvio CR:",paste(round(n_desvio,digits = 4)),"\n")
     cat("Percent Red:",paste(round(percent,digits = 2)),"\n")
+    cat("Mean SR:",paste(round(media,digits = 4)),"\n")
+    cat("Mean CR:",paste(round(n_media,digits = 4)),"\n")
   } else if(scenario=="original"){
     media <- mean(Xi)
     desvio <- sd(Xi)
   }
   if(scenario=="restr" && zstat=="T"){
-
+    Z <- d
   }
 }

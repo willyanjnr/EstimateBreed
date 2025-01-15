@@ -5,14 +5,14 @@
 \title{Estimativa dos componentes de variância pela restrição da variabilidade das
 testemunhas.}
 \usage{
-cvar(GEN, REP, Xi, approach = NULL)
+cvar(GEN, REP, Xi, approach = NULL, zstat = NULL)
 }
 \arguments{
 \item{GEN}{A coluna com o nome dos genótipos (sem testemunhas).}
 
 \item{REP}{A coluna com as repetições (se houver).}
 
-\item{Xi}{A coluna com o valor observado para determinado genótipo.}
+\item{Xi}{A coluna com o valor observado para a variável em determinado genótipo.}
 
 \item{approach}{Método a ser utilizado para estimativa dos componentes de
 variância. Usar "apI" para regressão genitor progênie, "apII" para o método

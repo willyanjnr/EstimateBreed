@@ -22,17 +22,16 @@
 #'@export
 
 #Usar o assign para criar um objeto, para o usuário imprimir apenas os resultados desejados
-restr <- function(TEST, REP, Xi, scenario = NULL, zstat=NULL){
+restr <- function(TEST, REP, Xi, scenario = NULL, zstat = NULL){
   require(dplyr)
   require(ggplot2)
-  require(lme4)
+
   if (is.null(scenario)){
     stop("Por favor, informe se a restrição será aplicada!")
   }
-  if(scenario=="restr"){
+  if (scenario == "restr"){
     media <- mean(Xi)
     desvio <- sd(Xi)
-
     lim_1s <- c(media - desvio, media + desvio)
     dentro_limite <- Xi >= lim_1s[1] & Xi <= lim_1s[2]
     ream <- data.frame(TEST = TEST[dentro_limite], REP = REP[dentro_limite], Xi = Xi[dentro_limite])
@@ -41,29 +40,36 @@ restr <- function(TEST, REP, Xi, scenario = NULL, zstat=NULL){
     gen_rep_removidos <- paste(removidos, rep_removidos, sep = "R")
     n_desvio <- sd(ream$Xi)
     n_media <- mean(ream$Xi)
-    percent <- 100-((n_desvio*100)/desvio)
-
     print(gen_rep_removidos)
-    print(ream)
-
-  } else if(scenario=="original"){
-    media <- mean(Xi)
-    desvio <- sd(Xi)
-    final <- data.frame(media,desvio)
-    print(final)
   }
-  if(zstat==T){
-    if(scenario=="restr"){
-    reamost <- ream %>%
-      mutate(znorm=(Xi-n_media)/n_desvio)
-    print(reamost)
-    } else if(scenario=="original"){
-      orig <- data.frame(TEST,REP,Xi)
-    reamost_orig <- orig %>%
-      mutate(znorm=(Xi-media)/desvio)
-    print(reamost_orig)
-    }}
-} #assign
+
+  if (is.null(zstat)){
+    stop("Por favor, informe se a normalização será aplicada!")
+  }
+  if (zstat == FALSE){
+    if (scenario == "restr"){
+      assign("Control",ream,envir = .GlobalEnv)
+    } else if (scenario == "original"){
+    datatest <- data.frame(TEST,REP,Xi)
+    colnames(datatest) <- c("GEN","REP","Xi")
+    assign("Control",datatest,envir = .GlobalEnv)
+    }
+  }
+  if (zstat == TRUE){
+    if (scenario == "restr"){
+      reamost <- ream %>%
+        mutate(znorm = (Xi - n_media) / n_desvio)
+      assign("Control", reamost, envir = .GlobalEnv)
+    } else if (scenario == "original"){
+      orig <- data.frame(TEST, REP, Xi)
+      media <- mean(orig$Xi)
+      desvio <- sd(orig$Xi)
+      reamost_orig <- orig %>%
+        mutate(znorm = (Xi - media) / desvio)
+      assign("Control", reamost_orig, envir = .GlobalEnv)
+    }
+  }
+}
 
 #'Estimativa dos componentes de variância pela restrição da variabilidade das
 #'testemunhas.
@@ -73,7 +79,7 @@ restr <- function(TEST, REP, Xi, scenario = NULL, zstat=NULL){
 #'padrão, o que restringe a variação a partir da remoção de valores assimétricos.
 #'@param GEN A coluna com o nome dos genótipos (sem testemunhas).
 #'@param REP A coluna com as repetições (se houver).
-#'@param Xi A coluna com o valor observado para determinado genótipo.
+#'@param Xi A coluna com o valor observado para a variável em determinado genótipo.
 #'@param approach Método a ser utilizado para estimativa dos componentes de
 #'variância. Usar "apI" para regressão genitor progênie, "apII" para o método
 #'da soma de quadrados de blocos aumentados com testemunhas intercalares, "apIII"
@@ -89,8 +95,26 @@ restr <- function(TEST, REP, Xi, scenario = NULL, zstat=NULL){
 #'https://doi.org/10.4025/actasciagron.v45i1.56156
 #'@export
 
-cvar <- function(GEN,REP,Xi,approach=NULL){
+cvar <- function(GEN,REP,Xi,approach=NULL,zstat=NULL){
+  require(lme4)
+
   if(is.null(approach)){
     stop("Por favor, informe um método de estimativa dos componentes de variância")
   }
+  if(exists("Control")){
+    control <- Control
+    genot <- data.frame(GEN,REP,Xi)
+    datag <- rbind(genot,control)
+    print(datag)
+  } else {
+    stop("É preciso realizar as operações da função restr para as testemunhas")
+  }
+  #apI Modelo Linear
+  if(approach=="apI"){
+  mod1 <- lm(Xi~GEN,data=datag)
+  summary(mod1)
+  }
+  #apII Soma de quadrados RCBD
+
+  #apIII MLM
 }

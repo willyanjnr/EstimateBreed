@@ -22,6 +22,7 @@
 #'@export
 
 #Usar o assign para criar um objeto, para o usuário imprimir apenas os resultados desejados
+#Função finalizada
 restr <- function(TEST, REP, Xi, scenario = NULL, zstat = NULL){
   require(dplyr)
   require(ggplot2)
@@ -48,6 +49,7 @@ restr <- function(TEST, REP, Xi, scenario = NULL, zstat = NULL){
   }
   if (zstat == FALSE){
     if (scenario == "restr"){
+      colnames(ream) <- c("GEN","REP","Xi")
       assign("Control",ream,envir = .GlobalEnv)
     } else if (scenario == "original"){
     datatest <- data.frame(TEST,REP,Xi)
@@ -59,6 +61,7 @@ restr <- function(TEST, REP, Xi, scenario = NULL, zstat = NULL){
     if (scenario == "restr"){
       reamost <- ream %>%
         mutate(znorm = (Xi - n_media) / n_desvio)
+      colnames(reamost) <- c("GEN","REP","Xi","znorm")
       assign("Control", reamost, envir = .GlobalEnv)
     } else if (scenario == "original"){
       orig <- data.frame(TEST, REP, Xi)
@@ -66,6 +69,7 @@ restr <- function(TEST, REP, Xi, scenario = NULL, zstat = NULL){
       desvio <- sd(orig$Xi)
       reamost_orig <- orig %>%
         mutate(znorm = (Xi - media) / desvio)
+      colnames(reamos_orig) <- c("GEN","REP","Xi","znorm")
       assign("Control", reamost_orig, envir = .GlobalEnv)
     }
   }
@@ -84,6 +88,7 @@ restr <- function(TEST, REP, Xi, scenario = NULL, zstat = NULL){
 #'variância. Usar "apI" para regressão genitor progênie, "apII" para o método
 #'da soma de quadrados de blocos aumentados com testemunhas intercalares, "apIII"
 #'para o método com modelos lineares mistos com efeitos genéticos aleatórios.
+#'@param zstat Argumento lógico. Aplica a normalização pela notação Z se "TRUE".
 #'@return Retorna uma tabela com os genótipos e os índices selecionados.
 #'Quanto maior o valor do índice, mais resiliente é o genótipo.
 #'@author Willyan Jr. A. Bandeira, Ivan R. Carvalho
@@ -96,25 +101,42 @@ restr <- function(TEST, REP, Xi, scenario = NULL, zstat = NULL){
 #'@export
 
 cvar <- function(GEN,REP,Xi,approach=NULL,zstat=NULL){
+  require(dplyr)
   require(lme4)
+  require(minque)
 
   if(is.null(approach)){
-    stop("Por favor, informe um método de estimativa dos componentes de variância")
+    stop("Por favor, informe um método de estimativa dos componentes de variância!")
+  }
+  if(is.null(zstat)){
+    stop("Por favor, informe se a normalização foi aplicada!")
   }
   if(exists("Control")){
     control <- Control
     genot <- data.frame(GEN,REP,Xi)
-    datag <- rbind(genot,control)
-    print(datag)
+    if(zstat==F){
+      datag <- rbind(genot,control)
+    } else if(zstat==T){
+      media <- mean(genot$Xi)
+      desvio <- sd(genot$Xi)
+      datag <- genot %>%
+        mutate(znorm=(Xi-media)/desvio)
+      datag <- rbind(genot,control)
+    }
   } else {
     stop("É preciso realizar as operações da função restr para as testemunhas")
   }
-  #apI Modelo Linear
-  if(approach=="apI"){
-  mod1 <- lm(Xi~GEN,data=datag)
-  summary(mod1)
-  }
-  #apII Soma de quadrados RCBD
 
-  #apIII MLM
+  #apI Modelo Linear
+  if(approach=="apIII"){
+    mod1 = lmm(Xi~+1|GEN,method=c("reml"),data=datag)
+    assign("mod1",mod1,envir = .GlobalEnv)
+
+    V_GEN <- mod1$Var$Xi["V(GEN)", "Est"]
+    V_e <- mod1$Var$Xi["V(e)", "Est"]
+    h2 <- V_GEN / (V_GEN + V_e)
+    Ac <- sqrt(h2)
+    param <- data.frame(V_GEN,V_e,h2,Ac)
+    print(param)
+  }
 }

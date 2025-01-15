@@ -18,6 +18,8 @@ cvar(GEN, REP, Xi, approach = NULL, zstat = NULL)
 variância. Usar "apI" para regressão genitor progênie, "apII" para o método
 da soma de quadrados de blocos aumentados com testemunhas intercalares, "apIII"
 para o método com modelos lineares mistos com efeitos genéticos aleatórios.}
+
+\item{zstat}{Argumento lógico. Aplica a normalização pela notação Z se "TRUE".}
 }
 \value{
 Retorna uma tabela com os genótipos e os índices selecionados.

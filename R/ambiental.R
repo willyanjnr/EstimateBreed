@@ -348,4 +348,131 @@ plastocrono <- function(GEN,TMED,NNOS,habito="ind",plot=F){
       theme_ipsum()
   }}
 
-#' Fototermal
+#'Determinação do índice fototermal
+#'@description
+#'Cálculo do índice fototermal
+#'@param DIA A coluna com o dia de ciclo
+#'@param TMED A coluna com os valores de temperatura média
+#'@param N A coluna com os valores de fotoperíodo
+#'@param plot Argumento lógico. Plotar um gráfico se TRUE
+#'@export
+
+fototermal <- function(DIA, TMED, N,plot=F) {
+  require(dplyr)
+
+  # Verificação de entradas
+  if (length(DIA) != length(TMED)) {
+    stop("O comprimento de 'DIA' deve ser igual ao comprimento de 'TMED'.")
+  }
+  if (length(DIA) != length(N) && length(N) != 1) {
+    stop("O comprimento de 'N' deve ser igual ao comprimento de 'DIA' ou 'N'
+         deve ser um valor constante.")
+  }
+  if (!is.numeric(TMED) || any(TMED < 0)) {
+    stop("Os valores de 'TMED' devem ser numéricos e positivos.")
+  }
+  if (!is.numeric(N) || any(N <= 0)) {
+    stop("Os valores de 'N' (fotoperíodo) devem ser numéricos e positivos.")
+  }
+
+  data <- data.frame(DIA, TMED, N)
+  data <- data %>%
+    mutate(Tef = TMED - 10,
+           IFTd = Tef * N)
+  if (any(data$Tef < 0)) {
+    stop("Temperatura média (TMED) deve ser maior que 10°C para garantir uma
+         temperatura efetiva positiva.")
+  }
+  data <- data %>%
+    mutate(IFTac = cumsum(IFTd))
+  return(data)
+}
+
+#' Balanço hídrico
+# Instalar pacotes necessários
+# install.packages("climate", dependencies = TRUE)
+# install.packages("meteoland", dependencies = TRUE)
+# install.packages("rnoaa", dependencies = TRUE)
+# install.packages("soiltexture", dependencies = TRUE)
+
+library(climate)
+library(meteoland)
+library(rnoaa)
+library(soiltexture)
+
+# Função para cálculo do balanço hídrico complexo com automação de parâmetros
+balanco_hidrico_complexo_auto <- function(P, ET, R, D, I, lat, lon, altitude, S_max, porosidade, capacidade_infiltracao, data_inicio, data_fim) {
+
+  # Obter dados climáticos (temperatura média, umidade, etc.) utilizando o pacote 'climate'
+  clima <- climate_data(lat = lat, lon = lon, start_date = data_inicio, end_date = data_fim, variables = c("temperature", "humidity", "wind_speed", "radiation"))
+
+  # Obter dados de temperatura e umidade
+  T <- clima$temperature  # Temperatura média (°C)
+  UR <- clima$humidity    # Umidade relativa (%)
+  u2 <- clima$wind_speed  # Velocidade do vento (m/s)
+  Rn <- clima$radiation   # Radiação líquida (MJ/m²/dia)
+
+  # Calcular a pressão atmosférica (Pₐ) com base na altitude (estimativa)
+  P_a <- 101.3 * ((1 - 2.25577e-5 * altitude) ^ 5.2559)  # Fórmula para pressão atmosférica em função da altitude
+
+  # Funções internas para calcular eₛ, eₐ, Δ e γ
+  calcular_es <- function(T) {
+    return(0.6108 * exp((17.27 * T) / (T + 237.3)))  # Pressão de vapor de saturação (kPa)
+  }
+
+  calcular_ea <- function(es, UR) {
+    return(es * (UR / 100))  # Pressão de vapor atual (kPa)
+  }
+
+  calcular_delta <- function(T) {
+    return((4098 * (0.6108 * exp((17.27 * T) / (T + 237.3)))) / ((T + 237.3)^2))  # Declive da curva de saturação (kPa/°C)
+  }
+
+  calcular_gamma <- function(P_a) {
+    return(0.665 * 10^(-3) * P_a)  # Constante psicrométrica (kPa/°C)
+  }
+
+  # Calculando os parâmetros
+  es <- sapply(T, calcular_es)  # Pressão de vapor de saturação
+  ea <- mapply(calcular_ea, es, UR)  # Pressão de vapor atual
+  delta <- sapply(T, calcular_delta)  # Declive da curva de saturação
+  gamma <- calcular_gamma(P_a)  # Constante psicrométrica
+
+  # Definir o armazenamento inicial de água no solo (geralmente começa com zero)
+  S <- 0  # Variação do armazenamento de água no solo
+
+  # Armazenamento no solo ao longo do tempo
+  S_acumulado <- numeric(length(P))  # Vetor para armazenar valores de S ao longo do tempo
+
+  # Iterar sobre cada período (dia, mês, etc.)
+  for (t in 1:length(P)) {
+    # 1. Precipitação (P) e Irrigação (I)
+    agua_adicionada <- P[t] + I[t]
+
+    # 2. Evapotranspiração (ET) com método Penman-Monteith
+    ET_calculado <- (0.408 * delta[t] * (Rn[t] - G[t]) + gamma * (900 / (T[t] + 273)) * u2[t] * (es[t] - ea[t])) /
+      (delta[t] + gamma * (1 + 0.34 * u2[t]))  # Evapotranspiração com método Penman-Monteith
+
+    # 3. Escoamento (R)
+    escoamento <- min(R[t], agua_adicionada)
+
+    # 4. Infiltração no solo
+    agua_infiltrada <- min(agua_adicionada - escoamento, capacidade_infiltracao)
+
+    # 5. Drenagem para o lençol freático (D)
+    drenagem <- min(agua_infiltrada, S[t])  # A drenagem não pode ultrapassar o armazenamento
+
+    # Atualizando o armazenamento de água no solo (S)
+    S[t] <- S[t] + agua_adicionada - ET_calculado - escoamento - drenagem
+
+    # Verificando se o armazenamento ultrapassou a capacidade máxima do solo (S_max)
+    if (S[t] > S_max) {
+      S[t] <- S_max  # O armazenamento no solo não pode ser maior que a capacidade de retenção
+    }
+
+    # Armazenar a variação do armazenamento de água no solo ao longo do tempo
+    S_acumulado[t] <- S[t]
+  }
+
+  return(S_acumulado)  # Retorna a variação do armazenamento de água no solo ao longo do tempo
+}

@@ -12,9 +12,10 @@ Jinks_Pooni(População, Var, VG, Testemunhas)
 \description{
 Função para estimar a probabilidade de extrair linhagens superiores de populações
 Método de Jinks and Pooni
-
+}
+\references{
 Port, E. D., Carvalho, I. R., Pradebon, L. C., Loro, M. V., Colet, C. D. F.,
 Silva, J. A. G. D., & Sausen, N. H. (2024).
 Early selection of resilient progenies to seed yield in soybean populations.
- Ciência Rural, 54, e20230287.
+Ciência Rural, 54, e20230287.
 }

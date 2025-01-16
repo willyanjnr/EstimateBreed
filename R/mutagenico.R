@@ -22,13 +22,13 @@ mut_index <- function(mut,MSG,MST,GT,DT,SL) {
   PER <- PER
   SL <- SL
 
-  # Cálculo de Germinação Relativa (GR)
+  #Cálculo da Germinação Relativa (GR)
   GR <- (MSG/MST)*100
 
-  # Cálculo do Índice de Germinação (GI)
+  #Cálculo do Índice de Germinação (GI)
   GI <- GT/DT
 
-  # Cálculo do Índice de Vitalidade (VI)
+  #Cálculo do Índice de Vitalidade (VI)
   VI <- SL*GI
 
   # Retornar os resultados

@@ -24,3 +24,9 @@ dhid(CICLO, FASE, ETo, AD = 4, PROF = 100, Cultura = "Soja")
 \description{
 Estimativa do déficit hídrico das culturas agrícolas
 }
+\references{
+Bortoluzzi, M. P., Heldwein, A. B., Trentin, R., Maldaner, I. C., & da Silva,
+J. R. (2020). Risk of occurrence of water deficit in soybean cultivated in
+lowland soils. Earth Interactions, 24(4), 1-16.
+https://doi.org/10.1175/EI-D-19-0029.1
+}

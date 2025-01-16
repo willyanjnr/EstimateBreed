@@ -1,8 +1,6 @@
 #' Determinação do Déficit Hídrico
 #' @description
-#'
 #' Estimativa do déficit hídrico das culturas agrícolas
-#'
 #'@param CICLO Coluna referente ao ciclo da cultura
 #'@param FASE Fase em que a cultura se encontra
 #'@param ETo Evapotranspiração potencial do dia
@@ -10,6 +8,11 @@
 #'@param ADP Água Disponível Predita
 #'@param PROF Profundidade Aproximada do Solo (em cm)
 #'@param plot Plotar um gráfico do acúmulo (Padrão é F (FALSE))
+#'@references
+#'Bortoluzzi, M. P., Heldwein, A. B., Trentin, R., Maldaner, I. C., & da Silva,
+#'J. R. (2020). Risk of occurrence of water deficit in soybean cultivated in
+#'lowland soils. Earth Interactions, 24(4), 1-16.
+#'https://doi.org/10.1175/EI-D-19-0029.1
 #'@export
 
 dhid <- function(CICLO,FASE,ETo,AD=4,PROF=100,Cultura="Soja"){

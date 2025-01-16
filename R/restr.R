@@ -127,7 +127,7 @@ cvar <- function(GEN,REP,Xi,approach=NULL,zstat=NULL){
     stop("É preciso realizar as operações da função restr para as testemunhas")
   }
 
-  #apI Modelo Linear
+  #apIII Modelo Linear Misto
   if(approach=="apIII"){
     mod1 = lmm(Xi~+1|GEN,method=c("reml"),data=datag)
     assign("mod1",mod1,envir = .GlobalEnv)

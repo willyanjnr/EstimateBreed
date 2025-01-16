@@ -14,6 +14,13 @@
 #'models for wheat industrial quality analysis.
 #'Genetics and Molecular Research, 18(3), 1-14.
 #'@export
+#'@examples
+#'\donttest{
+#' library(Breeding)
+#'
+#'data("ptn")
+#'with(ptn,is_qindustrial(Cult,NQ,W,PTN))
+#'}
 
 is_qindustrial <- function(GEN, NQ, W, PTN){
   require("dplyr")
@@ -59,10 +66,10 @@ is_qindustrial <- function(GEN, NQ, W, PTN){
 #'
 #'data("aveia")
 #'# Calcular o rendimento industrial sem extrair a média
-#'with(aveia, rendind(GEN, NG2M, MG, MC, RG))
+#'with(aveia, rend_ind(GEN, NG2M, MG, MC, RG))
 #'
 #'# Calcular o rendimento industrial extraindo a média por genótipo
-#'with(aveia, rendind(GEN, NG2M, MG, MC, RG, stat = "mean"))
+#'with(aveia, rend_ind(GEN, NG2M, MG, MC, RG, stat = "mean"))
 #'}
 
 rend_ind <- function(GEN,NG2M,MG,MC,RG,stat="all",...){
@@ -104,7 +111,17 @@ rend_ind <- function(GEN,NG2M,MG,MC,RG,stat="all",...){
 #'@author Willyan Jr. A. Bandeira, Ivan R. Carvalho
 #'@export
 #'@examples
-#'with(data,indviab(genot,var1,var2)) #Ajustar o exemplo###
+#'library(Breeding)
+#'
+#'data("trigo")
+#'#Índice de viabilidade de espiga
+#'with(trigo,indviab(TEST,NGE,NNE))
+#'
+#'#Índice de colheita da espiga
+#'with(trigo,indviab(TEST,MGE,ME))
+#'
+#'#Índice de deposição de espiguetas na espiga
+#'#'with(trigo,indviab(TEST,NEE,CE))
 
 indviab <- function(GEN,var1,var2,ylab="Índice",xlab="Genótipo",stat="all",plot=F){
   require("dplyr")
@@ -117,7 +134,7 @@ indviab <- function(GEN,var1,var2,ylab="Índice",xlab="Genótipo",stat="all",plo
   if(stat=="all"){
     indesp <- variav1/variav2
     mediaind <- mean(indesp)
-    dados=data.frame(genot,indesp)
+    dados <- data.frame(GEN,indesp)
     colnames(dados) <- c("Genótipo","Índice")
     cat("\n-----------------------------------------------------------------\n")
     cat("Índice de Viabilidade Geral")

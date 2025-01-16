@@ -19,6 +19,14 @@ is_qindustrial(GEN, NQ, W, PTN)
 Função para determinar índices de qualidade industrial de genótipos de trigo,
 descritas por Szareski et al. (2019).
 }
+\examples{
+\donttest{
+library(Breeding)
+
+data("ptn")
+with(ptn,is_qindustrial(Cult,NQ,W,PTN))
+}
+}
 \references{
 Szareski, V. J., Carvalho, I. R., Kehl, K., Levien, A. M.,
 Lautenchleger, F., Barbosa, M. H., ... & Aumonde, T. Z. (2019).

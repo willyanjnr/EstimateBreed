@@ -28,9 +28,9 @@ library(Breeding)
 
 data("aveia")
 # Calcular o rendimento industrial sem extrair a média
-with(aveia, rendind(GEN, NG2M, MG, MC, RG))
+with(aveia, rend_ind(GEN, NG2M, MG, MC, RG))
 
 # Calcular o rendimento industrial extraindo a média por genótipo
-with(aveia, rendind(GEN, NG2M, MG, MC, RG, stat = "mean"))
+with(aveia, rend_ind(GEN, NG2M, MG, MC, RG, stat = "mean"))
 }
 }

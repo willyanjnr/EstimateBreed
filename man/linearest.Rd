@@ -11,7 +11,9 @@ linearest(indep, dep, type = NULL, alpha = 0.05)
 
 \item{dep}{Nome da coluna da variável dependente}
 
-\item{type}{Tipo de análise a ser realizada.}
+\item{type}{Tipo de análise a ser realizada. Usar "MET" para extrair a máxima
+eficiência técnica, "x3" para obter os pontos de máxima e mínima e "platô" para
+extrair os parâmetros pela função platô.}
 
 \item{alpha}{Significância do teste}
 }
@@ -20,7 +22,8 @@ Retorna uma tabela com os genótipos e os índices selecionados.
 Quanto maior o valor do índice, mais resiliente é o genótipo.
 }
 \description{
-Determinação da máxima eficiência técnica (MET), x2, x3 e platô.
+Determinação da máxima eficiência técnica (MET), pontos de máxima e mínima e
+função platô.
 }
 \author{
 Willyan Jr. A. Bandeira, Ivan R. Carvalho

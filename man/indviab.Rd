@@ -25,7 +25,17 @@ indviab(
 Estimativa do índice de viabilidade a partir de duas variáveis de campo.
 }
 \examples{
-with(data,indviab(genot,var1,var2)) #Ajustar o exemplo###
+library(Breeding)
+
+data("trigo")
+#Índice de viabilidade de espiga
+with(trigo,indviab(TEST,NGE,NNE))
+
+#Índice de colheita da espiga
+with(trigo,indviab(TEST,MGE,ME))
+
+#Índice de deposição de espiguetas na espiga
+#'with(trigo,indviab(TEST,NEE,CE))
 }
 \author{
 Willyan Jr. A. Bandeira, Ivan R. Carvalho

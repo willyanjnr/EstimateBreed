@@ -10,6 +10,20 @@
 #' heterobeltiose, utilize "hetb".
 #' @author Willyan Jr. A. Bandeira, Ivan R. Carvalho.
 #'@export
+#'@examples
+#'\donttest{
+#' library(Breeding)
+#'
+#' data("maize")
+#' #Extrair heterose e heterobeltiose
+#' with(maize,heterose(HIB,GM,GP,P,stat="all"))
+#'
+#' #Extrair apenas heterose
+#' with(maize,heterose(HIB,GM,GP,P,param = "het"))
+#'
+#' #Extrair apenas heterobeltiose
+#' with(maize,heterose(HIB,GM,GP,P,param = "hetb"))
+#'}
 
 heterose <- function(GEN,
                      GM,

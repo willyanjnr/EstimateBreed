@@ -2,8 +2,7 @@
 % Please edit documentation in R/JPooni.R
 \name{Jinks_Pooni}
 \alias{Jinks_Pooni}
-\title{Função para estimar a probabilidade de extrair linhagens superiores de populações
-Método de Jinks and Pooni}
+\title{Método de Jinks and Pooni}
 \usage{
 Jinks_Pooni(População, Var, VG, Testemunhas)
 }
@@ -11,6 +10,9 @@ Jinks_Pooni(População, Var, VG, Testemunhas)
 \item{name}{description}
 }
 \description{
+Função para estimar a probabilidade de extrair linhagens superiores de populações
+Método de Jinks and Pooni
+
 Port, E. D., Carvalho, I. R., Pradebon, L. C., Loro, M. V., Colet, C. D. F.,
 Silva, J. A. G. D., & Sausen, N. H. (2024).
 Early selection of resilient progenies to seed yield in soybean populations.

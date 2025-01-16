@@ -1,9 +1,12 @@
 #'Estimativas a partir de equações polinomiais.
 #'@description
-#'Determinação da máxima eficiência técnica (MET), x2, x3 e platô.
+#'Determinação da máxima eficiência técnica (MET), pontos de máxima e mínima e
+#'função platô.
 #'@param indep Nome da coluna com a variável independente.
 #'@param dep Nome da coluna da variável dependente
-#'@param type Tipo de análise a ser realizada.
+#'@param type Tipo de análise a ser realizada. Usar "MET" para extrair a máxima
+#'eficiência técnica, "x3" para obter os pontos de máxima e mínima e "platô" para
+#'extrair os parâmetros pela função platô.
 #'@param alpha Significância do teste
 #'@return Retorna uma tabela com os genótipos e os índices selecionados.
 #'Quanto maior o valor do índice, mais resiliente é o genótipo.
@@ -34,6 +37,38 @@ linearest <- function(indep,dep,type=NULL,alpha=0.05){
       return("O coeficiente quadrático não é significativo")
     }}
 
+  if (type == "x3"){
+    mod2 <- lm(dep ~ poly(indep,3,raw = T))
+    coeff <- coef(mod2)
+    cat("Coeficientes do modelo cúbico:\n",coeff,"\n")
+
+    b0 <- coeff[1]
+    b1 <- coeff[2]
+    b3 <- coeff[3]
+    b4 <- coeff[4]
+    der1 <- function(x) b1 + 2 * b2 * x + 3 * b3 * x^2
+
+    # Resolver f'(x) = 0 para encontrar os pontos críticos
+    pontos_criticos <- polyroot(c(b1, 2 * b2, 3 * b3))
+    pontos_criticos <- Re(pontos_criticos[Im(pontos_criticos) == 0]) # Apenas raízes reais
+
+    cat("Pontos críticos (x):\n", pontos_criticos, "\n")
+
+    # Derivada de 2ª ordem: f''(x) = 2*b2 + 6*b3*x
+    derivada_2 <- function(x) 2 * b2 + 6 * b3 * x
+
+    # Classificar os pontos críticos como máxima, mínima ou inflexão
+    for (ponto in pontos_criticos) {
+      valor_segunda_derivada <- derivada_2(ponto)
+      if (valor_segunda_derivada > 0) {
+        cat("Ponto x =", ponto, "é um mínimo.\n")
+      } else if (valor_segunda_derivada < 0) {
+        cat("Ponto x =", ponto, "é um máximo.\n")
+      } else {
+        cat("Ponto x =", ponto, "é um ponto de inflexão.\n")
+      }
+    }
+
   if (type == "platô") {
     tryCatch({
       L_init <- max(dep)
@@ -62,4 +97,5 @@ linearest <- function(indep,dep,type=NULL,alpha=0.05){
   } else {
     stop("Tipo de análise não reconhecido")
   }
+}
 }

@@ -1,3 +1,5 @@
+#'Método de Jinks and Pooni
+#'@description
 #'Função para estimar a probabilidade de extrair linhagens superiores de populações
 #' Método de Jinks and Pooni
 #'
@@ -10,10 +12,10 @@
 #'
 #' @export
 
+#Finalizar
 Jinks_Pooni<-function(População, Var, VG, Testemunhas){
 
   require(dplyr)
-  require(crayon)
   require(ggplot2)
 
   População = População
@@ -29,12 +31,12 @@ Jinks_Pooni<-function(População, Var, VG, Testemunhas){
     data.frame(População, Z, P, Valor_Genético)
 
 
-  cat(crayon::white(bold("\n-----------------------------------------------------------------\n")))
-  green(italic(cat("Probabilidade de extrair linhagens superiores da populações
-                   - Método de Jinks and Pooni")))
-  cat(crayon::white(bold("\n-----------------------------------------------------------------\n")))
-  green(italic(cat("Parâmetros")))
-  cat(crayon::white(bold("\n-----------------------------------------------------------------\n")))
+  cat("\n-----------------------------------------------------------------\n")
+  cat("Probabilidade de extrair linhagens superiores da populações
+                   - Método de Jinks and Pooni")
+  cat("\n-----------------------------------------------------------------\n")
+  cat("Parâmetros")
+  cat("\n-----------------------------------------------------------------\n")
   print(Parâmetros)
-  cat(crayon::white(bold("\n-----------------------------------------------------------------\n")))
+  cat("\n-----------------------------------------------------------------\n")
 }

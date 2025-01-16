@@ -22,6 +22,21 @@ heterobeltiose, utilize "hetb".}
 \description{
 Cálculo dos parâmetros da heterose e heterobeltiose de híbridos de milho
 }
+\examples{
+\donttest{
+library(Breeding)
+
+data("maize")
+#Extrair heterose e heterobeltiose
+with(maize,heterose(HIB,GM,GP,P,stat="all"))
+
+#Extrair apenas heterose
+with(maize,heterose(HIB,GM,GP,P,param = "het"))
+
+#Extrair apenas heterobeltiose
+with(maize,heterose(HIB,GM,GP,P,param = "hetb"))
+}
+}
 \author{
 Willyan Jr. A. Bandeira, Ivan R. Carvalho.
 }

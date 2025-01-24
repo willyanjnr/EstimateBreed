@@ -742,21 +742,70 @@ ALELICA<-function(ADITIVIDADE){
   Aditividade<-data.frame(Genitor_Paterno, Genitor_Materno,Progênie)
 
   return(Aditividade)
-
 }
 
-#'Ganho genético aditivo
-#'@description
-#'Estimativa do ganho genético aditivo (Falconer, 1987).
-#'@param GEN Genótipos a serem selecionados.
-#'@param VAR Variável de interesse.
-#'@param h2 Valor da herdabilidade.
-#'@param P Performance da progênie.
-#'@param u Média do grupo contemporâneo mais 10%.
-#'@author Willyan Jr. A. Bandeira, Ivan R. Carvalho
-#'@export
 
-gga <- function(){
+#' Ganho Genético Aditivo
+#' @description
+#' Esta função estima o ganho genético aditivo, conforme descrito por Falconer (1987).
+#' @param GEN Vetor ou dataframe contendo os genótipos a serem selecionados.
+#' @param VAR Variável de interesse para análise.
+#' @param h2 Herdabilidade do caráter (um valor entre 0 e 1).
+#' @param P Performance da progênie (um valor numérico ou vetor).
+#' @param u Média do grupo contemporâneo aumentada em 10%.
+#' @author
+#' Willyan Jr. A. Bandeira, Ivan R. Carvalho
+#' @export
+gga <- function(GEN, VAR, h2, P, u) {
+  data <- data.frame(GEN,VAR,h2,P,u)
   A <- 2
   return(A)
+}
+
+#'Número de indivíduos a serem selecionados em cada família
+#'@description
+#'Definição do número de indivíduos a serem selecionados pelo BLUPis
+#'@param y Variável resposta
+#'@param r A coluna com o efeito de repetição (fixos)
+#'@param p A couna com o efeito de parcela (aleatório)
+#'@param f A coluna com o efeito de genético de dominância associado a famílias
+#'de irmãos-completos (aleatório)
+#'@param b A coluna com o efeito dos blocos incompletos (aleatório)
+#'@param A Matriz de parentesco obtida com o AGHmatrix
+#'@author Willyan Jr. A. Bandeira, Ivan R. Carvalho
+#'@references
+#'Oliveira, R. A., Daros, E., Resende, M. D. V., Bespalhok-Filho, J. C.,
+#'Zambon, J. L. C., Souza, T. R., & Lucius, A. S. F. (2011). Procedimento
+#'Blupis e seleção massal em cana-de-açúcar. Bragantia, 70(4), 796–800.
+#'Model 35 (SELEGEN)
+#'@export
+
+blupis <- function(){
+  #Verificações
+  #Função incompleta, finalizar
+  if(!is.matrix(A) || nrow(A) != ncol(A)){
+    stop("Kinship Matrix must be square!")
+  }
+
+  #Alterar "dados" conforme a função
+  if(!all(dados[[id_col]] %in% rownames(A))){
+    stop("IDs in dataframe need to be the same of the Kinship Matrix")
+    #Ver a necessidade de utilizar stop em vez de warning
+  }
+  #Processo de filtragem dos genótipos que estão na matriz A mas não estão no DF
+  A <- A[as.character(dados[[id_col]]), as.character(dados[[id_col]])]
+  require(sommer)
+  #Fazer verificação do modelo
+  #Quais procedimentos precisam ser realizados para o modelo?
+  #Fazer o modelo com o sommer, requer matriz de parentesco
+  modelo <- mmer(
+    formula = as.formula(paste(y_col,"~1")),
+    random = ~vs(ID,Gu=A),
+    data = dados
+  )
+  summary(modelo)
+  modelo$sigma
+
+  #Ajustar o modelo para o sommer
+  modelo <- lmer(y~r+(1|a)+(1|p)+(1|f)+(1|b),data=dados)
 }

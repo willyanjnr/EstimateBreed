@@ -1,8 +1,6 @@
-#' Cálculo da Soma Térmica
-#' @description
-#'
-#' Cálculo da Soma Térmica de Culturas
-#'
+#'Cálculo da Soma Térmica
+#'@description
+#'Cálculo da Soma Térmica de Culturas
 #'@param TMED Coluna da temperatura média
 #'@param cultura Definir a cultura (Padrão = "milho")
 #'@param plot Plotar um gráfico do acúmulo (Padrão é T (TRUE))
@@ -395,10 +393,10 @@ fototermal <- function(DIA, TMED, N,plot=F) {
 # install.packages("rnoaa", dependencies = TRUE)
 # install.packages("soiltexture", dependencies = TRUE)
 
-library(climate)
-library(meteoland)
-library(rnoaa)
-library(soiltexture)
+#library(climate)
+#library(meteoland)
+#library(rnoaa)
+#library(soiltexture)
 
 # Função para cálculo do balanço hídrico complexo com automação de parâmetros
 balanco_hidrico_complexo_auto <- function(P, ET, R, D, I, lat, lon, altitude, S_max, porosidade, capacidade_infiltracao, data_inicio, data_fim) {

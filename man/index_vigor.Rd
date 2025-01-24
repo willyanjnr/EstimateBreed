@@ -2,7 +2,7 @@
 % Please edit documentation in R/indgerm.R
 \name{index_vigor}
 \alias{index_vigor}
-\title{Índice de vigor multivariado em sementes}
+\title{Índice de vigor multivariado em sementes - COMPLETO}
 \usage{
 index_vigor(GEN, PC, G, CPA, RAD, MS, EC)
 }

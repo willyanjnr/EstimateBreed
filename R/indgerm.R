@@ -1,4 +1,4 @@
-#'Índice de vigor multivariado em sementes
+#'Índice de vigor multivariado em sementes - COMPLETO
 #'@description
 #'Determinação do vigor multivariado de sementes
 #'@param PC desc

@@ -1,7 +1,7 @@
-#' índices de Estresse para Seleção
-#' @description
-#' Índices de seleção de genótipos conduzidos sob condições de estresse citados
-#' por Ghazvini et al. (2024).
+#'índices de Estresse para Seleção
+#'@description
+#'Índices de seleção de genótipos conduzidos sob condições de estresse citados
+#'por Ghazvini et al. (2024).
 #'@param GEN Genótipos a serem selecionados.
 #'@param YS Produtividade do genótipo sem condições estressoras.
 #'@param YC Prdotuvidade do genótipo sob condições estressoras.
@@ -26,10 +26,10 @@
 #'@export
 #'@examples
 #'\donttest{
-#' library(Breeding)
+#'library(Breeding)
 #'
-#' data("aveia")
-#' with(aveia,estresse(GEN,MC,MG,index = "ALL",bygen=T))
+#'data("aveia")
+#'with(aveia,estresse(GEN,MC,MG,index = "ALL",bygen=T))
 #'
 #'}
 

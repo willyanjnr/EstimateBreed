@@ -1,14 +1,14 @@
-#' Função para cálculo da heterose e heterobeltiose
-#' @description
-#' Cálculo dos parâmetros da heterose e heterobeltiose de híbridos de milho
-#' @param GEN A coluna com o nome do genótipo
-#' @param GM A coluna com a média do genitor materno
-#' @param GP A coluna com a média do genitor paterno
-#' @param PR A coluna com a média da progênie
-#' @param param Valor para determinar o parâmetro a ser calculado. Padrão é "all".
-#' Para calcular apenas a heterose, utilize "het". Para calcular apenas a
-#' heterobeltiose, utilize "hetb".
-#' @author Willyan Jr. A. Bandeira, Ivan R. Carvalho.
+#'Função para cálculo da heterose e heterobeltiose
+#'@description
+#'Cálculo dos parâmetros da heterose e heterobeltiose de híbridos de milho
+#'@param GEN A coluna com o nome do genótipo
+#'@param GM A coluna com a média do genitor materno
+#'@param GP A coluna com a média do genitor paterno
+#'@param PR A coluna com a média da progênie
+#'@param param Valor para determinar o parâmetro a ser calculado. Padrão é "all".
+#'Para calcular apenas a heterose, utilize "het". Para calcular apenas a
+#'heterobeltiose, utilize "hetb".
+#'@author Willyan Jr. A. Bandeira, Ivan R. Carvalho.
 #'@export
 #'@examples
 #'\donttest{

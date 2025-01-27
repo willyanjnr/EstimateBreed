@@ -305,46 +305,135 @@ TEMP_BASE<-function(DAS,
 #' Estimativa do plastocrono da soja
 #' @description
 #' Estimativa do plastocrono da soja por meio da Tmed
-#'
 #' @param GEN Coluna referente ao genótipo
 #' @param TMED Coluna referente a temperatura média
-#' @param NNOS Número de nós mensurados a campo
+#' @param STAD Estádio fenológico conforme descrito por Fehr & Caviness (ANO).
 #' @param habito Hábito de crescimento do genótipo (padrão="ind")
 #' @param plot Imprimir o gráfico (padrão=T)
+#' @references Porta, F. S. D., Streck, N. A., Alberto, C. M., da Silva, M. R.,
+#'& Tura, E. F. (2024). Improving understanding of the plastochron of
+#'determinate and indeterminate soybean cultivars. Revista Brasileira de
+#'Engenharia Agrícola e Ambiental, 28(10), e278299.
+#'https://doi.org/10.1590/1807-1929/agriambi.v28n10e278299
 #' @export
 
 #Função incompleta, finalizar
-plastocrono <- function(GEN,TMED,NNOS,habito="ind",plot=F){
+plastocrono <- function(GEN, TMED, STAD, NN, habito = "ind", type = "early", plot = FALSE) {
+  require(dplyr)
   require(ggplot2)
   require(hrbrthemes)
-  GEN <- as.factor(GEN)
-  Tmed <- TMED
-  NNOS <- NNOS
+  require(broom)
+  require(purrr)
+  require(ggrepel)
+  require(grid)
+
   Tb = 7.6
   Tot = 31
   TB = 40
-  if(Tb<Tmed && Tmed<Tot){
-    TTd1 = (Tot-Tb)*((Tmed-Tb)/(Tot-Tb))*1
-    if (Tot<Tmed && Tmed<TB){
-      TTd2 = (Tot-Tb)*((Tmed-TB)/(Tot-TB))*1
+  resultado <- data.frame(GEN, TMED, STAD, NN) %>%
+    group_by(GEN) %>%
+    mutate(
+      TTd = case_when(
+        TMED > Tb & TMED <= Tot ~ (Tot - Tb) * ((TMED - Tb) / (Tot - Tb)) * 1,
+        TMED > Tot & TMED <= TB ~ (Tot - Tb) * ((TMED - TB) / (Tot - TB)) * 1,
+        TRUE ~ 0
+      ),
+      ATT = cumsum(TTd)
+    )
+  total <- resultado %>%
+    group_by(GEN) %>%
+    summarize(TST = max(ATT, na.rm = TRUE))
+
+  if (habito == "ind") {
+    dadosf <- resultado %>%
+      group_by(NN) %>%
+      mutate(STA = max(ATT)) %>%
+      ungroup() %>%
+      filter(STAD %in% c("V1", "V2", "V3", "V4", "V5", "V6", "V7", "V8", "V9", "V10",
+                         "R1", "R2", "R3", "R4", "R5")) %>%
+      mutate(Class = case_when(
+        STAD %in% c("V1", "V2", "V3", "V4", "V5", "V6", "V7", "V8", "V9", "V10") ~ "Early",
+        STAD %in% c("R1", "R2") ~ "Intermediate",
+        STAD %in% c("R3", "R4", "R5") ~ "Late",
+        TRUE ~ "Undefined"
+      ))
+
+    #LM by Class
+    modc <- dadosf %>%
+      group_by(Class) %>%
+      summarise(
+        modelo = list(lm(STA~NN,data=cur_data())),
+        .groups = "drop"
+      )
+    coefic <- modc %>%
+      mutate(coeff = lapply(modelo,coef))
+    res <- modc %>%
+      mutate(resumo = lapply(modelo,summary))
+  }
+  cat("Early Soybean Pheno\n")
+  print(res$resumo[[1]])
+  cat("-------------------------------\n")
+  cat("Intermediate Soybean Pheno\n")
+  print(res$resumo[[2]])
+  cat("-------------------------------\n")
+  cat("Late Soybean Pheno\n")
+  print(res$resumo[[3]])
+
+  if(plot == TRUE) {
+    # Ajustar modelos lineares para cada classe e extrair estatísticas
+    modelos <- dadosf %>%
+      group_by(Class) %>%
+      summarise(model = list(lm(NN ~ STA, data = cur_data())), .groups = "drop")
+
+    # Adicionar previsões ao dataframe original e extrair estatísticas dos modelos
+    modelos_stats <- modelos %>%
+      mutate(
+        stats = map(model, ~ tidy(.x)),  # Resumo dos coeficientes
+        model_summary = map(model, ~ summary(.x)),  # Resumo completo do modelo
+        rsq = map_dbl(model_summary, ~ .$r.squared),  # R²
+        fstat_pval = map_dbl(model_summary, function(x) pf(x$fstatistic[1], x$fstatistic[2], x$fstatistic[3], lower.tail = FALSE)), # p-valor do teste F
+        eq_text = map2(model, rsq, ~ paste("y =", round(coef(.x)[2], 2), "x +", round(coef(.x)[1], 2), "\nR² =", round(.y, 2), "\nF-pval =", round(pf(summary(.x)$fstatistic[1], summary(.x)$fstatistic[2], summary(.x)$fstatistic[3], lower.tail = FALSE), 3)))
+      )
+
+    # Adicionar previsões e equações ao dataframe original
+    dadosf <- dadosf %>%
+      left_join(modelos, by = "Class") %>%
+      mutate(pred = map2_dbl(model, STA, ~ predict(.x, newdata = data.frame(STA = .y)))) %>%
+      left_join(modelos_stats %>% select(Class, eq_text), by = "Class")
+
+    # Obter limites dos eixos
+    x_limits <- c(min(dadosf$STA), max(dadosf$STA))
+    y_limits <- c(min(dadosf$NN), max(dadosf$NN))
+
+    # Plotar as retas de cada modelo linear com personalização dos pontos
+    p <- ggplot(dadosf, aes(x = STA, y = NN, color = Class, shape = Class)) +
+      geom_point(size = 3) +  # Pontos reais
+      geom_line(aes(y = pred), size = 1.2) +  # Retas ajustadas
+      labs(title = "Modelos Lineares por Classe",
+           x = "Soma Térmica Acumulada (STA)",
+           y = "Número de Nós (NN)",
+           color = "Classe",
+           shape = "Classe") +
+      theme_minimal() +
+      theme(
+        plot.title = element_text(size = 14, face = "bold"),
+        axis.title = element_text(size = 12),
+        legend.position = "bottom"  # Posicionar a legenda abaixo do gráfico
+      ) +
+      # Ajustando os limites dos eixos
+      coord_cartesian(xlim = x_limits, ylim = y_limits)  # Previne a geração de valores negativos ou distorcidos
+
+    # Adicionar as equações no canto superior esquerdo
+    for (i in 1:nrow(modelos_stats)) {
+      p <- p + annotation_custom(
+        grob = textGrob(modelos_stats$eq_text[i], gp = gpar(fontsize = 10, fontface = "italic")),
+        xmin = x_limits[1], xmax = x_limits[1] + 0.1 * (x_limits[2] - x_limits[1]),
+        ymin = y_limits[2] - (i * 35), ymax = y_limits[2] - ((i - 1) * 35)  # Espaçar as equações verticalmente
+      )
     }
-    if (Tmed<Tb && Tmed>TB){
-      TTd3=0
-      ATT=TTd1+TTd2+TTd3
-    }}
-  Plast = AAT/NNOS
-  Final <- data.frame(GEN,Plast)
-  Graf <- data.frame(NNOS,AAT)
-  cat("\n-------------------------------------------\n")
-  cat("Plastocrono")
-  cat("\n-------------------------------------------\n")
-  return(Final)
-  if(plot==T){
-    linear <- ggplot(Graf, aes(x=AAT, y=NNOS)) +
-      geom_point() +
-      geom_smooth(method=lm , color="red", fill="#69b3a2", se=TRUE) +
-      theme_ipsum()
-  }}
+    print(p)
+  }
+}
 
 #'Determinação do índice fototermal
 #'@description

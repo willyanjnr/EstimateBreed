@@ -4,14 +4,14 @@
 \alias{plastocrono}
 \title{Estimativa do plastocrono da soja}
 \usage{
-plastocrono(GEN, TMED, NNOS, habito = "ind", plot = F)
+plastocrono(GEN, TMED, STAD, NN, habito = "ind", type = "early", plot = FALSE)
 }
 \arguments{
 \item{GEN}{Coluna referente ao genótipo}
 
 \item{TMED}{Coluna referente a temperatura média}
 
-\item{NNOS}{Número de nós mensurados a campo}
+\item{STAD}{Estádio fenológico conforme descrito por Fehr & Caviness (ANO).}
 
 \item{habito}{Hábito de crescimento do genótipo (padrão="ind")}
 
@@ -19,4 +19,11 @@ plastocrono(GEN, TMED, NNOS, habito = "ind", plot = F)
 }
 \description{
 Estimativa do plastocrono da soja por meio da Tmed
+}
+\references{
+Porta, F. S. D., Streck, N. A., Alberto, C. M., da Silva, M. R.,
+& Tura, E. F. (2024). Improving understanding of the plastochron of
+determinate and indeterminate soybean cultivars. Revista Brasileira de
+Engenharia Agrícola e Ambiental, 28(10), e278299.
+https://doi.org/10.1590/1807-1929/agriambi.v28n10e278299
 }

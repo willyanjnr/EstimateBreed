@@ -5,6 +5,7 @@
 #'@param cultura Definir a cultura (Padrão = "milho")
 #'@param plot Plotar um gráfico do acúmulo (Padrão é T (TRUE))
 #'@export
+
 somatermica <- function(TMED,MONTH,cultura="milho",plot=T){
   require(ggplot2)
   TMED = TMED
@@ -308,7 +309,8 @@ TEMP_BASE<-function(DAS,
 #' @param GEN Coluna referente ao genótipo
 #' @param TMED Coluna referente a temperatura média
 #' @param STAD Estádio fenológico conforme descrito por Fehr & Caviness (ANO).
-#' @param habito Hábito de crescimento do genótipo (padrão="ind")
+#' @param habito Hábito de crescimento do genótipo (padrão="ind"). Utilizar
+#' "ind" para indeterminado e "det" para determinado.
 #' @param plot Imprimir o gráfico (padrão=T)
 #' @references Porta, F. S. D., Streck, N. A., Alberto, C. M., da Silva, M. R.,
 #'& Tura, E. F. (2024). Improving understanding of the plastochron of
@@ -318,7 +320,7 @@ TEMP_BASE<-function(DAS,
 #' @export
 
 #Função incompleta, finalizar
-plastocrono <- function(GEN, TMED, STAD, NN, habito = "ind", type = "early", plot = FALSE) {
+plastocrono <- function(GEN, TMED, STAD, NN, habito = "ind", plot = FALSE) {
   require(dplyr)
   require(ggplot2)
   require(hrbrthemes)
@@ -326,6 +328,8 @@ plastocrono <- function(GEN, TMED, STAD, NN, habito = "ind", type = "early", plo
   require(purrr)
   require(ggrepel)
   require(grid)
+
+  #Falta fazer o gráfico#####
 
   Tb = 7.6
   Tot = 31
@@ -369,69 +373,47 @@ plastocrono <- function(GEN, TMED, STAD, NN, habito = "ind", type = "early", plo
       mutate(coeff = lapply(modelo,coef))
     res <- modc %>%
       mutate(resumo = lapply(modelo,summary))
+    cat("-------------------------------\n")
+    cat("Early Soybean Pheno (V1 to R1)\n")
+    print(res$resumo[[1]])
+    cat("-------------------------------\n")
+    cat("Intermediate Soybean Pheno (R1 to R3)\n")
+    print(res$resumo[[2]])
+    cat("-------------------------------\n")
+    cat("Late Soybean Pheno (R3 to R5)\n")
+    print(res$resumo[[3]])
   }
-  cat("Early Soybean Pheno\n")
-  print(res$resumo[[1]])
-  cat("-------------------------------\n")
-  cat("Intermediate Soybean Pheno\n")
-  print(res$resumo[[2]])
-  cat("-------------------------------\n")
-  cat("Late Soybean Pheno\n")
-  print(res$resumo[[3]])
 
-  if(plot == TRUE) {
-    # Ajustar modelos lineares para cada classe e extrair estatísticas
-    modelos <- dadosf %>%
+  if(habito=="det"){
+    dadosf <- resultado %>%
+      group_by(NN) %>%
+      mutate(STA = max(ATT)) %>%
+      ungroup() %>%
+      filter(STAD %in% c("V1", "V2", "V3", "V4", "V5", "V6", "V7", "V8", "V9", "V10",
+                         "R1", "R2", "R3")) %>%
+      mutate(Class = case_when(
+        STAD %in% c("V1", "V2", "V3", "V4", "V5", "V6", "V7", "V8", "V9", "V10") ~ "Early",
+        STAD %in% c("R1","R2","R3") ~ "Late",
+        TRUE ~ "Undefined"
+      ))
+
+    #LM by Class
+    modc <- dadosf %>%
       group_by(Class) %>%
-      summarise(model = list(lm(NN ~ STA, data = cur_data())), .groups = "drop")
-
-    # Adicionar previsões ao dataframe original e extrair estatísticas dos modelos
-    modelos_stats <- modelos %>%
-      mutate(
-        stats = map(model, ~ tidy(.x)),  # Resumo dos coeficientes
-        model_summary = map(model, ~ summary(.x)),  # Resumo completo do modelo
-        rsq = map_dbl(model_summary, ~ .$r.squared),  # R²
-        fstat_pval = map_dbl(model_summary, function(x) pf(x$fstatistic[1], x$fstatistic[2], x$fstatistic[3], lower.tail = FALSE)), # p-valor do teste F
-        eq_text = map2(model, rsq, ~ paste("y =", round(coef(.x)[2], 2), "x +", round(coef(.x)[1], 2), "\nR² =", round(.y, 2), "\nF-pval =", round(pf(summary(.x)$fstatistic[1], summary(.x)$fstatistic[2], summary(.x)$fstatistic[3], lower.tail = FALSE), 3)))
+      summarise(
+        modelo = list(lm(STA~NN,data=cur_data())),
+        .groups = "drop"
       )
-
-    # Adicionar previsões e equações ao dataframe original
-    dadosf <- dadosf %>%
-      left_join(modelos, by = "Class") %>%
-      mutate(pred = map2_dbl(model, STA, ~ predict(.x, newdata = data.frame(STA = .y)))) %>%
-      left_join(modelos_stats %>% select(Class, eq_text), by = "Class")
-
-    # Obter limites dos eixos
-    x_limits <- c(min(dadosf$STA), max(dadosf$STA))
-    y_limits <- c(min(dadosf$NN), max(dadosf$NN))
-
-    # Plotar as retas de cada modelo linear com personalização dos pontos
-    p <- ggplot(dadosf, aes(x = STA, y = NN, color = Class, shape = Class)) +
-      geom_point(size = 3) +  # Pontos reais
-      geom_line(aes(y = pred), size = 1.2) +  # Retas ajustadas
-      labs(title = "Modelos Lineares por Classe",
-           x = "Soma Térmica Acumulada (STA)",
-           y = "Número de Nós (NN)",
-           color = "Classe",
-           shape = "Classe") +
-      theme_minimal() +
-      theme(
-        plot.title = element_text(size = 14, face = "bold"),
-        axis.title = element_text(size = 12),
-        legend.position = "bottom"  # Posicionar a legenda abaixo do gráfico
-      ) +
-      # Ajustando os limites dos eixos
-      coord_cartesian(xlim = x_limits, ylim = y_limits)  # Previne a geração de valores negativos ou distorcidos
-
-    # Adicionar as equações no canto superior esquerdo
-    for (i in 1:nrow(modelos_stats)) {
-      p <- p + annotation_custom(
-        grob = textGrob(modelos_stats$eq_text[i], gp = gpar(fontsize = 10, fontface = "italic")),
-        xmin = x_limits[1], xmax = x_limits[1] + 0.1 * (x_limits[2] - x_limits[1]),
-        ymin = y_limits[2] - (i * 35), ymax = y_limits[2] - ((i - 1) * 35)  # Espaçar as equações verticalmente
-      )
-    }
-    print(p)
+    coefic <- modc %>%
+      mutate(coeff = lapply(modelo,coef))
+    res <- modc %>%
+      mutate(resumo = lapply(modelo,summary))
+    cat("-------------------------------\n")
+    cat("Early Soybean Pheno (V1 to R1)\n")
+    print(res$resumo[[1]])
+    cat("-------------------------------\n")
+    cat("Late Soybean Pheno (R1 to R3)\n")
+    print(res$resumo[[2]])
   }
 }
 
@@ -486,6 +468,8 @@ fototermal <- function(DIA, TMED, N,plot=F) {
 #library(meteoland)
 #library(rnoaa)
 #library(soiltexture)
+
+#Função experimental
 
 # Função para cálculo do balanço hídrico complexo com automação de parâmetros
 balanco_hidrico_complexo_auto <- function(P, ET, R, D, I, lat, lon, altitude, S_max, porosidade, capacidade_infiltracao, data_inicio, data_fim) {

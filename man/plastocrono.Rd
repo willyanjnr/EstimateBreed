@@ -4,7 +4,7 @@
 \alias{plastocrono}
 \title{Estimativa do plastocrono da soja}
 \usage{
-plastocrono(GEN, TMED, STAD, NN, habito = "ind", type = "early", plot = FALSE)
+plastocrono(GEN, TMED, STAD, NN, habito = "ind", plot = FALSE)
 }
 \arguments{
 \item{GEN}{Coluna referente ao genótipo}
@@ -13,7 +13,8 @@ plastocrono(GEN, TMED, STAD, NN, habito = "ind", type = "early", plot = FALSE)
 
 \item{STAD}{Estádio fenológico conforme descrito por Fehr & Caviness (ANO).}
 
-\item{habito}{Hábito de crescimento do genótipo (padrão="ind")}
+\item{habito}{Hábito de crescimento do genótipo (padrão="ind"). Utilizar
+"ind" para indeterminado e "det" para determinado.}
 
 \item{plot}{Imprimir o gráfico (padrão=T)}
 }

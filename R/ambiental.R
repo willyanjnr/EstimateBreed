@@ -329,8 +329,7 @@ plastocrono <- function(GEN, TMED, STAD, NN, habito = "ind", plot = FALSE) {
   require(ggrepel)
   require(grid)
 
-  #Falta fazer o gráfico#####
-
+  #Falta adicionar o caso de ter mais de um genótipo
   Tb = 7.6
   Tot = 31
   TB = 40
@@ -366,7 +365,7 @@ plastocrono <- function(GEN, TMED, STAD, NN, habito = "ind", plot = FALSE) {
     modc <- dadosf %>%
       group_by(Class) %>%
       summarise(
-        modelo = list(lm(STA~NN,data=cur_data())),
+        modelo = list(lm(NN~STA,data=cur_data())),
         .groups = "drop"
       )
     coefic <- modc %>%
@@ -401,7 +400,7 @@ plastocrono <- function(GEN, TMED, STAD, NN, habito = "ind", plot = FALSE) {
     modc <- dadosf %>%
       group_by(Class) %>%
       summarise(
-        modelo = list(lm(STA~NN,data=cur_data())),
+        modelo = list(lm(NN~STA,data=cur_data())),
         .groups = "drop"
       )
     coefic <- modc %>%
@@ -414,6 +413,87 @@ plastocrono <- function(GEN, TMED, STAD, NN, habito = "ind", plot = FALSE) {
     cat("-------------------------------\n")
     cat("Late Soybean Pheno (R1 to R3)\n")
     print(res$resumo[[2]])
+  }
+
+  if (plot == TRUE) {
+    modelos <- dadosf %>%
+      group_by(Class) %>%
+      summarise(model = list(lm(NN ~ STA, data = cur_data())), .groups = "drop")
+
+    modelos_stats <- modelos %>%
+      mutate(
+        stats = map(model, ~ tidy(.x)),
+        model_summary = map(model, ~ summary(.x)),
+        rsq = map_dbl(model_summary, ~ .$r.squared),  # R²
+        slope_pval = map_dbl(model_summary, ~ coef(.x)[2, "Pr(>|t|)"]),
+        eq_text = map2(model, rsq, ~ paste(
+          "y =", signif(coef(.x)[2], 6), "x +", signif(coef(.x)[1], 6), "\n",
+          "R² =", signif(.y, 2), "\n",
+          "Pr(>t) =", format.pval(coef(summary(.x))[2, "Pr(>|t|)"],
+                                  digits = 5, eps = 1e-16)
+        ))
+      )
+
+    dadosf <- dadosf %>%
+      left_join(modelos, by = "Class") %>%
+      mutate(pred = map2_dbl(model, STA, ~ predict(.x, newdata = data.frame(STA = .y)))) %>%
+      left_join(modelos_stats %>% select(Class, eq_text), by = "Class")
+
+    x_limits <- c(min(dadosf$STA), max(dadosf$STA))
+    y_limits <- c(min(dadosf$NN), max(dadosf$NN))
+
+    num_classes <- nrow(modelos_stats)
+    spacing <- (y_limits[2] - y_limits[1]) * 0.1
+
+    p <- ggplot(dadosf, aes(x = STA, y = NN, color = Class, shape = Class)) +
+      geom_point(size = 3) +
+      geom_line(aes(y = pred), size = 1.2) +
+      labs(title = "Soybean Plastochron",
+           x = "Accumulated Thermal Sum (ATT, ºC Day)",
+           y = "Number of Nodes (NN)",
+           color = "Class",
+           shape = "Class") +
+      theme_classic() +
+      theme(
+        plot.title = element_text(size = 14, face = "bold"),
+        axis.title = element_text(size = 12),
+        legend.position = "bottom"
+      ) +
+      scale_x_continuous(
+        breaks = seq(floor(x_limits[1] / 200) * 200,
+                     ceiling(x_limits[2] / 200) * 200, 200),
+        expand = expansion(mult = 0.05)
+      ) +
+      scale_y_continuous(
+        breaks = seq(floor(y_limits[1] / 2) * 2,
+                     ceiling(y_limits[2] / 2) * 2, 2),
+        expand = expansion(mult = 0.05)
+      ) +
+      coord_cartesian(xlim = x_limits, ylim = y_limits)
+
+    for (i in 1:num_classes) {
+      p <- p + annotation_custom(
+        grob = textGrob(
+          paste("Class:", modelos_stats$Class[i]),
+          gp = gpar(fontsize = 10, fontface = "bold", col = "black")
+        ),
+        xmin = x_limits[1] + 0.05 * (x_limits[2] - x_limits[1]),
+        xmax = x_limits[1] + 0.05 * (x_limits[2] - x_limits[1]),
+        ymin = y_limits[2] - (i - 1) * spacing,
+        ymax = y_limits[2] - (i - 1) * spacing
+      )
+      p <- p + annotation_custom(
+        grob = textGrob(
+          modelos_stats$eq_text[i],
+          gp = gpar(fontsize = 10, fontface = "italic", col = "black")
+        ),
+        xmin = x_limits[1] + 0.05 * (x_limits[2] - x_limits[1]),
+        xmax = x_limits[1] + 0.05 * (x_limits[2] - x_limits[1]),
+        ymin = y_limits[2] - (i - 1) * spacing - 0.05 * (y_limits[2] - y_limits[1]),
+        ymax = y_limits[2] - (i - 1) * spacing - 0.05 * (y_limits[2] - y_limits[1])
+      )
+    }
+    print(p)
   }
 }
 

@@ -782,7 +782,7 @@ gga <- function(GEN, VAR, h2, P, u) {
 
 blupis <- function(){
   #Verificações
-  #Função incompleta, finalizar
+  #Função incompleta, finalizar###
   if(!is.matrix(A) || nrow(A) != ncol(A)){
     stop("Kinship Matrix must be square!")
   }
@@ -808,4 +808,94 @@ blupis <- function(){
 
   #Ajustar o modelo para o sommer
   modelo <- lmer(y~r+(1|a)+(1|p)+(1|f)+(1|b),data=dados)
+}
+
+#'Parâmetros gerais para seleção
+#'@description
+#'Função para determinar parâmetros de seleção, com base em um experimento
+#'realizado na cultura do arroz. Destinada para avaliação isolada do desempenho
+#'de linhagens dentro de uma determinada população.
+#'@param POP A coluna com a população em melhoramento.
+#'@param GEN A coluna com os genótipos selecionados dentro da população.
+#'@param VAR A coluna com a variável de interesse.
+#'@param REP A coluna com as repetições (se houver).
+#'@param K Pressão de seleção (Padrão 0.05).
+#'@param type Tipo de experimento (balanceado ou desbalanceado). Utilize
+#'"balanced" para balanceado e "unb" para desbalanceado.
+#'@param check Argumento lógico. Faz as verificações do pressuposto do modelo
+#'estatístico se o valor for igual a TRUE.
+#'@author Willyan Jr. A. Bandeira, Ivan R. Carvalho
+#'@references
+#'Yadav, S. P. S., Bhandari, S., Ghimire, N. P., Mehata, D. K., Majhi, S. K.,
+#'Bhattarai, S., Shrestha, S., Yadav, B., Chaudhary, P., & Bhujel, S. (2024).
+#'Genetic variability, character association, path coefficient, and diversity
+#'analysis of rice (Oryza sativa L.) genotypes based on agro-morphological
+#'traits. International Journal of Agronomy, 2024, Article ID 9946332.
+#'https://doi.org/10.1155/2024/9946332
+#'@export
+
+library(dplyr)
+library(dplyr)
+
+library(dplyr)
+
+library(dplyr)
+
+genpar <- function(POP, GEN, REP = NULL, vars, K = 0.05, type = "balanced", check = FALSE) {
+  require(dplyr)
+  require(ez)
+
+  if (is.null(REP)) {
+    stop("Informe as repetições", call. = FALSE)
+  }
+
+  varc <- data.frame(POP, GEN, REP)
+  varc$POP <- as.factor(varc$POP)
+  varc$GEN <- as.factor(varc$GEN)
+  varc$REP <- as.factor(varc$REP)
+  for (var_name in vars) {
+    if (!(var_name %in% colnames(dados))) {
+      stop(paste("A variável", var_name, "não existe no conjunto de dados."), call. = FALSE)
+    }
+    varc <- varc %>%
+      mutate(!!var_name := dados[[var_name]])
+    X <- tapply(varc[[var_name]], POP, mean)
+
+    if (type == "balanced") {
+      repet <- length(unique(varc$REP))
+      model <- aov(varc[[var_name]] ~ GEN + REP, data = varc)
+      anova_table <- summary(model)[[1]]
+      MSg <- anova_table["GEN", "Mean Sq"]
+      MSe <- anova_table["Residual", "Mean Sq"]
+      pvalue <- anova_table["GEN", "Pr(>F)"]
+      sigmaE = MSe
+      sigmaG = ((MSg / MSe) / repet)
+      sigmaP = sigmaG + sigmaE
+      if (sigmaG > sigmaP) {
+        warning("Valor da variância genética maior que o valor da variância fenotípica! Estimativas viesadas, favor verificar os dados!")
+      }
+      ECV = ((sqrt(sigmaE) / X) * 100)
+      GCV = ((sqrt(sigmaG) / X) * 100)
+      PCV = ((sqrt(sigmaP) / X) * 100)
+      H2 = (sigmaG / sigmaP) * 100
+      GA = H2 * sigmaP * K
+      GAM = (GA / X) * 100
+      if(pvalue >= 0.05){
+        print(paste("Resultados para a variável:", var_name))
+        print(summary(model))
+        warning("Efeito dos genótipos não significativo para a variável ",var_name,"!",call. = FALSE)
+      } else{
+      result <- data.frame(
+        Parameters = c("sigmaE", "sigmaG", "sigmaP", "ECV", "GCV", "PCV", "H2", "GA", "GAM"),
+        Valor = c(sigmaE, sigmaG, sigmaP, ECV, GCV, PCV, H2, GA, GAM)
+      )
+      colnames(result)[which(colnames(result) == "Valor")] <- var_name
+      print(paste("Resultados para a variável:", var_name))
+      print(summary(model))
+      print(result)
+      }
+    } else if (type == "unb") {
+      # Ajustar um modelo com ANOVA tipo III
+    }
+  }
 }

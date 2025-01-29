@@ -834,12 +834,7 @@ blupis <- function(){
 #'https://doi.org/10.1155/2024/9946332
 #'@export
 
-library(dplyr)
-library(dplyr)
-
-library(dplyr)
-
-library(dplyr)
+require(dplyr)
 
 genpar <- function(POP, GEN, REP = NULL, vars, K = 0.05, type = "balanced", check = FALSE) {
   require(dplyr)

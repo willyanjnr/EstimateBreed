@@ -636,17 +636,27 @@ balanco_hidrico_complexo_auto <- function(P, ET, R, D, I, lat, lon, altitude, S_
 #' @param LAT Latitude
 #' @param type Tipo de análise. Utilize 1 para forecast e 2 para dados temporais.
 #' @param days Número de dias
+#' @param control Tipo de produto a ser aplicado. Utilizar "fung" para fungicida,
+#' "herb" para herbicida, "ins" para inseticidas, "bio" para produtos biológicos.
+#' @param details Retorna o resultado de forma detalhada se TRUE.
+#' @param dates Só utilizar esse argumento se type=2. Data de início e final
+#' para a obtenção dos dados meteorológicos para um ciclo de cultivo.
+#' @return Retorna os momentos ideais de aplicação, considerando cada cenário.
+#' Tomado como parâmetro um DELTA_T entre 2 e 8, velocidade do vento entre 3 e 8,
+#' e ausência de precipitação.
 #' @author Willyan Jr. A. Bandeira, Ivan R. Carvalho
 #' @export
 
 
-deltat <- function(LON,LAT,type=1,days=7,details=FALSE){
+deltat <- function(LON,LAT,type=1,days=7,control=NULL,details=FALSE,dates=NULL){
   #Verificações inicias
 
   if (type == 1) {
     # Tipo 1 - Forecast
     require(httr)
     require(jsonlite)
+    require(dplyr)
+    require(lubridate)
 
     url <- "https://api.open-meteo.com/v1/forecast"
     res <- GET(url, query = list(
@@ -665,29 +675,75 @@ deltat <- function(LON,LAT,type=1,days=7,details=FALSE){
     ur <- previsao$hourly$relative_humidity_2m
     wind <- previsao$hourly$windspeed_10m
     prec <- previsao$hourly$precipitation
-    df <- data.frame(
+    df1 <- data.frame(
       Hora = hora,
       Temp = temp,
       UR = ur,
       WindS = wind,
       Prec = prec
     )
-    df$Hora <- as.POSIXct(df$Hora, format = "%Y-%m-%dT%H:%M",
-                          tz = "America/Sao_Paulo")
-    df$Dia <- as.Date(df$Hora)
-    df$Hora <- format(df$Hora, "%H:%M")
-    df <- df[,c("Dia","Hora","Temp","UR","WindS","Prec")]
-    assign("forecast",df,envir = .GlobalEnv)
+    df1$Hora <- as.POSIXct(df1$Hora, format = "%Y-%m-%dT%H:%M", tz = "UTC")
+    df1$Hora <- with_tz(df1$Hora, "America/Sao_Paulo")
+    df1$Dia <- as.Date(df1$Hora, tz = "America/Sao_Paulo")
+    df1$HoraF <- format(df1$Hora, "%H:%M")
+    df1 <- df1[, c("Dia", "HoraF", "Temp", "UR", "WindS", "Prec")]
+    colnames(df1)[2] <- "Hora"
+    #Fazer o cálculo do DELTAT
+    dt <- df1 %>%
+      mutate(alpha = log(UR/100)+(17.27*Temp)/(237.7+Temp),
+             Td = (237.7*alpha)/(17.27-alpha),
+             DELTAT = Temp-Td)
+    dt <- dt %>% select(-alpha,-Td)
+    assign("forecast",dt,envir = .GlobalEnv)
     if(details==TRUE){
       print(previsao$hourly_units)
-      print(df)
+      print(dt)
     }
-
-    #Fazer o cálculo do DELTAT
-
-    alpha <- log(UR/100)+(17.27*Temp)/(237.7+Temp)
-    Td <- (237.7*alpha)/(17.27-alpha)
-
+    if(is.null(control)){
+      ideal <- dt %>%
+        filter(DELTAT >= 2 & DELTAT <= 8,
+               WindS < 10,
+               Prec < 2)
+      cat("Momentos com condição ideal de aplicação\n")
+      cat("--------------------------------------------------------\n")
+      print(ideal)
+    } else if(control=="fung"){
+      ideal <- dt %>%
+        filter(DELTAT >= 2 & DELTAT <= 8,
+               WindS < 10,
+               Prec < 2,
+               Temp >= 15 & Temp <=25)
+      cat("Momentos de condição ideal para aplicação de fungicida\n")
+      cat("--------------------------------------------------------\n")
+      print(ideal)
+    } else if(control=="ins"){
+      ideal <- dt %>%
+        filter(DELTAT >= 2 & DELTAT <= 8,
+               WindS < 10,
+               Prec < 2,
+               Temp >= 15 & Temp <=30)
+      cat("Momentos de condição ideal para aplicação de inseticida\n")
+      cat("--------------------------------------------------------\n")
+      print(ideal)
+    } else if(control=="herb"){
+      ideal <- dt %>%
+        filter(DELTAT >= 2 & DELTAT <= 8,
+               WindS < 10,
+               Prec < 2,
+               Temp >= 15 & Temp <=30)
+      cat("Momentos de condição ideal para aplicação de herbicida\n")
+      cat("--------------------------------------------------------\n")
+      print(ideal)
+    } else if(control=="bio"){
+      ideal <- dt %>%
+        filter(DELTAT >= 2 & DELTAT <= 8,
+               WindS < 10,
+               Prec < 2,
+               Temp >= 15 & Temp <=30)
+      cat("Momentos de condição ideal para aplicação de biológicos\n")
+      cat("--------------------------------------------------------\n")
+      print(ideal)
+    }
   }
 
   if(type==2){

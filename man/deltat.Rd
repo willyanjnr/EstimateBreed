@@ -4,7 +4,15 @@
 \alias{deltat}
 \title{Aplicação de defensivos agrícolas}
 \usage{
-deltat(LON, LAT, type = 1, days = 7, details = FALSE)
+deltat(
+  LON,
+  LAT,
+  type = 1,
+  days = 7,
+  control = NULL,
+  details = FALSE,
+  dates = NULL
+)
 }
 \arguments{
 \item{LON}{Longitude}
@@ -14,6 +22,19 @@ deltat(LON, LAT, type = 1, days = 7, details = FALSE)
 \item{type}{Tipo de análise. Utilize 1 para forecast e 2 para dados temporais.}
 
 \item{days}{Número de dias}
+
+\item{control}{Tipo de produto a ser aplicado. Utilizar "fung" para fungicida,
+"herb" para herbicida, "ins" para inseticidas, "bio" para produtos biológicos.}
+
+\item{details}{Retorna o resultado de forma detalhada se TRUE.}
+
+\item{dates}{Só utilizar esse argumento se type=2. Data de início e final
+para a obtenção dos dados meteorológicos para um ciclo de cultivo.}
+}
+\value{
+Retorna os momentos ideais de aplicação, considerando cada cenário.
+Tomado como parâmetro um DELTA_T entre 2 e 8, velocidade do vento entre 3 e 8,
+e ausência de precipitação.
 }
 \description{
 Determinação do momento ideal para aplicação

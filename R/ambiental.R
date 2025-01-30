@@ -541,8 +541,8 @@ fototermal <- function(DIA, TMED, N,plot=F) {
 # Instalar pacotes necessários
 # install.packages("climate", dependencies = TRUE)
 # install.packages("meteoland", dependencies = TRUE)
-# install.packages("rnoaa", dependencies = TRUE)
-# install.packages("soiltexture", dependencies = TRUE)
+# instll.packages("rnoaa", dependencies = TRUE)
+# install.packages("soiltexture"a, dependencies = TRUE)
 
 #library(climate)
 #library(meteoland)
@@ -626,4 +626,72 @@ balanco_hidrico_complexo_auto <- function(P, ET, R, D, I, lat, lon, altitude, S_
   }
 
   return(S_acumulado)  # Retorna a variação do armazenamento de água no solo ao longo do tempo
+}
+
+
+#' Aplicação de defensivos agrícolas
+#' @description
+#' Determinação do momento ideal para aplicação
+#' @param LON Longitude
+#' @param LAT Latitude
+#' @param type Tipo de análise. Utilize 1 para forecast e 2 para dados temporais.
+#' @param days Número de dias
+#' @author Willyan Jr. A. Bandeira, Ivan R. Carvalho
+#' @export
+
+
+deltat <- function(LON,LAT,type=1,days=7,details=FALSE){
+  #Verificações inicias
+
+  if (type == 1) {
+    # Tipo 1 - Forecast
+    require(httr)
+    require(jsonlite)
+
+    url <- "https://api.open-meteo.com/v1/forecast"
+    res <- GET(url, query = list(
+      latitude = LAT,
+      longitude = LON,
+      hourly = "temperature_2m,relative_humidity_2m,windspeed_10m,precipitation",
+      timezone = "auto",
+      forecast_days = days
+    ))
+    if (status_code(res) != 200) {
+      stop("Verifique as coordenadas")
+    }
+    previsao <- fromJSON(content(res, "text"))
+    hora <- previsao$hourly$time
+    temp <- previsao$hourly$temperature_2m
+    ur <- previsao$hourly$relative_humidity_2m
+    wind <- previsao$hourly$windspeed_10m
+    prec <- previsao$hourly$precipitation
+    df <- data.frame(
+      Hora = hora,
+      Temp = temp,
+      UR = ur,
+      WindS = wind,
+      Prec = prec
+    )
+    df$Hora <- as.POSIXct(df$Hora, format = "%Y-%m-%dT%H:%M",
+                          tz = "America/Sao_Paulo")
+    df$Dia <- as.Date(df$Hora)
+    df$Hora <- format(df$Hora, "%H:%M")
+    df <- df[,c("Dia","Hora","Temp","UR","WindS","Prec")]
+    assign("forecast",df,envir = .GlobalEnv)
+    if(details==TRUE){
+      print(previsao$hourly_units)
+      print(df)
+    }
+
+    #Fazer o cálculo do DELTAT
+
+    alpha <- log(UR/100)+(17.27*Temp)/(237.7+Temp)
+    Td <- (237.7*alpha)/(17.27-alpha)
+
+  }
+
+  if(type==2){
+    #Tipo 2 - Dados históricos
+    require(nasapower)
+  }
 }

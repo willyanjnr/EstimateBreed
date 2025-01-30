@@ -875,6 +875,7 @@ genpar <- function(POP, GEN, REP = NULL, vars, K = 0.05, type = "balanced", chec
       H2 = (sigmaG / sigmaP) * 100
       GA = H2 * sigmaP * K
       GAM = (GA / X) * 100
+      #Adicionar estruturas de covariância!
       if(pvalue >= 0.05){
         print(paste("Resultados para a variável:", var_name))
         print(summary(model))

@@ -838,7 +838,6 @@ require(dplyr)
 
 genpar <- function(POP, GEN, REP = NULL, vars, K = 0.05, type = "balanced", check = FALSE) {
   require(dplyr)
-  require(ez)
 
   if (is.null(REP)) {
     stop("Informe as repetições", call. = FALSE)
@@ -891,6 +890,8 @@ genpar <- function(POP, GEN, REP = NULL, vars, K = 0.05, type = "balanced", chec
       print(result)
       }
     } else if (type == "unb") {
+      require(ez)
+
       # Ajustar um modelo com ANOVA tipo III
     }
   }

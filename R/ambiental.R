@@ -648,10 +648,11 @@ balanco_hidrico_complexo_auto <- function(P, ET, R, D, I, lat, lon, altitude, S_
 #' @export
 
 
-deltat <- function(LON,LAT,type=1,days=7,control=NULL,details=FALSE,dates=NULL){
+deltat <- function(LON,LAT,type=1,days=7,control=NULL,
+                   details=FALSE,dates=NULL,plot=FALSE){
   #Verificações inicias
 
-  if (type == 1) {
+  if (type==1) {
     # Tipo 1 - Forecast
     require(httr)
     require(jsonlite)
@@ -698,6 +699,11 @@ deltat <- function(LON,LAT,type=1,days=7,control=NULL,details=FALSE,dates=NULL){
     if(details==TRUE){
       print(previsao$hourly_units)
       print(dt)
+    }
+    if(plot==TRUE){
+      require(ggplot2)
+
+      #Fazer gráfico
     }
     if(is.null(control)){
       ideal <- dt %>%
@@ -749,5 +755,34 @@ deltat <- function(LON,LAT,type=1,days=7,control=NULL,details=FALSE,dates=NULL){
   if(type==2){
     #Tipo 2 - Dados históricos
     require(nasapower)
+
+    if(is.null(dates) || length(dates) !=2){
+      stop("O parâmetro 'dates' deve ser um vetor com duas datas
+           no formato 'YYYY-MM-DD'. Exemplo: c('2023-01-01', '2023-05-01').")
+    }
+    clim <- get_power(
+              community = "ag",
+              pars = c("T2M", "RH2M", "PRECTOTCORR"),
+              lonlat = c(LON, LAT),
+              dates = dates,
+              temporal_api = "hourly")
+    assign("climate_data",clim,envir = .GlobalEnv)
+
+    clim <- clim %>%
+      select(-LON,-LAT)
+
+    #Cálculo DELTAT
+    dt <- clim %>%
+      mutate(alpha = log(RH2M/100)+(17.27*T2M)/(237.7+T2M),
+             Td = (237.7*alpha)/(17.27-alpha),
+             DELTAT = T2M-Td)
+    dt <- dt %>% select(-alpha,-Td)
+    ideal <- dt %>%
+      filter(DELTAT >= 2 & DELTAT <= 8,
+             PRECTOTCORR < 2)
+    assign("retrospective",ideal,envir = .GlobalEnv)
+    if(details==TRUE){
+      return(ideal)
+    }
   }
 }

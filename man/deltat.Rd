@@ -11,7 +11,8 @@ deltat(
   days = 7,
   control = NULL,
   details = FALSE,
-  dates = NULL
+  dates = NULL,
+  plot = FALSE
 )
 }
 \arguments{

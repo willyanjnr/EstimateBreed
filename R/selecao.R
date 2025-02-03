@@ -1,10 +1,12 @@
-#' Resposta a seleção ponderada pela pressão de seleção
-#'
-#' @param Var Nome da variável resposta
-#' @param h Nome da coluna com o valor da herdabilidade
-#' @param VF Nome da coluna com o valor da variância fenotípica
-#' @param P Valor da pressão de seleção (padrão = 1)
-#' @export
+#'Pressão de Seleção
+#'@description
+#'Resposta a seleção ponderada pela pressão de seleção
+#'@param Var A coluna com o nome das variáveis de interesse
+#'@param h A coluna com os valores de herdabilidade no sentido restrito
+#'@param VF A coluna com os valores de variância fenotípica
+#'@param P A coluna com os valores observados para as progênies
+#'@author Willyan Jr. A. Bandeira, Ivan R. Carvalho
+#'@export
 
 GS<-function(Var, h, VF, P = "1"){
   require(dplyr)
@@ -118,24 +120,22 @@ GS<-function(Var, h, VF, P = "1"){
     print(final)}}
 
 #######
-#' Resposta a seleção ponderada pelo Diferencial de Seleção
-#'
-#' @param Var description
-#' @param h description
-#' @param DS description
-#' @export
+#'Diferencial de Seleção Simples
+#'@description
+#'Resposta a seleção ponderada pelo Diferencial de Seleção Simples
+#'@param Var A coluna com o nome das variáveis de interesse
+#'@param h A coluna com os valores de herdabilidade no sentido restrito
+#'@param DS A coluna com o valor do diferencial de seleção a ser aplicado para
+#'cada variável
+#'@export
 
 GS2<-function(Var, h, DS){
-
   require(dplyr)
-  require(crayon)
 
   Var = as.factor(Var)
   h = h
   DS = DS
-
   GS = h*DS
-
   final <- data.frame(Var,GS)
   cat("\n-----------------------------------------------------------------\n")
   cat("Ganho de Seleção Ponderado pelo Diferencial de Seleção")
@@ -144,20 +144,19 @@ GS2<-function(Var, h, DS){
 }
 
 ####
-#' Resposta a seleção ponderada pela pressão de seleção e Controle de Genitores
-#' @description
-#' Considera conhecer apenas o genitor materno, sem controle do polinizador,
-#' ou uma seleção direta sem parentais
-#' @param Var description
-#' @param h description
-#' @param VF description
-#' @param P description
-#' @export
+#'Resposta a Seleção pelo Controle de Genitores
+#'@description
+#'Considera conhecer apenas o genitor materno, sem controle do polinizador,
+#'ou uma seleção direta sem parentais
+#'@param Var A coluna com as variáveis de interesse
+#'@param h A coluna com os valores de herdabilidade no sentido restrito
+#'@param VF A coluna com os valores de variância fenotípica
+#'@param P A coluna com os valores das progênies
+#'@author Willyan Jr. A. Bandeira, Ivan R. Carvalho
+#'@export
 
 GS3<-function(Var, h, VF, P = "1"){
-
   require(dplyr)
-  require(crayon)
 
   Var = as.factor(Var)
   h = h
@@ -268,14 +267,16 @@ GS3<-function(Var, h, VF, P = "1"){
     print(final)}}
 
 ###########
-#' Resposta a seleção ponderada pela Pressão Ponderado pelo Anode seleção e ano
-#'
-#' @param Var description
-#' @param h description
-#' @param VF description
-#' @param P description
-#' @param Ano description
-#' @export
+#'Resposta Seleção pelo Ano
+#'@description
+#'Resposta a seleção ponderada pela Pressão Ponderado pelo Ano de seleção e Ano
+#'@param Var A coluna com a variáveis de interesse
+#'@param h A coluna com os valores de herdabilidade no sentido restrito
+#'@param VF A coluna com os valores de variância fenotípica
+#'@param P A coluna com o valor obtido para as progênies
+#'@param Ano A coluna com o ano de seleção
+#'@author Willyan Jr. A. Bandeira, Ivan R. Carvalho
+#'@export
 
 GS4<-function(Var, h, VF, P = "1", Ano){
   require(dplyr)
@@ -390,12 +391,14 @@ GS4<-function(Var, h, VF, P = "1", Ano){
     print(final)}}
 
 ####
-#' Seleção de Genótipos Transgressívos - Diferencial de Seleção (DS)
-#'
-#' @param Gen desc
-#' @param Var desc
-#' @param Testemunha desc
-#' @export
+#'Seleção pelo Diferencial de Seleção (Média e Desvios)
+#'@description
+#'Seleção de Genótipos Transgressívos - Diferencial de Seleção (DS)
+#'@param Gen A coluna com o nome do genótipo
+#'@param Var A coluna com a variável de interesse
+#'@param Testemunha A coluna com o valor da variável 'X' para as testemunhas
+#'@author Willyan Jr. A. Bandeira, Ivan R. Carvalho
+#'@export
 
 transgressivos<-function(Gen, Var, Testemunha,ylab="Seleção",xlab="Genótipos"){
   require(dplyr)
@@ -451,10 +454,11 @@ transgressivos<-function(Gen, Var, Testemunha,ylab="Seleção",xlab="Genótipos"
 }
 
 ###
-#' Segregação padrão
-#'
-#'@param  TABELA
-#'
+#'Segregação Padrão
+#'@description
+#'Tabela didática da segregação padrão por geração
+#'@param MELHORAMENTO Parâmetro base para a função imprimir a tabela
+#'@author Willyan Jr. A. Bandeira, Ivan R. Carvalho
 #'@export
 SEGREGAÇÃO_PADRÃO<-function(MELHORAMENTO){
 
@@ -481,14 +485,14 @@ SEGREGAÇÃO_PADRÃO<-function(MELHORAMENTO){
 }
 
 ###
+#'Coeficiente de endogamia
+#'@description
 #'Função para Cálculo do coeficiente de endogamia
-
-#'@param var description
-#'@param VG description
-#'@param VF description
-#'
-#'
-#'
+#'@param var Coluna com o nome da variável
+#'@param VG Coluna com a variância genotípica
+#'@param VF Coluna com a variância fenotípica
+#'@author
+#'Willyan Jr. A. Bandeira, Ivan R. Carvalho
 #'@export
 
 Coeficiente_endogamia<-function(var, VG, VF){
@@ -668,11 +672,14 @@ Coeficiente_endogamia<-function(var, VG, VF){
 }
 
 ###
+#' Regressão Genitor Progênie
+#' @description
 #' Estimativa da Regressão Genitor x Progênie
-#'
 #' @param ind description
 #' @param Genitor description
 #' @param Progenie description
+#' @author
+#' Willyan Jr. A. Bandeira, Ivan R. Carvalho
 #' @export
 
 reg_GP <- function(ind, Genitor, Progenie) {
@@ -723,12 +730,16 @@ reg_GP <- function(ind, Genitor, Progenie) {
 #'Interações alélicas
 #'@description
 #'Exemplos didáticos de interações alélicas e gênicas
-#'
+#'@param type Tipo de interação alélica. Utilize "ad" para aditividade, "dom"
+#'para dominância completa, "domp" para dominância parcial e "sob" para
+#'sobredominância.
+#'@param ge Tipo de interação GxE. Utilize "aus" para ausência de interação,
+#'"simples" para interação simples e "complex" para interação complexa.
 #'@author
 #'Willyan Jr. A. Bandeira, Ivan R. Carvalho
 #'@export
 
-ALELICA<-function(interactions,type=NULL,ge=NULL){
+ALELICA<-function(type=NULL,ge=NULL){
   require(ggplot2)
 
   if(!is.null(type)){
@@ -852,16 +863,20 @@ ALELICA<-function(interactions,type=NULL,ge=NULL){
 #' @param VAR Variável de interesse para análise.
 #' @param h2 Herdabilidade do caráter (um valor entre 0 e 1).
 #' @param P Performance da progênie (um valor numérico ou vetor).
-#' @param u Média do grupo contemporâneo aumentada em 10%.
 #' @author
 #' Willyan Jr. A. Bandeira, Ivan R. Carvalho
 #' @export
-gga <- function(GEN, VAR, h2, P, u) {
-  data <- data.frame(GEN,VAR,h2,P,u)
-  A <- 2
-  return(A)
 
-  #Função incompleta, finalizar!
+gga <- function(GEN, VAR, h2, P) {
+  require(dplyr)
+  data <- data.frame(GEN,VAR,h2,P)
+  data <- data %>%
+    group_by(VAR) %>%
+    mutate(u=(mean(P))+(mean(P)*0.1))
+  ganho <- data %>%
+    group_by(GEN) %>%
+    mutate(AGV=h2*(P-u))
+  return(ganho)
 }
 
 #'Número de indivíduos a serem selecionados em cada família
@@ -985,3 +1000,14 @@ genpar <- function(POP, GEN, REP = NULL, vars, K = 0.05, type = "balanced", chec
     }
   }
 }
+
+#'Número de genes
+#'@description
+#'Determinação do número de genes
+#'@author Willyan Jr. A. Bandeira, Ivan R. Carvalho
+#'@export
+
+#Três tipos
+#1 - Herança
+#2 - Máximo e Mínimo
+#3 - Artigo Arroz

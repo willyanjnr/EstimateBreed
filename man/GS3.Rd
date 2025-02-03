@@ -2,20 +2,23 @@
 % Please edit documentation in R/selecao.R
 \name{GS3}
 \alias{GS3}
-\title{Resposta a seleção ponderada pela pressão de seleção e Controle de Genitores}
+\title{Resposta a Seleção pelo Controle de Genitores}
 \usage{
 GS3(Var, h, VF, P = "1")
 }
 \arguments{
-\item{Var}{description}
+\item{Var}{A coluna com as variáveis de interesse}
 
-\item{h}{description}
+\item{h}{A coluna com os valores de herdabilidade no sentido restrito}
 
-\item{VF}{description}
+\item{VF}{A coluna com os valores de variância fenotípica}
 
-\item{P}{description}
+\item{P}{A coluna com os valores das progênies}
 }
 \description{
 Considera conhecer apenas o genitor materno, sem controle do polinizador,
 ou uma seleção direta sem parentais
+}
+\author{
+Willyan Jr. A. Bandeira, Ivan R. Carvalho
 }

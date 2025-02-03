@@ -2,17 +2,20 @@
 % Please edit documentation in R/selecao.R
 \name{transgressivos}
 \alias{transgressivos}
-\title{Seleção de Genótipos Transgressívos - Diferencial de Seleção (DS)}
+\title{Seleção pelo Diferencial de Seleção (Média e Desvios)}
 \usage{
 transgressivos(Gen, Var, Testemunha, ylab = "Seleção", xlab = "Genótipos")
 }
 \arguments{
-\item{Gen}{desc}
+\item{Gen}{A coluna com o nome do genótipo}
 
-\item{Var}{desc}
+\item{Var}{A coluna com a variável de interesse}
 
-\item{Testemunha}{desc}
+\item{Testemunha}{A coluna com o valor da variável 'X' para as testemunhas}
 }
 \description{
 Seleção de Genótipos Transgressívos - Diferencial de Seleção (DS)
+}
+\author{
+Willyan Jr. A. Bandeira, Ivan R. Carvalho
 }

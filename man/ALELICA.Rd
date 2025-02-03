@@ -4,7 +4,15 @@
 \alias{ALELICA}
 \title{Interações alélicas}
 \usage{
-ALELICA(interactions, type = NULL, ge = NULL)
+ALELICA(type = NULL, ge = NULL)
+}
+\arguments{
+\item{type}{Tipo de interação alélica. Utilize "ad" para aditividade, "dom"
+para dominância completa, "domp" para dominância parcial e "sob" para
+sobredominância.}
+
+\item{ge}{Tipo de interação GxE. Utilize "aus" para ausência de interação,
+"simples" para interação simples e "complex" para interação complexa.}
 }
 \description{
 Exemplos didáticos de interações alélicas e gênicas

@@ -2,21 +2,24 @@
 % Please edit documentation in R/selecao.R
 \name{GS4}
 \alias{GS4}
-\title{Resposta a seleção ponderada pela Pressão Ponderado pelo Anode seleção e ano}
+\title{Resposta Seleção pelo Ano}
 \usage{
 GS4(Var, h, VF, P = "1", Ano)
 }
 \arguments{
-\item{Var}{description}
+\item{Var}{A coluna com a variáveis de interesse}
 
-\item{h}{description}
+\item{h}{A coluna com os valores de herdabilidade no sentido restrito}
 
-\item{VF}{description}
+\item{VF}{A coluna com os valores de variância fenotípica}
 
-\item{P}{description}
+\item{P}{A coluna com o valor obtido para as progênies}
 
-\item{Ano}{description}
+\item{Ano}{A coluna com o ano de seleção}
 }
 \description{
-Resposta a seleção ponderada pela Pressão Ponderado pelo Anode seleção e ano
+Resposta a seleção ponderada pela Pressão Ponderado pelo Ano de seleção e Ano
+}
+\author{
+Willyan Jr. A. Bandeira, Ivan R. Carvalho
 }

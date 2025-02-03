@@ -2,17 +2,20 @@
 % Please edit documentation in R/selecao.R
 \name{Coeficiente_endogamia}
 \alias{Coeficiente_endogamia}
-\title{Função para Cálculo do coeficiente de endogamia}
+\title{Coeficiente de endogamia}
 \usage{
 Coeficiente_endogamia(var, VG, VF)
 }
 \arguments{
-\item{var}{description}
+\item{var}{Coluna com o nome da variável}
 
-\item{VG}{description}
+\item{VG}{Coluna com a variância genotípica}
 
-\item{VF}{description}
+\item{VF}{Coluna com a variância fenotípica}
 }
 \description{
 Função para Cálculo do coeficiente de endogamia
+}
+\author{
+Willyan Jr. A. Bandeira, Ivan R. Carvalho
 }

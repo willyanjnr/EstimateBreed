@@ -2,17 +2,18 @@
 % Please edit documentation in R/selecao.R
 \name{GS2}
 \alias{GS2}
-\title{Resposta a seleção ponderada pelo Diferencial de Seleção}
+\title{Diferencial de Seleção Simples}
 \usage{
 GS2(Var, h, DS)
 }
 \arguments{
-\item{Var}{description}
+\item{Var}{A coluna com o nome das variáveis de interesse}
 
-\item{h}{description}
+\item{h}{A coluna com os valores de herdabilidade no sentido restrito}
 
-\item{DS}{description}
+\item{DS}{A coluna com o valor do diferencial de seleção a ser aplicado para
+cada variável}
 }
 \description{
-Resposta a seleção ponderada pelo Diferencial de Seleção
+Resposta a seleção ponderada pelo Diferencial de Seleção Simples
 }

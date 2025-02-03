@@ -4,7 +4,7 @@
 \alias{gga}
 \title{Ganho Genético Aditivo}
 \usage{
-gga(GEN, VAR, h2, P, u)
+gga(GEN, VAR, h2, P)
 }
 \arguments{
 \item{GEN}{Vetor ou dataframe contendo os genótipos a serem selecionados.}
@@ -14,8 +14,6 @@ gga(GEN, VAR, h2, P, u)
 \item{h2}{Herdabilidade do caráter (um valor entre 0 e 1).}
 
 \item{P}{Performance da progênie (um valor numérico ou vetor).}
-
-\item{u}{Média do grupo contemporâneo aumentada em 10%.}
 }
 \description{
 Esta função estima o ganho genético aditivo, conforme descrito por Falconer (1987).

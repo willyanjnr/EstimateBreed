@@ -2,19 +2,22 @@
 % Please edit documentation in R/selecao.R
 \name{GS}
 \alias{GS}
-\title{Resposta a seleção ponderada pela pressão de seleção}
+\title{Pressão de Seleção}
 \usage{
 GS(Var, h, VF, P = "1")
 }
 \arguments{
-\item{Var}{Nome da variável resposta}
+\item{Var}{A coluna com o nome das variáveis de interesse}
 
-\item{h}{Nome da coluna com o valor da herdabilidade}
+\item{h}{A coluna com os valores de herdabilidade no sentido restrito}
 
-\item{VF}{Nome da coluna com o valor da variância fenotípica}
+\item{VF}{A coluna com os valores de variância fenotípica}
 
-\item{P}{Valor da pressão de seleção (padrão = 1)}
+\item{P}{A coluna com os valores observados para as progênies}
 }
 \description{
 Resposta a seleção ponderada pela pressão de seleção
+}
+\author{
+Willyan Jr. A. Bandeira, Ivan R. Carvalho
 }

@@ -720,30 +720,130 @@ reg_GP <- function(ind, Genitor, Progenie) {
 }
 
 ###
-#Interações alélicas (FINALIZAR)
-#' Exemplos didáticos de interações alélicas e gênicas
+#'Interações alélicas
+#'@description
+#'Exemplos didáticos de interações alélicas e gênicas
 #'
-#'
-#'
-#'
-#'
-#'
-#' @export
+#'@author
+#'Willyan Jr. A. Bandeira, Ivan R. Carvalho
+#'@export
 
-ALELICA<-function(ADITIVIDADE){
+ALELICA<-function(interactions,type=NULL,ge=NULL){
+  require(ggplot2)
 
-  require("dplyr")
-  require("crayon")
-
-  Genitor_Materno = c(2000, 2500, 3000)
-  Genitor_Paterno = c(1000, 1500, 2000)
-  Progênie = c(1500, 2000, 2500)
-
-  Aditividade<-data.frame(Genitor_Paterno, Genitor_Materno,Progênie)
-
-  return(Aditividade)
+  if(!is.null(type)){
+  if(type=="ad"){
+    genotipo <- c("AA", "Aa", "aa")
+    efeito <- c(2, 1, 0)
+    altura <- c(120, 70, 20)
+    dados <- data.frame(genotipo = factor(rep(genotipo, each = 10)), altura = rep(altura, each = 10))
+    ggplot(dados, aes(x = genotipo, y = altura, group = 1)) +
+      geom_line(aes(color = genotipo), size = 1.2) +
+      geom_point(aes(color = genotipo), size = 3) +
+      geom_text(aes(label = altura), vjust = -0.5, color = "black", size = 5) +
+      labs(title = "Interação Genética Aditiva",
+           x = "Genótipo", y = "Altura de Planta (cm)") +
+      theme_minimal()+
+      theme(legend.position = "none")
+  } else if(type=="dom"){
+    genotipo <- c("AA", "Aa", "aa")
+    efeito <- c(2, 1, 0)
+    altura <- c(120, 120, 20)
+    dados <- data.frame(genotipo = factor(rep(genotipo, each = 10)), altura = rep(altura, each = 10))
+    ggplot(dados, aes(x = genotipo, y = altura, group = 1)) +
+      geom_line(aes(color = genotipo), size = 1.2) +
+      geom_point(aes(color = genotipo), size = 3) +
+      geom_text(aes(label = altura), vjust = -0.5, color = "black", size = 5) +
+      labs(title = "Interação Genética de Dominância",
+           x = "Genótipo", y = "Altura de Planta (cm)") +
+      theme_minimal()+
+      theme(legend.position = "none")
+  } else if(type=="domp"){
+    genotipo <- c("AA", "Aa", "aa")
+    efeito <- c(2, 1, 0)
+    altura <- c(120, 90, 20)
+    dados <- data.frame(genotipo = factor(rep(genotipo, each = 10)), altura = rep(altura, each = 10))
+    ggplot(dados, aes(x = genotipo, y = altura, group = 1)) +
+      geom_line(aes(color = genotipo), size = 1.2) +
+      geom_point(aes(color = genotipo), size = 3) +
+      geom_text(aes(label = altura), vjust = -0.5, color = "black", size = 5) +
+      labs(title = "Interação Genética de Dominância Parcial",
+           x = "Genótipo", y = "Altura de Planta (cm)") +
+      theme_minimal()+
+      theme(legend.position = "none")
+  } else if(type=="sob"){
+    genotipo <- c("AA", "Aa", "aa")
+    efeito <- c(2, 1, 0)
+    altura <- c(120, 160, 20)
+    dados <- data.frame(genotipo = factor(rep(genotipo, each = 10)), altura = rep(altura, each = 10))
+    ggplot(dados, aes(x = genotipo, y = altura, group = 1)) +
+      geom_line(aes(color = genotipo), size = 1.2) +
+      geom_point(aes(color = genotipo), size = 3) +
+      geom_text(aes(label = altura), vjust = -0.5, color = "black", size = 5)+
+      labs(title = "Interação Genética de Sobredominância",
+           x = "Genótipo", y = "Altura de Planta (cm)") +
+      theme_minimal()+
+      theme(legend.position = "none")
+  }
+  }
+  if(!is.null(ge)){
+    if(ge=="aus"){
+      genotipo <- c("AA", "Aa")
+      ambientes <- c("Ambiente 1", "Ambiente 2")
+      efeito_ambiente_1 <- c(60, 70)
+      efeito_ambiente_2 <- c(95, 105)
+      dados <- data.frame(
+        genotipo = rep(genotipo, times = 2),
+        ambiente = rep(ambientes, each = 2),
+        altura = c(efeito_ambiente_1, efeito_ambiente_2)
+      )
+      ggplot(dados, aes(x = ambiente, y = altura,
+                        group = genotipo, color = genotipo)) +
+        geom_line() +
+        geom_point() +
+        geom_text(aes(label = altura), vjust = -0.5, color = "black", size = 5)+
+        labs(title = "Ausência de Interação Genótipo-Ambiente",
+             x = "Ambiente", y = "Altura de Planta (cm)") +
+        theme_minimal()
+    } else if(ge=="simples"){
+      genotipo <- c("AA", "Aa")
+      ambientes <- c("Ambiente 1", "Ambiente 2")
+      efeito_ambiente_1 <- c(60, 80)
+      efeito_ambiente_2 <- c(85, 125)
+      dados <- data.frame(
+        genotipo = rep(genotipo, times = 2),
+        ambiente = rep(ambientes, each = 2),
+        altura = c(efeito_ambiente_1, efeito_ambiente_2)
+      )
+      ggplot(dados, aes(x = ambiente, y = altura,
+                        group = genotipo, color = genotipo)) +
+        geom_line() +
+        geom_point() +
+        geom_text(aes(label = altura), vjust = -0.5, color = "black", size = 5)+
+        labs(title = "Ausência de Interação Genótipo-Ambiente",
+             x = "Ambiente", y = "Altura de Planta (cm)") +
+        theme_minimal()
+    } else if(ge=="complex"){
+      genotipo <- c("AA", "Aa")
+      ambientes <- c("Ambiente 1", "Ambiente 2")
+      efeito_ambiente_1 <- c(60, 100)
+      efeito_ambiente_2 <- c(110, 60)
+      dados <- data.frame(
+        genotipo = rep(genotipo, times = 2),
+        ambiente = rep(ambientes, each = 2),
+        altura = c(efeito_ambiente_1, efeito_ambiente_2)
+      )
+      ggplot(dados, aes(x = ambiente, y = altura,
+                        group = genotipo, color = genotipo)) +
+        geom_line() +
+        geom_point() +
+        geom_text(aes(label = altura), vjust = -0.5, color = "black", size = 5)+
+        labs(title = "Ausência de Interação Genótipo-Ambiente",
+             x = "Ambiente", y = "Altura de Planta (cm)") +
+        theme_minimal()
+    }
+  }
 }
-
 
 #' Ganho Genético Aditivo
 #' @description
@@ -760,6 +860,8 @@ gga <- function(GEN, VAR, h2, P, u) {
   data <- data.frame(GEN,VAR,h2,P,u)
   A <- 2
   return(A)
+
+  #Função incompleta, finalizar!
 }
 
 #'Número de indivíduos a serem selecionados em cada família
@@ -834,10 +936,9 @@ blupis <- function(){
 #'https://doi.org/10.1155/2024/9946332
 #'@export
 
-require(dplyr)
-
 genpar <- function(POP, GEN, REP = NULL, vars, K = 0.05, type = "balanced", check = FALSE) {
   require(dplyr)
+  require(lme4)
 
   if (is.null(REP)) {
     stop("Informe as repetições", call. = FALSE)
@@ -847,12 +948,13 @@ genpar <- function(POP, GEN, REP = NULL, vars, K = 0.05, type = "balanced", chec
   varc$POP <- as.factor(varc$POP)
   varc$GEN <- as.factor(varc$GEN)
   varc$REP <- as.factor(varc$REP)
+
   for (var_name in vars) {
     if (!(var_name %in% colnames(dados))) {
       stop(paste("A variável", var_name, "não existe no conjunto de dados."), call. = FALSE)
     }
-    varc <- varc %>%
-      mutate(!!var_name := dados[[var_name]])
+
+    varc <- varc %>% mutate(!!var_name := dados[[var_name]])
     X <- tapply(varc[[var_name]], POP, mean)
 
     if (type == "balanced") {
@@ -862,37 +964,24 @@ genpar <- function(POP, GEN, REP = NULL, vars, K = 0.05, type = "balanced", chec
       MSg <- anova_table["GEN", "Mean Sq"]
       MSe <- anova_table["Residual", "Mean Sq"]
       pvalue <- anova_table["GEN", "Pr(>F)"]
-      sigmaE = MSe
-      sigmaG = ((MSg / MSe) / repet)
-      sigmaP = sigmaG + sigmaE
-      if (sigmaG > sigmaP) {
-        warning("Valor da variância genética maior que o valor da variância fenotípica! Estimativas viesadas, favor verificar os dados!")
-      }
-      ECV = ((sqrt(sigmaE) / X) * 100)
-      GCV = ((sqrt(sigmaG) / X) * 100)
-      PCV = ((sqrt(sigmaP) / X) * 100)
-      H2 = (sigmaG / sigmaP) * 100
-      GA = H2 * sigmaP * K
-      GAM = (GA / X) * 100
-      #Adicionar estruturas de covariância!
-      if(pvalue >= 0.05){
-        print(paste("Resultados para a variável:", var_name))
-        print(summary(model))
-        warning("Efeito dos genótipos não significativo para a variável ",var_name,"!",call. = FALSE)
-      } else{
+
+    } else if (type=="unb"){
+      #Modelo Linear Misto ou ANOVA tipo 3
+    }
+
+    if (pvalue >= 0.05) {
+      print(paste("Resultados para a variável:", var_name))
+      print(anova_table)
+      warning("Efeito dos genótipos não significativo para a variável ", var_name, "!", call. = FALSE)
+    } else {
       result <- data.frame(
         Parameters = c("sigmaE", "sigmaG", "sigmaP", "ECV", "GCV", "PCV", "H2", "GA", "GAM"),
         Valor = c(sigmaE, sigmaG, sigmaP, ECV, GCV, PCV, H2, GA, GAM)
       )
       colnames(result)[which(colnames(result) == "Valor")] <- var_name
       print(paste("Resultados para a variável:", var_name))
-      print(summary(model))
+      print(anova_table)
       print(result)
-      }
-    } else if (type == "unb") {
-      require(ez)
-
-      # Ajustar um modelo com ANOVA tipo III
     }
   }
 }

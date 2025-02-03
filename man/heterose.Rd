@@ -4,7 +4,7 @@
 \alias{heterose}
 \title{Função para cálculo da heterose e heterobeltiose}
 \usage{
-heterose(GEN, GM, GP, PR, param = "all")
+heterose(GEN, GM, GP, PR, REP, param = "all")
 }
 \arguments{
 \item{GEN}{A coluna com o nome do genótipo}
@@ -14,6 +14,8 @@ heterose(GEN, GM, GP, PR, param = "all")
 \item{GP}{A coluna com a média do genitor paterno}
 
 \item{PR}{A coluna com a média da progênie}
+
+\item{REP}{A coluna com as repetições}
 
 \item{param}{Valor para determinar o parâmetro a ser calculado. Padrão é "all".
 Para calcular apenas a heterose, utilize "het". Para calcular apenas a

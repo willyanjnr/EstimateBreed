@@ -2,10 +2,13 @@
 % Please edit documentation in R/selecao.R
 \name{ALELICA}
 \alias{ALELICA}
-\title{Exemplos didáticos de interações alélicas e gênicas}
+\title{Interações alélicas}
 \usage{
-ALELICA(ADITIVIDADE)
+ALELICA(interactions, type = NULL, ge = NULL)
 }
 \description{
 Exemplos didáticos de interações alélicas e gênicas
+}
+\author{
+Willyan Jr. A. Bandeira, Ivan R. Carvalho
 }

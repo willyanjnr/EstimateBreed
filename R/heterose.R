@@ -5,6 +5,7 @@
 #'@param GM A coluna com a média do genitor materno
 #'@param GP A coluna com a média do genitor paterno
 #'@param PR A coluna com a média da progênie
+#'@param REP A coluna com as repetições
 #'@param param Valor para determinar o parâmetro a ser calculado. Padrão é "all".
 #'Para calcular apenas a heterose, utilize "het". Para calcular apenas a
 #'heterobeltiose, utilize "hetb".
@@ -25,49 +26,33 @@
 #' with(maize,heterose(HIB,GM,GP,P,param = "hetb"))
 #'}
 
-heterose <- function(GEN,
-                     GM,
-                     GP,
-                     PR,
-                     param = "all"){
+heterose <- function(GEN, GM, GP, PR, REP, param = "all") {
   require(dplyr)
-  GEN=GEN
-  GM=GM
-  GP=GP
-  PR=PR
-  data <- data.frame(GEN,GM,GP,PR)
+  require(stats)
 
-  if(param=="all"){
-    data <- data %>%
+  data <- data.frame(GEN, GM, GP, PR, REP)
+  model1 <- aov(REP ~ GEN, data = data)
+  MSe <- summary(model1)[[1]]["Residuals", "Mean Sq"]
+  r <- length(unique(REP))
+  data <- data %>%
     mutate(
-      het<-((PR-((GM+GP)/2))/
-              ((GM+GP)/2))*100
+      Heterose = ((PR - ((GM + GP) / 2)) / ((GM + GP) / 2)) * 100,
+      SE_Heterose = sqrt((3 * MSe) / (2 * r))
     )
-    Genitor <- apply(data[, c("GM", "GP")], 1, max)
-    data <- data %>%
-      mutate(
-      hetb <- ((PR-Genitor)/Genitor)*100
-      )
-    colnames(data)<-c("GEN","GM","GP","PR","Heterose","Heterobeltiose")
-    df_s <- data[,c(1,5,6)]
-    return(df_s)
-  } else if (param=="het"){
-    data <- data %>%
-      mutate(
-        het<-((PR-((GM+GP)/2))/
-                ((GM+GP)/2))*100
-      )
-    colnames(data)<-c("GEN","GM","GP","PR","Heterose")
-    df_s <- data[,c(1,5)]
-    return(df_s)
-  } else if (param=="hetb"){
-    Genitor <- apply(data[, c("GM", "GP")], 1, max)
-    data <- data %>%
-      mutate(
-        hetb <- ((PR-Genitor)/Genitor)*100
-      )
-    colnames(data)<-c("GEN","GM","GP","PR","Heterobeltiose")
-    df_s <- data[,c(1,5)]
-    return(df_s)
-}
+  Genitor <- pmax(GM, GP)
+  data <- data %>%
+    mutate(
+      Heterobeltiose = ((PR - Genitor) / Genitor) * 100,
+      SE_Heterobeltiose = sqrt((2 * MSe) / r)
+    )
+
+  if (param == "all") {
+    return(data[, c("GEN", "Heterose", "SE_Heterose", "Heterobeltiose", "SE_Heterobeltiose")])
+
+  } else if (param == "het") {
+    return(data[, c("GEN", "Heterose", "SE_Heterose")])
+
+  } else if (param == "hetb") {
+    return(data[, c("GEN", "Heterobeltiose", "SE_Heterobeltiose")])
+  }
 }

@@ -30,3 +30,6 @@ J. R. (2020). Risk of occurrence of water deficit in soybean cultivated in
 lowland soils. Earth Interactions, 24(4), 1-16.
 https://doi.org/10.1175/EI-D-19-0029.1
 }
+\author{
+Willyan Jr. A. Bandeira, Ivan R. Carvalho
+}

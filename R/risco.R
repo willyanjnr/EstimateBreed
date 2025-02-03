@@ -33,6 +33,7 @@ risco <- function(DIA,MES,TEMP,UR,doença="ferrugem",plot=F){
   if(doença=="ferrugem"){
   alfa = log(2)/log(2.30508474576)
   umidade = aggregate(UR~DIA+MES,data=dados,FUN=function(x)sum(x>85))
+  print(umidade)
   colnames(umidade) <- c("Dia","Mês","W")
   umidade <- as.data.frame(umidade)
   umidade$riscoUR <- 1/1+(2.72^(umidade$W-12))

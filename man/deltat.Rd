@@ -7,7 +7,7 @@
 deltat(
   LON,
   LAT,
-  type = 1,
+  type = 2,
   days = 7,
   control = NULL,
   details = FALSE,
@@ -16,9 +16,9 @@ deltat(
 )
 }
 \arguments{
-\item{LON}{Longitude}
+\item{LON}{Longitude (em decimal)}
 
-\item{LAT}{Latitude}
+\item{LAT}{Latitude (em decimal)}
 
 \item{type}{Tipo de análise. Utilize 1 para forecast e 2 para dados temporais.}
 
@@ -39,6 +39,20 @@ e ausência de precipitação.
 }
 \description{
 Determinação do momento ideal para aplicação
+}
+\examples{
+\donttest{
+library(Breeding)
+
+# Previsão das condições de aplicação
+deltat(-53.696944444444,-28.063888888889,type=1,days=10)
+View(forecast)
+
+# Análise retrospectiva das condições de aplicação
+deltat(-53.696944444444,-28.063888888889,type=1,days=10,
+dates=c("2023-01-01","2023-05-01"))
+View(retrospective)
+}
 }
 \author{
 Willyan Jr. A. Bandeira, Ivan R. Carvalho

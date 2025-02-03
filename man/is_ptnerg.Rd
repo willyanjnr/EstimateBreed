@@ -22,3 +22,6 @@ V. J., Barbosa, M. H., ... & da Maia, L. C. (2017).
 Adaptability, stability and multivariate selection by mixed models.
 American Journal of Plant Sciences, 8(13), 3324.
 }
+\author{
+Willyan Jr. A. Bandeira, Ivan R. Carvalho
+}

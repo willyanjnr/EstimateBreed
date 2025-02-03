@@ -319,7 +319,6 @@ TEMP_BASE<-function(DAS,
 #'https://doi.org/10.1590/1807-1929/agriambi.v28n10e278299
 #' @export
 
-#Função incompleta, finalizar
 plastocrono <- function(GEN, TMED, STAD, NN, habito = "ind", plot = FALSE) {
   require(dplyr)
   require(ggplot2)
@@ -632,8 +631,8 @@ balanco_hidrico_complexo_auto <- function(P, ET, R, D, I, lat, lon, altitude, S_
 #' Aplicação de defensivos agrícolas
 #' @description
 #' Determinação do momento ideal para aplicação
-#' @param LON Longitude
-#' @param LAT Latitude
+#' @param LON Longitude (em decimal)
+#' @param LAT Latitude (em decimal)
 #' @param type Tipo de análise. Utilize 1 para forecast e 2 para dados temporais.
 #' @param days Número de dias
 #' @param control Tipo de produto a ser aplicado. Utilizar "fung" para fungicida,
@@ -645,10 +644,23 @@ balanco_hidrico_complexo_auto <- function(P, ET, R, D, I, lat, lon, altitude, S_
 #' Tomado como parâmetro um DELTA_T entre 2 e 8, velocidade do vento entre 3 e 8,
 #' e ausência de precipitação.
 #' @author Willyan Jr. A. Bandeira, Ivan R. Carvalho
+#' @examples
+#' \donttest{
+#' library(Breeding)
+#'
+#' # Previsão das condições de aplicação
+#' deltat(-53.696944444444,-28.063888888889,type=1,days=10)
+#' View(forecast)
+#'
+#' # Análise retrospectiva das condições de aplicação
+#' deltat(-53.696944444444,-28.063888888889,type=1,days=10,
+#' dates=c("2023-01-01","2023-05-01"))
+#' View(retrospective)
+#' }
 #' @export
 
 
-deltat <- function(LON,LAT,type=1,days=7,control=NULL,
+deltat <- function(LON,LAT,type=2,days=7,control=NULL,
                    details=FALSE,dates=NULL,plot=FALSE){
   #Verificações inicias
 

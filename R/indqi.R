@@ -59,6 +59,7 @@ is_qindustrial <- function(GEN, NQ, W, PTN){
 #'@param MC Coluna com os valores da massa de cariópse.
 #'@param RG Colunas com os valores do rendimento de grãos (kg/ha).
 #'@param stat Extrair ou não a média por genótipo. Padrão é `"all"`.
+#'@author Willyan Jr. A. Bandeira, Ivan R. Carvalho
 #'@export
 #'@examples
 #'\donttest{
@@ -192,6 +193,7 @@ ph <- function(GEN, PESO, crop="trigo"){
 #'@param GEN A coluna com o nome dos genótipos
 #'@param PTN Proteina Bruta
 #'@param RG Rendimento de grãos
+#'@author Willyan Jr. A. Bandeira, Ivan R. Carvalho
 #'@references
 #'de Pelegrin, A. J., Carvalho, I. R., Nunes, A. C. P., Demari, G. H., Szareski,
 #'V. J., Barbosa, M. H., ... & da Maia, L. C. (2017).

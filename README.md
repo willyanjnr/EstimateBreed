@@ -76,7 +76,7 @@ View(forecast)
 ## Documentation
 Complete documentation can be found when using the package within R.
 
-### Citing
+## Citing
 When citing this package, please use,
 ``` r
 library("EstimateBreed")
@@ -84,3 +84,6 @@ citation("EstimateBreed")
 ```
 
 ## References
+
+## Getting Help
+- If you find any errors, please make a report with the commands used so that we can repeat, check and adjust the functions! Send it to[github](https://github.com/willyanjnr/EstimateBreed/issues) or send an email to willyan.jab@hotmail.com.

@@ -15,7 +15,7 @@ devtools::install_github("https://github.com/willyanjnr/EstimateBreed")
 ```
 
 ### Example
-Obtain the genetic selection index for resilience (ISGR) for selecting genotypes for environmental stressors, as described by Bandeira et al. (2024).
+Obtain the genetic selection index for resilience (ISGR) for selecting genotypes for environmental stressors, as described by [Bandeira et al. (2024)](https://www.cropj.com/Carvalho_18_12_2024_825_830.pdf).
 
 ``` r
 library("EstimateBreed")

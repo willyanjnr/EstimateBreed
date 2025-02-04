@@ -4,6 +4,7 @@
 #'@param TMED Coluna da temperatura média
 #'@param cultura Definir a cultura (Padrão = "milho")
 #'@param plot Plotar um gráfico do acúmulo (Padrão é T (TRUE))
+#'@author Willyan Jr. A. Bandeira, Ivan R. Carvalho
 #'@export
 
 somatermica <- function(TMED,MONTH,cultura="milho",plot=T){
@@ -154,23 +155,16 @@ somatermica <- function(TMED,MONTH,cultura="milho",plot=T){
   }
 }
 
-#' Plotando as temperaturas bases e ótimas para as culturas
-#'
-#'
-#' @param DAS descrption
-#' @param Var desc
-#' @param Cultura Soja, Milho, Trigo
-#' @param ylab desc
-#' @param xlab description
-#'
-#'
-#'
-#' @author Willyan Jr. A. Bandeira, Ivan R. Carvalho
-#' @export
-
-
-
-
+#'Plotando as temperaturas bases e ótimas para as culturas
+#'@description
+#'Utilitária para plotar gráficos dos preferendos térmicos para as culturas
+#'@param DAS descrption
+#'@param Var desc
+#'@param Cultura Soja, Milho, Trigo
+#'@param ylab desc
+#'@param xlab description
+#'@author Willyan Jr. A. Bandeira, Ivan R. Carvalho
+#'@export
 
 TEMP_BASE<-function(DAS,
                     Var,
@@ -501,132 +495,55 @@ plastocrono <- function(GEN, TMED, STAD, NN, habito = "ind", plot = FALSE) {
 #'Cálculo do índice fototermal
 #'@param DIA A coluna com o dia de ciclo
 #'@param TMED A coluna com os valores de temperatura média
-#'@param N A coluna com os valores de fotoperíodo
-#'@param plot Argumento lógico. Plotar um gráfico se TRUE
+#'@param RAD A coluna com os valores de radiação incidente
+#'@param PER A coluna com o período (utilize VEG para vegetativo e REP para
+#'reprodutivo)
+#'@author Willyan Jr. A. Bandeira, Ivan R. Carvalho
+#'@references
+#'Zanon, A. J., & Tagliapietra, E. L. (2022). Ecofisiologia da soja:
+#'Visando altas produtividades (2ª ed.). Field Crops.
 #'@export
 
-fototermal <- function(DIA, TMED, N,plot=F) {
-  require(dplyr)
-
-  # Verificação de entradas
+fototermal <- function(DIA, TMED, RAD, PER) {
+  # Verificações iniciais
   if (length(DIA) != length(TMED)) {
     stop("O comprimento de 'DIA' deve ser igual ao comprimento de 'TMED'.")
   }
-  if (length(DIA) != length(N) && length(N) != 1) {
-    stop("O comprimento de 'N' deve ser igual ao comprimento de 'DIA' ou 'N'
-         deve ser um valor constante.")
+  if (length(DIA) != length(RAD)) {
+    stop("O comprimento de 'DIA' deve ser igual ao comprimento de 'RAD'.")
+  }
+  if (length(DIA) != length(PER)) {
+    stop("O comprimento de 'DIA' deve ser igual ao comprimento de 'PER'.")
   }
   if (!is.numeric(TMED) || any(TMED < 0)) {
     stop("Os valores de 'TMED' devem ser numéricos e positivos.")
   }
-  if (!is.numeric(N) || any(N <= 0)) {
-    stop("Os valores de 'N' (fotoperíodo) devem ser numéricos e positivos.")
+  if (!is.numeric(RAD) || any(RAD <= 0)) {
+    stop("Os valores de 'RAD' (radiação) devem ser numéricos e positivos.")
   }
 
-  data <- data.frame(DIA, TMED, N)
-  data <- data %>%
-    mutate(Tef = TMED - 10,
-           IFTd = Tef * N)
-  if (any(data$Tef < 0)) {
-    stop("Temperatura média (TMED) deve ser maior que 10°C para garantir uma
-         temperatura efetiva positiva.")
+  data <- data.frame(DIA, PER, TMED, RAD, stringsAsFactors = FALSE)
+  data <- data[order(data$DIA), ]
+  T_base_dict <- c("vegetativo" = 7.6, "reprodutivo" = 0)
+
+  data$Qac_final <- NA
+  periodos <- unique(data$PER)
+  offset <- 0
+  resultado <- data.frame()
+
+  for (p in periodos) {
+    dados_periodo <- subset(data, PER == p)
+    T_base <- T_base_dict[p]
+    dados_periodo$Tef <- dados_periodo$TMED - T_base
+    dados_periodo$Q <- dados_periodo$RAD / dados_periodo$Tef
+    dados_periodo$Qac_final <- cumsum(dados_periodo$Q) + offset
+    offset <- tail(dados_periodo$Qac_final, 1)
+    resultado <- rbind(resultado, dados_periodo)
   }
-  data <- data %>%
-    mutate(IFTac = cumsum(IFTd))
-  return(data)
+
+  resultado <- resultado[order(resultado$DIA), ]
+  return(resultado)
 }
-
-#' Balanço hídrico
-# Instalar pacotes necessários
-# install.packages("climate", dependencies = TRUE)
-# install.packages("meteoland", dependencies = TRUE)
-# instll.packages("rnoaa", dependencies = TRUE)
-# install.packages("soiltexture"a, dependencies = TRUE)
-
-#library(climate)
-#library(meteoland)
-#library(rnoaa)
-#library(soiltexture)
-
-#Função experimental
-
-# Função para cálculo do balanço hídrico complexo com automação de parâmetros
-balanco_hidrico_complexo_auto <- function(P, ET, R, D, I, lat, lon, altitude, S_max, porosidade, capacidade_infiltracao, data_inicio, data_fim) {
-
-  # Obter dados climáticos (temperatura média, umidade, etc.) utilizando o pacote 'climate'
-  clima <- climate_data(lat = lat, lon = lon, start_date = data_inicio, end_date = data_fim, variables = c("temperature", "humidity", "wind_speed", "radiation"))
-
-  # Obter dados de temperatura e umidade
-  T <- clima$temperature  # Temperatura média (°C)
-  UR <- clima$humidity    # Umidade relativa (%)
-  u2 <- clima$wind_speed  # Velocidade do vento (m/s)
-  Rn <- clima$radiation   # Radiação líquida (MJ/m²/dia)
-
-  # Calcular a pressão atmosférica (Pₐ) com base na altitude (estimativa)
-  P_a <- 101.3 * ((1 - 2.25577e-5 * altitude) ^ 5.2559)  # Fórmula para pressão atmosférica em função da altitude
-
-  # Funções internas para calcular eₛ, eₐ, Δ e γ
-  calcular_es <- function(T) {
-    return(0.6108 * exp((17.27 * T) / (T + 237.3)))  # Pressão de vapor de saturação (kPa)
-  }
-
-  calcular_ea <- function(es, UR) {
-    return(es * (UR / 100))  # Pressão de vapor atual (kPa)
-  }
-
-  calcular_delta <- function(T) {
-    return((4098 * (0.6108 * exp((17.27 * T) / (T + 237.3)))) / ((T + 237.3)^2))  # Declive da curva de saturação (kPa/°C)
-  }
-
-  calcular_gamma <- function(P_a) {
-    return(0.665 * 10^(-3) * P_a)  # Constante psicrométrica (kPa/°C)
-  }
-
-  # Calculando os parâmetros
-  es <- sapply(T, calcular_es)  # Pressão de vapor de saturação
-  ea <- mapply(calcular_ea, es, UR)  # Pressão de vapor atual
-  delta <- sapply(T, calcular_delta)  # Declive da curva de saturação
-  gamma <- calcular_gamma(P_a)  # Constante psicrométrica
-
-  # Definir o armazenamento inicial de água no solo (geralmente começa com zero)
-  S <- 0  # Variação do armazenamento de água no solo
-
-  # Armazenamento no solo ao longo do tempo
-  S_acumulado <- numeric(length(P))  # Vetor para armazenar valores de S ao longo do tempo
-
-  # Iterar sobre cada período (dia, mês, etc.)
-  for (t in 1:length(P)) {
-    # 1. Precipitação (P) e Irrigação (I)
-    agua_adicionada <- P[t] + I[t]
-
-    # 2. Evapotranspiração (ET) com método Penman-Monteith
-    ET_calculado <- (0.408 * delta[t] * (Rn[t] - G[t]) + gamma * (900 / (T[t] + 273)) * u2[t] * (es[t] - ea[t])) /
-      (delta[t] + gamma * (1 + 0.34 * u2[t]))  # Evapotranspiração com método Penman-Monteith
-
-    # 3. Escoamento (R)
-    escoamento <- min(R[t], agua_adicionada)
-
-    # 4. Infiltração no solo
-    agua_infiltrada <- min(agua_adicionada - escoamento, capacidade_infiltracao)
-
-    # 5. Drenagem para o lençol freático (D)
-    drenagem <- min(agua_infiltrada, S[t])  # A drenagem não pode ultrapassar o armazenamento
-
-    # Atualizando o armazenamento de água no solo (S)
-    S[t] <- S[t] + agua_adicionada - ET_calculado - escoamento - drenagem
-
-    # Verificando se o armazenamento ultrapassou a capacidade máxima do solo (S_max)
-    if (S[t] > S_max) {
-      S[t] <- S_max  # O armazenamento no solo não pode ser maior que a capacidade de retenção
-    }
-
-    # Armazenar a variação do armazenamento de água no solo ao longo do tempo
-    S_acumulado[t] <- S[t]
-  }
-
-  return(S_acumulado)  # Retorna a variação do armazenamento de água no solo ao longo do tempo
-}
-
 
 #' Aplicação de defensivos agrícolas
 #' @description

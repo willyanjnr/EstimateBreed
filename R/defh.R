@@ -17,6 +17,8 @@
 #'@export
 
 dhid <- function(CICLO,FASE,ETo,AD=4,PROF=100,Cultura="Soja"){
+  #Agrupar por RMG
+
   CICLO <- CICLO
   FASE <- FASE
   ETo <- ETo

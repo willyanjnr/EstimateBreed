@@ -4,17 +4,25 @@
 \alias{fototermal}
 \title{Determinação do índice fototermal}
 \usage{
-fototermal(DIA, TMED, N, plot = F)
+fototermal(DIA, TMED, RAD, PER)
 }
 \arguments{
 \item{DIA}{A coluna com o dia de ciclo}
 
 \item{TMED}{A coluna com os valores de temperatura média}
 
-\item{N}{A coluna com os valores de fotoperíodo}
+\item{RAD}{A coluna com os valores de radiação incidente}
 
-\item{plot}{Argumento lógico. Plotar um gráfico se TRUE}
+\item{PER}{A coluna com o período (utilize VEG para vegetativo e REP para
+reprodutivo)}
 }
 \description{
 Cálculo do índice fototermal
+}
+\references{
+Zanon, A. J., & Tagliapietra, E. L. (2022). Ecofisiologia da soja:
+Visando altas produtividades (2ª ed.). Field Crops.
+}
+\author{
+Willyan Jr. A. Bandeira, Ivan R. Carvalho
 }

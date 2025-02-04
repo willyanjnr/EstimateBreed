@@ -38,6 +38,7 @@ linearest <- function(indep,dep,type=NULL,alpha=0.05){
     }}
 
   if (type == "x3"){
+    #Função incompleta, finalizar
     mod2 <- lm(dep ~ poly(indep,3,raw = T))
     coeff <- coef(mod2)
     cat("Coeficientes do modelo cúbico:\n",coeff,"\n")

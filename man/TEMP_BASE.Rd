@@ -24,7 +24,7 @@ TEMP_BASE(
 \item{xlab}{description}
 }
 \description{
-Plotando as temperaturas bases e ótimas para as culturas
+Utilitária para plotar gráficos dos preferendos térmicos para as culturas
 }
 \author{
 Willyan Jr. A. Bandeira, Ivan R. Carvalho

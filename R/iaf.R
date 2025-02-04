@@ -7,6 +7,7 @@
 #'@param crop Cultura amostrada. Utilizar "soy" para soja e "maize" para milho.
 #'@param sp Espaçamento entre linhas (Padrão sp=0.45).
 #'@param sden Densidade de semeadura, em plantas por metro linear (padrão sden=14).
+#'@author Willyan Jr. A. Bandeira, Ivan R. Carvalho
 #'@export
 
 iaf <- function(GEN, W, L, crop = "soy", sp = 0.45, sden = 14) {

@@ -22,3 +22,6 @@ iaf(GEN, W, L, crop = "soy", sp = 0.45, sden = 14)
 \description{
 Função utilitária para a determinação do IAF de culturas
 }
+\author{
+Willyan Jr. A. Bandeira, Ivan R. Carvalho
+}

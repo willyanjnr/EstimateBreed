@@ -16,3 +16,6 @@ somatermica(TMED, MONTH, cultura = "milho", plot = T)
 \description{
 Cálculo da Soma Térmica de Culturas
 }
+\author{
+Willyan Jr. A. Bandeira, Ivan R. Carvalho
+}

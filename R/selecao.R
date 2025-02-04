@@ -477,9 +477,9 @@ SEGREGAÇÃO_PADRÃO<-function(MELHORAMENTO){
              "1 a 2", "3 ou +", "3 ou +","3 ou +","3 ou +","3 ou +","3 ou +")
   E_AMBIENTE<-c("-","-","baixo",
                 "baixo", "alto", "alto","alto","alto","alto","alto")
-
+  COEF_F<-c(0.000,0.500,0.750,0.875,0.937,0.969,0.984,0.992,0.996,0.998)
   TABELA<-data.frame(AUTÓGAMAS,ALÓGAMAS,HETEROZIGOSE,HOMOZIGOSE,MUTANTES,
-                     SELEÇÃO,N_GENES, E_AMBIENTE)
+                     SELEÇÃO,N_GENES, E_AMBIENTE, COEF_F)
 
   return(TABELA)
 }
@@ -1000,14 +1000,3 @@ genpar <- function(POP, GEN, REP = NULL, vars, K = 0.05, type = "balanced", chec
     }
   }
 }
-
-#'Número de genes
-#'@description
-#'Determinação do número de genes
-#'@author Willyan Jr. A. Bandeira, Ivan R. Carvalho
-#'@export
-
-#Três tipos
-#1 - Herança
-#2 - Máximo e Mínimo
-#3 - Artigo Arroz

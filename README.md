@@ -11,7 +11,7 @@ EstimateBreed is an R package designed to perform analyses and estimate environm
 To install the latest version from GitHub, use the following command:
 
 ```r
-devtools::install_github("willyanjnr/EstimateBreed")
+devtools::install_github("https://github.com/willyanjnr/EstimateBreed")
 ```
 
 ### Example
@@ -31,12 +31,13 @@ with(genot, isgr(GEN, ENV, NG, MG, CICLO))
 Predict ∆T to determine the ideal times to apply agricultural pesticides.
 ``` r
 library("EstimateBreed")
+
 deltat(-53.91472,-28.38778,type=1,days=10)
 View(forecast)
 ```
 
 ## Documentation
-Complete documentation can be found when using the package within R
+Complete documentation can be found when using the package within R.
 
 ### Citing
 When citing this package, please use,

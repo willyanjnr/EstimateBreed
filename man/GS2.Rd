@@ -17,3 +17,7 @@ cada variável}
 \description{
 Resposta a seleção ponderada pelo Diferencial de Seleção Simples
 }
+\author{
+Willyan Jr. A. Bandeira, Ivan R. Carvalho, Murilo V. Loro,
+Leonardo C. Pradebon, José A. G. da Silva
+}

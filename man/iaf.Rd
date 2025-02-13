@@ -36,5 +36,6 @@ Plastocrono e caracteres morfológicos da soja com hábito de crescimento
 indeterminado. Revista Cultivando o Saber, 8(2), 184-200.
 }
 \author{
-Willyan Jr. A. Bandeira, Ivan R. Carvalho
+Willyan Jr. A. Bandeira, Ivan R. Carvalho, Murilo V. Loro,
+Leonardo C. Pradebon, José A. G. da Silva
 }

@@ -13,5 +13,6 @@ SEGREGAÇÃO_PADRÃO(MELHORAMENTO)
 Tabela didática da segregação padrão por geração
 }
 \author{
-Willyan Jr. A. Bandeira, Ivan R. Carvalho
+Willyan Jr. A. Bandeira, Ivan R. Carvalho, Murilo V. Loro,
+Leonardo C. Pradebon, José A. G. da Silva
 }

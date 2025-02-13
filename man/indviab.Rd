@@ -47,5 +47,6 @@ Revista Engenharia na Agricultura - REVENG, 32(Contínua), 54–64.
 https://doi.org/10.13083/reveng.v32i1.17394
 }
 \author{
-Willyan Jr. A. Bandeira, Ivan R. Carvalho
+Willyan Jr. A. Bandeira, Ivan R. Carvalho, Murilo V. Loro,
+Leonardo C. Pradebon, José A. G. da Silva
 }

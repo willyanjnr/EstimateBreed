@@ -18,5 +18,6 @@ sobredominância.}
 Exemplos didáticos de interações alélicas e gênicas
 }
 \author{
-Willyan Jr. A. Bandeira, Ivan R. Carvalho
+Willyan Jr. A. Bandeira, Ivan R. Carvalho, Murilo V. Loro,
+Leonardo C. Pradebon, José A. G. da Silva
 }

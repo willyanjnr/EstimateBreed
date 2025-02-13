@@ -17,5 +17,6 @@ reg_GP(ind, Genitor, Progenie)
 Estimativa da Regressão Genitor x Progênie
 }
 \author{
-Willyan Jr. A. Bandeira, Ivan R. Carvalho
+Willyan Jr. A. Bandeira, Ivan R. Carvalho, Murilo V. Loro,
+Leonardo C. Pradebon, José A. G. da Silva
 }

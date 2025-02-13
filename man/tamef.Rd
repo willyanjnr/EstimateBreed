@@ -17,5 +17,6 @@ tamef(GEN, SI, NE)
 Estimativa do tamanho efetivo populacional adaptado por Morais (1997).
 }
 \author{
-Willyan Jr. A. Bandeira, Ivan R. Carvalho.
+Willyan Jr. A. Bandeira, Ivan R. Carvalho, Murilo V. Loro,
+Leonardo C. Pradebon, José A. G. da Silva
 }

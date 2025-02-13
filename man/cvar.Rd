@@ -38,5 +38,6 @@ Acta Scientiarum. Agronomy, 45, e56156.
 https://doi.org/10.4025/actasciagron.v45i1.56156
 }
 \author{
-Willyan Jr. A. Bandeira, Ivan R. Carvalho
+Willyan Jr. A. Bandeira, Ivan R. Carvalho, Murilo V. Loro,
+Leonardo C. Pradebon, José A. G. da Silva
 }

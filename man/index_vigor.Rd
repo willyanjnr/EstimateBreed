@@ -30,5 +30,6 @@ a new biometric approach applied to the effects of genotypes and
 environments. Journal of Seed Science, 40(4), 396-406.
 }
 \author{
-Willyan Jr. A. Bandeira, Ivan R. Carvalho
+Willyan Jr. A. Bandeira, Ivan R. Carvalho, Murilo V. Loro,
+Leonardo C. Pradebon, José A. G. da Silva
 }

@@ -17,5 +17,6 @@ Coeficiente_endogamia(var, VG, VF)
 Função para Cálculo do coeficiente de endogamia
 }
 \author{
-Willyan Jr. A. Bandeira, Ivan R. Carvalho
+Willyan Jr. A. Bandeira, Ivan R. Carvalho, Murilo V. Loro,
+Leonardo C. Pradebon, José A. G. da Silva
 }

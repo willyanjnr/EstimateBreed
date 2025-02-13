@@ -20,5 +20,6 @@ Considera conhecer apenas o genitor materno, sem controle do polinizador,
 ou uma seleção direta sem parentais
 }
 \author{
-Willyan Jr. A. Bandeira, Ivan R. Carvalho
+Willyan Jr. A. Bandeira, Ivan R. Carvalho, Murilo V. Loro,
+Leonardo C. Pradebon, José A. G. da Silva
 }

@@ -35,5 +35,6 @@ models for wheat industrial quality analysis.
 Genetics and Molecular Research, 18(3), 1-14.
 }
 \author{
-Willyan Jr. A. Bandeira, Ivan R. Carvalho
+Willyan Jr. A. Bandeira, Ivan R. Carvalho, Murilo V. Loro,
+Leonardo C. Pradebon, José A. G. da Silva
 }

@@ -23,5 +23,6 @@ Adaptability, stability and multivariate selection by mixed models.
 American Journal of Plant Sciences, 8(13), 3324.
 }
 \author{
-Willyan Jr. A. Bandeira, Ivan R. Carvalho
+Willyan Jr. A. Bandeira, Ivan R. Carvalho, Murilo V. Loro,
+Leonardo C. Pradebon, José A. G. da Silva
 }

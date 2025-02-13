@@ -37,5 +37,6 @@ traits. International Journal of Agronomy, 2024, Article ID 9946332.
 https://doi.org/10.1155/2024/9946332
 }
 \author{
-Willyan Jr. A. Bandeira, Ivan R. Carvalho
+Willyan Jr. A. Bandeira, Ivan R. Carvalho, Murilo V. Loro,
+Leonardo C. Pradebon, José A. G. da Silva
 }

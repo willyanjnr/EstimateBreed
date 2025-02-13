@@ -50,5 +50,6 @@ Fehr, W. R., & Caviness, C. E. (1977). Stages of soybean development.
 Iowa State University of Science and Technology Special Report, 80, 1-11.
 }
 \author{
-Willyan Jr. A. Bandeira, Ivan R. Carvalho
+Willyan Jr. A. Bandeira, Ivan R. Carvalho, Murilo V. Loro,
+Leonardo C. Pradebon, José A. G. da Silva
 }

@@ -62,5 +62,6 @@ Selection Models. Journal of Crop Health 76, 601–616 (2024).
 https://doi.org/10.1007/s10343-024-00981-1
 }
 \author{
-Willyan Jr. A. Bandeira, Ivan R. Carvalho
+Willyan Jr. A. Bandeira, Ivan R. Carvalho, Murilo V. Loro,
+Leonardo C. Pradebon, José A. G. da Silva
 }

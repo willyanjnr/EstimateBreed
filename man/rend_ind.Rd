@@ -35,5 +35,6 @@ with(aveia, rend_ind(GEN,NG2M,MG,MC,RG,stat="mean"))
 }
 }
 \author{
-Willyan Jr. A. Bandeira, Ivan R. Carvalho
+Willyan Jr. A. Bandeira, Ivan R. Carvalho, Murilo V. Loro,
+Leonardo C. Pradebon, José A. G. da Silva
 }

@@ -44,5 +44,6 @@ Secretaria de Defesa Agropecuária. Regras para Análise de Sementes.
 Brasília: MAPA/ACS, 2009. 399 p. ISBN 978-85-99851-70-8.
 }
 \author{
-Willyan Jr. A. Bandeira, Ivan R. Carvalho
+Willyan Jr. A. Bandeira, Ivan R. Carvalho, Murilo V. Loro,
+Leonardo C. Pradebon, José A. G. da Silva
 }

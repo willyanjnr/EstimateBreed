@@ -36,3 +36,7 @@ Rosa, T. D., Martins, T. S., ... & Maia, L. D. (2017).
 Diallel and prediction (REML/BLUP) for yield components in intervarietal maize hybrids.
 Genet Mol Res, 16(3).
 }
+\author{
+Willyan Jr. A. Bandeira, Ivan R. Carvalho, Murilo V. Loro,
+Leonardo C. Pradebon, José A. G. da Silva
+}

@@ -52,5 +52,6 @@ to abiotic stresses. Aust J Crop Sci, 18(12), 825-830.
 https://doi.org/10.21475/ajcs.24.18.12.p98
 }
 \author{
-Willyan Jr. A. Bandeira, Ivan R. Carvalho
+Willyan Jr. A. Bandeira, Ivan R. Carvalho, Murilo V. Loro,
+Leonardo C. Pradebon, José A. G. da Silva
 }

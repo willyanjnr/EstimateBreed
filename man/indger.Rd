@@ -29,5 +29,6 @@ Journal of Food Engineering, vol. 13, no. 10, 2017, pp. 20160433.
 https://doi.org/10.1515/ijfe-2016-043
 }
 \author{
-Willyan Jr. A. Bandeira, Ivan R. Carvalho
+Willyan Jr. A. Bandeira, Ivan R. Carvalho, Murilo V. Loro,
+Leonardo C. Pradebon, José A. G. da Silva
 }

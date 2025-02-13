@@ -30,5 +30,6 @@ Blupis e seleção massal em cana-de-açúcar. Bragantia, 70(4), 796–800.
 Model 35 (SELEGEN)
 }
 \author{
-Willyan Jr. A. Bandeira, Ivan R. Carvalho
+Willyan Jr. A. Bandeira, Ivan R. Carvalho, Murilo V. Loro,
+Leonardo C. Pradebon, José A. G. da Silva
 }

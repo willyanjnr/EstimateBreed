@@ -19,5 +19,6 @@ gga(GEN, VAR, h2, P)
 Esta função estima o ganho genético aditivo, conforme descrito por Falconer (1987).
 }
 \author{
-Willyan Jr. A. Bandeira, Ivan R. Carvalho
+Willyan Jr. A. Bandeira, Ivan R. Carvalho, Murilo V. Loro,
+Leonardo C. Pradebon, José A. G. da Silva
 }

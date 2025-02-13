@@ -19,3 +19,7 @@ Silva, J. A. G. D., & Sausen, N. H. (2024).
 Early selection of resilient progenies to seed yield in soybean populations.
 Ciência Rural, 54, e20230287.
 }
+\author{
+Willyan Jr. A. Bandeira, Ivan R. Carvalho, Murilo V. Loro,
+Leonardo C. Pradebon, José A. G. da Silva
+}

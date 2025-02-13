@@ -2,7 +2,7 @@
 % Please edit documentation in R/estresse.R
 \name{itu}
 \alias{itu}
-\title{Índice de Temperatura e Umidade}
+\title{Índice de Temperatura e Umidade ####Alterar nome}
 \usage{
 itu(CICLO, TM, UR)
 }
@@ -15,4 +15,8 @@ itu(CICLO, TM, UR)
 }
 \description{
 Cálculo do Índice de Temperatura e Umidade (ITU)
+}
+\author{
+Willyan Jr. A. Bandeira, Ivan R. Carvalho, Murilo V. Loro,
+Leonardo C. Pradebon, José A. G. da Silva
 }

@@ -24,5 +24,6 @@ Zanon, A. J., & Tagliapietra, E. L. (2022). Ecofisiologia da soja:
 Visando altas produtividades (2ª ed.). Field Crops.
 }
 \author{
-Willyan Jr. A. Bandeira, Ivan R. Carvalho
+Willyan Jr. A. Bandeira, Ivan R. Carvalho, Murilo V. Loro,
+Leonardo C. Pradebon, José A. G. da Silva
 }

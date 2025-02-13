@@ -31,5 +31,6 @@ lowland soils. Earth Interactions, 24(4), 1-16.
 https://doi.org/10.1175/EI-D-19-0029.1
 }
 \author{
-Willyan Jr. A. Bandeira, Ivan R. Carvalho
+Willyan Jr. A. Bandeira, Ivan R. Carvalho, Murilo V. Loro,
+Leonardo C. Pradebon, José A. G. da Silva
 }

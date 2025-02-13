@@ -21,3 +21,7 @@ Adaptability and stability of wheat genotypes according to the
 phenotypic index of seed vigor. Pesquisa Agropecuária Brasileira,
 53, 727-735.
 }
+\author{
+Willyan Jr. A. Bandeira, Ivan R. Carvalho, Murilo V. Loro,
+Leonardo C. Pradebon, José A. G. da Silva
+}

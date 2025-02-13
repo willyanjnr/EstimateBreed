@@ -2,9 +2,7 @@
 % Please edit documentation in R/mutagenico.R
 \name{mut_index}
 \alias{mut_index}
-\title{Índice de vigor multivariado em sementes
-Citação: "A new method for mutation inducing in rice
-by using DC electrophoresis bath and its mutagenic ef}
+\title{Índice de vigor multivariado em sementes}
 \usage{
 mut_index(mut, MSG, MST, GT, DT, SL)
 }
@@ -22,7 +20,15 @@ mut_index(mut, MSG, MST, GT, DT, SL)
 \item{SL}{Comprimento da plântula}
 }
 \description{
-Índice de vigor multivariado em sementes
 Citação: "A new method for mutation inducing in rice
 by using DC electrophoresis bath and its mutagenic ef
+}
+\references{
+Zou, M., Tong, S., Zou, T. et al. A new method for mutation inducing in rice
+by using DC electrophoresis bath and its mutagenic effects. Sci Rep 13, 6707
+(2023). https://doi.org/10.1038/s41598-023-33742-7
+}
+\author{
+Willyan Jr. A. Bandeira, Ivan R. Carvalho, Murilo V. Loro,
+Leonardo C. Pradebon, José A. G. da Silva
 }

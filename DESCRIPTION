@@ -2,6 +2,7 @@ Package: EstimateBreed
 Type: Package
 Title: Estimation of Environmental Variables and Genetic Parameters
 Version: 0.1.0
+Date/Publication: 2025-02-13
 Authors@R: c(
     person(
       "Willyan Jr. A. Bandeira", 
@@ -14,6 +15,24 @@ Authors@R: c(
       email = "carvalho.irc@gmail.com",
       role = c("aut", "ctb"),
       comment = c(ORCID = "0000-0001-7947-4900")
+    ),
+    person(
+      "Murilo V. Loro", 
+      email = "muriloloro@gmail.com",
+      role = c("aut", "ctb"),
+      comment = c(ORCID = "0000-0003-0241-4226")
+    ),
+    person(
+      "Leonardo C. Pradebon", 
+      email = "leonardopradebon@gmail.com",
+      role = c("aut", "ctb"),
+      comment = c(ORCID = "0000-0001-7827-6312")
+    ),
+    person(
+      "José A. G. da Silva", 
+      email = "jagsfaem@yahoo.com.br",
+      role = c("aut", "ctb"),
+      comment = c(ORCID = "0009-0005-4923-5526")
     )
   )
 Description: Performs analyzes and estimates of environmental covariates 

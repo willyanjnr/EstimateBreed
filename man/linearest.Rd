@@ -26,5 +26,6 @@ Determinação da máxima eficiência técnica (MET), pontos de máxima e mínim
 função platô.
 }
 \author{
-Willyan Jr. A. Bandeira, Ivan R. Carvalho
+Willyan Jr. A. Bandeira, Ivan R. Carvalho, Murilo V. Loro,
+Leonardo C. Pradebon, José A. G. da Silva
 }

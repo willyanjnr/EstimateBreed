@@ -35,5 +35,6 @@ technique for speed breeding in soybean. Genetics and Molecular Research, 23(1).
 https://doi.org/10.4238/gmr19232
 }
 \author{
-Willyan Jr. A. Bandeira, Ivan R. Carvalho
+Willyan Jr. A. Bandeira, Ivan R. Carvalho, Murilo V. Loro,
+Leonardo C. Pradebon, José A. G. da Silva
 }

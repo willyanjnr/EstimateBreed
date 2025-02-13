@@ -17,5 +17,6 @@ transgressivos(Gen, Var, Testemunha, ylab = "Seleção", xlab = "Genótipos")
 Seleção de Genótipos Transgressívos - Diferencial de Seleção (DS)
 }
 \author{
-Willyan Jr. A. Bandeira, Ivan R. Carvalho
+Willyan Jr. A. Bandeira, Ivan R. Carvalho, Murilo V. Loro,
+Leonardo C. Pradebon, José A. G. da Silva
 }

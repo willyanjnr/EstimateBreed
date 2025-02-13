@@ -12,7 +12,8 @@
 #' Temperature Intermittent Drying on Rice Seed Viability and Vigor" International
 #' Journal of Food Engineering, vol. 13, no. 10, 2017, pp. 20160433.
 #' https://doi.org/10.1515/ijfe-2016-043
-#' @author Willyan Jr. A. Bandeira, Ivan R. Carvalho
+#' @author Willyan Jr. A. Bandeira, Ivan R. Carvalho, Murilo V. Loro,
+#' Leonardo C. Pradebon, José A. G. da Silva
 #' @examples
 #' with(data,indviab(genot,var1,var2))
 

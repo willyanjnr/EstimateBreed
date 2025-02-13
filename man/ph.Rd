@@ -4,19 +4,44 @@
 \alias{ph}
 \title{Determinação do peso do hectolitro de cereais}
 \usage{
-ph(GEN, PESO, crop = "trigo")
+ph(GEN, PESO, crop = "trigo", stat = "all")
 }
 \arguments{
 \item{GEN}{A coluna com o nome do genótipo}
 
-\item{PESO}{Peso obtido em balança de 1qt lt}
+\item{PESO}{Peso obtido em balança de 1qt lt, conforme determinado pelas
+Regras de Análises de Sementes (RAS), do Ministério da Agricultura,
+Pecuária e Abastecimento (2009).}
 }
 \value{
-Retorna o valor estimado do peso do hectolitro (PH).
+Retorna o valor estimado do peso do hectolitro (PH) para o ceral
+selecionado.
 }
 \description{
 Função útil para caracterizar o peso do hectolitro (PH) de experimentos com
 cereais.
+}
+\examples{
+\donttest{
+library(EstimateBreed)
+
+GEN <- rep(paste("G", 1:5, sep=""), each = 3)
+REP <- rep(1:3, times = 5)
+MG <- c(78.5, 80.2, 79.1, 81.3, 82.0, 80.8, 76.9, 78.1, 77.5, 83.2,
+84.1, 82.9, 77.4, 78.9, 79.3)
+
+data <- data.frame(GEN, REP, MG)
+
+with(data,ph(GEN,MG,crop="trigo"))
+
+#Extrair a média do PH por genótipo
+with(data,ph(GEN,MG,crop="trigo",stat="mean"))
+}
+}
+\references{
+Brasil. Ministério da Agricultura, Pecuária e Abastecimento.
+Secretaria de Defesa Agropecuária. Regras para Análise de Sementes.
+Brasília: MAPA/ACS, 2009. 399 p. ISBN 978-85-99851-70-8.
 }
 \author{
 Willyan Jr. A. Bandeira, Ivan R. Carvalho

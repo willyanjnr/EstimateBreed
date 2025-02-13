@@ -26,7 +26,7 @@ e calcula o desvio padrão desses parâmetros para cada ambiente.
 }
 \examples{
 \donttest{
-library(Breeding)
+library(EstimateBreed)
 data("desvamb")
 
 with(desvamb,desv_clim(ENV,TMED,PREC))

@@ -21,7 +21,7 @@ descritas por Szareski et al. (2019).
 }
 \examples{
 \donttest{
-library(Breeding)
+library(EstimateBreed)
 
 data("ptn")
 with(ptn,is_qindustrial(Cult,NQ,W,PTN))

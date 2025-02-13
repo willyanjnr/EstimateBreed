@@ -7,7 +7,19 @@
 #'@param crop Cultura amostrada. Utilizar "soy" para soja e "maize" para milho.
 #'@param sp Espaçamento entre linhas (Padrão sp=0.45).
 #'@param sden Densidade de semeadura, em plantas por metro linear (padrão sden=14).
-#'@author Willyan Jr. A. Bandeira, Ivan R. Carvalho
+#' @author Willyan Jr. A. Bandeira, Ivan R. Carvalho, Murilo V. Loro,
+#' Leonardo C. Pradebon, José A. G. da Silva
+#'@references
+#'Meira, D., Queiróz de Souza, V., Carvalho, I. R., Nardino, M., Follmann,
+#'D. N., Meier, C., Brezolin, P., Ferrari, M., & Pelegrin, A. J. (2015).
+#'Plastocrono e caracteres morfológicos da soja com hábito de crescimento
+#'indeterminado. Revista Cultivando o Saber, 8(2), 184-200.
+#'@examples
+#'\donttest{
+#'library(EstimateBreed)
+#'
+#'#Finalizar o exemplo
+#'}
 #'@export
 
 iaf <- function(GEN, W, L, crop = "soy", sp = 0.45, sden = 14) {

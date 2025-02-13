@@ -4,7 +4,8 @@
 #'@param GEN A coluna com o nome do genótipo (progênie).
 #'@param SI A coluna com o número de indivíduos selecionados.
 #'@param NE Número de indivíduos conduzidos no período de seleção.
-#'@author Willyan Jr. A. Bandeira, Ivan R. Carvalho.
+#' @author Willyan Jr. A. Bandeira, Ivan R. Carvalho, Murilo V. Loro,
+#' Leonardo C. Pradebon, José A. G. da Silva
 #'@export
 
 tamef <- function(GEN,SI,NE){

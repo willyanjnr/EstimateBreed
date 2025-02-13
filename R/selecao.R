@@ -5,7 +5,8 @@
 #'@param h A coluna com os valores de herdabilidade no sentido restrito
 #'@param VF A coluna com os valores de variância fenotípica
 #'@param P A coluna com os valores observados para as progênies
-#'@author Willyan Jr. A. Bandeira, Ivan R. Carvalho
+#' @author Willyan Jr. A. Bandeira, Ivan R. Carvalho, Murilo V. Loro,
+#' Leonardo C. Pradebon, José A. G. da Silva
 #'@export
 
 GS<-function(Var, h, VF, P = "1"){
@@ -127,6 +128,8 @@ GS<-function(Var, h, VF, P = "1"){
 #'@param h A coluna com os valores de herdabilidade no sentido restrito
 #'@param DS A coluna com o valor do diferencial de seleção a ser aplicado para
 #'cada variável
+#' @author Willyan Jr. A. Bandeira, Ivan R. Carvalho, Murilo V. Loro,
+#' Leonardo C. Pradebon, José A. G. da Silva
 #'@export
 
 GS2<-function(Var, h, DS){
@@ -152,7 +155,8 @@ GS2<-function(Var, h, DS){
 #'@param h A coluna com os valores de herdabilidade no sentido restrito
 #'@param VF A coluna com os valores de variância fenotípica
 #'@param P A coluna com os valores das progênies
-#'@author Willyan Jr. A. Bandeira, Ivan R. Carvalho
+#' @author Willyan Jr. A. Bandeira, Ivan R. Carvalho, Murilo V. Loro,
+#' Leonardo C. Pradebon, José A. G. da Silva
 #'@export
 
 GS3<-function(Var, h, VF, P = "1"){
@@ -275,7 +279,8 @@ GS3<-function(Var, h, VF, P = "1"){
 #'@param VF A coluna com os valores de variância fenotípica
 #'@param P A coluna com o valor obtido para as progênies
 #'@param Ano A coluna com o ano de seleção
-#'@author Willyan Jr. A. Bandeira, Ivan R. Carvalho
+#' @author Willyan Jr. A. Bandeira, Ivan R. Carvalho, Murilo V. Loro,
+#' Leonardo C. Pradebon, José A. G. da Silva
 #'@export
 
 GS4<-function(Var, h, VF, P = "1", Ano){
@@ -397,7 +402,8 @@ GS4<-function(Var, h, VF, P = "1", Ano){
 #'@param Gen A coluna com o nome do genótipo
 #'@param Var A coluna com a variável de interesse
 #'@param Testemunha A coluna com o valor da variável 'X' para as testemunhas
-#'@author Willyan Jr. A. Bandeira, Ivan R. Carvalho
+#' @author Willyan Jr. A. Bandeira, Ivan R. Carvalho, Murilo V. Loro,
+#' Leonardo C. Pradebon, José A. G. da Silva
 #'@export
 
 transgressivos<-function(Gen, Var, Testemunha,ylab="Seleção",xlab="Genótipos"){
@@ -458,7 +464,8 @@ transgressivos<-function(Gen, Var, Testemunha,ylab="Seleção",xlab="Genótipos"
 #'@description
 #'Tabela didática da segregação padrão por geração
 #'@param MELHORAMENTO Parâmetro base para a função imprimir a tabela
-#'@author Willyan Jr. A. Bandeira, Ivan R. Carvalho
+#' @author Willyan Jr. A. Bandeira, Ivan R. Carvalho, Murilo V. Loro,
+#' Leonardo C. Pradebon, José A. G. da Silva
 #'@export
 SEGREGAÇÃO_PADRÃO<-function(MELHORAMENTO){
 
@@ -491,8 +498,8 @@ SEGREGAÇÃO_PADRÃO<-function(MELHORAMENTO){
 #'@param var Coluna com o nome da variável
 #'@param VG Coluna com a variância genotípica
 #'@param VF Coluna com a variância fenotípica
-#'@author
-#'Willyan Jr. A. Bandeira, Ivan R. Carvalho
+#' @author Willyan Jr. A. Bandeira, Ivan R. Carvalho, Murilo V. Loro,
+#' Leonardo C. Pradebon, José A. G. da Silva
 #'@export
 
 Coeficiente_endogamia<-function(var, VG, VF){
@@ -678,8 +685,8 @@ Coeficiente_endogamia<-function(var, VG, VF){
 #' @param ind description
 #' @param Genitor description
 #' @param Progenie description
-#' @author
-#' Willyan Jr. A. Bandeira, Ivan R. Carvalho
+#' @author Willyan Jr. A. Bandeira, Ivan R. Carvalho, Murilo V. Loro,
+#' Leonardo C. Pradebon, José A. G. da Silva
 #' @export
 
 reg_GP <- function(ind, Genitor, Progenie) {
@@ -735,8 +742,8 @@ reg_GP <- function(ind, Genitor, Progenie) {
 #'sobredominância.
 #'@param ge Tipo de interação GxE. Utilize "aus" para ausência de interação,
 #'"simples" para interação simples e "complex" para interação complexa.
-#'@author
-#'Willyan Jr. A. Bandeira, Ivan R. Carvalho
+#' @author Willyan Jr. A. Bandeira, Ivan R. Carvalho, Murilo V. Loro,
+#' Leonardo C. Pradebon, José A. G. da Silva
 #'@export
 
 ALELICA<-function(type=NULL,ge=NULL){
@@ -863,8 +870,8 @@ ALELICA<-function(type=NULL,ge=NULL){
 #' @param VAR Variável de interesse para análise.
 #' @param h2 Herdabilidade do caráter (um valor entre 0 e 1).
 #' @param P Performance da progênie (um valor numérico ou vetor).
-#' @author
-#' Willyan Jr. A. Bandeira, Ivan R. Carvalho
+#' @author Willyan Jr. A. Bandeira, Ivan R. Carvalho, Murilo V. Loro,
+#' Leonardo C. Pradebon, José A. G. da Silva
 #' @export
 
 gga <- function(GEN, VAR, h2, P) {
@@ -889,7 +896,8 @@ gga <- function(GEN, VAR, h2, P) {
 #'de irmãos-completos (aleatório)
 #'@param b A coluna com o efeito dos blocos incompletos (aleatório)
 #'@param A Matriz de parentesco obtida com o AGHmatrix
-#'@author Willyan Jr. A. Bandeira, Ivan R. Carvalho
+#' @author Willyan Jr. A. Bandeira, Ivan R. Carvalho, Murilo V. Loro,
+#' Leonardo C. Pradebon, José A. G. da Silva
 #'@references
 #'Oliveira, R. A., Daros, E., Resende, M. D. V., Bespalhok-Filho, J. C.,
 #'Zambon, J. L. C., Souza, T. R., & Lucius, A. S. F. (2011). Procedimento
@@ -941,7 +949,8 @@ blupis <- function(){
 #'"balanced" para balanceado e "unb" para desbalanceado.
 #'@param check Argumento lógico. Faz as verificações do pressuposto do modelo
 #'estatístico se o valor for igual a TRUE.
-#'@author Willyan Jr. A. Bandeira, Ivan R. Carvalho
+#' @author Willyan Jr. A. Bandeira, Ivan R. Carvalho, Murilo V. Loro,
+#' Leonardo C. Pradebon, José A. G. da Silva
 #'@references
 #'Yadav, S. P. S., Bhandari, S., Ghimire, N. P., Mehata, D. K., Majhi, S. K.,
 #'Bhattarai, S., Shrestha, S., Yadav, B., Chaudhary, P., & Bhujel, S. (2024).

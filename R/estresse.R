@@ -16,7 +16,8 @@
 #'@param ylab Ajustar o título do eixo y no gráfico.
 #'@return Retorna uma tabela com os genótipos e os índices selecionados.
 #'Quanto maior o valor do índice, mais resiliente é o genótipo.
-#'@author Willyan Jr. A. Bandeira, Ivan R. Carvalho
+#' @author Willyan Jr. A. Bandeira, Ivan R. Carvalho, Murilo V. Loro,
+#' Leonardo C. Pradebon, José A. G. da Silva
 #'@references
 #'Ghazvini, H., Pour-Aboughadareh, A., Jasemi, S.S. et al.
 #'A Framework for Selection of High-Yielding and Drought-tolerant
@@ -348,13 +349,15 @@ estresse <- function(GEN,YS,YC,index="ALL",bygen=T,plot=F,xlab="Genótipo",ylab=
   }
 }
 
-#' Índice de Temperatura e Umidade
+#' Índice de Temperatura e Umidade ####Alterar nome
 #'@description
 #'Cálculo do Índice de Temperatura e Umidade (ITU)
 #'
 #'@param CICLO Coluna referente ao Ciclo
 #'@param TM Colune referente à Temperatura Média
 #'@param UR Coluna referente à Umidade Relativa
+#' @author Willyan Jr. A. Bandeira, Ivan R. Carvalho, Murilo V. Loro,
+#' Leonardo C. Pradebon, José A. G. da Silva
 #'@export
 
 itu <- function(CICLO,TM,UR){

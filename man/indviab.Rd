@@ -25,17 +25,26 @@ indviab(
 Estimativa do índice de viabilidade a partir de duas variáveis de campo.
 }
 \examples{
-library(Breeding)
+\donttest{
+library(EstimateBreed)
 
 data("trigo")
 #Índice de viabilidade de espiga
-with(trigo,indviab(TEST,NGE,NNE))
+with(trigo,indviab(TEST,NGE,NEE))
 
 #Índice de colheita da espiga
 with(trigo,indviab(TEST,MGE,ME))
 
 #Índice de deposição de espiguetas na espiga
 #'with(trigo,indviab(TEST,NEE,CE))
+}
+}
+\references{
+Rigotti, E. J., Carvalho, I. R., Loro, M. V., Pradebon, L. C., Dalla Roza,
+J. P., & Sangiovo, J. P. (2024). Seed and grain yield and quality of wheat
+subjected to advanced harvest using a physiological ripening process.
+Revista Engenharia na Agricultura - REVENG, 32(Contínua), 54–64.
+https://doi.org/10.13083/reveng.v32i1.17394
 }
 \author{
 Willyan Jr. A. Bandeira, Ivan R. Carvalho

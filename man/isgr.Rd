@@ -4,7 +4,7 @@
 \alias{isgr}
 \title{ISGR - Índice de Seleção Genético para Resiliência.}
 \usage{
-isgr(GEN, ENV, NG, MG, CICLO, req = 3.5)
+isgr(GEN, ENV, NG, MG, CICLO, req = 3.5, stage = NULL)
 }
 \arguments{
 \item{GEN}{Coluna referente aos genótipos. As linhagens devem obrigatoriamente
@@ -19,21 +19,29 @@ ter o prefixo "L" antes do número. Ex: L139.}
 \item{CICLO}{Número de dias do ciclo, para definir a precipitação pluviométrica
 ideal (valor de 3.5 mm por dia)}
 
-\item{req}{Valor da demanda hídrica diária média para a cultura da soja (padrão 3.5 mm)}
+\item{req}{Valor da demanda hídrica diária média para a cultura da soja
+(padrão 3.5 mm). Pode ser alterado conforme o estádio fenológico.}
+
+\item{stage}{Parâmetro para definir o estádio fenológico que a cultura se
+encontra. Utilizar "veg" para vegetativo e "rep" para reprodutivo, caso as
+avaliações tenham sido realizadas apenas em um determinado período.}
 }
 \description{
 Estimativa do índice de seleção para resiliência ambiental (Bandeira et al., 2024).
 }
 \examples{
 \donttest{
-library(Breeding)
+library(EstimateBreed)
 #Obter os desvios ambientais
 data("desvamb")
-with(desvamb, desv_clim(ENV, TMED, PREC))
+with(desvamb, desv_clim(ENV,TMED,PREC))
 
 #Calcular o ISGR
 data("genot")
-with(genot, isgr(GEN, ENV, NG, MG, CICLO))
+with(genot, isgr(GEN,ENV,NG,MG,CICLO))
+
+#Definir o requerimento hídrico por estádio
+with(genot, isgr(GEN,ENV,NG,MG,CICLO,req=5,stage="rep"))
 }
 }
 \references{

@@ -1,6 +1,8 @@
 #'AIC e multitrait de sementes de aveia preta
 #'@description
 #'Índices de seleção multicaracterística
+#' @author Willyan Jr. A. Bandeira, Ivan R. Carvalho, Murilo V. Loro,
+#' Leonardo C. Pradebon, José A. G. da Silva
 #'@references
 #'Moura, N. B., Carvalho, I. R., Silva, J. A. G., Loro, M. V., Barbosa, M. H.,
 #'Lautenchleger, F., Marchioro, V. S., & Souza, V. Q. (2021). Akaike criteria

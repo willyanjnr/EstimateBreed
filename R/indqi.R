@@ -6,7 +6,8 @@
 #'@param NQ A coluna com o valor do falling number
 #'@param W A coluna com a força de glúten (W)
 #'@param PTN A coluna com os valores de proteína
-#'@author Willyan Jr. A. Bandeira, Ivan R. Carvalho
+#' @author Willyan Jr. A. Bandeira, Ivan R. Carvalho, Murilo V. Loro,
+#' Leonardo C. Pradebon, José A. G. da Silva
 #'@references
 #'Szareski, V. J., Carvalho, I. R., Kehl, K., Levien, A. M.,
 #'Lautenchleger, F., Barbosa, M. H., ... & Aumonde, T. Z. (2019).
@@ -16,7 +17,7 @@
 #'@export
 #'@examples
 #'\donttest{
-#' library(Breeding)
+#' library(EstimateBreed)
 #'
 #'data("ptn")
 #'with(ptn,is_qindustrial(Cult,NQ,W,PTN))
@@ -59,18 +60,19 @@ is_qindustrial <- function(GEN, NQ, W, PTN){
 #'@param MC Coluna com os valores da massa de cariópse.
 #'@param RG Colunas com os valores do rendimento de grãos (kg/ha).
 #'@param stat Extrair ou não a média por genótipo. Padrão é `"all"`.
-#'@author Willyan Jr. A. Bandeira, Ivan R. Carvalho
+#' @author Willyan Jr. A. Bandeira, Ivan R. Carvalho, Murilo V. Loro,
+#' Leonardo C. Pradebon, José A. G. da Silva
 #'@export
 #'@examples
 #'\donttest{
-#' library(Breeding)
+#'library(EstimateBreed)
 #'
 #'data("aveia")
 #'# Calcular o rendimento industrial sem extrair a média
-#'with(aveia, rend_ind(GEN, NG2M, MG, MC, RG))
+#'with(aveia, rend_ind(GEN,NG2M,MG,MC,RG))
 #'
 #'# Calcular o rendimento industrial extraindo a média por genótipo
-#'with(aveia, rend_ind(GEN, NG2M, MG, MC, RG, stat = "mean"))
+#'with(aveia, rend_ind(GEN,NG2M,MG,MC,RG,stat="mean"))
 #'}
 
 rend_ind <- function(GEN,NG2M,MG,MC,RG,stat="all",...){
@@ -109,20 +111,29 @@ rend_ind <- function(GEN,NG2M,MG,MC,RG,stat="all",...){
 #'@param genot Nome da coluna que contém os genótipos
 #'@param var1 Nome da coluna que contém a primeira variável
 #'@param var2 Nome da coluna que contém a segunda variável
-#'@author Willyan Jr. A. Bandeira, Ivan R. Carvalho
+#' @author Willyan Jr. A. Bandeira, Ivan R. Carvalho, Murilo V. Loro,
+#' Leonardo C. Pradebon, José A. G. da Silva
+#'@references
+#'Rigotti, E. J., Carvalho, I. R., Loro, M. V., Pradebon, L. C., Dalla Roza,
+#'J. P., & Sangiovo, J. P. (2024). Seed and grain yield and quality of wheat
+#'subjected to advanced harvest using a physiological ripening process.
+#'Revista Engenharia na Agricultura - REVENG, 32(Contínua), 54–64.
+#'https://doi.org/10.13083/reveng.v32i1.17394
 #'@export
 #'@examples
-#'library(Breeding)
+#' \donttest{
+#'library(EstimateBreed)
 #'
 #'data("trigo")
 #'#Índice de viabilidade de espiga
-#'with(trigo,indviab(TEST,NGE,NNE))
+#'with(trigo,indviab(TEST,NGE,NEE))
 #'
 #'#Índice de colheita da espiga
 #'with(trigo,indviab(TEST,MGE,ME))
 #'
 #'#Índice de deposição de espiguetas na espiga
 #'#'with(trigo,indviab(TEST,NEE,CE))
+#' }
 
 indviab <- function(GEN,var1,var2,ylab="Índice",xlab="Genótipo",stat="all",plot=F){
   require("dplyr")
@@ -141,6 +152,9 @@ indviab <- function(GEN,var1,var2,ylab="Índice",xlab="Genótipo",stat="all",plo
     cat("Índice de Viabilidade Geral")
     cat("\n-----------------------------------------------------------------\n")
     print(dados)
+    if(plot==T){
+      warning("Só é possível plotar o gráfico quando stat='mean'",call. = FALSE)
+    }
   }
   else if (stat=="mean"){
     indesp = variav1/variav2
@@ -167,22 +181,56 @@ indviab <- function(GEN,var1,var2,ylab="Índice",xlab="Genótipo",stat="all",plo
 #'Função útil para caracterizar o peso do hectolitro (PH) de experimentos com
 #'cereais.
 #'@param GEN A coluna com o nome do genótipo
-#'@param PESO Peso obtido em balança de 1qt lt
-#'@return Retorna o valor estimado do peso do hectolitro (PH).
-#'@author Willyan Jr. A. Bandeira, Ivan R. Carvalho
+#'@param PESO Peso obtido em balança de 1qt lt, conforme determinado pelas
+#'Regras de Análises de Sementes (RAS), do Ministério da Agricultura,
+#'Pecuária e Abastecimento (2009).
+#'@return Retorna o valor estimado do peso do hectolitro (PH) para o ceral
+#'selecionado.
+#' @author Willyan Jr. A. Bandeira, Ivan R. Carvalho, Murilo V. Loro,
+#' Leonardo C. Pradebon, José A. G. da Silva
+#'@references
+#'Brasil. Ministério da Agricultura, Pecuária e Abastecimento.
+#'Secretaria de Defesa Agropecuária. Regras para Análise de Sementes.
+#' Brasília: MAPA/ACS, 2009. 399 p. ISBN 978-85-99851-70-8.
 #'@export
+#'@examples
+#'\donttest{
+#'library(EstimateBreed)
+#'
+#'GEN <- rep(paste("G", 1:5, sep=""), each = 3)
+#'REP <- rep(1:3, times = 5)
+#'MG <- c(78.5, 80.2, 79.1, 81.3, 82.0, 80.8, 76.9, 78.1, 77.5, 83.2,
+#'84.1, 82.9, 77.4, 78.9, 79.3)
+#'
+#'data <- data.frame(GEN, REP, MG)
+#'
+#'with(data,ph(GEN,MG,crop="trigo"))
+#'
+#'#Extrair a média do PH por genótipo
+#'with(data,ph(GEN,MG,crop="trigo",stat="mean"))
+#'}
 
-ph <- function(GEN, PESO, crop="trigo"){
+ph <- function(GEN, PESO, crop="trigo", stat="all") {
   require(dplyr)
   dados <- data.frame(GEN, PESO)
 
-  if(crop == "trigo"){
+  if(crop == "trigo") {
     dados <- dados %>%
-      mutate(PH = format(-9.935757 + (PESO * 0.451821), nsmall = 2))
-    return(dados)
-  } else if (crop == "aveia"){
+      mutate(PH = -9.935757 + (PESO * 0.451821))
+  } else if (crop == "aveia") {
     dados <- dados %>%
-      mutate(PH = format(-3.512294 + (PESO * 0.425507), nsmall = 2))
+      mutate(PH = -3.512294 + (PESO * 0.425507))
+  }
+
+  if(stat == "mean") {
+    media <- aggregate(PH ~ GEN,
+                       data = dados,
+                       FUN = mean,
+                       na.rm = TRUE)
+    return(media)
+  } else {
+    dados <- dados %>%
+      mutate(PH = format(PH, nsmall = 2))
     return(dados)
   }
 }
@@ -193,7 +241,8 @@ ph <- function(GEN, PESO, crop="trigo"){
 #'@param GEN A coluna com o nome dos genótipos
 #'@param PTN Proteina Bruta
 #'@param RG Rendimento de grãos
-#'@author Willyan Jr. A. Bandeira, Ivan R. Carvalho
+#' @author Willyan Jr. A. Bandeira, Ivan R. Carvalho, Murilo V. Loro,
+#' Leonardo C. Pradebon, José A. G. da Silva
 #'@references
 #'de Pelegrin, A. J., Carvalho, I. R., Nunes, A. C. P., Demari, G. H., Szareski,
 #'V. J., Barbosa, M. H., ... & da Maia, L. C. (2017).

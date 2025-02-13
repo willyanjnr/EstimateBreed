@@ -8,7 +8,8 @@
 #'@param ADP Água Disponível Predita
 #'@param PROF Profundidade Aproximada do Solo (em cm)
 #'@param plot Plotar um gráfico do acúmulo (Padrão é F (FALSE))
-#'@author Willyan Jr. A. Bandeira, Ivan R. Carvalho
+#' @author Willyan Jr. A. Bandeira, Ivan R. Carvalho, Murilo V. Loro,
+#' Leonardo C. Pradebon, José A. G. da Silva
 #'@references
 #'Bortoluzzi, M. P., Heldwein, A. B., Trentin, R., Maldaner, I. C., & da Silva,
 #'J. R. (2020). Risk of occurrence of water deficit in soybean cultivated in

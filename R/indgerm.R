@@ -7,7 +7,8 @@
 #'@param RAD desc
 #'@param MS desc
 #'@param EC desc
-#'@author Willyan Jr. A. Bandeira, Ivan R. Carvalho
+#' @author Willyan Jr. A. Bandeira, Ivan R. Carvalho, Murilo V. Loro,
+#' Leonardo C. Pradebon, José A. G. da Silva
 #'@references
 #'Szareski, V. J., Carvalho, I. R., Demari, G. H., Rosa, T. C. D.,
 #'Souza, V. Q. D., Villela, F. A.,Aumonde, T. Z. (2018).
@@ -50,6 +51,8 @@ print(dadosfinal)
 #' Índice de vigor simples de sementes (Szareski et al., 2018).
 #'@param PC desc
 #'@param G desc
+#' @author Willyan Jr. A. Bandeira, Ivan R. Carvalho, Murilo V. Loro,
+#' Leonardo C. Pradebon, José A. G. da Silva
 #'@references
 #'Szareski, V. J., Carvalho, I. R., Kehl, K., Levien, A. M., Nardino,
 #'M., Dellagostin, S. M., ... & Aumonde, T. Z. (2018).
@@ -89,6 +92,8 @@ ivig_simp <- function(GEN,PC,G){
 #'@param plot Plotar o gráfico se `T`
 #'@param ylab Nome do eixo Y
 #'@param xlab Nome do eixo X
+#' @author Willyan Jr. A. Bandeira, Ivan R. Carvalho, Murilo V. Loro,
+#' Leonardo C. Pradebon, José A. G. da Silva
 #'@references
 #' Carvalho, I. R., Pelegrin, A. D., Szareski, V. J., Ferrari, M.,
 #' Rosa, T. D., Martins, T. S., ... & Maia, L. D. (2017).

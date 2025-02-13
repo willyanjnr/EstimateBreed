@@ -12,7 +12,8 @@
 #'@param zstat Argumento lógico. Aplica a normalização pela notação Z se "TRUE".
 #'@return Retorna uma tabela com os genótipos e os índices selecionados.
 #'Quanto maior o valor do índice, mais resiliente é o genótipo.
-#'@author Willyan Jr. A. Bandeira, Ivan R. Carvalho
+#' @author Willyan Jr. A. Bandeira, Ivan R. Carvalho, Murilo V. Loro,
+#' Leonardo C. Pradebon, José A. G. da Silva
 #'@references
 #'Carvalho, I. R., Silva, J. A. G. da, Moura, N. B., Ferreira, L. L.,
 #'Lautenchleger, F., & Souza, V. Q. de. (2023). Methods for estimation of
@@ -91,7 +92,8 @@ restr <- function(TEST, REP, Xi, scenario = NULL, zstat = NULL){
 #'@param zstat Argumento lógico. Aplica a normalização pela notação Z se "TRUE".
 #'@return Retorna uma tabela com os genótipos e os índices selecionados.
 #'Quanto maior o valor do índice, mais resiliente é o genótipo.
-#'@author Willyan Jr. A. Bandeira, Ivan R. Carvalho
+#' @author Willyan Jr. A. Bandeira, Ivan R. Carvalho, Murilo V. Loro,
+#' Leonardo C. Pradebon, José A. G. da Silva
 #'@references
 #'Carvalho, I. R., Silva, J. A. G. da, Moura, N. B., Ferreira, L. L.,
 #'Lautenchleger, F., & Souza, V. Q. de. (2023). Methods for estimation of

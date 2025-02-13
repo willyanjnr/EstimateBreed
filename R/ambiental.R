@@ -4,7 +4,8 @@
 #'@param TMED Coluna da temperatura média
 #'@param cultura Definir a cultura (Padrão = "milho")
 #'@param plot Plotar um gráfico do acúmulo (Padrão é T (TRUE))
-#'@author Willyan Jr. A. Bandeira, Ivan R. Carvalho
+#' @author Willyan Jr. A. Bandeira, Ivan R. Carvalho, Murilo V. Loro,
+#' Leonardo C. Pradebon, José A. G. da Silva
 #'@export
 
 somatermica <- function(TMED,MONTH,cultura="milho",plot=T){
@@ -163,7 +164,8 @@ somatermica <- function(TMED,MONTH,cultura="milho",plot=T){
 #'@param Cultura Soja, Milho, Trigo
 #'@param ylab desc
 #'@param xlab description
-#'@author Willyan Jr. A. Bandeira, Ivan R. Carvalho
+#' @author Willyan Jr. A. Bandeira, Ivan R. Carvalho, Murilo V. Loro,
+#' Leonardo C. Pradebon, José A. G. da Silva
 #'@export
 
 TEMP_BASE<-function(DAS,
@@ -299,19 +301,38 @@ TEMP_BASE<-function(DAS,
 
 #' Estimativa do plastocrono da soja
 #' @description
-#' Estimativa do plastocrono da soja por meio da Tmed
-#' @param GEN Coluna referente ao genótipo
-#' @param TMED Coluna referente a temperatura média
-#' @param STAD Estádio fenológico conforme descrito por Fehr & Caviness (ANO).
+#' Estimativa do plastocrono da soja por meio da temperatura média e do número
+#' de nós
+#' @param GEN A coluna com o nome do genótipo.
+#' @param TMED A coluna com o valores de temperatura média do ar.
+#' @param STAD Estádio fenológico conforme descrito por Fehr & Caviness (1977).
+#' @param NN A coluna com o número de nós mensurados a campo.
 #' @param habito Hábito de crescimento do genótipo (padrão="ind"). Utilizar
 #' "ind" para indeterminado e "det" para determinado.
-#' @param plot Imprimir o gráfico (padrão=T)
+#' @param plot Função lógica para imprimir o gráfico se 'TRUE'.
+#' @return Caso o hábito de crescimento seja determinado, retorna um modelo
+#' linear para os estádios V1 a R1 (Early Pheno) e um modelo linear para os
+#' estádios R1 a R5 (Late Pheno). Caso o hábito de crescimento seja indeterminado,
+#' retorna três modelos lineares: Early Pheno (V1 até R1), Intermediate Pheno
+#' (R1 até R3) e Late Pheno (R3 a R5).
+#' @author Willyan Jr. A. Bandeira, Ivan R. Carvalho, Murilo V. Loro,
+#' Leonardo C. Pradebon, José A. G. da Silva
 #' @references Porta, F. S. D., Streck, N. A., Alberto, C. M., da Silva, M. R.,
 #'& Tura, E. F. (2024). Improving understanding of the plastochron of
 #'determinate and indeterminate soybean cultivars. Revista Brasileira de
 #'Engenharia Agrícola e Ambiental, 28(10), e278299.
 #'https://doi.org/10.1590/1807-1929/agriambi.v28n10e278299
+#'
+#'Fehr, W. R., & Caviness, C. E. (1977). Stages of soybean development.
+#'Iowa State University of Science and Technology Special Report, 80, 1-11.
 #' @export
+#' @examples
+#' \donttest{
+#' library(EstimateBreed)
+#' data("pheno")
+#'
+#' with(pheno, plastocrono(GEN,TMED,EST,NN,habito="ind",plot=T))
+#' }
 
 plastocrono <- function(GEN, TMED, STAD, NN, habito = "ind", plot = FALSE) {
   require(dplyr)
@@ -498,7 +519,8 @@ plastocrono <- function(GEN, TMED, STAD, NN, habito = "ind", plot = FALSE) {
 #'@param RAD A coluna com os valores de radiação incidente
 #'@param PER A coluna com o período (utilize VEG para vegetativo e REP para
 #'reprodutivo)
-#'@author Willyan Jr. A. Bandeira, Ivan R. Carvalho
+#' @author Willyan Jr. A. Bandeira, Ivan R. Carvalho, Murilo V. Loro,
+#' Leonardo C. Pradebon, José A. G. da Silva
 #'@references
 #'Zanon, A. J., & Tagliapietra, E. L. (2022). Ecofisiologia da soja:
 #'Visando altas produtividades (2ª ed.). Field Crops.
@@ -560,7 +582,8 @@ fototermal <- function(DIA, TMED, RAD, PER) {
 #' @return Retorna os momentos ideais de aplicação, considerando cada cenário.
 #' Tomado como parâmetro um DELTA_T entre 2 e 8, velocidade do vento entre 3 e 8,
 #' e ausência de precipitação.
-#' @author Willyan Jr. A. Bandeira, Ivan R. Carvalho
+#' @author Willyan Jr. A. Bandeira, Ivan R. Carvalho, Murilo V. Loro,
+#' Leonardo C. Pradebon, José A. G. da Silva
 #' @examples
 #' \donttest{
 #' library(Breeding)

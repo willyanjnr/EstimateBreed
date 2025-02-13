@@ -11,6 +11,8 @@
 #'@param plot Plotar o gráfico se `T`
 #'@param ylab Nome do eixo Y
 #'@param xlab Nome do eixo X
+#' @author Willyan Jr. A. Bandeira, Ivan R. Carvalho, Murilo V. Loro,
+#' Leonardo C. Pradebon, José A. G. da Silva
 #'@export
 gvri <- function(GEN,C,L,E,stat="all",plot=F,ylab="GVRI",xlab="Genótipo"){
   require(dplyr)

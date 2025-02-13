@@ -22,6 +22,19 @@ iaf(GEN, W, L, crop = "soy", sp = 0.45, sden = 14)
 \description{
 Função utilitária para a determinação do IAF de culturas
 }
+\examples{
+\donttest{
+library(EstimateBreed)
+
+#Finalizar o exemplo
+}
+}
+\references{
+Meira, D., Queiróz de Souza, V., Carvalho, I. R., Nardino, M., Follmann,
+D. N., Meier, C., Brezolin, P., Ferrari, M., & Pelegrin, A. J. (2015).
+Plastocrono e caracteres morfológicos da soja com hábito de crescimento
+indeterminado. Revista Cultivando o Saber, 8(2), 184-200.
+}
 \author{
 Willyan Jr. A. Bandeira, Ivan R. Carvalho
 }

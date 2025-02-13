@@ -4,6 +4,8 @@
 #'Método de Jinks and Pooni
 #'
 #'@param name description
+#' @author Willyan Jr. A. Bandeira, Ivan R. Carvalho, Murilo V. Loro,
+#' Leonardo C. Pradebon, José A. G. da Silva
 #'@references
 #'Port, E. D., Carvalho, I. R., Pradebon, L. C., Loro, M. V., Colet, C. D. F.,
 #'Silva, J. A. G. D., & Sausen, N. H. (2024).

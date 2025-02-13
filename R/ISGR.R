@@ -10,11 +10,12 @@
 #' cultivo em cada ambiente.
 #' @return Um dataframe contendo o identificador do ambiente de seleção e
 #' os desvios padrões para temperatura e precipitação.
-#' @author Willyan Jr. A. Bandeira, Ivan R. Carvalho
+#' @author Willyan Jr. A. Bandeira, Ivan R. Carvalho, Murilo V. Loro,
+#' Leonardo C. Pradebon, José A. G. da Silva
 #' @export
 #' @examples
 #' \donttest{
-#' library(Breeding)
+#' library(EstimateBreed)
 #' data("desvamb")
 #'
 #' with(desvamb,desv_clim(ENV,TMED,PREC))
@@ -40,9 +41,9 @@ desv_clim <- function(ENV,TMED,PREC) {
 }
 
 ################################################################################
-#' ISGR - Índice de Seleção Genético para Resiliência.
-#' @description
-#' Estimativa do índice de seleção para resiliência ambiental (Bandeira et al., 2024).
+#'ISGR - Índice de Seleção Genético para Resiliência.
+#'@description
+#'Estimativa do índice de seleção para resiliência ambiental (Bandeira et al., 2024).
 #'@param GEN Coluna referente aos genótipos. As linhagens devem obrigatoriamente
 #'ter o prefixo "L" antes do número. Ex: L139.
 #'@param ENV Coluna referente ao ambiente de seleção.
@@ -50,8 +51,13 @@ desv_clim <- function(ENV,TMED,PREC) {
 #'@param MG Massa de grãos de todos os genótipos avaliados
 #'@param CICLO Número de dias do ciclo, para definir a precipitação pluviométrica
 #'ideal (valor de 3.5 mm por dia)
-#'@param req Valor da demanda hídrica diária média para a cultura da soja (padrão 3.5 mm)
-#'@author Willyan Jr. A. Bandeira, Ivan R. Carvalho
+#'@param req Valor da demanda hídrica diária média para a cultura da soja
+#'(padrão 3.5 mm). Pode ser alterado conforme o estádio fenológico.
+#'@param stage Parâmetro para definir o estádio fenológico que a cultura se
+#'encontra. Utilizar "veg" para vegetativo e "rep" para reprodutivo, caso as
+#'avaliações tenham sido realizadas apenas em um determinado período.
+#' @author Willyan Jr. A. Bandeira, Ivan R. Carvalho, Murilo V. Loro,
+#' Leonardo C. Pradebon, José A. G. da Silva
 #'@references
 #'Bandeira, W. J. A., Carvalho, I. R., Loro, M. V., da Silva, J. A. G.,
 #'Dalla Roza, J. P., Scarton, V. D. B., Bruinsma, G. M. W., & Pradebon, L. C. (2024).
@@ -61,17 +67,20 @@ desv_clim <- function(ENV,TMED,PREC) {
 #' @export
 #' @examples
 #' \donttest{
-#' library(Breeding)
+#' library(EstimateBreed)
 #' #Obter os desvios ambientais
 #' data("desvamb")
-#' with(desvamb, desv_clim(ENV, TMED, PREC))
+#' with(desvamb, desv_clim(ENV,TMED,PREC))
 #'
 #' #Calcular o ISGR
 #' data("genot")
-#' with(genot, isgr(GEN, ENV, NG, MG, CICLO))
+#' with(genot, isgr(GEN,ENV,NG,MG,CICLO))
+#'
+#' #Definir o requerimento hídrico por estádio
+#' with(genot, isgr(GEN,ENV,NG,MG,CICLO,req=5,stage="rep"))
 #' }
 
-isgr <- function(GEN, ENV, NG, MG, CICLO,req=3.5) {
+isgr <- function(GEN, ENV, NG, MG, CICLO,req=3.5, stage=NULL) {
   require(dplyr)
 
   GEN <- as.factor(GEN)
@@ -83,6 +92,13 @@ isgr <- function(GEN, ENV, NG, MG, CICLO,req=3.5) {
 
   # Verificação inicial dos dados
 ##############################################################################
+  if(is.null(stage)){
+    req <- req
+  } else if(stage=="veg"){
+    req <- req
+  } else if(stage=="rep"){
+    req <- req
+  }
   desvng <- sd(dados$NG, na.rm = TRUE)
   desvmg <- sd(dados$MG, na.rm = TRUE)
 

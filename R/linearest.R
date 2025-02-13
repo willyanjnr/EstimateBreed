@@ -10,7 +10,8 @@
 #'@param alpha Significância do teste
 #'@return Retorna uma tabela com os genótipos e os índices selecionados.
 #'Quanto maior o valor do índice, mais resiliente é o genótipo.
-#'@author Willyan Jr. A. Bandeira, Ivan R. Carvalho
+#' @author Willyan Jr. A. Bandeira, Ivan R. Carvalho, Murilo V. Loro,
+#' Leonardo C. Pradebon, José A. G. da Silva
 #'@export
 
 linearest <- function(indep,dep,type=NULL,alpha=0.05){

@@ -7,19 +7,37 @@
 plastocrono(GEN, TMED, STAD, NN, habito = "ind", plot = FALSE)
 }
 \arguments{
-\item{GEN}{Coluna referente ao genótipo}
+\item{GEN}{A coluna com o nome do genótipo.}
 
-\item{TMED}{Coluna referente a temperatura média}
+\item{TMED}{A coluna com o valores de temperatura média do ar.}
 
-\item{STAD}{Estádio fenológico conforme descrito por Fehr & Caviness (ANO).}
+\item{STAD}{Estádio fenológico conforme descrito por Fehr & Caviness (1977).}
+
+\item{NN}{A coluna com o número de nós mensurados a campo.}
 
 \item{habito}{Hábito de crescimento do genótipo (padrão="ind"). Utilizar
 "ind" para indeterminado e "det" para determinado.}
 
-\item{plot}{Imprimir o gráfico (padrão=T)}
+\item{plot}{Função lógica para imprimir o gráfico se 'TRUE'.}
+}
+\value{
+Caso o hábito de crescimento seja determinado, retorna um modelo
+linear para os estádios V1 a R1 (Early Pheno) e um modelo linear para os
+estádios R1 a R5 (Late Pheno). Caso o hábito de crescimento seja indeterminado,
+retorna três modelos lineares: Early Pheno (V1 até R1), Intermediate Pheno
+(R1 até R3) e Late Pheno (R3 a R5).
 }
 \description{
-Estimativa do plastocrono da soja por meio da Tmed
+Estimativa do plastocrono da soja por meio da temperatura média e do número
+de nós
+}
+\examples{
+\donttest{
+library(EstimateBreed)
+data("pheno")
+
+with(pheno, plastocrono(GEN,TMED,EST,NN,habito="ind",plot=T))
+}
 }
 \references{
 Porta, F. S. D., Streck, N. A., Alberto, C. M., da Silva, M. R.,
@@ -27,4 +45,10 @@ Porta, F. S. D., Streck, N. A., Alberto, C. M., da Silva, M. R.,
 determinate and indeterminate soybean cultivars. Revista Brasileira de
 Engenharia Agrícola e Ambiental, 28(10), e278299.
 https://doi.org/10.1590/1807-1929/agriambi.v28n10e278299
+
+Fehr, W. R., & Caviness, C. E. (1977). Stages of soybean development.
+Iowa State University of Science and Technology Special Report, 80, 1-11.
+}
+\author{
+Willyan Jr. A. Bandeira, Ivan R. Carvalho
 }

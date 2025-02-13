@@ -13,7 +13,8 @@
 #' Evaluation of a forecasting system to facilitate decision-making for the
 #' chemical control of Asian soybean rust. Trop. plant pathol. 49, 539–546 (2024).
 #' https://doi.org/10.1007/s40858-024-00649-1
-#' @author Willyan Jr. A. Bandeira, Ivan Ricardo Carvalho
+#' @author Willyan Jr. A. Bandeira, Ivan R. Carvalho, Murilo V. Loro,
+#' Leonardo C. Pradebon, José A. G. da Silva
 #' @examples
 #' \donttest{
 #' library(Breeding)

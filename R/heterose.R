@@ -9,7 +9,8 @@
 #'@param param Valor para determinar o parâmetro a ser calculado. Padrão é "all".
 #'Para calcular apenas a heterose, utilize "het". Para calcular apenas a
 #'heterobeltiose, utilize "hetb".
-#'@author Willyan Jr. A. Bandeira, Ivan R. Carvalho.
+#' @author Willyan Jr. A. Bandeira, Ivan R. Carvalho, Murilo V. Loro,
+#' Leonardo C. Pradebon, José A. G. da Silva
 #'@export
 #'@examples
 #'\donttest{

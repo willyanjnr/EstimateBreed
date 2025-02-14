@@ -18,7 +18,7 @@ devtools::install_github("https://github.com/willyanjnr/EstimateBreed")
 Obtain the genetic selection index for resilience (ISGR) for selecting genotypes for environmental stressors, as described by [Bandeira et al. (2024)](https://www.cropj.com/Carvalho_18_12_2024_825_830.pdf).
 
 ``` r
-library("EstimateBreed")
+library(EstimateBreed)
 
 #Obtain environmental deviations
 data("desvamb")
@@ -67,7 +67,7 @@ with(genot, isgr(GEN, ENV, NG, MG, CICLO))
 ```
 Predict ∆T to determine the ideal times to apply agricultural pesticides.
 ``` r
-library("EstimateBreed")
+library(EstimateBreed)
 
 deltat(-53.91472,-28.38778,type=1,days=10)
 View(forecast)
@@ -79,7 +79,7 @@ Complete documentation can be found when using the package within R.
 ## Citing
 When citing this package, please use,
 ``` r
-library("EstimateBreed")
+library(EstimateBreed)
 citation("EstimateBreed")
 
 To cite package ‘EstimateBreed’ in publications use:

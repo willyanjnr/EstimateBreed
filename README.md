@@ -81,6 +81,23 @@ When citing this package, please use,
 ``` r
 library("EstimateBreed")
 citation("EstimateBreed")
+
+To cite package ‘EstimateBreed’ in publications use:
+
+  Willyan Jr. A. Bandeira, Ivan R. Carvalho, Murilo V. Loro, Leonardo
+  C. Pradebon, José A. G. da Silva (2025). _EstimateBreed: Estimation
+  of Environmental Variables and Genetic Parameters_. R package
+  version 0.1.0, <https://github.com/willyanjnr/EstimateBreed>.
+
+A BibTeX entry for LaTeX users is
+
+  @Manual{,
+    title = {EstimateBreed: Estimation of Environmental Variables and Genetic Parameters},
+    author = {{Willyan Jr. A. Bandeira} and {Ivan R. Carvalho} and {Murilo V. Loro} and {Leonardo C. Pradebon} and {José A. G. da Silva}},
+    year = {2025},
+    note = {R package version 0.1.0},
+    url = {https://github.com/willyanjnr/EstimateBreed},
+  }
 ```
 
 ## Getting Help

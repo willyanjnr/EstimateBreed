@@ -18,7 +18,7 @@ devtools::install_github("https://github.com/willyanjnr/EstimateBreed")
 Obtain the genetic selection index for resilience (ISGR) for selecting genotypes for environmental stressors, as described by [Bandeira et al. (2024)](https://www.cropj.com/Carvalho_18_12_2024_825_830.pdf).
 
 ``` r
-library("EstimateBreed")
+library(EstimateBreed)
 
 #Obtain environmental deviations
 data("desvamb")
@@ -67,7 +67,7 @@ with(genot, isgr(GEN, ENV, NG, MG, CICLO))
 ```
 Predict ∆T to determine the ideal times to apply agricultural pesticides.
 ``` r
-library("EstimateBreed")
+library(EstimateBreed)
 
 deltat(-53.91472,-28.38778,type=1,days=10)
 View(forecast)
@@ -79,11 +79,26 @@ Complete documentation can be found when using the package within R.
 ## Citing
 When citing this package, please use,
 ``` r
-library("EstimateBreed")
+library(EstimateBreed)
 citation("EstimateBreed")
-```
 
-## References
+To cite package ‘EstimateBreed’ in publications use:
+
+  Willyan Jr. A. Bandeira, Ivan R. Carvalho, Murilo V. Loro, Leonardo
+  C. Pradebon, José A. G. da Silva (2025). _EstimateBreed: Estimation
+  of Environmental Variables and Genetic Parameters_. R package
+  version 0.1.0, <https://github.com/willyanjnr/EstimateBreed>.
+
+A BibTeX entry for LaTeX users is
+
+  @Manual{,
+    title = {EstimateBreed: Estimation of Environmental Variables and Genetic Parameters},
+    author = {{Willyan Jr. A. Bandeira} and {Ivan R. Carvalho} and {Murilo V. Loro} and {Leonardo C. Pradebon} and {José A. G. da Silva}},
+    year = {2025},
+    note = {R package version 0.1.0},
+    url = {https://github.com/willyanjnr/EstimateBreed},
+  }
+```
 
 ## Getting Help
 - If you find any errors, please make a report with the commands used so that we can repeat, check and adjust the functions! Send it to [github](https://github.com/willyanjnr/EstimateBreed/issues) or send an email to willyan.jab@hotmail.com.

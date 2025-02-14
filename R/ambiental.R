@@ -1,18 +1,21 @@
-#'Cálculo da Soma Térmica
+#'Calculation of thermal sum
 #'@description
-#'Cálculo da Soma Térmica de Culturas
-#'@param TMED Coluna da temperatura média
-#'@param cultura Definir a cultura (Padrão = "milho")
-#'@param plot Plotar um gráfico do acúmulo (Padrão é T (TRUE))
-#'@author Willyan Jr. A. Bandeira, Ivan R. Carvalho, Murilo V. Loro,
-#'Leonardo C. Pradebon, José A. G. da Silva
+#'Calculates the daily and accumulated thermal sum of crops
+#'@param TMED The column with the average air temperature values
+#'@param crop Parameter to define the culture. Use "maize", "soybean", "flax",
+#'"trit" or "oat"
+#'@param plot Logical argument. Plot a graph of thermal accumulation if TRUE.
+#'@author Willyan Júnior Adorian Bandeira
+#'@author Ivan Ricardo Carvalo
+#'@author Murilo Vieira Loro
+#'@author Leonardo Cesar Pradebon
+#'@author José Antonio Gonzalez da Silva
 #'@export
 
-somatermica <- function(TMED,MONTH,cultura="milho",plot=T){
+somatermica <- function(TMED,crop="milho",plot=F){
   require(ggplot2)
   TMED = TMED
-  MONTH = MONTH
-  if(cultura=="milho"){
+  if(cultura=="maize"){
     TBi=10
     ST=TMED-TBi
     STot <- sum(ST)
@@ -23,23 +26,23 @@ somatermica <- function(TMED,MONTH,cultura="milho",plot=T){
     acumulado <- data.frame(STAc)
     acumulado$Ciclo <- 1:nrow(acumulado)
     cat("\n----------------------------\n")
-    cat("Soma Térmica para o Milho")
+    cat("Thermal sum for the maize crop")
     cat("\n----------------------------\n")
-    cat("Ciclo Total =",tail(acumulado$Ciclo, n = 1),"Dias\n")
-    cat("ST =",paste(STot),"GDD\n")
+    cat("Total Cycle =",tail(acumulado$Ciclo, n = 1),"Days\n")
+    cat("TS =",paste(STot),"GDD\n")
     cat("TBi =",paste(TBi),"ºC\n")
-    cat("Valor Máximo =",paste(VMax),"ºC\n")
-    cat("Valor Mínimo =",paste(VMin),"ºC\n")
+    cat("Max Value =",paste(VMax),"ºC\n")
+    cat("Min Value =",paste(VMin),"ºC\n")
     cat("CV(%) =",paste(round(CV,digits = 2)),"\n")
     if(plot==T){
         grafico=ggplot(acumulado, aes(x=Ciclo, y=STAc)) +
         geom_line(color="red", size=1, alpha=0.9, linetype=1) +
-        ylab("ST Acumulada (ºC)")+xlab("Ciclo do Milho")+theme_classic()+
+        ylab("Accumulated TS (ºC)")+xlab("Maize Cycle")+theme_classic()+
         scale_x_continuous(breaks=seq(0,tail(acumulado$Ciclo, n = 1)+5,10))
       plot(grafico)
   }
   }
-  else if(cultura=="soja"){
+  else if(cultura=="soybean"){
     TBi=5
     ST=TMED-TBi
     STot <- sum(ST)
@@ -50,23 +53,23 @@ somatermica <- function(TMED,MONTH,cultura="milho",plot=T){
     acumulado <- data.frame(STAc)
     acumulado$Ciclo <- 1:nrow(acumulado)
     cat("\n----------------------------\n")
-    cat("Soma Térmica para a Soja")
+    cat("Thermal sum for the soybean crop")
     cat("\n----------------------------\n")
-    cat("Ciclo Total =",tail(acumulado$Ciclo, n = 1),"Dias\n")
-    cat("ST =",paste(STot),"GDD\n")
+    cat("Total Cycle =",tail(acumulado$Ciclo, n = 1),"Days\n")
+    cat("TS =",paste(STot),"GDD\n")
     cat("TBi =",paste(TBi),"ºC\n")
-    cat("Valor Máximo =",paste(VMax),"ºC\n")
-    cat("Valor Mínimo =",paste(VMin),"ºC\n")
+    cat("Max Value =",paste(VMax),"ºC\n")
+    cat("Min Value =",paste(VMin),"ºC\n")
     cat("CV(%) =",paste(round(CV,digits = 2)),"\n")
     if(plot==T){
       grafico=ggplot(acumulado, aes(x=Ciclo, y=STAc)) +
         geom_line(color="red", size=1, alpha=0.9, linetype=1) +
-        ylab("ST Acumulada (ºC)")+xlab("Ciclo da Soja")+theme_classic()+
+        ylab("Accumulated TS (ºC)")+xlab("Soybean Cycle")+theme_classic()+
         scale_x_continuous(breaks=seq(0,tail(acumulado$Ciclo, n = 1)+5,10))
       plot(grafico)
     }
   }
-  else if (cultura=="linhaça"){
+  else if (cultura=="flax"){
     TBi=-4
     ST=TMED-TBi
     STot <- sum(ST)
@@ -77,23 +80,23 @@ somatermica <- function(TMED,MONTH,cultura="milho",plot=T){
     acumulado <- data.frame(STAc)
     acumulado$Ciclo <- 1:nrow(acumulado)
     cat("\n----------------------------\n")
-    cat("Soma Térmica para a Linhaça")
+    cat("Thermal sum form the flaxseed crop")
     cat("\n----------------------------\n")
-    cat("Ciclo Total =",tail(acumulado$Ciclo, n = 1),"Dias\n")
-    cat("ST =",paste(STot),"GDD\n")
+    cat("Total Cycle =",tail(acumulado$Ciclo, n = 1),"Days\n")
+    cat("TS =",paste(STot),"GDD\n")
     cat("TBi =",paste(TBi),"ºC\n")
-    cat("Valor Máximo =",paste(VMax),"ºC\n")
-    cat("Valor Mínimo =",paste(VMin),"ºC\n")
+    cat("Max Value =",paste(VMax),"ºC\n")
+    cat("Min Value =",paste(VMin),"ºC\n")
     cat("CV(%) =",paste(round(CV,digits = 2)),"\n")
     if(plot==T){
       grafico=ggplot(acumulado, aes(x=Ciclo, y=STAc)) +
         geom_line(color="red", size=1, alpha=0.9, linetype=1) +
-        ylab("ST Acumulada (ºC)")+xlab("Ciclo da Linhaça")+theme_classic()+
+        ylab("Accumulated TS (ºC)")+xlab("Flaxseed Cycle")+theme_classic()+
         scale_x_continuous(breaks=seq(0,tail(acumulado$Ciclo, n = 1)+5,10))
       plot(grafico)
     }
   }
-  else if (cultura=="trigo"){
+  else if (cultura=="trit"){
     TBi=-4
     ST=TMED-TBi
     STot <- sum(ST)
@@ -105,28 +108,22 @@ somatermica <- function(TMED,MONTH,cultura="milho",plot=T){
     acumulado$Ciclo <- 1:nrow(acumulado)
     print(acumulado)
     cat("\n----------------------------\n")
-    cat("Soma Térmica para o Trigo")
+    cat("Thermal sum for the wheat crop")
     cat("\n----------------------------\n")
-    cat("Ciclo Total =",tail(acumulado$Ciclo, n = 1),"Dias\n")
-    cat("ST =",paste(STot),"GDD\n")
+    cat("Total Cycle =",tail(acumulado$Ciclo, n = 1),"Days\n")
+    cat("TS =",paste(STot),"GDD\n")
     cat("TBi =",paste(TBi),"ºC\n")
-    cat("Valor Máximo =",paste(VMax),"ºC\n")
-    cat("Valor Mínimo =",paste(VMin),"ºC\n")
+    cat("Max Value =",paste(VMax),"ºC\n")
+    cat("Min Value =",paste(VMin),"ºC\n")
     cat("CV(%) =",paste(round(CV,digits = 2)),"\n")
     if(plot==T){
-      grafico=ggplot(acumulado,aes(x=Ciclo,y=STAc))+
-        geom_point(aes(colour=factor(MONTH)),size=5)+
-        geom_line(color = "blue", linewidth = 1) + theme_bw()+
-        scale_x_continuous(breaks = seq(0,250, by = 15))+
-        ggtitle("")+ylab("Accumulated Thermal Sum (ºC)")+xlab("Cycle")+
-        theme(text = element_text(size = 18))+
-        guides(color = guide_legend(title = "Months"))+
-        ylab("Accumulated Thermal Sum (ºC)")+xlab("Cycle")+theme_classic()+
-        scale_x_continuous(breaks=seq(0,tail(acumulado$Ciclo, n = 1)+5,10))+
-        scale_y_continuous(breaks=seq(0,tail(acumulado$STAc, n = 1)+125,250))
+      grafico=ggplot(acumulado, aes(x=Ciclo, y=STAc)) +
+        geom_line(color="red", size=1, alpha=0.9, linetype=1) +
+        ylab("Accumulated TS (ºC)")+xlab("Wheat Cycle")+theme_classic()+
+        scale_x_continuous(breaks=seq(0,tail(acumulado$Ciclo, n = 1)+5,10))
       plot(grafico)
     }
-  else if (cultura=="aveia"){
+  else if (cultura=="oat"){
     TBi=-4
     ST=TMED-TBi
     STot <- sum(ST)
@@ -137,18 +134,18 @@ somatermica <- function(TMED,MONTH,cultura="milho",plot=T){
     acumulado <- data.frame(STAc)
     acumulado$Ciclo <- 1:nrow(acumulado)
     cat("\n----------------------------\n")
-    cat("Soma Térmica para a Aveia Branca")
+    cat("Thermal sum for the oat crop")
     cat("\n----------------------------\n")
-    cat("Ciclo Total =",tail(acumulado$Ciclo, n = 1),"Dias\n")
-    cat("ST =",paste(STot),"GDD\n")
+    cat("Total Cycle =",tail(acumulado$Ciclo, n = 1),"Days\n")
+    cat("TS =",paste(STot),"GDD\n")
     cat("TBi =",paste(TBi),"ºC\n")
-    cat("Valor Máximo =",paste(VMax),"ºC\n")
-    cat("Valor Mínimo =",paste(VMin),"ºC\n")
+    cat("Max Value =",paste(VMax),"ºC\n")
+    cat("Min Value =",paste(VMin),"ºC\n")
     cat("CV(%) =",paste(round(CV,digits = 2)),"\n")
     if(plot==T){
       grafico=ggplot(acumulado, aes(x=Ciclo, y=STAc)) +
         geom_line(color="red", size=1, alpha=0.9, linetype=1) +
-        ylab("ST Acumulada (ºC)")+xlab("Ciclo da Linhaça")+theme_classic()+
+        ylab("Accumulated TS (ºC)")+xlab("Oat Cycle")+theme_classic()+
         scale_x_continuous(breaks=seq(0,tail(acumulado$Ciclo, n = 1)+5,10))
       plot(grafico)
   }
@@ -156,22 +153,26 @@ somatermica <- function(TMED,MONTH,cultura="milho",plot=T){
   }
 }
 
-#'Plotando as temperaturas bases e ótimas para as culturas
+#'Plotting the optimum and cardinal temperatures for crops
 #'@description
-#'Utilitária para plotar gráficos dos preferendos térmicos para as culturas
+#'Utility function for plotting graphs of thermal preferences for crops
 #'@param DAS descrption
 #'@param Var desc
 #'@param Cultura Soja, Milho, Trigo
 #'@param ylab desc
 #'@param xlab description
-#'@author Willyan Jr. A. Bandeira, Ivan R. Carvalho, Murilo V. Loro,
-#'Leonardo C. Pradebon, José A. G. da Silva
+#'@author Willyan Júnior Adorian Bandeira
+#'@author Ivan Ricardo Carvalho
+#'@author Murilo Vieira Loro
+#'@author Leonardo Cesar Pradebon
+#'@author José Antonio Gonzalez da Silva
 #'@export
 
 TEMP_BASE<-function(DAS,
                     Var,
-                    Cultura = "Soja",
-                    ylab = "Atributo meteorológico", xlab = "Dias após Semeadura"){
+                    crop = "soybean",
+                    ylab = "Atributo meteorológico",
+                    xlab = "Dias após Semeadura"){
 
   require(dplyr)
   require(ggplot2)
@@ -180,7 +181,7 @@ TEMP_BASE<-function(DAS,
   Var = Var
   Cultura=Cultura
 
-  if(Cultura=="Soja"){
+  if(Cultura=="soybean"){
     TbInferior<-10
     TbSuperior<-35
     ToInferior<-20
@@ -297,24 +298,28 @@ TEMP_BASE<-function(DAS,
   }
 }
 
-#'Estimativa do plastocrono da soja
+#'Soybean plastochron estimation
 #'@description
-#'Estimativa do plastocrono da soja por meio da temperatura média e do número
-#'de nós
-#'@param GEN A coluna com o nome do genótipo.
-#'@param TMED A coluna com o valores de temperatura média do ar.
-#'@param STAD Estádio fenológico conforme descrito por Fehr & Caviness (1977).
-#'@param NN A coluna com o número de nós mensurados a campo.
-#'@param habito Hábito de crescimento do genótipo (padrão="ind"). Utilizar
-#'"ind" para indeterminado e "det" para determinado.
-#'@param plot Função lógica para imprimir o gráfico se 'TRUE'.
-#'@return Caso o hábito de crescimento seja determinado, retorna um modelo
-#'linear para os estádios V1 a R1 (Early Pheno) e um modelo linear para os
-#'estádios R1 a R5 (Late Pheno). Caso o hábito de crescimento seja indeterminado,
-#'retorna três modelos lineares: Early Pheno (V1 até R1), Intermediate Pheno
-#'(R1 até R3) e Late Pheno (R3 a R5).
-#'@author Willyan Jr. A. Bandeira, Ivan R. Carvalho, Murilo V. Loro,
-#'Leonardo C. Pradebon, José A. G. da Silva
+#'Estimation of soybean plastochron using average air temperature and number of
+#'nodes
+#'@param GEN The column with the genotype name.
+#'@param TMED The column with the average air temperature values.
+#'@param STAD The column with the phenological stages of soybean, as described by
+#' Fehr & Caviness (1977).
+#'@param NN The column with the number of nodes measured in field.
+#'@param habit Growth habit of the genotype (default = "ind"). Use "ind" for
+#'indeterminate and "det" for determinate.
+#'@param plot Logical argument. Returns a graph with the linear models if TRUE.
+#'@return If the growth habit is determined, the function returns a linear model
+#'for the V1 to R1 stages (Early Pheno) and a linear model for the R1 to R5
+#'stages (Late Pheno). If the growth habit is indeterminate, returns three linear
+#'models: Early Pheno (V1 to R1), Intermediate Pheno (R1 to R3) and Late Pheno
+#'(R3 to R5).
+#'@author Willyan Júnior Adorian Bandeira
+#'@author Ivan Ricardo Carvalho
+#'@author Murilo Vieira Loro
+#'@author Leonardo Cesar Pradebon
+#'@author José Antonio Gonzalez da Silva
 #'@references Porta, F. S. D., Streck, N. A., Alberto, C. M., da Silva, M. R.,
 #'& Tura, E. F. (2024). Improving understanding of the plastochron of
 #'determinate and indeterminate soybean cultivars. Revista Brasileira de
@@ -332,7 +337,7 @@ TEMP_BASE<-function(DAS,
 #'with(pheno, plastocrono(GEN,TMED,EST,NN,habito="ind",plot=T))
 #'}
 
-plastocrono <- function(GEN, TMED, STAD, NN, habito = "ind", plot = FALSE) {
+plastocrono <- function(GEN, TMED, STAD, NN, habit = "ind", plot = FALSE) {
   require(dplyr)
   require(ggplot2)
   require(hrbrthemes)
@@ -359,7 +364,7 @@ plastocrono <- function(GEN, TMED, STAD, NN, habito = "ind", plot = FALSE) {
     group_by(GEN) %>%
     summarize(TST = max(ATT, na.rm = TRUE))
 
-  if (habito == "ind") {
+  if (habit == "ind") {
     dadosf <- resultado %>%
       group_by(NN) %>%
       mutate(STA = max(ATT)) %>%
@@ -395,7 +400,7 @@ plastocrono <- function(GEN, TMED, STAD, NN, habito = "ind", plot = FALSE) {
     print(res$resumo[[3]])
   }
 
-  if(habito=="det"){
+  if(habit=="det"){
     dadosf <- resultado %>%
       group_by(NN) %>%
       mutate(STA = max(ATT)) %>%
@@ -565,7 +570,7 @@ fototermal <- function(DIA, TMED, RAD, PER) {
   return(resultado)
 }
 
-#'Condições ótimas para aplicação de defensivos agrícolas
+#'Optimum conditions for pesticide application
 #'@description
 #'Determinação do momento ideal para aplicação de defensivos agrícolas
 #'@param LON Longitude (em decimal)
@@ -580,8 +585,11 @@ fototermal <- function(DIA, TMED, RAD, PER) {
 #'@return Retorna os momentos ideais de aplicação, considerando cada cenário.
 #'Tomado como parâmetro um DELTA_T entre 2 e 8, velocidade do vento entre 3 e 8,
 #'e ausência de precipitação.
-#'@author Willyan Jr. A. Bandeira, Ivan R. Carvalho, Murilo V. Loro,
-#'Leonardo C. Pradebon, José A. G. da Silva
+#'@author Willyan Júnior Adorian Bandeira
+#'@author Ivan Ricardo Carvalho
+#'@author Murilo Vieira Loro
+#'@author Leonardo Cesar Pradebon
+#'@author José Antonio Gonzalez da Silva
 #'@export
 #'@examples
 #'\donttest{

@@ -2,34 +2,35 @@
 % Please edit documentation in R/ambiental.R
 \name{plastocrono}
 \alias{plastocrono}
-\title{Estimativa do plastocrono da soja}
+\title{Soybean plastochron estimation}
 \usage{
-plastocrono(GEN, TMED, STAD, NN, habito = "ind", plot = FALSE)
+plastocrono(GEN, TMED, STAD, NN, habit = "ind", plot = FALSE)
 }
 \arguments{
-\item{GEN}{A coluna com o nome do genótipo.}
+\item{GEN}{The column with the genotype name.}
 
-\item{TMED}{A coluna com o valores de temperatura média do ar.}
+\item{TMED}{The column with the average air temperature values.}
 
-\item{STAD}{Estádio fenológico conforme descrito por Fehr & Caviness (1977).}
+\item{STAD}{The column with the phenological stages of soybean, as described by
+Fehr & Caviness (1977).}
 
-\item{NN}{A coluna com o número de nós mensurados a campo.}
+\item{NN}{The column with the number of nodes measured in field.}
 
-\item{habito}{Hábito de crescimento do genótipo (padrão="ind"). Utilizar
-"ind" para indeterminado e "det" para determinado.}
+\item{habit}{Growth habit of the genotype (default = "ind"). Use "ind" for
+indeterminate and "det" for determinate.}
 
-\item{plot}{Função lógica para imprimir o gráfico se 'TRUE'.}
+\item{plot}{Logical argument. Returns a graph with the linear models if TRUE.}
 }
 \value{
-Caso o hábito de crescimento seja determinado, retorna um modelo
-linear para os estádios V1 a R1 (Early Pheno) e um modelo linear para os
-estádios R1 a R5 (Late Pheno). Caso o hábito de crescimento seja indeterminado,
-retorna três modelos lineares: Early Pheno (V1 até R1), Intermediate Pheno
-(R1 até R3) e Late Pheno (R3 a R5).
+If the growth habit is determined, the function returns a linear model
+for the V1 to R1 stages (Early Pheno) and a linear model for the R1 to R5
+stages (Late Pheno). If the growth habit is indeterminate, returns three linear
+models: Early Pheno (V1 to R1), Intermediate Pheno (R1 to R3) and Late Pheno
+(R3 to R5).
 }
 \description{
-Estimativa do plastocrono da soja por meio da temperatura média e do número
-de nós
+Estimation of soybean plastochron using average air temperature and number of
+nodes
 }
 \examples{
 \donttest{
@@ -50,6 +51,13 @@ Fehr, W. R., & Caviness, C. E. (1977). Stages of soybean development.
 Iowa State University of Science and Technology Special Report, 80, 1-11.
 }
 \author{
-Willyan Jr. A. Bandeira, Ivan R. Carvalho, Murilo V. Loro,
-Leonardo C. Pradebon, José A. G. da Silva
+Willyan Júnior Adorian Bandeira
+
+Ivan Ricardo Carvalho
+
+Murilo Vieira Loro
+
+Leonardo Cesar Pradebon
+
+José Antonio Gonzalez da Silva
 }

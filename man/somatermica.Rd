@@ -2,21 +2,29 @@
 % Please edit documentation in R/ambiental.R
 \name{somatermica}
 \alias{somatermica}
-\title{Cálculo da Soma Térmica}
+\title{Calculation of thermal sum}
 \usage{
-somatermica(TMED, MONTH, cultura = "milho", plot = T)
+somatermica(TMED, crop = "milho", plot = F)
 }
 \arguments{
-\item{TMED}{Coluna da temperatura média}
+\item{TMED}{The column with the average air temperature values}
 
-\item{cultura}{Definir a cultura (Padrão = "milho")}
+\item{crop}{Parameter to define the culture. Use "maize", "soybean", "flax",
+"trit" or "oat"}
 
-\item{plot}{Plotar um gráfico do acúmulo (Padrão é T (TRUE))}
+\item{plot}{Logical argument. Plot a graph of thermal accumulation if TRUE.}
 }
 \description{
-Cálculo da Soma Térmica de Culturas
+Calculates the daily and accumulated thermal sum of crops
 }
 \author{
-Willyan Jr. A. Bandeira, Ivan R. Carvalho, Murilo V. Loro,
-Leonardo C. Pradebon, José A. G. da Silva
+Willyan Júnior Adorian Bandeira
+
+Ivan Ricardo Carvalo
+
+Murilo Vieira Loro
+
+Leonardo Cesar Pradebon
+
+José Antonio Gonzalez da Silva
 }

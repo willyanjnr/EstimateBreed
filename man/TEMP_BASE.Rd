@@ -2,12 +2,12 @@
 % Please edit documentation in R/ambiental.R
 \name{TEMP_BASE}
 \alias{TEMP_BASE}
-\title{Plotando as temperaturas bases e ótimas para as culturas}
+\title{Plotting the optimum and cardinal temperatures for crops}
 \usage{
 TEMP_BASE(
   DAS,
   Var,
-  Cultura = "Soja",
+  crop = "soybean",
   ylab = "Atributo meteorológico",
   xlab = "Dias após Semeadura"
 )
@@ -17,16 +17,23 @@ TEMP_BASE(
 
 \item{Var}{desc}
 
-\item{Cultura}{Soja, Milho, Trigo}
-
 \item{ylab}{desc}
 
 \item{xlab}{description}
+
+\item{Cultura}{Soja, Milho, Trigo}
 }
 \description{
-Utilitária para plotar gráficos dos preferendos térmicos para as culturas
+Utility function for plotting graphs of thermal preferences for crops
 }
 \author{
-Willyan Jr. A. Bandeira, Ivan R. Carvalho, Murilo V. Loro,
-Leonardo C. Pradebon, José A. G. da Silva
+Willyan Júnior Adorian Bandeira
+
+Ivan Ricardo Carvalho
+
+Murilo Vieira Loro
+
+Leonardo Cesar Pradebon
+
+José Antonio Gonzalez da Silva
 }

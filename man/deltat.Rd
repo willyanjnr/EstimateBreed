@@ -2,7 +2,7 @@
 % Please edit documentation in R/ambiental.R
 \name{deltat}
 \alias{deltat}
-\title{Aplicação de defensivos agrícolas}
+\title{Condições ótimas para aplicação de defensivos agrícolas}
 \usage{
 deltat(
   LON,
@@ -38,7 +38,7 @@ Tomado como parâmetro um DELTA_T entre 2 e 8, velocidade do vento entre 3 e 8,
 e ausência de precipitação.
 }
 \description{
-Determinação do momento ideal para aplicação
+Determinação do momento ideal para aplicação de defensivos agrícolas
 }
 \examples{
 \donttest{

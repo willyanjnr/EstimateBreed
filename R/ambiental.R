@@ -4,8 +4,8 @@
 #'@param TMED Coluna da temperatura média
 #'@param cultura Definir a cultura (Padrão = "milho")
 #'@param plot Plotar um gráfico do acúmulo (Padrão é T (TRUE))
-#' @author Willyan Jr. A. Bandeira, Ivan R. Carvalho, Murilo V. Loro,
-#' Leonardo C. Pradebon, José A. G. da Silva
+#'@author Willyan Jr. A. Bandeira, Ivan R. Carvalho, Murilo V. Loro,
+#'Leonardo C. Pradebon, José A. G. da Silva
 #'@export
 
 somatermica <- function(TMED,MONTH,cultura="milho",plot=T){
@@ -164,8 +164,8 @@ somatermica <- function(TMED,MONTH,cultura="milho",plot=T){
 #'@param Cultura Soja, Milho, Trigo
 #'@param ylab desc
 #'@param xlab description
-#' @author Willyan Jr. A. Bandeira, Ivan R. Carvalho, Murilo V. Loro,
-#' Leonardo C. Pradebon, José A. G. da Silva
+#'@author Willyan Jr. A. Bandeira, Ivan R. Carvalho, Murilo V. Loro,
+#'Leonardo C. Pradebon, José A. G. da Silva
 #'@export
 
 TEMP_BASE<-function(DAS,
@@ -191,7 +191,6 @@ TEMP_BASE<-function(DAS,
 
     dados<-data.frame(DAS, Var)
 
-
     grafico=ggplot(dados, aes(x = DAS, y = Var))+
       geom_line(col = "red", size =0.8, linetype = 2,group=1)+ylab(ylab)+xlab(xlab)+theme_classic()+
       geom_segment(aes(x = 0, y =TbInferior, xend =DAS, yend = TbInferior), linetype = 1, color = "blue")+
@@ -202,7 +201,6 @@ TEMP_BASE<-function(DAS,
       geom_label(aes(x=15, y=ToInferior, label="Temperatura ótima inferior"))+theme_classic()+
       geom_segment(aes(x = 0, y =ToSuperior, xend =DAS, yend =ToSuperior), linetype = 2, color = "darkgreen")+
       geom_label(aes(x=15, y=ToSuperior, label="Temperatura ótima superior"))+theme_classic()
-
 
     parâmetros<-list(
 
@@ -299,25 +297,25 @@ TEMP_BASE<-function(DAS,
   }
 }
 
-#' Estimativa do plastocrono da soja
-#' @description
-#' Estimativa do plastocrono da soja por meio da temperatura média e do número
-#' de nós
-#' @param GEN A coluna com o nome do genótipo.
-#' @param TMED A coluna com o valores de temperatura média do ar.
-#' @param STAD Estádio fenológico conforme descrito por Fehr & Caviness (1977).
-#' @param NN A coluna com o número de nós mensurados a campo.
-#' @param habito Hábito de crescimento do genótipo (padrão="ind"). Utilizar
-#' "ind" para indeterminado e "det" para determinado.
-#' @param plot Função lógica para imprimir o gráfico se 'TRUE'.
-#' @return Caso o hábito de crescimento seja determinado, retorna um modelo
-#' linear para os estádios V1 a R1 (Early Pheno) e um modelo linear para os
-#' estádios R1 a R5 (Late Pheno). Caso o hábito de crescimento seja indeterminado,
-#' retorna três modelos lineares: Early Pheno (V1 até R1), Intermediate Pheno
-#' (R1 até R3) e Late Pheno (R3 a R5).
-#' @author Willyan Jr. A. Bandeira, Ivan R. Carvalho, Murilo V. Loro,
-#' Leonardo C. Pradebon, José A. G. da Silva
-#' @references Porta, F. S. D., Streck, N. A., Alberto, C. M., da Silva, M. R.,
+#'Estimativa do plastocrono da soja
+#'@description
+#'Estimativa do plastocrono da soja por meio da temperatura média e do número
+#'de nós
+#'@param GEN A coluna com o nome do genótipo.
+#'@param TMED A coluna com o valores de temperatura média do ar.
+#'@param STAD Estádio fenológico conforme descrito por Fehr & Caviness (1977).
+#'@param NN A coluna com o número de nós mensurados a campo.
+#'@param habito Hábito de crescimento do genótipo (padrão="ind"). Utilizar
+#'"ind" para indeterminado e "det" para determinado.
+#'@param plot Função lógica para imprimir o gráfico se 'TRUE'.
+#'@return Caso o hábito de crescimento seja determinado, retorna um modelo
+#'linear para os estádios V1 a R1 (Early Pheno) e um modelo linear para os
+#'estádios R1 a R5 (Late Pheno). Caso o hábito de crescimento seja indeterminado,
+#'retorna três modelos lineares: Early Pheno (V1 até R1), Intermediate Pheno
+#'(R1 até R3) e Late Pheno (R3 a R5).
+#'@author Willyan Jr. A. Bandeira, Ivan R. Carvalho, Murilo V. Loro,
+#'Leonardo C. Pradebon, José A. G. da Silva
+#'@references Porta, F. S. D., Streck, N. A., Alberto, C. M., da Silva, M. R.,
 #'& Tura, E. F. (2024). Improving understanding of the plastochron of
 #'determinate and indeterminate soybean cultivars. Revista Brasileira de
 #'Engenharia Agrícola e Ambiental, 28(10), e278299.
@@ -325,14 +323,14 @@ TEMP_BASE<-function(DAS,
 #'
 #'Fehr, W. R., & Caviness, C. E. (1977). Stages of soybean development.
 #'Iowa State University of Science and Technology Special Report, 80, 1-11.
-#' @export
-#' @examples
-#' \donttest{
-#' library(EstimateBreed)
-#' data("pheno")
+#'@export
+#'@examples
+#'\donttest{
+#'library(EstimateBreed)
+#'data("pheno")
 #'
-#' with(pheno, plastocrono(GEN,TMED,EST,NN,habito="ind",plot=T))
-#' }
+#'with(pheno, plastocrono(GEN,TMED,EST,NN,habito="ind",plot=T))
+#'}
 
 plastocrono <- function(GEN, TMED, STAD, NN, habito = "ind", plot = FALSE) {
   require(dplyr)
@@ -519,8 +517,8 @@ plastocrono <- function(GEN, TMED, STAD, NN, habito = "ind", plot = FALSE) {
 #'@param RAD A coluna com os valores de radiação incidente
 #'@param PER A coluna com o período (utilize VEG para vegetativo e REP para
 #'reprodutivo)
-#' @author Willyan Jr. A. Bandeira, Ivan R. Carvalho, Murilo V. Loro,
-#' Leonardo C. Pradebon, José A. G. da Silva
+#'@author Willyan Jr. A. Bandeira, Ivan R. Carvalho, Murilo V. Loro,
+#'Leonardo C. Pradebon, José A. G. da Silva
 #'@references
 #'Zanon, A. J., & Tagliapietra, E. L. (2022). Ecofisiologia da soja:
 #'Visando altas produtividades (2ª ed.). Field Crops.
@@ -563,42 +561,41 @@ fototermal <- function(DIA, TMED, RAD, PER) {
     resultado <- rbind(resultado, dados_periodo)
   }
 
-  resultado <- resultado[order(resultado$DIA), ]
+  resultado <- resultado[order(resultado$DIA),]
   return(resultado)
 }
 
-#' Aplicação de defensivos agrícolas
-#' @description
-#' Determinação do momento ideal para aplicação
-#' @param LON Longitude (em decimal)
-#' @param LAT Latitude (em decimal)
-#' @param type Tipo de análise. Utilize 1 para forecast e 2 para dados temporais.
-#' @param days Número de dias
-#' @param control Tipo de produto a ser aplicado. Utilizar "fung" para fungicida,
-#' "herb" para herbicida, "ins" para inseticidas, "bio" para produtos biológicos.
-#' @param details Retorna o resultado de forma detalhada se TRUE.
-#' @param dates Só utilizar esse argumento se type=2. Data de início e final
-#' para a obtenção dos dados meteorológicos para um ciclo de cultivo.
-#' @return Retorna os momentos ideais de aplicação, considerando cada cenário.
-#' Tomado como parâmetro um DELTA_T entre 2 e 8, velocidade do vento entre 3 e 8,
-#' e ausência de precipitação.
-#' @author Willyan Jr. A. Bandeira, Ivan R. Carvalho, Murilo V. Loro,
-#' Leonardo C. Pradebon, José A. G. da Silva
-#' @examples
-#' \donttest{
-#' library(Breeding)
+#'Condições ótimas para aplicação de defensivos agrícolas
+#'@description
+#'Determinação do momento ideal para aplicação de defensivos agrícolas
+#'@param LON Longitude (em decimal)
+#'@param LAT Latitude (em decimal)
+#'@param type Tipo de análise. Utilize 1 para forecast e 2 para dados temporais.
+#'@param days Número de dias
+#'@param control Tipo de produto a ser aplicado. Utilizar "fung" para fungicida,
+#'"herb" para herbicida, "ins" para inseticidas, "bio" para produtos biológicos.
+#'@param details Retorna o resultado de forma detalhada se TRUE.
+#'@param dates Só utilizar esse argumento se type=2. Data de início e final
+#'para a obtenção dos dados meteorológicos para um ciclo de cultivo.
+#'@return Retorna os momentos ideais de aplicação, considerando cada cenário.
+#'Tomado como parâmetro um DELTA_T entre 2 e 8, velocidade do vento entre 3 e 8,
+#'e ausência de precipitação.
+#'@author Willyan Jr. A. Bandeira, Ivan R. Carvalho, Murilo V. Loro,
+#'Leonardo C. Pradebon, José A. G. da Silva
+#'@export
+#'@examples
+#'\donttest{
+#'library(Breeding)
 #'
-#' # Previsão das condições de aplicação
-#' deltat(-53.696944444444,-28.063888888889,type=1,days=10)
-#' View(forecast)
+#'# Previsão das condições de aplicação
+#'deltat(-53.696944444444,-28.063888888889,type=1,days=10)
+#'View(forecast)
 #'
-#' # Análise retrospectiva das condições de aplicação
-#' deltat(-53.696944444444,-28.063888888889,type=1,days=10,
-#' dates=c("2023-01-01","2023-05-01"))
-#' View(retrospective)
-#' }
-#' @export
-
+#'# Análise retrospectiva das condições de aplicação
+#'deltat(-53.696944444444,-28.063888888889,type=1,days=10,
+#'dates=c("2023-01-01","2023-05-01"))
+#'View(retrospective)
+#'}
 
 deltat <- function(LON,LAT,type=2,days=7,control=NULL,
                    details=FALSE,dates=NULL,plot=FALSE){

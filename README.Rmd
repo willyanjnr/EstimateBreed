@@ -1,27 +1,32 @@
+---
+output: github_document
+---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# EstimateBreed \<img src=“man/figures/logo.png” align=“right” height=“140/”
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# EstimateBreed <img src="man/figures/logo.png" align="right" height="140/"
 
 <!-- badges: start -->
-
-![Lifecycle:
-experimental](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg)
-[![Lifecycle:
-experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
+![Lifecycle: experimental](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg)
+[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 <!-- badges: end -->
 
-EstimateBreed is an R package designed to perform analyses and estimate
-environmental covariates and genetic parameters related to selection
-strategies and the development of superior genotypes. The package offers
-two main functionalities: - **Prediction models** for environmental
-covariates and processes. - **Estimation of genetic parameters** and
-selection strategies for developing superior genotypes.
+EstimateBreed is an R package designed to perform analyses and estimate environmental covariates and genetic parameters related to selection strategies and the development of superior genotypes. The package offers two main functionalities: 
+- **Prediction models** for environmental covariates and processes.
+- **Estimation of genetic parameters** and selection strategies for developing superior genotypes.
 
 ## Installation
 
-You can install the development version of EstimateBreed from
-[GitHub](https://github.com/) with:
+You can install the development version of EstimateBreed from [GitHub](https://github.com/) with:
 
 ``` r
 # install.packages("pak")
@@ -29,10 +34,7 @@ pak::pak("willyanjnr/EstimateBreed")
 ```
 
 ### Example
-
-Obtain the genetic selection index for resilience (ISGR) for selecting
-genotypes for environmental stressors, as described by [Bandeira et
-al. (2024)](https://www.cropj.com/Carvalho_18_12_2024_825_830.pdf).
+Obtain the genetic selection index for resilience (ISGR) for selecting genotypes for environmental stressors, as described by [Bandeira et al. (2024)](https://www.cropj.com/Carvalho_18_12_2024_825_830.pdf).
 
 ``` r
 library(EstimateBreed)
@@ -82,10 +84,7 @@ with(genot, isgr(GEN, ENV, NG, MG, CICLO))
 # 3  L277  E2 74.756384
 # 2  L162  E2 86.543916
 ```
-
-Predict ∆T to determine the ideal times to apply agricultural
-pesticides.
-
+Predict ∆T to determine the ideal times to apply agricultural pesticides.
 ``` r
 library(EstimateBreed)
 
@@ -94,13 +93,10 @@ View(forecast)
 ```
 
 ## Documentation
-
 Complete documentation can be found when using the package within R.
 
 ## Citing
-
 When citing this package, please use,
-
 ``` r
 library(EstimateBreed)
 citation("EstimateBreed")
@@ -124,8 +120,4 @@ A BibTeX entry for LaTeX users is
 ```
 
 ## Getting Help
-
-- If you find any errors, please make a report with the commands used so
-  that we can repeat, check and adjust the functions! Send it to
-  [github](https://github.com/willyanjnr/EstimateBreed/issues) or send
-  an email to <bandeira.wjab@gmail.com>.
+- If you find any errors, please make a report with the commands used so that we can repeat, check and adjust the functions! Send it to [github](https://github.com/willyanjnr/EstimateBreed/issues) or send an email to bandeira.wjab@gmail.com.

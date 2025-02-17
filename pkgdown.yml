@@ -1,0 +1,10 @@
+navbar:
+  title: "EstimateBreed"
+  left:
+    - text: "Home"
+      href: index.html
+    - text: "Vignettes"
+      href: vignettes.html
+
+template:
+  bootswatch: "cerulean"  # ou "flatly", "lumen", etc.

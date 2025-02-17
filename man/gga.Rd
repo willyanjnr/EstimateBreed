@@ -2,23 +2,30 @@
 % Please edit documentation in R/selecao.R
 \name{gga}
 \alias{gga}
-\title{Ganho Genético Aditivo}
+\title{Additive Genetic Gain}
 \usage{
 gga(GEN, VAR, h2, P)
 }
 \arguments{
-\item{GEN}{Vetor ou dataframe contendo os genótipos a serem selecionados.}
+\item{GEN}{Vector or dataframe containing the genotypes to be selected.}
 
-\item{VAR}{Variável de interesse para análise.}
+\item{VAR}{Variable of interest for analysis.}
 
-\item{h2}{Herdabilidade do caráter (um valor entre 0 e 1).}
+\item{h2}{Heritability of the character (a value between 0 and 1).}
 
-\item{P}{Performance da progênie (um valor numérico ou vetor).}
+\item{P}{Performance of the progeny (a numerical value or vector).}
 }
 \description{
-Esta função estima o ganho genético aditivo, conforme descrito por Falconer (1987).
+Estimates the additive genetic gain, as described by Falconer (1987).
 }
 \author{
-Willyan Jr. A. Bandeira, Ivan R. Carvalho, Murilo V. Loro,
-Leonardo C. Pradebon, José A. G. da Silva
+Willyan Júnior Adorian Bandeira
+
+Ivan Ricardo Carvalho
+
+Murilo Vieira Loro
+
+Leonardo Cesar Pradebon
+
+José Antonio Gonzalez da Silva
 }

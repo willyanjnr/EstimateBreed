@@ -2,22 +2,29 @@
 % Please edit documentation in R/selecao.R
 \name{GS2}
 \alias{GS2}
-\title{Diferencial de Seleção Simples}
+\title{Single Selection Differential}
 \usage{
 GS2(Var, h, DS)
 }
 \arguments{
-\item{Var}{A coluna com o nome das variáveis de interesse}
+\item{Var}{The column with the name of the variables of interest}
 
-\item{h}{A coluna com os valores de herdabilidade no sentido restrito}
+\item{h}{The column with the heritability values in the strict sense}
 
-\item{DS}{A coluna com o valor do diferencial de seleção a ser aplicado para
-cada variável}
+\item{DS}{The column with the value of the selection differential to be applied
+to each variable}
 }
 \description{
-Resposta a seleção ponderada pelo Diferencial de Seleção Simples
+Response to selection weighted by the Simple Selection Differential
 }
 \author{
-Willyan Jr. A. Bandeira, Ivan R. Carvalho, Murilo V. Loro,
-Leonardo C. Pradebon, José A. G. da Silva
+Willyan Júnior Adorian Bandeira
+
+Ivan Ricardo Carvalho
+
+Murilo Vieira Loro
+
+Leonardo Cesar Pradebon
+
+José Antonio Gonzalez da Silva
 }

@@ -2,17 +2,24 @@
 % Please edit documentation in R/selecao.R
 \name{SEGREGAÇÃO_PADRÃO}
 \alias{SEGREGAÇÃO_PADRÃO}
-\title{Segregação Padrão}
+\title{Standard Segregation}
 \usage{
 SEGREGAÇÃO_PADRÃO(MELHORAMENTO)
 }
 \arguments{
-\item{MELHORAMENTO}{Parâmetro base para a função imprimir a tabela}
+\item{MELHORAMENTO}{Base parameter for the print table function}
 }
 \description{
-Tabela didática da segregação padrão por geração
+Didactic table of standard segregation by generation
 }
 \author{
-Willyan Jr. A. Bandeira, Ivan R. Carvalho, Murilo V. Loro,
-Leonardo C. Pradebon, José A. G. da Silva
+Willyan Júnior Adorian Bandeira
+
+Ivan Ricardo Carvalho
+
+Murilo Vieira Loro
+
+Leonardo Cesar Pradebon
+
+José Antonio Gonzalez da Silva
 }

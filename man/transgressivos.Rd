@@ -4,19 +4,26 @@
 \alias{transgressivos}
 \title{Seleção pelo Diferencial de Seleção (Média e Desvios)}
 \usage{
-transgressivos(Gen, Var, Testemunha, ylab = "Seleção", xlab = "Genótipos")
+transgressivos(Gen, Var, Testemunha, ylab = "Selection", xlab = "Genotypes")
 }
 \arguments{
-\item{Gen}{A coluna com o nome do genótipo}
+\item{Gen}{The column with the genotype name}
 
-\item{Var}{A coluna com a variável de interesse}
+\item{Var}{The column with the variable of interest}
 
-\item{Testemunha}{A coluna com o valor da variável 'X' para as testemunhas}
+\item{Witness}{The column with the value of the variable 'X' for the witnesses}
 }
 \description{
-Seleção de Genótipos Transgressívos - Diferencial de Seleção (DS)
+Selection of Transgressive Genotypes - Selection Differential (SD)
 }
 \author{
-Willyan Jr. A. Bandeira, Ivan R. Carvalho, Murilo V. Loro,
-Leonardo C. Pradebon, José A. G. da Silva
+Willyan Júnior Adorian Bandeira
+
+Ivan Ricardo Carvalho
+
+Murilo Vieira Loro
+
+Leonardo Cesar Pradebon
+
+José Antonio Gonzalez da Silva
 }

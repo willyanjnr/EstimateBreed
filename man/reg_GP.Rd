@@ -2,7 +2,7 @@
 % Please edit documentation in R/selecao.R
 \name{reg_GP}
 \alias{reg_GP}
-\title{Regressão Genitor Progênie}
+\title{Regression Genitor Progeny}
 \usage{
 reg_GP(ind, Genitor, Progenie)
 }
@@ -14,9 +14,16 @@ reg_GP(ind, Genitor, Progenie)
 \item{Progenie}{description}
 }
 \description{
-Estimativa da Regressão Genitor x Progênie
+Estimation of Genitor x Progeny Regression
 }
 \author{
-Willyan Jr. A. Bandeira, Ivan R. Carvalho, Murilo V. Loro,
-Leonardo C. Pradebon, José A. G. da Silva
+Willyan Júnior Adorian Bandeira
+
+Ivan Ricardo Carvalho
+
+Murilo Vieira Loro
+
+Leonardo Cesar Pradebon
+
+José Antonio Gonzalez da Silva
 }

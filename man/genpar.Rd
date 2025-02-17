@@ -2,31 +2,31 @@
 % Please edit documentation in R/selecao.R
 \name{genpar}
 \alias{genpar}
-\title{Parâmetros gerais para seleção}
+\title{General parameters for selection}
 \usage{
 genpar(POP, GEN, REP = NULL, vars, K = 0.05, type = "balanced", check = FALSE)
 }
 \arguments{
-\item{POP}{A coluna com a população em melhoramento.}
+\item{POP}{The column with the population under improvement.}
 
-\item{GEN}{A coluna com os genótipos selecionados dentro da população.}
+\item{GEN}{The column with the selected genotypes within the population.}
 
-\item{REP}{A coluna com as repetições (se houver).}
+\item{REP}{The column with the repetitions (if any).}
 
-\item{K}{Pressão de seleção (Padrão 0.05).}
+\item{K}{Selection pressure (Default 0.05).}
 
-\item{type}{Tipo de experimento (balanceado ou desbalanceado). Utilize
-"balanced" para balanceado e "unb" para desbalanceado.}
+\item{type}{Type of experiment (balanced or unbalanced). Use
+“balanced” for balanced and “unb” for unbalanced.}
 
-\item{check}{Argumento lógico. Faz as verificações do pressuposto do modelo
-estatístico se o valor for igual a TRUE.}
+\item{check}{Logical argument. Checks the model's assumptions
+statistical if the value is equal to TRUE.}
 
-\item{VAR}{A coluna com a variável de interesse.}
+\item{VAR}{The column with the variable of interest.}
 }
 \description{
-Função para determinar parâmetros de seleção, com base em um experimento
-realizado na cultura do arroz. Destinada para avaliação isolada do desempenho
-de linhagens dentro de uma determinada população.
+Function for determining selection parameters, based on an experiment
+carried out on the rice crop. Intended for isolated evaluation of the performance
+of strains within a given population.
 }
 \references{
 Yadav, S. P. S., Bhandari, S., Ghimire, N. P., Mehata, D. K., Majhi, S. K.,
@@ -37,6 +37,13 @@ traits. International Journal of Agronomy, 2024, Article ID 9946332.
 https://doi.org/10.1155/2024/9946332
 }
 \author{
-Willyan Jr. A. Bandeira, Ivan R. Carvalho, Murilo V. Loro,
-Leonardo C. Pradebon, José A. G. da Silva
+Willyan Júnior Adorian Bandeira
+
+Ivan Ricardo Carvalho
+
+Murilo Vieira Loro
+
+Leonardo Cesar Pradebon
+
+José Antonio Gonzalez da Silva
 }

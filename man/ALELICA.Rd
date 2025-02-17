@@ -2,22 +2,29 @@
 % Please edit documentation in R/selecao.R
 \name{ALELICA}
 \alias{ALELICA}
-\title{Interações alélicas}
+\title{Allelic interactions}
 \usage{
 ALELICA(type = NULL, ge = NULL)
 }
 \arguments{
-\item{type}{Tipo de interação alélica. Utilize "ad" para aditividade, "dom"
-para dominância completa, "domp" para dominância parcial e "sob" para
-sobredominância.}
+\item{type}{Type of allelic interaction. Use “ad” for additivity, “dom”
+for complete dominance, “domp” for partial dominance and “sob” for
+overdominance.}
 
-\item{ge}{Tipo de interação GxE. Utilize "aus" para ausência de interação,
-"simples" para interação simples e "complex" para interação complexa.}
+\item{ge}{Type of GxE interaction. Use “aus” for no interaction,
+“simple” for simple interaction and “complex” for complex interaction.}
 }
 \description{
-Exemplos didáticos de interações alélicas e gênicas
+Examples of allelic and gene interactions
 }
 \author{
-Willyan Jr. A. Bandeira, Ivan R. Carvalho, Murilo V. Loro,
-Leonardo C. Pradebon, José A. G. da Silva
+Willyan Júnior Adorian Bandeira
+
+Ivan Ricardo Carvalho
+
+Murilo Vieira Loro
+
+Leonardo Cesar Pradebon
+
+José Antonio Gonzalez da Silva
 }

@@ -2,24 +2,31 @@
 % Please edit documentation in R/selecao.R
 \name{GS3}
 \alias{GS3}
-\title{Resposta a Seleção pelo Controle de Genitores}
+\title{Response to Selection by Control of Genitors}
 \usage{
 GS3(Var, h, VF, P = "1")
 }
 \arguments{
-\item{Var}{A coluna com as variáveis de interesse}
+\item{Var}{The column with the variables of interest}
 
-\item{h}{A coluna com os valores de herdabilidade no sentido restrito}
+\item{h}{The column with the restricted heritability values}
 
-\item{VF}{A coluna com os valores de variância fenotípica}
+\item{VF}{The column with the phenotypic variance values}
 
-\item{P}{A coluna com os valores das progênies}
+\item{P}{The column with the progeny values}
 }
 \description{
-Considera conhecer apenas o genitor materno, sem controle do polinizador,
-ou uma seleção direta sem parentais
+Consider knowing only the maternal parent, without controlling the pollinator,
+or direct selection without parents
 }
 \author{
-Willyan Jr. A. Bandeira, Ivan R. Carvalho, Murilo V. Loro,
-Leonardo C. Pradebon, José A. G. da Silva
+Willyan Júnior Adorian Bandeira
+
+Ivan Ricardo Carvalho
+
+Murilo Vieira Loro
+
+Leonardo Cesar Pradebon
+
+José Antonio Gonzalez da Silva
 }

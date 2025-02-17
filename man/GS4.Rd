@@ -2,25 +2,33 @@
 % Please edit documentation in R/selecao.R
 \name{GS4}
 \alias{GS4}
-\title{Resposta Seleção pelo Ano}
+\title{Response to Selection by Year}
 \usage{
 GS4(Var, h, VF, P = "1", Ano)
 }
 \arguments{
-\item{Var}{A coluna com a variáveis de interesse}
+\item{Var}{The column with the variables of interest}
 
-\item{h}{A coluna com os valores de herdabilidade no sentido restrito}
+\item{h}{The column with the restricted heritability values}
 
-\item{VF}{A coluna com os valores de variância fenotípica}
+\item{VF}{The column with the phenotypic variance values}
 
-\item{P}{A coluna com o valor obtido para as progênies}
+\item{P}{The column with the value obtained for the progenies}
 
-\item{Ano}{A coluna com o ano de seleção}
+\item{Year}{The column with the year of selection}
 }
 \description{
-Resposta a seleção ponderada pela Pressão Ponderado pelo Ano de seleção e Ano
+Response to selection weighted by Pressure Weighted by Year of selection and
+Year
 }
 \author{
-Willyan Jr. A. Bandeira, Ivan R. Carvalho, Murilo V. Loro,
-Leonardo C. Pradebon, José A. G. da Silva
+Willyan Júnior Adorian Bandeira
+
+Ivan Ricardo Carvalho
+
+Murilo Vieira Loro
+
+Leonardo Cesar Pradebon
+
+José Antonio Gonzalez da Silva
 }

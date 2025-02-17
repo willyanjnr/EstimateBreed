@@ -2,23 +2,30 @@
 % Please edit documentation in R/selecao.R
 \name{GS}
 \alias{GS}
-\title{Pressão de Seleção}
+\title{Selection pressure}
 \usage{
 GS(Var, h, VF, P = "1")
 }
 \arguments{
-\item{Var}{A coluna com o nome das variáveis de interesse}
+\item{Var}{The column with the name of the variables of interest}
 
-\item{h}{A coluna com os valores de herdabilidade no sentido restrito}
+\item{h}{The column with the restricted heritability values}
 
-\item{VF}{A coluna com os valores de variância fenotípica}
+\item{VF}{The column with the phenotypic variance values}
 
-\item{P}{A coluna com os valores observados para as progênies}
+\item{P}{The column with the values observed for the progenies}
 }
 \description{
-Resposta a seleção ponderada pela pressão de seleção
+Response to selection weighted by selection pressure
 }
 \author{
-Willyan Jr. A. Bandeira, Ivan R. Carvalho, Murilo V. Loro,
-Leonardo C. Pradebon, José A. G. da Silva
+Willyan Júnior Adorian Bandeira
+
+Ivan Ricardo Carvalho
+
+Murilo Vieira Loro
+
+Leonardo Cesar Pradebon
+
+José Antonio Gonzalez da Silva
 }

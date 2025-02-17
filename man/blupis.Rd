@@ -2,26 +2,26 @@
 % Please edit documentation in R/selecao.R
 \name{blupis}
 \alias{blupis}
-\title{Número de indivíduos a serem selecionados em cada família}
+\title{Number of individuals to be selected in each family}
 \usage{
 blupis()
 }
 \arguments{
-\item{y}{Variável resposta}
+\item{y}{Response variable}
 
-\item{r}{A coluna com o efeito de repetição (fixos)}
+\item{r}{The column with the repetition effect (fixed)}
 
-\item{p}{A couna com o efeito de parcela (aleatório)}
+\item{p}{The column with the plot effect (random)}
 
-\item{f}{A coluna com o efeito de genético de dominância associado a famílias
-de irmãos-completos (aleatório)}
+\item{f}{The column with the genetic effect of dominance associated with
+families of full siblings (random)}
 
-\item{b}{A coluna com o efeito dos blocos incompletos (aleatório)}
+\item{b}{The column with the effect of incomplete blocks (random)}
 
-\item{A}{Matriz de parentesco obtida com o AGHmatrix}
+\item{A}{Kinship matrix obtained with AGHmatrix}
 }
 \description{
-Definição do número de indivíduos a serem selecionados pelo BLUPis
+Definition of the number of individuals to be selected by BLUPis
 }
 \references{
 Oliveira, R. A., Daros, E., Resende, M. D. V., Bespalhok-Filho, J. C.,
@@ -30,6 +30,13 @@ Blupis e seleção massal em cana-de-açúcar. Bragantia, 70(4), 796–800.
 Model 35 (SELEGEN)
 }
 \author{
-Willyan Jr. A. Bandeira, Ivan R. Carvalho, Murilo V. Loro,
-Leonardo C. Pradebon, José A. G. da Silva
+Willyan Júnior Adorian Bandeira
+
+Ivan Ricardo Carvalho
+
+Murilo Vieira Loro
+
+Leonardo Cesar Pradebon
+
+José Antonio Gonzalez da Silva
 }

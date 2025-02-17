@@ -2,21 +2,28 @@
 % Please edit documentation in R/selecao.R
 \name{Coeficiente_endogamia}
 \alias{Coeficiente_endogamia}
-\title{Coeficiente de endogamia}
+\title{Inbreeding coefficient}
 \usage{
 Coeficiente_endogamia(var, VG, VF)
 }
 \arguments{
-\item{var}{Coluna com o nome da variável}
+\item{var}{Column with the variable name}
 
-\item{VG}{Coluna com a variância genotípica}
+\item{VG}{Column with genotypic variance}
 
-\item{VF}{Coluna com a variância fenotípica}
+\item{VF}{Column with phenotypic variance}
 }
 \description{
-Função para Cálculo do coeficiente de endogamia
+Function for calculating the inbreeding coefficient
 }
 \author{
-Willyan Jr. A. Bandeira, Ivan R. Carvalho, Murilo V. Loro,
-Leonardo C. Pradebon, José A. G. da Silva
+Willyan Júnior Adorian Bandeira
+
+Ivan Ricardo Carvalho
+
+Murilo Vieira Loro
+
+Leonardo Cesar Pradebon
+
+José Antonio Gonzalez da Silva
 }

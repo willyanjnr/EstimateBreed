@@ -64,6 +64,14 @@ Imports:
     cowplot,
     sommer,
     lme4
+Suggests:
+    rmarkdown,
+    spelling,
+    testthat (>= 3.0.0),
+    roxygen2,
+    DT
+VignetteBuilder: 
+    knitr
 Encoding: UTF-8
 LazyData: true
 LazyLoad: true

@@ -1,0 +1,29 @@
+---
+title: "Introduction to EstimateBreed"
+author: "Willyan Júnior Adorian Bandeira"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Introduction to EstimateBreed}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+#Introduction
+
+EstimateBreed is an R package designed to perform analyses and estimate environmental covariates and genetic parameters related to selection strategies and the development of superior genotypes.
+
+#Installation
+
+You can install the development version of EstimateBreed from [GitHub](https://github.com/) with:
+
+``` r
+# install.packages("pak")
+pak::pak("willyanjnr/EstimateBreed")
+```

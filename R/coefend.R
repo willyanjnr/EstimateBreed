@@ -1,15 +1,15 @@
-#' Conjunto de Dados para Coef. de Endogamia
+#' Data: Data: Endogamy Coefficient Data Set
 #'
-#' Conjunto de dados de variância fenotípica, genotípica, herdabilidade e
-#' diferencial de seleção para diferentes variáveis.
+#' Data set of phenotypic and genotypic variance, heritability and
+#' differential selection for different variables.
 #'
-#' @format Um data.frame com 7 observações e 5 variáveis:
+#' @format A data.frame with 7 observations and 5 variables:
 #' \describe{
-#'   \item{Var}{Variável.}
-#'   \item{VF}{Variância fenotípica.}
-#'   \item{VG}{Variância genética.}
-#'   \item{h}{Herdabilidade}
-#'   \item{DS}{Diferencial de seleção.}
+#'   \item{Var}{Variable name.}
+#'   \item{VF}{Phenotypic Variance.}
+#'   \item{VG}{Genotypic Variance.}
+#'   \item{h}{Broad-sense heritability}
+#'   \item{DS}{Selection Differential}
 #' }
-#' @source Dados reais de campo para utilização.
+#' @source Real data for use.
 "coefend"

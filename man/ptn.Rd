@@ -3,24 +3,24 @@
 \docType{data}
 \name{ptn}
 \alias{ptn}
-\title{Conjunto de Dados de Milho}
+\title{Data: Wheat Dataset 1}
 \format{
-Um data.frame com 360 observações e 5 variáveis:
+A data.frame with 360 observations and 5 variables:
 \describe{
-  \item{Cult}{Cultivares de trigo.}
-  \item{Am}{Número identificador da amostra.}
+  \item{Cult}{Wheat cultivars.}
+  \item{Am}{Sample identification number.}
   \item{NQ}{Falling Number.}
-  \item{W}{Força de Glúten (W).}
-  \item{PTN}{Proteína.}
+  \item{W}{Gluten Strength (W).}
+  \item{PTN}{Grain Protein.}
 }
 }
 \source{
-Dados reais de laboratório.
+Real laboratory data.
 }
 \usage{
 ptn
 }
 \description{
-Conjunto de dados com progênies e genitores maternos e paternos de milho.
+Data set with wheat cultivars and grain rheological characters.
 }
 \keyword{datasets}

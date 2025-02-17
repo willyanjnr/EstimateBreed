@@ -3,25 +3,25 @@
 \docType{data}
 \name{pheno}
 \alias{pheno}
-\title{Conjunto de Dados para Estimativa do Plastocrono da Soja}
+\title{Soybean Plastochron Estimation Data Set}
 \format{
-Um data.frame com 135 observações e 5 variáveis:
+A data.frame with 135 observations and 5 variables:
 \describe{
-  \item{CICLO}{Dias do ciclo da soja.}
-  \item{GEN}{A coluna com o nome do genótipo.}
-  \item{TMED}{A coluna com os valores de temperatura média.}
-  \item{EST}{A coluna com o estádio fenológico.}
-  \item{NN}{A coluna com o número de nós.}
+  \item{CICLO}{Days in the soybean cycle.}
+  \item{GEN}{The column with the name of the genotype.}
+  \item{TMED}{The column with the average temperature values.}
+  \item{EST}{The column with the phenological stage.}
+  \item{NN}{The column with the number of nodes.}
 }
 }
 \source{
-Dados fictícios para utilização.
+Simulated data for use.
 }
 \usage{
 pheno
 }
 \description{
-Conjunto de dados fictícios para estimativa do plastocrono da soja com base
-no número de nós
+Fictitious data set for estimating soybean plastochron based on
+on the number of nodes
 }
 \keyword{datasets}

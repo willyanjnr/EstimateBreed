@@ -1,17 +1,17 @@
-#' Conjunto de Dados para Extração de Vigor de Sementes
+#' Data Set for Seed Vigor Extraction
 #'
-#' Conjunto de dados de experimento com genótipos de trigo submetidos a diferentes
-#' densidade de semeadura.
+#' Data set from experiment with wheat genotypes subjected to different
+#' sowing density.
 #'
-#' @format Um data.frame com 54 observações e 6 variáveis:
+#' @format A data.frame with 54 observations and 6 variables:
 #' \describe{
-#'   \item{Trat}{Coluna com os tratamentos.}
-#'   \item{PC}{Ver o que é.}
-#'   \item{G}{Percentual de germinação.}
-#'   \item{CPA}{Comprimento de parte aérea.}
-#'   \item{RAD}{Comprimento radicular.}
-#'   \item{MS}{Massa seca de plântula.}
-#'   \item{EC}{Ver o que é EC.}
+#'   \item{Trat}{Column with treatments.}
+#'   \item{PC}{First Count}
+#'   \item{G}{Germination percentage.}
+#'   \item{CPA}{Length of aerial part.}
+#'   \item{RAD}{Root length.}
+#'   \item{MS}{Seedling dry mass.}
+#'   \item{EC}{See what EC is.}
 #' }
-#' @source Dados reais de campo para utilização.
+#' @source Real field data for use.
 "vig"

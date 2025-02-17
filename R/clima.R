@@ -1,15 +1,15 @@
-#' Conjunto de Dados Climáticos para Predições
+#' Data: Climate Data Set for Predictions
 #'
-#' Dados de temperatura média do ar e umidade relativa do ar para o período de
-#' um ano, com hora, dia e mês.
+#' Average air temperature and relative humidity data for the period of
+#' one year, with time, day and month.
 #'
-#' @format Um data.frame com 8760 observações e 5 variáveis:
+#' @format A data.frame with 8760 observations and 5 variables:
 #' \describe{
-#'   \item{MO}{Mês do ano.}
-#'   \item{DY}{Dia do ano.}
-#'   \item{HR}{Hora do dia.}
-#'   \item{TMED}{Temperatura Média do Ar - em ºC.}
-#'   \item{RH}{Umidade Relativa do ar - em \%.}
+#'   \item{MO}{Month of the year.}
+#'   \item{DY}{Day of the year.}
+#'   \item{HR}{Time of the day.}
+#'   \item{TMED}{Average Air Temperature - in ºC.}
+#'   \item{RH}{Relative Humidity - in \%.}
 #' }
-#' @source Dados obtidos na plataforma Nasa Power (https://power.larc.nasa.gov/).
+#' @source Data obtained from the Nasa Power platform (https://power.larc.nasa.gov/).
 "clima"

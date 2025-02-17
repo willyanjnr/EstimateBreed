@@ -2,44 +2,51 @@
 % Please edit documentation in R/heterose.R
 \name{heterose}
 \alias{heterose}
-\title{Função para cálculo da heterose e heterobeltiose}
+\title{Heterosis and Heterobeltiosis}
 \usage{
 heterose(GEN, GM, GP, PR, REP, param = "all")
 }
 \arguments{
-\item{GEN}{A coluna com o nome do genótipo}
+\item{GEN}{The column with the genotype name}
 
-\item{GM}{A coluna com a média do genitor materno}
+\item{GM}{The column with the average of the maternal parent}
 
-\item{GP}{A coluna com a média do genitor paterno}
+\item{GP}{The column with the average of the paternal parent}
 
-\item{PR}{A coluna com a média da progênie}
+\item{PR}{The column with the average of the progeny}
 
-\item{REP}{A coluna com as repetições}
+\item{REP}{The column with the repetitions}
 
-\item{param}{Valor para determinar o parâmetro a ser calculado. Padrão é "all".
-Para calcular apenas a heterose, utilize "het". Para calcular apenas a
-heterobeltiose, utilize "hetb".}
+\item{param}{Value to determine the parameter to be calculated. Default is “all”.
+To calculate heterosis only, use “het”. To calculate only heterobeltiosis,
+use “hetb”.}
 }
 \description{
-Cálculo dos parâmetros da heterose e heterobeltiose de híbridos de milho
+Calculation of heterosis and heterobeltiosis parameters of hybrids
 }
 \examples{
 \donttest{
 library(Breeding)
 
 data("maize")
-#Extrair heterose e heterobeltiose
+#Extract heterosis and heterobeltiosis
 with(maize,heterose(HIB,GM,GP,P,stat="all"))
 
-#Extrair apenas heterose
+#Only extract heterosis
 with(maize,heterose(HIB,GM,GP,P,param = "het"))
 
-#Extrair apenas heterobeltiose
+#Extract only heterobeltiosis
 with(maize,heterose(HIB,GM,GP,P,param = "hetb"))
 }
 }
 \author{
-Willyan Jr. A. Bandeira, Ivan R. Carvalho, Murilo V. Loro,
-Leonardo C. Pradebon, José A. G. da Silva
+Willyan Júnior Adorian Bandeira
+
+Ivan Ricardo Carvalho
+
+Murilo Vieira Loro
+
+Leonardo Cesar Pradebon
+
+José Antonio Gonzalez da Silva
 }

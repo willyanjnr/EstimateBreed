@@ -1,13 +1,16 @@
-#'Estimativa do índice de seleção para qualidade industrial do trigo
+#'Industrial quality of wheat
 #'@description
-#'Função para determinar índices de qualidade industrial de genótipos de trigo,
-#'descritas por Szareski et al. (2019).
-#'@param GEN A coluna com o nome do genótipo
-#'@param NQ A coluna com o valor do falling number
-#'@param W A coluna com a força de glúten (W)
-#'@param PTN A coluna com os valores de proteína
-#' @author Willyan Jr. A. Bandeira, Ivan R. Carvalho, Murilo V. Loro,
-#' Leonardo C. Pradebon, José A. G. da Silva
+#'Function for determining industrial quality indices of wheat genotypes,
+#'described by Szareski et al. (2019).
+#'@param GEN The column with the genotype name
+#'@param NQ The column with the falling number
+#'@param W The column with the gluten force (W)
+#'@param PTN The column with the protein values
+#'@author Willyan Júnior Adorian Bandeira
+#'@author Ivan Ricardo Carvalho
+#'@author Murilo Vieira Loro
+#'@author Leonardo Cesar Pradebon
+#'@author José Antonio Gonzalez da Silva
 #'@references
 #'Szareski, V. J., Carvalho, I. R., Kehl, K., Levien, A. M.,
 #'Lautenchleger, F., Barbosa, M. H., ... & Aumonde, T. Z. (2019).
@@ -17,7 +20,7 @@
 #'@export
 #'@examples
 #'\donttest{
-#' library(EstimateBreed)
+#'library(EstimateBreed)
 #'
 #'data("ptn")
 #'with(ptn,is_qindustrial(Cult,NQ,W,PTN))
@@ -42,36 +45,40 @@ is_qindustrial <- function(GEN, NQ, W, PTN){
   dadosfinal <- data.frame(genot,indice)
   colnames(dadosfinal) <- c("GEN","Index")
   cat("\n-----------------------------\n")
-  cat("Índice de Qualidade do Trigo")
+  cat("Wheat Quality Index")
   cat("\n-----------------------------\n")
   print(dadosfinal)
   cat("\n-----------------------------\n")
-  cat("Desvios")
+  cat("Deviations")
   cat("\n-----------------------------\n")
   print(desvios)
 }
 
-#'Índice de Descasque e Rendimento Industrial
+#'Peeling Index and Industrial Yield
 #'@description
-#'Cálculo do Índice de Descasque e Rendimento Industrial de Aveia Branca
-#'@param GEN A coluna com o nome dos genótipos.
-#'@param NG2M Coluna com os valores do número de grãos maior que 2mm.
-#'@param MG Coluna com os valores da massa de grãos.
-#'@param MC Coluna com os valores da massa de cariópse.
-#'@param RG Colunas com os valores do rendimento de grãos (kg/ha).
-#'@param stat Extrair ou não a média por genótipo. Padrão é `"all"`.
-#' @author Willyan Jr. A. Bandeira, Ivan R. Carvalho, Murilo V. Loro,
-#' Leonardo C. Pradebon, José A. G. da Silva
+#'Calculating the Hulling Index and Industrial Yield of White Oats
+#'@param GEN The column with the name of the genotypes.
+#'@param NG2M The column with values for the number of grains larger than 2mm.
+#'@param MG The column with grain mass values.
+#'@param MC The column with karyopsis mass values.
+#'@param RG The column with the grain yield values (kg per ha).
+#'@param stat Logical argument. Use “all” to keep all the observations or “mean”
+#'to extract the overall average.
+#'@author Willyan Júnior Adorian Bandeira
+#'@author Ivan Ricardo Carvalho
+#'@author Murilo Vieira Loro
+#'@author Leonardo Cesar Pradebon
+#'@author José Antonio Gonzalez da Silva
 #'@export
 #'@examples
 #'\donttest{
 #'library(EstimateBreed)
 #'
 #'data("aveia")
-#'# Calcular o rendimento industrial sem extrair a média
+#'# Calculate the industrial yield without extracting the average
 #'with(aveia, rend_ind(GEN,NG2M,MG,MC,RG))
 #'
-#'# Calcular o rendimento industrial extraindo a média por genótipo
+#'# Calculate the industrial yield by extracting the average per genotype
 #'with(aveia, rend_ind(GEN,NG2M,MG,MC,RG,stat="mean"))
 #'}
 
@@ -87,7 +94,7 @@ rend_ind <- function(GEN,NG2M,MG,MC,RG,stat="all",...){
     RI = RG*(NG2M/100)*ID
     final <- data.frame(GEN,ID,RI)
     cat("\n-----------------------------------------------------------------\n")
-    cat("Índice de Descasque e Rendimento Industrial")
+    cat("Peeling Index and Industrial Yield")
     cat("\n-----------------------------------------------------------------\n")
     print(final)
   }else if (stat=="mean"){
@@ -99,20 +106,23 @@ rend_ind <- function(GEN,NG2M,MG,MC,RG,stat="all",...){
                            FUN = mean,
                            na.rm = TRUE)
     cat("\n-----------------------------------------------------------------\n")
-    cat("Índice de Descasque e Rendimento Industrial (Média por Genótipo)")
+    cat("Peeling Index and Industrial Yield (Mean by Genotype)")
     cat("\n-----------------------------------------------------------------\n")
     print(media_gen)
   }
 }
 
-#'Estimativa de índices de espiga
+#'Ear Indexes
 #'@description
-#'Estimativa do índice de viabilidade a partir de duas variáveis de campo.
-#'@param genot Nome da coluna que contém os genótipos
-#'@param var1 Nome da coluna que contém a primeira variável
-#'@param var2 Nome da coluna que contém a segunda variável
-#' @author Willyan Jr. A. Bandeira, Ivan R. Carvalho, Murilo V. Loro,
-#' Leonardo C. Pradebon, José A. G. da Silva
+#'Estimating the viability index from the combination of two field variables.
+#'@param genot The column with the name of the genotypes
+#'@param var1 The column containing the first variable
+#'@param var2 The column containing the second variable
+#'@author Willyan Júnior Adorian Bandeira
+#'@author Ivan Ricardo Carvalho
+#'@author Murilo Vieira Loro
+#'@author Leonardo Cesar Pradebon
+#'@author José Antonio Gonzalez da Silva
 #'@references
 #'Rigotti, E. J., Carvalho, I. R., Loro, M. V., Pradebon, L. C., Dalla Roza,
 #'J. P., & Sangiovo, J. P. (2024). Seed and grain yield and quality of wheat
@@ -125,17 +135,17 @@ rend_ind <- function(GEN,NG2M,MG,MC,RG,stat="all",...){
 #'library(EstimateBreed)
 #'
 #'data("trigo")
-#'#Índice de viabilidade de espiga
+#'#Ear viability index
 #'with(trigo,indviab(TEST,NGE,NEE))
 #'
-#'#Índice de colheita da espiga
+#'#Ear harvest index
 #'with(trigo,indviab(TEST,MGE,ME))
 #'
-#'#Índice de deposição de espiguetas na espiga
+#'#Spikelet deposition index in the ear
 #'#'with(trigo,indviab(TEST,NEE,CE))
 #' }
 
-indviab <- function(GEN,var1,var2,ylab="Índice",xlab="Genótipo",stat="all",plot=F){
+indviab <- function(GEN,var1,var2,ylab="Index",xlab="Genotype",stat="all",plot=F){
   require("dplyr")
   require("ggplot2")
 
@@ -147,13 +157,13 @@ indviab <- function(GEN,var1,var2,ylab="Índice",xlab="Genótipo",stat="all",plo
     indesp <- variav1/variav2
     mediaind <- mean(indesp)
     dados <- data.frame(GEN,indesp)
-    colnames(dados) <- c("Genótipo","Índice")
+    colnames(dados) <- c("Genotype","Index")
     cat("\n-----------------------------------------------------------------\n")
-    cat("Índice de Viabilidade Geral")
+    cat("General Viability Index")
     cat("\n-----------------------------------------------------------------\n")
     print(dados)
     if(plot==T){
-      warning("Só é possível plotar o gráfico quando stat='mean'",call. = FALSE)
+      warning("The graph can only be plotted when stat='mean'",call. = FALSE)
     }
   }
   else if (stat=="mean"){
@@ -163,7 +173,7 @@ indviab <- function(GEN,var1,var2,ylab="Índice",xlab="Genótipo",stat="all",plo
                            data = dados,
                            FUN = mean,
                            na.rm = TRUE)
-    colnames(media_gen) <- c("Genótipo","Índice")
+    colnames(media_gen) <- c("Genotype","Index")
     if(plot==T){
       grafico=ggplot(media_gen, aes(x=Genótipo, y=Índice)) +
         geom_bar(stat = "identity")+
@@ -171,23 +181,26 @@ indviab <- function(GEN,var1,var2,ylab="Índice",xlab="Genótipo",stat="all",plo
       print(grafico)
     }
     cat("\n-----------------------------------------------------------------\n")
-    cat("Índice de Viabilidade (Média por Genótipo)")
+    cat("Viability Index (Average per Genotype))")
     cat("\n-----------------------------------------------------------------\n")
     print(media_gen)
   }}
 
-#'Determinação do peso do hectolitro de cereais
+#'Hectolitre weight of cereals
 #'@description
-#'Função útil para caracterizar o peso do hectolitro (PH) de experimentos com
-#'cereais.
-#'@param GEN A coluna com o nome do genótipo
-#'@param PESO Peso obtido em balança de 1qt lt, conforme determinado pelas
-#'Regras de Análises de Sementes (RAS), do Ministério da Agricultura,
-#'Pecuária e Abastecimento (2009).
-#'@return Retorna o valor estimado do peso do hectolitro (PH) para o ceral
+#'Useful function for characterizing the hectolitre weight (HW) of experiments
+#' with cereals.
+#'@param GEN The column with the genotype name
+#'@param PESO Weight obtained on a 1qt lt scale, as determined by the
+#'Rules for Seed Analysis (RAS), Ministry of Agriculture,
+#'Livestock and Supply (2009).
+#'@return Returns the estimated value of the hectolitre weight (HW) for the ceral
 #'selecionado.
-#' @author Willyan Jr. A. Bandeira, Ivan R. Carvalho, Murilo V. Loro,
-#' Leonardo C. Pradebon, José A. G. da Silva
+#'@author Willyan Júnior Adorian Bandeira
+#'@author Ivan Ricardo Carvalho
+#'@author Murilo Vieira Loro
+#'@author Leonardo Cesar Pradebon
+#'@author José Antonio Gonzalez da Silva
 #'@references
 #'Brasil. Ministério da Agricultura, Pecuária e Abastecimento.
 #'Secretaria de Defesa Agropecuária. Regras para Análise de Sementes.
@@ -206,7 +219,7 @@ indviab <- function(GEN,var1,var2,ylab="Índice",xlab="Genótipo",stat="all",plo
 #'
 #'with(data,ph(GEN,MG,crop="trigo"))
 #'
-#'#Extrair a média do PH por genótipo
+#'#Extract the average PH per genotype
 #'with(data,ph(GEN,MG,crop="trigo",stat="mean"))
 #'}
 
@@ -216,33 +229,36 @@ ph <- function(GEN, PESO, crop="trigo", stat="all") {
 
   if(crop == "trigo") {
     dados <- dados %>%
-      mutate(PH = -9.935757 + (PESO * 0.451821))
+      mutate(HW = -9.935757 + (PESO * 0.451821))
   } else if (crop == "aveia") {
     dados <- dados %>%
-      mutate(PH = -3.512294 + (PESO * 0.425507))
+      mutate(HW = -3.512294 + (PESO * 0.425507))
   }
 
   if(stat == "mean") {
-    media <- aggregate(PH ~ GEN,
+    media <- aggregate(HW ~ GEN,
                        data = dados,
                        FUN = mean,
                        na.rm = TRUE)
     return(media)
   } else {
     dados <- dados %>%
-      mutate(PH = format(PH, nsmall = 2))
+      mutate(HW = format(HW, nsmall = 2))
     return(dados)
   }
 }
 
-#'Índice de seleção para proteína x rendimento de grãos
+#'Selection index for protein and grain yield
 #'@description
-#'Índice de seleção para proteína e rendimento de grãos (Pelegrin et al., 2017).
-#'@param GEN A coluna com o nome dos genótipos
-#'@param PTN Proteina Bruta
-#'@param RG Rendimento de grãos
-#' @author Willyan Jr. A. Bandeira, Ivan R. Carvalho, Murilo V. Loro,
-#' Leonardo C. Pradebon, José A. G. da Silva
+#'Selection index for protein and grain yield (Pelegrin et al., 2017).
+#'@param GEN The column with the name of the genotype
+#'@param PTN The column with the crude protein values
+#'@param RG The column with the grain yield values (in kg per ha)
+#'@author Willyan Júnior Adorian Bandeira
+#'@author Ivan Ricardo Carvalho
+#'@author Murilo Vieira Loro
+#'@author Leonardo Cesar Pradebon
+#'@author José Antonio Gonzalez da Silva
 #'@references
 #'de Pelegrin, A. J., Carvalho, I. R., Nunes, A. C. P., Demari, G. H., Szareski,
 #'V. J., Barbosa, M. H., ... & da Maia, L. C. (2017).
@@ -262,11 +278,11 @@ is_ptnerg <- function(GEN, PTN, RG){
   sd_rg <- sd(variav2)
 
   final <- data.frame(sd_ptn,sd_rg)
-  indice <- ((variav1/sd_ptn)*(variav2/sd_rg))
+  index <- ((variav1/sd_ptn)*(variav2/sd_rg))
 
-  dadosfinal <- data.frame(genot,indice)
+  dadosfinal <- data.frame(genot,index)
   cat(crayon::white(bold("\n-----------------------------------------------------------------\n")))
-  green(italic(cat("Genótipo")))
+  green(italic(cat("Genotype")))
   cat(crayon::white(bold("\n-----------------------------------------------------------------\n")))
   print(dadosfinal)
 }

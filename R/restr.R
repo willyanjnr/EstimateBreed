@@ -1,19 +1,20 @@
-#'Restrição da variabilidade das testemunhas
+#'Restriction of witness variability
 #'@description
-#'Método para restrição da variabilidade das testemunhas proposta por
-#'Carvalho et al. (2023). Utiliza a restriçõa da média mais ou menos um desvio
-#'padrão, o que restringe a variação a partir da remoção de valores assimétricos.
-#'@param TEST A coluna com o nome da testemunha
-#'@param REP A coluna com as repetições
-#'@param Xi A coluna com o valor observado para determinado genótipo.
-#'@param scenario Cenário a ser utilizado para o cálculo. Usar "original" para
-#'não restringir as testemunhas pela média mais ou menos os desvios padrões, ou
-#'"restr" para aplicar a restrição.
-#'@param zstat Argumento lógico. Aplica a normalização pela notação Z se "TRUE".
-#'@return Retorna uma tabela com os genótipos e os índices selecionados.
-#'Quanto maior o valor do índice, mais resiliente é o genótipo.
-#' @author Willyan Jr. A. Bandeira, Ivan R. Carvalho, Murilo V. Loro,
-#' Leonardo C. Pradebon, José A. G. da Silva
+#'Method for restricting the variability of witnesses proposed by Carvalho et al.
+#'(2023). It uses the restriction of the mean plus or minus one standard deviation.
+#'standard deviation, which restricts variation by removing asymmetric values.
+#'@param TEST The column with the name of the witness
+#'@param REP The column with the replications
+  #'@param Xi The column with the observed value for a given genotype.
+#'@param scenario Scenario to be used for the calculation. Use “original” to
+#'do not restrict the witnesses by the mean plus or minus the standard deviations,
+#' or “restr” to apply the restriction.
+#'@param zstat Logical argument. Applies Z-notation normalization if “TRUE”.
+#'@author Willyan Júnior Adorian Bandeira
+#'@author Ivan Ricardo Carvalho
+#'@author Murilo Vieira Loro
+#'@author Leonardo Cesar Pradebon
+#'@author José Antonio Gonzalez da Silva
 #'@references
 #'Carvalho, I. R., Silva, J. A. G. da, Moura, N. B., Ferreira, L. L.,
 #'Lautenchleger, F., & Souza, V. Q. de. (2023). Methods for estimation of
@@ -29,7 +30,7 @@ restr <- function(TEST, REP, Xi, scenario = NULL, zstat = NULL){
   require(ggplot2)
 
   if (is.null(scenario)){
-    stop("Por favor, informe se a restrição será aplicada!")
+    stop("Please inform if the restriction will be applied!")
   }
   if (scenario == "restr"){
     media <- mean(Xi)
@@ -46,7 +47,7 @@ restr <- function(TEST, REP, Xi, scenario = NULL, zstat = NULL){
   }
 
   if (is.null(zstat)){
-    stop("Por favor, informe se a normalização será aplicada!")
+    stop("Please let us know if standardization will be applied!")
   }
   if (zstat == FALSE){
     if (scenario == "restr"){
@@ -76,24 +77,24 @@ restr <- function(TEST, REP, Xi, scenario = NULL, zstat = NULL){
   }
 }
 
-#'Estimativa dos componentes de variância pela restrição da variabilidade das
-#'testemunhas.
+#'Estimation of variance components by restricting the variability of the
+#'witnesses.
 #'@description
-#'Método para restrição da variabilidade das testemunhas proposta por
-#'Carvalho et al. (2023). Utiliza a restriçõa da média mais ou menos um desvio
-#'padrão, o que restringe a variação a partir da remoção de valores assimétricos.
-#'@param GEN A coluna com o nome dos genótipos (sem testemunhas).
-#'@param REP A coluna com as repetições (se houver).
-#'@param Xi A coluna com o valor observado para a variável em determinado genótipo.
-#'@param approach Método a ser utilizado para estimativa dos componentes de
-#'variância. Usar "apI" para regressão genitor progênie, "apII" para o método
-#'da soma de quadrados de blocos aumentados com testemunhas intercalares, "apIII"
-#'para o método com modelos lineares mistos com efeitos genéticos aleatórios.
-#'@param zstat Argumento lógico. Aplica a normalização pela notação Z se "TRUE".
-#'@return Retorna uma tabela com os genótipos e os índices selecionados.
-#'Quanto maior o valor do índice, mais resiliente é o genótipo.
-#' @author Willyan Jr. A. Bandeira, Ivan R. Carvalho, Murilo V. Loro,
-#' Leonardo C. Pradebon, José A. G. da Silva
+#'Estimation of variance components and genetic parameters from the restriction
+#'of witness values
+#'@param GEN The column with the name of the genotypes (without witnesses).
+#'@param REP The column with the repetitions (if any).
+#'@param Xi The column with the observed value for the variable in a given genotype.
+#'@param approach Method to be used for estimating variance components. Use “apI”
+#' for parent-offspring regression, “apII” for the of the sum of squares of
+#' augmented blocks with intercalary parents, “apIII” for the method with linear
+#'  mixed models with random genetic effects.
+#'@param zstat Logical argument. Applies Z-notation normalization if “TRUE”.
+#'@author Willyan Júnior Adorian Bandeira
+#'@author Ivan Ricardo Carvalho
+#'@author Murilo Vieira Loro
+#'@author Leonardo Cesar Pradebon
+#'@author José Antonio Gonzalez da Silva
 #'@references
 #'Carvalho, I. R., Silva, J. A. G. da, Moura, N. B., Ferreira, L. L.,
 #'Lautenchleger, F., & Souza, V. Q. de. (2023). Methods for estimation of
@@ -108,10 +109,10 @@ cvar <- function(GEN,REP,Xi,approach=NULL,zstat=NULL){
   require(minque)
 
   if(is.null(approach)){
-    stop("Por favor, informe um método de estimativa dos componentes de variância!")
+    stop("Please provide a method for estimating variance components!")
   }
   if(is.null(zstat)){
-    stop("Por favor, informe se a normalização foi aplicada!")
+    stop("Please inform if standardization will be applied!")
   }
   if(exists("Control")){
     control <- Control
@@ -126,7 +127,8 @@ cvar <- function(GEN,REP,Xi,approach=NULL,zstat=NULL){
       datag <- rbind(genot,control)
     }
   } else {
-    stop("É preciso realizar as operações da função restr para as testemunhas")
+    stop("You have to carry out the operations of the restr function for the
+         witnesses")
   }
 
   #apIII Modelo Linear Misto

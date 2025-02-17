@@ -1,13 +1,13 @@
-#' Conjunto de Dados de Trigo
+#' Data: Wheat Dataset 2
 #'
-#' Conjunto de dados com progênies e genitores maternos e paternos de milho.
+#' Wheat genotype, protein and grain yield data set
 #'
-#' @format Um data.frame com 360 observações e 5 variáveis:
+#' @format A data.frame with 360 observations and 5 variables:
 #' \describe{
-#'   \item{CULTIVAR}{Cultivares de trigo.}
-#'   \item{REP}{Número da repetição.}
-#'   \item{PTN}{Proteína.}
-#'   \item{RG}{Rendimento de grãos (kg ha)}
+#'   \item{CULTIVAR}{Wheat cultivars.}
+#'   \item{REP}{Repetition number.}
+#'   \item{PTN}{Grain protein.}
+#'   \item{RG}{Grain yield (kg ha)}
 #' }
-#' @source Dados reais de campo.
+#' @source Real field data.
 "ptnrg"

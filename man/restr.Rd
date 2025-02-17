@@ -2,31 +2,27 @@
 % Please edit documentation in R/restr.R
 \name{restr}
 \alias{restr}
-\title{Restrição da variabilidade das testemunhas}
+\title{Restriction of witness variability}
 \usage{
 restr(TEST, REP, Xi, scenario = NULL, zstat = NULL)
 }
 \arguments{
-\item{TEST}{A coluna com o nome da testemunha}
+\item{TEST}{The column with the name of the witness}
 
-\item{REP}{A coluna com as repetições}
+\item{REP}{The column with the replications}
 
-\item{Xi}{A coluna com o valor observado para determinado genótipo.}
+\item{Xi}{The column with the observed value for a given genotype.}
 
-\item{scenario}{Cenário a ser utilizado para o cálculo. Usar "original" para
-não restringir as testemunhas pela média mais ou menos os desvios padrões, ou
-"restr" para aplicar a restrição.}
+\item{scenario}{Scenario to be used for the calculation. Use “original” to
+do not restrict the witnesses by the mean plus or minus the standard deviations,
+or “restr” to apply the restriction.}
 
-\item{zstat}{Argumento lógico. Aplica a normalização pela notação Z se "TRUE".}
-}
-\value{
-Retorna uma tabela com os genótipos e os índices selecionados.
-Quanto maior o valor do índice, mais resiliente é o genótipo.
+\item{zstat}{Logical argument. Applies Z-notation normalization if “TRUE”.}
 }
 \description{
-Método para restrição da variabilidade das testemunhas proposta por
-Carvalho et al. (2023). Utiliza a restriçõa da média mais ou menos um desvio
-padrão, o que restringe a variação a partir da remoção de valores assimétricos.
+Method for restricting the variability of witnesses proposed by Carvalho et al.
+(2023). It uses the restriction of the mean plus or minus one standard deviation.
+standard deviation, which restricts variation by removing asymmetric values.
 }
 \references{
 Carvalho, I. R., Silva, J. A. G. da, Moura, N. B., Ferreira, L. L.,
@@ -36,6 +32,13 @@ Acta Scientiarum. Agronomy, 45, e56156.
 https://doi.org/10.4025/actasciagron.v45i1.56156
 }
 \author{
-Willyan Jr. A. Bandeira, Ivan R. Carvalho, Murilo V. Loro,
-Leonardo C. Pradebon, José A. G. da Silva
+Willyan Júnior Adorian Bandeira
+
+Ivan Ricardo Carvalho
+
+Murilo Vieira Loro
+
+Leonardo Cesar Pradebon
+
+José Antonio Gonzalez da Silva
 }

@@ -2,33 +2,28 @@
 % Please edit documentation in R/restr.R
 \name{cvar}
 \alias{cvar}
-\title{Estimativa dos componentes de variância pela restrição da variabilidade das
-testemunhas.}
+\title{Estimation of variance components by restricting the variability of the
+witnesses.}
 \usage{
 cvar(GEN, REP, Xi, approach = NULL, zstat = NULL)
 }
 \arguments{
-\item{GEN}{A coluna com o nome dos genótipos (sem testemunhas).}
+\item{GEN}{The column with the name of the genotypes (without witnesses).}
 
-\item{REP}{A coluna com as repetições (se houver).}
+\item{REP}{The column with the repetitions (if any).}
 
-\item{Xi}{A coluna com o valor observado para a variável em determinado genótipo.}
+\item{Xi}{The column with the observed value for the variable in a given genotype.}
 
-\item{approach}{Método a ser utilizado para estimativa dos componentes de
-variância. Usar "apI" para regressão genitor progênie, "apII" para o método
-da soma de quadrados de blocos aumentados com testemunhas intercalares, "apIII"
-para o método com modelos lineares mistos com efeitos genéticos aleatórios.}
+\item{approach}{Method to be used for estimating variance components. Use “apI”
+for parent-offspring regression, “apII” for the of the sum of squares of
+augmented blocks with intercalary parents, “apIII” for the method with linear
+ mixed models with random genetic effects.}
 
-\item{zstat}{Argumento lógico. Aplica a normalização pela notação Z se "TRUE".}
-}
-\value{
-Retorna uma tabela com os genótipos e os índices selecionados.
-Quanto maior o valor do índice, mais resiliente é o genótipo.
+\item{zstat}{Logical argument. Applies Z-notation normalization if “TRUE”.}
 }
 \description{
-Método para restrição da variabilidade das testemunhas proposta por
-Carvalho et al. (2023). Utiliza a restriçõa da média mais ou menos um desvio
-padrão, o que restringe a variação a partir da remoção de valores assimétricos.
+Estimation of variance components and genetic parameters from the restriction
+of witness values
 }
 \references{
 Carvalho, I. R., Silva, J. A. G. da, Moura, N. B., Ferreira, L. L.,
@@ -38,6 +33,13 @@ Acta Scientiarum. Agronomy, 45, e56156.
 https://doi.org/10.4025/actasciagron.v45i1.56156
 }
 \author{
-Willyan Jr. A. Bandeira, Ivan R. Carvalho, Murilo V. Loro,
-Leonardo C. Pradebon, José A. G. da Silva
+Willyan Júnior Adorian Bandeira
+
+Ivan Ricardo Carvalho
+
+Murilo Vieira Loro
+
+Leonardo Cesar Pradebon
+
+José Antonio Gonzalez da Silva
 }

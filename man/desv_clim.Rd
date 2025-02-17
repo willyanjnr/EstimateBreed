@@ -2,27 +2,25 @@
 % Please edit documentation in R/isgr.R
 \name{desv_clim}
 \alias{desv_clim}
-\title{Função auxiliar para o cálculo do ISGR}
+\title{Auxiliary function for calculating ISGR}
 \usage{
 desv_clim(ENV, TMED, PREC)
 }
 \arguments{
-\item{ENV}{Identificação de cada ambiente de seleção (para diferenciar caso
-haja mais de um ciclo de cultivo).}
+\item{ENV}{Identification of each selection environment (to differentiate if
+there is more than one cultivation cycle).}
 
-\item{TMED}{Temperatura média do ar (em ºC) ocorrida durante o ciclo de
-cultivo em cada ambiente.}
+\item{TMED}{Average air temperature (in ºC) during the cycle in each environment.}
 
-\item{PREC}{Precipitação pluviométrica (em mm) ocorrida durante o ciclo de
-cultivo em cada ambiente.}
+\item{PREC}{Rainfall (in mm) during the cultivation cycle in each environment}
 }
 \value{
-Um dataframe contendo o identificador do ambiente de seleção e
-os desvios padrões para temperatura e precipitação.
+A dataframe containing the identifier of the selection environment and
+the standard deviations for temperature and precipitation.
 }
 \description{
-Esta função recebe um dataframe com os dados de temperatura e precipitação
-e calcula o desvio padrão desses parâmetros para cada ambiente.
+This function receives a dataframe with temperature and precipitation data
+and calculates the standard deviation of these parameters for each environment.
 }
 \examples{
 \donttest{
@@ -33,6 +31,13 @@ with(desvamb,desv_clim(ENV,TMED,PREC))
 }
 }
 \author{
-Willyan Jr. A. Bandeira, Ivan R. Carvalho, Murilo V. Loro,
-Leonardo C. Pradebon, José A. G. da Silva
+Willyan Júnior Adorian Bandeira
+
+Ivan Ricardo Carvalho
+
+Murilo Vieira Loro
+
+Leonardo Cesar Pradebon
+
+José Antonio Gonzalez da Silva
 }

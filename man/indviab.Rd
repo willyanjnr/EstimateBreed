@@ -2,40 +2,40 @@
 % Please edit documentation in R/indqi.R
 \name{indviab}
 \alias{indviab}
-\title{Estimativa de índices de espiga}
+\title{Ear Indexes}
 \usage{
 indviab(
   GEN,
   var1,
   var2,
-  ylab = "Índice",
-  xlab = "Genótipo",
+  ylab = "Index",
+  xlab = "Genotype",
   stat = "all",
   plot = F
 )
 }
 \arguments{
-\item{var1}{Nome da coluna que contém a primeira variável}
+\item{var1}{The column containing the first variable}
 
-\item{var2}{Nome da coluna que contém a segunda variável}
+\item{var2}{The column containing the second variable}
 
-\item{genot}{Nome da coluna que contém os genótipos}
+\item{genot}{The column with the name of the genotypes}
 }
 \description{
-Estimativa do índice de viabilidade a partir de duas variáveis de campo.
+Estimating the viability index from the combination of two field variables.
 }
 \examples{
 \donttest{
 library(EstimateBreed)
 
 data("trigo")
-#Índice de viabilidade de espiga
+#Ear viability index
 with(trigo,indviab(TEST,NGE,NEE))
 
-#Índice de colheita da espiga
+#Ear harvest index
 with(trigo,indviab(TEST,MGE,ME))
 
-#Índice de deposição de espiguetas na espiga
+#Spikelet deposition index in the ear
 #'with(trigo,indviab(TEST,NEE,CE))
 }
 }
@@ -47,6 +47,13 @@ Revista Engenharia na Agricultura - REVENG, 32(Contínua), 54–64.
 https://doi.org/10.13083/reveng.v32i1.17394
 }
 \author{
-Willyan Jr. A. Bandeira, Ivan R. Carvalho, Murilo V. Loro,
-Leonardo C. Pradebon, José A. G. da Silva
+Willyan Júnior Adorian Bandeira
+
+Ivan Ricardo Carvalho
+
+Murilo Vieira Loro
+
+Leonardo Cesar Pradebon
+
+José Antonio Gonzalez da Silva
 }

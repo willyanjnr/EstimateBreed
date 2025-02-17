@@ -2,30 +2,33 @@
 % Please edit documentation in R/linearest.R
 \name{linearest}
 \alias{linearest}
-\title{Estimativas a partir de equações polinomiais.}
+\title{Estimates using polynomial equations.}
 \usage{
 linearest(indep, dep, type = NULL, alpha = 0.05)
 }
 \arguments{
-\item{indep}{Nome da coluna com a variável independente.}
+\item{indep}{Name of the column with the independent variable.}
 
-\item{dep}{Nome da coluna da variável dependente}
+\item{dep}{Name of the dependent variable column}
 
-\item{type}{Tipo de análise a ser realizada. Usar "MET" para extrair a máxima
-eficiência técnica, "x3" para obter os pontos de máxima e mínima e "platô" para
-extrair os parâmetros pela função platô.}
+\item{type}{Type of analysis to be carried out. Use “MET” to extract the
+maximum technical efficiency, “x3” to obtain the maximum and minimum points
+and “plateau” to extract the parameters using the plateau function.}
 
-\item{alpha}{Significância do teste}
-}
-\value{
-Retorna uma tabela com os genótipos e os índices selecionados.
-Quanto maior o valor do índice, mais resiliente é o genótipo.
+\item{alpha}{Significance of the test.}
 }
 \description{
-Determinação da máxima eficiência técnica (MET), pontos de máxima e mínima e
-função platô.
+Determination of maximum technical efficiency (MET), maximum and minimum points
+and plateau function.
 }
 \author{
-Willyan Jr. A. Bandeira, Ivan R. Carvalho, Murilo V. Loro,
-Leonardo C. Pradebon, José A. G. da Silva
+Willyan Júnior Adorian Bandeira
+
+Ivan Ricardo Carvalho
+
+Murilo Vieira Loro
+
+Leonardo Cesar Pradebon
+
+José Antonio Gonzalez da Silva
 }

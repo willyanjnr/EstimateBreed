@@ -3,22 +3,22 @@
 \docType{data}
 \name{maize}
 \alias{maize}
-\title{Conjunto de Dados de Milho}
+\title{Data: Maize Dataset}
 \format{
-Um data.frame com 4 observações e 3 variáveis:
+A data.frame with 4 observations and 3 variables:
 \describe{
-  \item{P}{Progênies.}
-  \item{GM}{Genitor Materno.}
-  \item{GP}{Genitor Paterno.}
+  \item{P}{Progenies.}
+  \item{GM}{Maternal Parent}
+  \item{GP}{Patern Parent}
 }
 }
 \source{
-Dados simulados.
+Simulated Data.
 }
 \usage{
 maize
 }
 \description{
-Conjunto de dados com progênies e genitores maternos e paternos de milho.
+Data set with progenies and maternal and paternal maize genitors.
 }
 \keyword{datasets}

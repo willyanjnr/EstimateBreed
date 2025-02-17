@@ -2,25 +2,28 @@
 % Please edit documentation in R/iaf.R
 \name{iaf}
 \alias{iaf}
-\title{Estimativa do Índice de Área Foliar (IAF)}
+\title{Leaf Area Index (LAI)}
 \usage{
 iaf(GEN, W, L, crop = "soy", sp = 0.45, sden = 14)
 }
 \arguments{
-\item{GEN}{Colune com o nome do genótipo}
+\item{GEN}{The column with the genotype name}
 
-\item{W}{Largura da Folha.}
+\item{W}{The column with the width of the leaf.}
 
-\item{L}{Comprimento da Folha.}
+\item{L}{The column with the length of the leaf.}
 
-\item{crop}{Cultura amostrada. Utilizar "soy" para soja e "maize" para milho.}
+\item{crop}{Crop sampled. Use “soy” for soybean and “maize” for corn, “trit”
+for wheat, “rice” for rice, “bean” for bean, “sunflower” for sunflower,
+“cotton” for cotton, “sugarcane” for sugarcane, “potato” for potato and
+“tomato” for tomato.}
 
-\item{sp}{Espaçamento entre linhas (Padrão sp=0.45).}
+\item{sp}{Row spacing (Standard sp=0.45).}
 
-\item{sden}{Densidade de semeadura, em plantas por metro linear (padrão sden=14).}
+\item{sden}{Sowing density, in plants per linear meter (standard sden=14).}
 }
 \description{
-Função utilitária para a determinação do IAF de culturas
+Utility function for estimating crop LAI
 }
 \examples{
 \donttest{
@@ -36,6 +39,13 @@ Plastocrono e caracteres morfológicos da soja com hábito de crescimento
 indeterminado. Revista Cultivando o Saber, 8(2), 184-200.
 }
 \author{
-Willyan Jr. A. Bandeira, Ivan R. Carvalho, Murilo V. Loro,
-Leonardo C. Pradebon, José A. G. da Silva
+Willyan Júnior Adorian Bandeira
+
+Ivan Ricardo Carvalho
+
+Murilo Vieira Loro
+
+Leonardo Cesar Pradebon
+
+José Antonio Gonzalez da Silva
 }

@@ -3,25 +3,25 @@
 \docType{data}
 \name{aveia}
 \alias{aveia}
-\title{Conjunto de Dados de Aveia Branca}
+\title{Dataset: Oat data}
 \format{
-Um data.frame com 54 observações e 6 variáveis:
+A data.frame with 54 observations and 6 variables:
 \describe{
-  \item{GEN}{14 genótipos de aveia branca.}
-  \item{BLOCO}{Blocos do experimento.}
-  \item{NG2M}{Número de grãos maiores que 2 mm.}
-  \item{MG}{Massa de grãos}
-  \item{MC}{Massa de cariopse}
-  \item{RG}{Rendimento de grãos (em kg por ha)}
+  \item{GEN}{14 white oat genotypes.}
+  \item{BLOCO}{Experiment blocks.}
+  \item{NG2M}{Number of grains larger than 2 mm.}
+  \item{MG}{Grain mass}
+  \item{MC}{Caryopsis dough}
+  \item{RG}{Grain yield (in kg per ha)}
 }
 }
 \source{
-Dados reais de campo para utilização.
+Real field data for use.
 }
 \usage{
 aveia
 }
 \description{
-Conjunto de dados com genótipos de aveia e variáveis de indústria.
+Data set with oat genotypes and industry variables.
 }
 \keyword{datasets}

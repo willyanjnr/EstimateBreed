@@ -1,20 +1,26 @@
-#'Índice de vigor multivariado em sementes - COMPLETO
+#'Complete vigor index
 #'@description
-#'Determinação do vigor multivariado de sementes
-#'@param PC desc
-#'@param G desc
-#'@param CPA desc
-#'@param RAD desc
-#'@param MS desc
-#'@param EC desc
-#' @author Willyan Jr. A. Bandeira, Ivan R. Carvalho, Murilo V. Loro,
-#' Leonardo C. Pradebon, José A. G. da Silva
+#'Determining the multivariate vigor of seeds
+#'@param GEN The column with the genotype name
+#'@param REP The column with the replications
+#'@param PC The column with the values from the first count
+#'@param G The column with the values of percentage of germinated seeds
+#'@param CPA The column with the values of shoot length
+#'@param RAD The column with the values of Root Length
+#'@param MS The column with the values of dry mass
+#'@param EC TThe column with the field emergency values
+#'@author Willyan Júnior Adorian Bandeira
+#'@author Ivan Ricardo Carvalho
+#'@author Murilo Vieira Loro
+#'@author Leonardo Cesar Pradebon
+#'@author José Antonio Gonzalez da Silva
 #'@references
 #'Szareski, V. J., Carvalho, I. R., Demari, G. H., Rosa, T. C. D.,
 #'Souza, V. Q. D., Villela, F. A.,Aumonde, T. Z. (2018).
 #'Multivariate index of soybean seed vigor:
 #'a new biometric approach applied to the effects of genotypes and
 #'environments. Journal of Seed Science, 40(4), 396-406.
+#'@seealso \code{\link{ivig_simp}}
 #'@export
 
 index_vigor <- function(GEN,PC,G,CPA,RAD,MS,EC){
@@ -41,24 +47,28 @@ indice <- ((variav1/sd_pc)*(variav2/sd_g)*(variav3/sd_cpa)*(variav4/sd_rad)*(var
 
 dadosfinal <- data.frame(genot,indice)
 cat("\n-----------------------------------------------------------------\n")
-cat("Genótipo")
+cat("Complete Vigor Index by Genotype")
 cat("\n-----------------------------------------------------------------\n")
 print(dadosfinal)
 }
 
-#'Índice de vigor multivariado em sementes - SIMPLES
+#'Simple Vigor Index
 #'@description
-#' Índice de vigor simples de sementes (Szareski et al., 2018).
-#'@param PC desc
-#'@param G desc
-#' @author Willyan Jr. A. Bandeira, Ivan R. Carvalho, Murilo V. Loro,
-#' Leonardo C. Pradebon, José A. G. da Silva
+#'Simple seed vigor index described by Szareski et al. (2018).
+#'@param PC First count values
+#'@param G Germination percentage
+#'@author Willyan Júnior Adorian Bandeira
+#'@author Ivan Ricardo Carvalho
+#'@author Murilo Vieira Loro
+#'@author Leonardo Cesar Pradebon
+#'@author José Antonio Gonzalez da Silva
 #'@references
 #'Szareski, V. J., Carvalho, I. R., Kehl, K., Levien, A. M., Nardino,
 #'M., Dellagostin, S. M., ... & Aumonde, T. Z. (2018).
 #'Adaptability and stability of wheat genotypes according to the
 #'phenotypic index of seed vigor. Pesquisa Agropecuária Brasileira,
 #'53, 727-735.
+#'@seealso \code{\link{index_vigor}}
 #'@export
 
 ivig_simp <- function(GEN,PC,G){
@@ -76,32 +86,54 @@ ivig_simp <- function(GEN,PC,G){
 
   dadosfinal <- data.frame(genot,indice)
   cat("\n-----------------------------------------------------------------\n")
-  cat("Genótipo")
+  cat("Simple Vigor Index by Genotype")
   cat("\n-----------------------------------------------------------------\n")
   print(dadosfinal)
 }
 
-#'Índice de Seleção para Volume de Grão
+#'Selection for Grain Volume
 #'@description
-#'Índice de seleção para volume de grão proposto por Carvalho et al. (2017).
-#'@param GEN A coluna com o nome dos genótipos.
-#'@param C Comprimento do Grãos
-#'@param L Largura do Grão
-#'@param E Espessura do Grão
-#'@param stat Extrair ou não a média por genótipo. Padrão é `"all"`.
-#'@param plot Plotar o gráfico se `T`
-#'@param ylab Nome do eixo Y
-#'@param xlab Nome do eixo X
-#' @author Willyan Jr. A. Bandeira, Ivan R. Carvalho, Murilo V. Loro,
-#' Leonardo C. Pradebon, José A. G. da Silva
+#'Calculation of the selection index for grain volume, based on the values for
+#'grain length, width and thickness
+#'@param GEN The column with the genotype name
+#'@param C Grain length
+#'@param L Grain width
+#'@param E Grain thickness
+#'@param stat Extract or not the average per genotype. Use `“all”` to obtain
+#' information on all the observations or “mean” to extract the average.
+#'@param plot Logical argument. Plot a graph if TRUE
+#'@param ylab Y axis name
+#'@param xlab X axis name
+#'@author Willyan Júnior Adorian Bandeira
+#'@author Ivan Ricardo Carvalho
+#'@author Murilo Vieira Loro
+#'@author Leonardo Cesar Pradebon
+#'@author José Antonio Gonzalez da Silva
 #'@references
-#' Carvalho, I. R., Pelegrin, A. D., Szareski, V. J., Ferrari, M.,
-#' Rosa, T. D., Martins, T. S., ... & Maia, L. D. (2017).
-#'Diallel and prediction (REML/BLUP) for yield components in intervarietal maize hybrids.
-#' Genet Mol Res, 16(3).
+#'Carvalho, I. R., de Pelegrin, A. J., Szareski, V. J., Ferrari, M., da Rosa, T.
+#' C., Martins, T. S., dos Santos, N. L., Nardino, M., de Souza, V. Q., de
+#' Oliveira, A. C., & da Maia, L. C. (2017). Diallel and prediction (REML/BLUP)
+#' for yield components in intervarietal maize hybrids. Genetics and Molecular
+#' Research, 16(3), gmr16039734.
+#'  https://doi.org/10.4238/gmr16039734
 #'@export
+#'@examples
+#'\donttest{
+#'library(EstimateBreed)
+#'set.seed(123)
 #'
-gvri <- function(GEN,C,L,E,stat="all",plot=F,ylab="GVRI",xlab="Genótipo"){
+#'data <- tibble::tibble(
+#'Gen = rep(paste0("G", 1:10), each = 3),
+#'Rep = rep(1:3, times = 10),
+#'L = round(rnorm(30, mean = 3.2, sd = 0.3), 2),
+#'C = round(rnorm(30, mean = 8.5, sd = 0.5), 2),
+#'E = round(rnorm(30, mean = 2.1, sd = 0.2), 2)
+#')
+#'
+#'with(data,gvri(Gen,C,L,E, stat="mean", plot=T))
+#'}
+
+gvri <- function(GEN,C,L,E,stat="all",plot=F,ylab="GVRI",xlab="Genotype"){
   require(dplyr)
   require(ggplot2)
   GEN = as.factor(GEN)
@@ -112,7 +144,7 @@ gvri <- function(GEN,C,L,E,stat="all",plot=F,ylab="GVRI",xlab="Genótipo"){
     gvri = ((Comp*Larg*Esp)/sum(Comp+Larg+Esp))
     final <- data.frame(GEN,gvri)
     cat("\n-----------------------------------------------------------------\n")
-    cat("Índice Relativo do Volume de Grão")
+    cat("Grain Volume Relative Index (GVRI)")
     cat("\n-----------------------------------------------------------------\n")
     print(final)
   }else if (stat=="mean"){
@@ -124,10 +156,10 @@ gvri <- function(GEN,C,L,E,stat="all",plot=F,ylab="GVRI",xlab="Genótipo"){
                            FUN = mean,
                            na.rm = TRUE)
     cat("\n-----------------------------------------------------------------\n")
-    cat("Índice Relativo do Volume de Grão (Média por Genótipo)")
+    cat("Grain Volume Relative Index (Mean by Genotype)")
     cat("\n-----------------------------------------------------------------\n")
     print(media_gen)
-    cat("Média Geral =",paste(round(media_geral,digits = 5)))
+    cat("General Mean =",paste(round(media_geral,digits = 5)))
     if(plot==T){
       grafico=ggplot(media_gen, aes(x=GEN, y=gvri)) +
         geom_bar(stat = "identity")+

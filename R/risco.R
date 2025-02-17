@@ -1,37 +1,40 @@
-#' Estimativa do Risco da Ocorrência de Doenças na Soja
-#' @description
-#' Cálculo do Risco da Ocorrência de Doenças na Soja em função de variáveis
-#' meteorológicas (Engers et al., 2024).
-#' @param DIA Coluna referente ao dia do mês.
-#' @param MES Coluna referente ao mês do ano (valor numérico).
-#' @param TEMP Coluna da temperatura média do ar (em ºC).
-#' @param UR Coluna da umidade relativa (em \%).
-#' @param doença Definir a doença da soja (Padrão = "ferrugem").
-#' @param plot Plotar um gráfico do acúmulo (Padrão é F (FALSE)).
-#' @references
-#' de Oliveira Engers, L.B., Radons, S.Z., Henck, A.U. et al.
-#' Evaluation of a forecasting system to facilitate decision-making for the
-#' chemical control of Asian soybean rust. Trop. plant pathol. 49, 539–546 (2024).
-#' https://doi.org/10.1007/s40858-024-00649-1
-#' @author Willyan Jr. A. Bandeira, Ivan R. Carvalho, Murilo V. Loro,
-#' Leonardo C. Pradebon, José A. G. da Silva
-#' @examples
-#' \donttest{
-#' library(Breeding)
+#'Risk of Disease Occurrence in Soybeans
+#'@description
+#'Calculation of the Risk of Disease Occurrence in Soybeans as a Function of
+#'Variables meteorological variables (Engers et al., 2024).
+#'@param DIA The column for the day of the month.
+#'@param MES The column for the month of the year (numeric value).
+#'@param TEMP A coluna da temperatura média do ar (em ºC).
+#'@param UR The relative humidity column (in \%).
+#'@param doença Define the soybean disease (Standard = “rust”).
+#'@param plot Plot a graph of the accumulation (Default is F (FALSE)).
+#'@references
+#'de Oliveira Engers, L.B., Radons, S.Z., Henck, A.U. et al.
+#'Evaluation of a forecasting system to facilitate decision-making for the
+#'chemical control of Asian soybean rust. Trop. plant pathol. 49, 539–546 (2024).
+#'https://doi.org/10.1007/s40858-024-00649-1
+#'@author Willyan Júnior Adorian Bandeira
+#'@author Ivan Ricardo Carvalho
+#'@author Murilo Vieira Loro
+#'@author Leonardo Cesar Pradebon
+#'@author José Antonio Gonzalez da Silva
+#'@examples
+#'\donttest{
+#'library(Breeding)
 #'
-#' # Predição de Risco de Ferrugem
-#' data("clima")
-#' with(clima, risco(DY, MO, TMED, RH, doença = "ferrugem"))
-#' }
-#' @export
+#'# Rust Risk Prediction
+#'data("clima")
+#'with(clima, risco(DY, MO, TMED, RH, doença = "ferrugem"))
+#'}
+#'@export
 
-risco <- function(DIA,MES,TEMP,UR,doença="ferrugem",plot=F){
+risco <- function(DIA,MES,TEMP,UR,doença="rust",plot=F){
   DIA <- DIA
   MES <- as.factor(MES)
   TEMP <- TEMP
   UR <- UR
   dados <- data.frame(DIA,MES,TEMP,UR)
-  if(doença=="ferrugem"){
+  if(doença=="rust"){
   alfa = log(2)/log(2.30508474576)
   umidade = aggregate(UR~DIA+MES,data=dados,FUN=function(x)sum(x>85))
   print(umidade)
@@ -57,17 +60,17 @@ risco <- function(DIA,MES,TEMP,UR,doença="ferrugem",plot=F){
   diarioGeral$riscoTotal <- diarioGeral$riscoUR * diarioGeral$riscoTEMP
   diarioGeral$riscoTotal <- ifelse(diarioGeral$riscoTotal > 100, 100, diarioGeral$riscoTotal)
   cat("\n--------------------------------------------------\n")
-  cat("Risco de Ocorrência de Ferrugem Asiática")
+  cat("Risk of Asian Rust Occurrence")
   cat("\n--------------------------------------------------\n")
   print(riscofinal)
     if(plot==T){
       layout(matrix(c(1,3,2,3), 2, 2, byrow = TRUE))
       boxplot(Temp$riscoTEMP ~ Temp$Mês, col=rgb(0.3,0.5,0.4,0.6),
-              ylab="Risco Temperatura (%)",xlab="Mês",outline=F)
+              ylab="Temperature Risk (%)",xlab="Mês",outline=F)
       boxplot(umidade$riscoUR ~ umidade$Mês, col=rgb(0.3,0.5,0.4,0.6),
-              ylab="Risco Umidade Relativa (%)",xlab="Mês",outline=F)
+              ylab="Relative Humidity Risk (%)",xlab="Mês",outline=F)
       boxplot(diarioGeral$riscoTotal ~ diarioGeral$Mês, col=rgb(0.3,0.5,0.4,0.6),
-              ylab="Risco Total (%)",xlab="Mês",outline=F)
+              ylab="Total Risk (%)",xlab="Mês",outline=F)
     }
   }#ELSEIF
   }

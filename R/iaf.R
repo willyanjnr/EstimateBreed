@@ -1,14 +1,20 @@
-#'Estimativa do Índice de Área Foliar (IAF)
+#'Leaf Area Index (LAI)
 #'@description
-#'Função utilitária para a determinação do IAF de culturas
-#'@param GEN Colune com o nome do genótipo
-#'@param W Largura da Folha.
-#'@param L Comprimento da Folha.
-#'@param crop Cultura amostrada. Utilizar "soy" para soja e "maize" para milho.
-#'@param sp Espaçamento entre linhas (Padrão sp=0.45).
-#'@param sden Densidade de semeadura, em plantas por metro linear (padrão sden=14).
-#' @author Willyan Jr. A. Bandeira, Ivan R. Carvalho, Murilo V. Loro,
-#' Leonardo C. Pradebon, José A. G. da Silva
+#'Utility function for estimating crop LAI
+#'@param GEN The column with the genotype name
+#'@param W The column with the width of the leaf.
+#'@param L The column with the length of the leaf.
+#'@param crop Crop sampled. Use “soy” for soybean and “maize” for corn, “trit”
+#'for wheat, “rice” for rice, “bean” for bean, “sunflower” for sunflower,
+#'“cotton” for cotton, “sugarcane” for sugarcane, “potato” for potato and
+#'“tomato” for tomato.
+#'@param sp Row spacing (Standard sp=0.45).
+#'@param sden Sowing density, in plants per linear meter (standard sden=14).
+#'@author Willyan Júnior Adorian Bandeira
+#'@author Ivan Ricardo Carvalho
+#'@author Murilo Vieira Loro
+#'@author Leonardo Cesar Pradebon
+#'@author José Antonio Gonzalez da Silva
 #'@references
 #'Meira, D., Queiróz de Souza, V., Carvalho, I. R., Nardino, M., Follmann,
 #'D. N., Meier, C., Brezolin, P., Ferrari, M., & Pelegrin, A. J. (2015).
@@ -28,7 +34,7 @@ iaf <- function(GEN, W, L, crop = "soy", sp = 0.45, sden = 14) {
   k_correction <- c(
     soy = 0.7,
     maize = 0.75,
-    wheat = 0.88,
+    trit = 0.88,
     rice = 0.85,
     bean = 0.72,
     sunflower = 0.80,
@@ -39,21 +45,21 @@ iaf <- function(GEN, W, L, crop = "soy", sp = 0.45, sden = 14) {
   )
 
   if(!(crop %in% names(k_correction))){
-    stop("Cultura desconhecida. Por favor, informe uma cultura válida: \n",
+    stop("Unknown culture. Please enter a valid culture: \n",
          paste(names(k_correction),collapse = ", "))
   }
   k <- k_correction[crop]
   if (missing(W)) {
-    stop("Por favor, informe a largura da folha", call. = FALSE)
+    stop("Please enter the width of the sheet", call. = FALSE)
   }
   if (missing(L)) {
-    stop("Por favor, informe o comprimento da folha", call. = FALSE)
+    stop("Please enter the length of the sheet", call. = FALSE)
   }
   if (missing(GEN)) {
-    stop("Por favor, informe o genótipo", call. = FALSE)
+    stop("Please enter the genotype", call. = FALSE)
   }
   if(!is.numeric(W) || !is.numeric(L)){
-    stop("A largura e o comprimento da folha precisam ser numéricos",call. = F)
+    stop("The width and length of the sheet must be numerical",call. = F)
   }
     a1 <- data.frame(GEN, W, L)
     a1 <- a1 %>%
@@ -62,14 +68,14 @@ iaf <- function(GEN, W, L, crop = "soy", sp = 0.45, sden = 14) {
       group_by(GEN) %>%
       summarise(
         AFA = sum(AF)/10000,
-        DENS = (10000 / sp) * sden,
+        SD = (10000 / sp) * sden,
         AS = 10000 / ((10000 / sp) * sden),
-        IAF = AFA / AS
+        LAI = AFA / AS
       )
     resultado_f <- resultado %>%
       select(GEN,AFA,IAF)
-    cat("Cultura selecionada:",paste(crop),"\n")
-    cat("Espaçamento utilizado: ",paste(sp),"\n")
-    cat("Densidade de semeadura utilizada: ",paste(sden),"\n")
+    cat("Selected crop:",paste(crop),"\n")
+    cat("Row Spacing used: ",paste(sp),"\n")
+    cat("Sowing density used: ",paste(sden),"\n")
     return(resultado_f)
   }

@@ -1,22 +1,23 @@
-#'Estimativas a partir de equações polinomiais.
+#'Estimates using polynomial equations.
 #'@description
-#'Determinação da máxima eficiência técnica (MET), pontos de máxima e mínima e
-#'função platô.
-#'@param indep Nome da coluna com a variável independente.
-#'@param dep Nome da coluna da variável dependente
-#'@param type Tipo de análise a ser realizada. Usar "MET" para extrair a máxima
-#'eficiência técnica, "x3" para obter os pontos de máxima e mínima e "platô" para
-#'extrair os parâmetros pela função platô.
-#'@param alpha Significância do teste
-#'@return Retorna uma tabela com os genótipos e os índices selecionados.
-#'Quanto maior o valor do índice, mais resiliente é o genótipo.
-#' @author Willyan Jr. A. Bandeira, Ivan R. Carvalho, Murilo V. Loro,
-#' Leonardo C. Pradebon, José A. G. da Silva
+#'Determination of maximum technical efficiency (MET), maximum and minimum points
+#'and plateau function.
+#'@param indep Name of the column with the independent variable.
+#'@param dep Name of the dependent variable column
+#'@param type Type of analysis to be carried out. Use “MET” to extract the
+#'maximum technical efficiency, “x3” to obtain the maximum and minimum points
+#'and “plateau” to extract the parameters using the plateau function.
+#'@param alpha Significance of the test.
+#'@author Willyan Júnior Adorian Bandeira
+#'@author Ivan Ricardo Carvalho
+#'@author Murilo Vieira Loro
+#'@author Leonardo Cesar Pradebon
+#'@author José Antonio Gonzalez da Silva
 #'@export
 
 linearest <- function(indep,dep,type=NULL,alpha=0.05){
   if (is.null(type)) {
-    stop("Informar a análise a ser realizada no 'type'")
+    stop("Enter the analysis to be carried out in the 'type'")
   }
 
   if(type=="MET") {
@@ -35,14 +36,14 @@ linearest <- function(indep,dep,type=NULL,alpha=0.05){
       cat("y_MET =", round(est_y, digits = 5), "\n")
     } else {
       print(resumo)
-      return("O coeficiente quadrático não é significativo")
+      return("The quadratic coefficient is not significant")
     }}
 
   if (type == "x3"){
     #Função incompleta, finalizar
     mod2 <- lm(dep ~ poly(indep,3,raw = T))
     coeff <- coef(mod2)
-    cat("Coeficientes do modelo cúbico:\n",coeff,"\n")
+    cat("Coefficients of the cubic model:\n",coeff,"\n")
 
     b0 <- coeff[1]
     b1 <- coeff[2]
@@ -54,7 +55,7 @@ linearest <- function(indep,dep,type=NULL,alpha=0.05){
     pontos_criticos <- polyroot(c(b1, 2 * b2, 3 * b3))
     pontos_criticos <- Re(pontos_criticos[Im(pontos_criticos) == 0]) # Apenas raízes reais
 
-    cat("Pontos críticos (x):\n", pontos_criticos, "\n")
+    cat("Critical points (x):\n", pontos_criticos, "\n")
 
     # Derivada de 2ª ordem: f''(x) = 2*b2 + 6*b3*x
     derivada_2 <- function(x) 2 * b2 + 6 * b3 * x
@@ -63,15 +64,15 @@ linearest <- function(indep,dep,type=NULL,alpha=0.05){
     for (ponto in pontos_criticos) {
       valor_segunda_derivada <- derivada_2(ponto)
       if (valor_segunda_derivada > 0) {
-        cat("Ponto x =", ponto, "é um mínimo.\n")
+        cat("Point x =", ponto, "is a minimum.\n")
       } else if (valor_segunda_derivada < 0) {
-        cat("Ponto x =", ponto, "é um máximo.\n")
+        cat("Point x =", ponto, "is a maximum.\n")
       } else {
-        cat("Ponto x =", ponto, "é um ponto de inflexão.\n")
+        cat("Point x =", ponto, "is an inflection point.\n")
       }
     }
 
-  if (type == "platô") {
+  if (type == "plateau") {
     tryCatch({
       L_init <- max(dep)
       k_init <- 0.1
@@ -88,16 +89,16 @@ linearest <- function(indep,dep,type=NULL,alpha=0.05){
       k <- coef(modelo_logistico)["k"]   # Taxa de crescimento
       x0 <- coef(modelo_logistico)["x0"] # Ponto de inflexão
 
-      cat("Valor do platô (L):", round(L, digits = 5), "\n")
-      cat("Taxa de crescimento (k):", round(k, digits = 5), "\n")
-      cat("Ponto de inflexão (x0):", round(x0, digits = 5), "\n")
+      cat("Plateau value (L):", round(L, digits = 5), "\n")
+      cat("Growth rate (k):", round(k, digits = 5), "\n")
+      cat("Inflection point (x0):", round(x0, digits = 5), "\n")
       return(list(platô = L, taxa_crescimento = k, ponto_inflexao = x0))
     }, error = function(e) {
-      cat("Erro no ajuste do modelo:", e$message, "\n")
+      cat("Model fitting error:", e$message, "\n")
       return(NULL)
     })
   } else {
-    stop("Tipo de análise não reconhecido")
+    stop("Type of analysis not recognized")
   }
 }
 }

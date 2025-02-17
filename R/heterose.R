@@ -1,29 +1,32 @@
-#'Função para cálculo da heterose e heterobeltiose
+#'Heterosis and Heterobeltiosis
 #'@description
-#'Cálculo dos parâmetros da heterose e heterobeltiose de híbridos de milho
-#'@param GEN A coluna com o nome do genótipo
-#'@param GM A coluna com a média do genitor materno
-#'@param GP A coluna com a média do genitor paterno
-#'@param PR A coluna com a média da progênie
-#'@param REP A coluna com as repetições
-#'@param param Valor para determinar o parâmetro a ser calculado. Padrão é "all".
-#'Para calcular apenas a heterose, utilize "het". Para calcular apenas a
-#'heterobeltiose, utilize "hetb".
-#' @author Willyan Jr. A. Bandeira, Ivan R. Carvalho, Murilo V. Loro,
-#' Leonardo C. Pradebon, José A. G. da Silva
+#'Calculation of heterosis and heterobeltiosis parameters of hybrids
+#'@param GEN The column with the genotype name
+#'@param GM The column with the average of the maternal parent
+#'@param GP The column with the average of the paternal parent
+#'@param PR The column with the average of the progeny
+#'@param REP The column with the repetitions
+#'@param param Value to determine the parameter to be calculated. Default is “all”.
+#'To calculate heterosis only, use “het”. To calculate only heterobeltiosis,
+#'use “hetb”.
+#'@author Willyan Júnior Adorian Bandeira
+#'@author Ivan Ricardo Carvalho
+#'@author Murilo Vieira Loro
+#'@author Leonardo Cesar Pradebon
+#'@author José Antonio Gonzalez da Silva
 #'@export
 #'@examples
 #'\donttest{
 #' library(Breeding)
 #'
 #' data("maize")
-#' #Extrair heterose e heterobeltiose
+#' #Extract heterosis and heterobeltiosis
 #' with(maize,heterose(HIB,GM,GP,P,stat="all"))
 #'
-#' #Extrair apenas heterose
+#' #Only extract heterosis
 #' with(maize,heterose(HIB,GM,GP,P,param = "het"))
 #'
-#' #Extrair apenas heterobeltiose
+#' #Extract only heterobeltiosis
 #' with(maize,heterose(HIB,GM,GP,P,param = "hetb"))
 #'}
 
@@ -48,12 +51,13 @@ heterose <- function(GEN, GM, GP, PR, REP, param = "all") {
     )
 
   if (param == "all") {
-    return(data[, c("GEN", "Heterose", "SE_Heterose", "Heterobeltiose", "SE_Heterobeltiose")])
+    return(data[, c("GEN", "Heterosis", "SE_Heterosis", "Heterobeltiosis",
+                    "SE_Heterobeltiosis")])
 
   } else if (param == "het") {
-    return(data[, c("GEN", "Heterose", "SE_Heterose")])
+    return(data[, c("GEN", "Heterosis", "SE_Heterosis")])
 
   } else if (param == "hetb") {
-    return(data[, c("GEN", "Heterobeltiose", "SE_Heterobeltiose")])
+    return(data[, c("GEN", "Heterobeltiosis", "SE_Heterobeltiosis")])
   }
 }

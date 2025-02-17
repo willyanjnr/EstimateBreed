@@ -2,7 +2,7 @@
 % Please edit documentation in R/estresse.R
 \name{estresse}
 \alias{estresse}
-\title{índices de Estresse para Seleção}
+\title{Stress indices for genotype selection}
 \usage{
 estresse(
   GEN,
@@ -11,39 +11,39 @@ estresse(
   index = "ALL",
   bygen = T,
   plot = F,
-  xlab = "Genótipo",
-  ylab = "Valores",
+  xlab = "Genotype",
+  ylab = "Values",
   ...
 )
 }
 \arguments{
-\item{GEN}{Genótipos a serem selecionados.}
+\item{GEN}{The column with the genotypes to be selected.}
 
-\item{YS}{Produtividade do genótipo sem condições estressoras.}
+\item{YS}{Productivity of the genotype without stress conditions.}
 
-\item{YC}{Prdotuvidade do genótipo sob condições estressoras.}
+\item{YC}{Genotype productivity under stressful conditions.}
 
-\item{index}{Índice a ser calculado (Padrão "ALL"). Os índices a serem utilizados
-são: "STI" - Stress Tolerance Index, "YI" - Yield Index, "GMP" - Geometric Mean Productivity,
-"MP" - Mean Productivity, "MH" - Harmonic Mean, "SSI" - Stress Stability Index,
-"YSI" - Yield Stability Index, "RSI" - Relative Stress Index.}
+\item{index}{Index to be calculated (Standard “ALL”). The indices to be used
+are: 'STI' - Stress Tolerance Index, 'YI' - Yield Index, 'GMP' - Geometric Mean
+Productivity, 'MP' - Mean Productivity, 'MH' - Harmonic Mean, 'SSI' - Stress
+Stability Index, 'YSI' - Yield Stability Index, 'RSI' - Relative Stress Index.}
 
-\item{bygen}{Retorna a média de cada genótipo se "TRUE". Somente desta forma
-será possível plotar gráficos.}
+\item{bygen}{Returns the average of each genotype if “TRUE”. Only in this way
+it will be possible to plot graphs.}
 
-\item{plot}{Plotar gráfico se igual a "TRUE" (Padrão "F").}
+\item{plot}{Plot graph if equal to “TRUE” (Standard “F”).}
 
-\item{xlab}{Ajustar o título do eixo x no gráfico.}
+\item{xlab}{Adjust the title of the x-axis in the graph.}
 
-\item{ylab}{Ajustar o título do eixo y no gráfico.}
+\item{ylab}{Adjust the title of the y-axis in the graph.}
 }
 \value{
-Retorna uma tabela com os genótipos e os índices selecionados.
-Quanto maior o valor do índice, mais resiliente é o genótipo.
+Returns a table with the genotypes and the selected indices.
+The higher the index value, the more resilient the genotype.
 }
 \description{
-Índices de seleção de genótipos conduzidos sob condições de estresse citados
-por Ghazvini et al. (2024).
+Selection indices for genotypes conducted under stress conditions cited
+by Ghazvini et al. (2024).
 }
 \examples{
 \donttest{
@@ -62,6 +62,13 @@ Selection Models. Journal of Crop Health 76, 601–616 (2024).
 https://doi.org/10.1007/s10343-024-00981-1
 }
 \author{
-Willyan Jr. A. Bandeira, Ivan R. Carvalho, Murilo V. Loro,
-Leonardo C. Pradebon, José A. G. da Silva
+Willyan Júnior Adorian Bandeira
+
+Ivan Ricardo Carvalho
+
+Murilo Vieira Loro
+
+Leonardo Cesar Pradebon
+
+José Antonio Gonzalez da Silva
 }

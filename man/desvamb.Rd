@@ -3,22 +3,22 @@
 \docType{data}
 \name{desvamb}
 \alias{desvamb}
-\title{Conjunto de Dados para Desvio Ambiental}
+\title{Data: Data set for calculating the environmental deviation}
 \format{
-Um data.frame com 449 observações e 3 variáveis:
+A data.frame with 449 observations and 3 variables:
 \describe{
-  \item{ENV}{Ambiente de seleção.}
+  \item{ENV}{Selection environment.}
   \item{TMED}{Temperatura média do ar (em ºC).}
-  \item{PREC}{Precpitação pluviométrica.}
+  \item{PREC}{Precipitation (in mm)}
 }
 }
 \source{
-Dados reais de campo para utilização.
+Real field data for use.
 }
 \usage{
 desvamb
 }
 \description{
-Conjunto de dados com genótipos de aveia e variáveis de indústria.
+Data set with average air temperature and precipitation values per environment
 }
 \keyword{datasets}

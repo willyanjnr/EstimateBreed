@@ -3,25 +3,25 @@
 \docType{data}
 \name{coefend}
 \alias{coefend}
-\title{Conjunto de Dados para Coef. de Endogamia}
+\title{Data: Data: Endogamy Coefficient Data Set}
 \format{
-Um data.frame com 7 observações e 5 variáveis:
+A data.frame with 7 observations and 5 variables:
 \describe{
-  \item{Var}{Variável.}
-  \item{VF}{Variância fenotípica.}
-  \item{VG}{Variância genética.}
-  \item{h}{Herdabilidade}
-  \item{DS}{Diferencial de seleção.}
+  \item{Var}{Variable name.}
+  \item{VF}{Phenotypic Variance.}
+  \item{VG}{Genotypic Variance.}
+  \item{h}{Broad-sense heritability}
+  \item{DS}{Selection Differential}
 }
 }
 \source{
-Dados reais de campo para utilização.
+Real data for use.
 }
 \usage{
 coefend
 }
 \description{
-Conjunto de dados de variância fenotípica, genotípica, herdabilidade e
-diferencial de seleção para diferentes variáveis.
+Data set of phenotypic and genotypic variance, heritability and
+differential selection for different variables.
 }
 \keyword{datasets}

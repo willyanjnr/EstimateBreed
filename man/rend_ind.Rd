@@ -2,39 +2,47 @@
 % Please edit documentation in R/indqi.R
 \name{rend_ind}
 \alias{rend_ind}
-\title{Índice de Descasque e Rendimento Industrial}
+\title{Peeling Index and Industrial Yield}
 \usage{
 rend_ind(GEN, NG2M, MG, MC, RG, stat = "all", ...)
 }
 \arguments{
-\item{GEN}{A coluna com o nome dos genótipos.}
+\item{GEN}{The column with the name of the genotypes.}
 
-\item{NG2M}{Coluna com os valores do número de grãos maior que 2mm.}
+\item{NG2M}{The column with values for the number of grains larger than 2mm.}
 
-\item{MG}{Coluna com os valores da massa de grãos.}
+\item{MG}{The column with grain mass values.}
 
-\item{MC}{Coluna com os valores da massa de cariópse.}
+\item{MC}{The column with karyopsis mass values.}
 
-\item{RG}{Colunas com os valores do rendimento de grãos (kg/ha).}
+\item{RG}{The column with the grain yield values (kg per ha).}
 
-\item{stat}{Extrair ou não a média por genótipo. Padrão é `"all"`.}
+\item{stat}{Logical argument. Use “all” to keep all the observations or “mean”
+to extract the overall average.}
 }
 \description{
-Cálculo do Índice de Descasque e Rendimento Industrial de Aveia Branca
+Calculating the Hulling Index and Industrial Yield of White Oats
 }
 \examples{
 \donttest{
 library(EstimateBreed)
 
 data("aveia")
-# Calcular o rendimento industrial sem extrair a média
+# Calculate the industrial yield without extracting the average
 with(aveia, rend_ind(GEN,NG2M,MG,MC,RG))
 
-# Calcular o rendimento industrial extraindo a média por genótipo
+# Calculate the industrial yield by extracting the average per genotype
 with(aveia, rend_ind(GEN,NG2M,MG,MC,RG,stat="mean"))
 }
 }
 \author{
-Willyan Jr. A. Bandeira, Ivan R. Carvalho, Murilo V. Loro,
-Leonardo C. Pradebon, José A. G. da Silva
+Willyan Júnior Adorian Bandeira
+
+Ivan Ricardo Carvalho
+
+Murilo Vieira Loro
+
+Leonardo Cesar Pradebon
+
+José Antonio Gonzalez da Silva
 }

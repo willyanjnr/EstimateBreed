@@ -2,17 +2,17 @@
 % Please edit documentation in R/indgerm.R
 \name{ivig_simp}
 \alias{ivig_simp}
-\title{Índice de vigor multivariado em sementes - SIMPLES}
+\title{Simple Vigor Index}
 \usage{
 ivig_simp(GEN, PC, G)
 }
 \arguments{
-\item{PC}{desc}
+\item{PC}{First count values}
 
-\item{G}{desc}
+\item{G}{Germination percentage}
 }
 \description{
-Índice de vigor simples de sementes (Szareski et al., 2018).
+Simple seed vigor index described by Szareski et al. (2018).
 }
 \references{
 Szareski, V. J., Carvalho, I. R., Kehl, K., Levien, A. M., Nardino,
@@ -21,7 +21,17 @@ Adaptability and stability of wheat genotypes according to the
 phenotypic index of seed vigor. Pesquisa Agropecuária Brasileira,
 53, 727-735.
 }
+\seealso{
+\code{\link{index_vigor}}
+}
 \author{
-Willyan Jr. A. Bandeira, Ivan R. Carvalho, Murilo V. Loro,
-Leonardo C. Pradebon, José A. G. da Silva
+Willyan Júnior Adorian Bandeira
+
+Ivan Ricardo Carvalho
+
+Murilo Vieira Loro
+
+Leonardo Cesar Pradebon
+
+José Antonio Gonzalez da Silva
 }

@@ -2,21 +2,28 @@
 % Please edit documentation in R/tamef.R
 \name{tamef}
 \alias{tamef}
-\title{Tamanho Efetivo Populacional}
+\title{Effective Population Size}
 \usage{
 tamef(GEN, SI, NE)
 }
 \arguments{
-\item{GEN}{A coluna com o nome do genótipo (progênie).}
+\item{GEN}{The column with the name of the genotype (progeny).}
 
-\item{SI}{A coluna com o número de indivíduos selecionados.}
+\item{SI}{The column with the number of individuals selected}
 
-\item{NE}{Número de indivíduos conduzidos no período de seleção.}
+\item{NE}{Number of individuals conducted during the selection period.}
 }
 \description{
-Estimativa do tamanho efetivo populacional adaptado por Morais (1997).
+Estimated effective population size adapted from Morais (1997).
 }
 \author{
-Willyan Jr. A. Bandeira, Ivan R. Carvalho, Murilo V. Loro,
-Leonardo C. Pradebon, José A. G. da Silva
+Willyan Júnior Adorian Bandeira
+
+Ivan Ricardo Carvalho
+
+Murilo Vieira Loro
+
+Leonardo Cesar Pradebon
+
+José Antonio Gonzalez da Silva
 }

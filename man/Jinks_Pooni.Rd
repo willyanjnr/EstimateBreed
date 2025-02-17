@@ -2,16 +2,22 @@
 % Please edit documentation in R/JPooni.R
 \name{Jinks_Pooni}
 \alias{Jinks_Pooni}
-\title{Método de Jinks and Pooni}
+\title{Jinks and Pooni method}
 \usage{
-Jinks_Pooni(População, Var, VG, Testemunhas)
+Jinks_Pooni(Pop, Var, VG, Test)
 }
 \arguments{
-\item{name}{description}
+\item{Pop}{The column with the population name}
+
+\item{Var}{The column with the variable name}
+
+\item{VG}{The column with the genotypic variance values}
+
+\item{Test}{The column with the witnesses' names}
 }
 \description{
-Função para estimar a probabilidade de extrair linhagens superiores de populações
-Método de Jinks and Pooni
+Function for estimating the probability of extracting superior lines from
+populations by the Jinks and Pooni method
 }
 \references{
 Port, E. D., Carvalho, I. R., Pradebon, L. C., Loro, M. V., Colet, C. D. F.,
@@ -20,6 +26,13 @@ Early selection of resilient progenies to seed yield in soybean populations.
 Ciência Rural, 54, e20230287.
 }
 \author{
-Willyan Jr. A. Bandeira, Ivan R. Carvalho, Murilo V. Loro,
-Leonardo C. Pradebon, José A. G. da Silva
+Willyan Júnior Adorian Bandeira
+
+Ivan Ricardo Carvalho
+
+Murilo Vieira Loro
+
+Leonardo Cesar Pradebon
+
+José Antonio Gonzalez da Silva
 }

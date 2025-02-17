@@ -1,25 +1,26 @@
-#' Função auxiliar para o cálculo do ISGR
-#' @description
-#' Esta função recebe um dataframe com os dados de temperatura e precipitação
-#' e calcula o desvio padrão desses parâmetros para cada ambiente.
-#' @param ENV Identificação de cada ambiente de seleção (para diferenciar caso
-#' haja mais de um ciclo de cultivo).
-#' @param TMED Temperatura média do ar (em ºC) ocorrida durante o ciclo de
-#' cultivo em cada ambiente.
-#' @param PREC Precipitação pluviométrica (em mm) ocorrida durante o ciclo de
-#' cultivo em cada ambiente.
-#' @return Um dataframe contendo o identificador do ambiente de seleção e
-#' os desvios padrões para temperatura e precipitação.
-#' @author Willyan Jr. A. Bandeira, Ivan R. Carvalho, Murilo V. Loro,
-#' Leonardo C. Pradebon, José A. G. da Silva
-#' @export
-#' @examples
-#' \donttest{
-#' library(EstimateBreed)
-#' data("desvamb")
+#'Auxiliary function for calculating ISGR
+#'@description
+#'This function receives a dataframe with temperature and precipitation data
+#'and calculates the standard deviation of these parameters for each environment.
+#'@param ENV Identification of each selection environment (to differentiate if
+#'there is more than one cultivation cycle).
+#'@param TMED Average air temperature (in ºC) during the cycle in each environment.
+#'@param PREC Rainfall (in mm) during the cultivation cycle in each environment
+#'@return A dataframe containing the identifier of the selection environment and
+#'the standard deviations for temperature and precipitation.
+#'@author Willyan Júnior Adorian Bandeira
+#'@author Ivan Ricardo Carvalho
+#'@author Murilo Vieira Loro
+#'@author Leonardo Cesar Pradebon
+#'@author José Antonio Gonzalez da Silva
+#'@export
+#'@examples
+#'\donttest{
+#'library(EstimateBreed)
+#'data("desvamb")
 #'
-#' with(desvamb,desv_clim(ENV,TMED,PREC))
-#' }
+#'with(desvamb,desv_clim(ENV,TMED,PREC))
+#'}
 
 desv_clim <- function(ENV,TMED,PREC) {
   require(dplyr)
@@ -41,44 +42,48 @@ desv_clim <- function(ENV,TMED,PREC) {
 }
 
 ################################################################################
-#'ISGR - Índice de Seleção Genético para Resiliência.
+#'ISGR - Genetic Selection Index for Resilience
 #'@description
-#'Estimativa do índice de seleção para resiliência ambiental (Bandeira et al., 2024).
-#'@param GEN Coluna referente aos genótipos. As linhagens devem obrigatoriamente
-#'ter o prefixo "L" antes do número. Ex: L139.
-#'@param ENV Coluna referente ao ambiente de seleção.
-#'@param NG Número de grãos de todos os genótipos avaliados
-#'@param MG Massa de grãos de todos os genótipos avaliados
-#'@param CICLO Número de dias do ciclo, para definir a precipitação pluviométrica
-#'ideal (valor de 3.5 mm por dia)
-#'@param req Valor da demanda hídrica diária média para a cultura da soja
-#'(padrão 3.5 mm). Pode ser alterado conforme o estádio fenológico.
-#'@param stage Parâmetro para definir o estádio fenológico que a cultura se
-#'encontra. Utilizar "veg" para vegetativo e "rep" para reprodutivo, caso as
-#'avaliações tenham sido realizadas apenas em um determinado período.
-#' @author Willyan Jr. A. Bandeira, Ivan R. Carvalho, Murilo V. Loro,
-#' Leonardo C. Pradebon, José A. G. da Silva
+#'Estimation of the selection index for environmental resilience
+#'(Bandeira et al., 2024).
+#'@param GEN Column referring to genotypes. Lines must have the prefix “L” before
+#' the number. Ex: L139.
+#'@param ENV The column for the selection environment.
+#'@param NG Number of grains of all genotypes evaluated
+#'@param MG Grain mass of all genotypes evaluated
+#'@param CICLO Number of days in the cycle to define rainfall
+#'ideal (value of 3.5 mm per day). Can be changed manually in the 'req' argument.
+#'@param req Average daily water demand for the soybean crop (standard 3.5 mm).
+#'May change depending on the phenological stage.
+#'@param stage Parameter to define the phenological stage the crop is in
+#'Use “veg” for vegetative and “rep” for reproductive, if the
+#'evaluations have only been carried out in a given period.
+#'@author Willyan Júnior Adorian Bandeira
+#'@author Ivan Ricardo Carvalho
+#'@author Murilo Vieira Loro
+#'@author Leonardo Cesar Pradebon
+#'@author José Antonio Gonzalez da Silva
 #'@references
 #'Bandeira, W. J. A., Carvalho, I. R., Loro, M. V., da Silva, J. A. G.,
 #'Dalla Roza, J. P., Scarton, V. D. B., Bruinsma, G. M. W., & Pradebon, L. C. (2024).
 #'Identifying soybean progenies with high grain productivity and stress resilience
 #'to abiotic stresses. Aust J Crop Sci, 18(12), 825-830.
 #'https://doi.org/10.21475/ajcs.24.18.12.p98
-#' @export
-#' @examples
-#' \donttest{
-#' library(EstimateBreed)
-#' #Obter os desvios ambientais
-#' data("desvamb")
-#' with(desvamb, desv_clim(ENV,TMED,PREC))
+#'@export
+#'@examples
+#'\donttest{
+#'library(EstimateBreed)
+#'#Obtain environmental deviations
+#'data("desvamb")
+#'with(desvamb, desv_clim(ENV,TMED,PREC))
 #'
-#' #Calcular o ISGR
-#' data("genot")
-#' with(genot, isgr(GEN,ENV,NG,MG,CICLO))
+#'#Calculate the ISGR
+#'data("genot")
+#'with(genot, isgr(GEN,ENV,NG,MG,CICLO))
 #'
-#' #Definir o requerimento hídrico por estádio
-#' with(genot, isgr(GEN,ENV,NG,MG,CICLO,req=5,stage="rep"))
-#' }
+#'#Define the water requirement per stage
+#'with(genot, isgr(GEN,ENV,NG,MG,CICLO,req=5,stage="rep"))
+#'}
 
 isgr <- function(GEN, ENV, NG, MG, CICLO,req=3.5, stage=NULL) {
   require(dplyr)
@@ -114,7 +119,7 @@ isgr <- function(GEN, ENV, NG, MG, CICLO,req=3.5, stage=NULL) {
   } else {
     NGT <- NA
     MGT <- NA
-    stop("Nenhuma testemunha encontrada!")
+    stop("No witnesses found!")
   }
 
   SNG <- desvng
@@ -123,7 +128,7 @@ isgr <- function(GEN, ENV, NG, MG, CICLO,req=3.5, stage=NULL) {
   if(exists("DPclim")){
     DPclim <- DPclim
   } else {
-    stop("É necessário obter os desvios padrões a partir da função desv_clim!")
+    stop("The standard deviations must be obtained from the desv_clim!")
   }
 
   num_lins <- sum(dados$tipo == "Lin")

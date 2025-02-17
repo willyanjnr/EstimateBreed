@@ -1,15 +1,14 @@
-#' Conjunto de Dados GXE
+#' Data: GxE Interaction
 #'
-#' Conjunto de dados com linhagens e testemnunhas de um experimento GxE.
+#' Data set with strains and test subjects from a GxE experiment.
 #'
-#' @format Um data.frame com 55 observações e 5 variáveis:
+#' @format A data.frame with 55 observations and 5 variables:
 #' \describe{
-#'   \item{GEN}{Linhagens selecionadas em um experimento GXE.}
-#'   \item{ENV}{Ambientes de seleção.}
-#'   \item{NG}{Número de grãos mensurado nas linhagens.}
-#'   \item{MG}{Massa de grãos mensurada nas linhagens (e
-#'   m g)}
-#'   \item{CICLO}{Duração do ciclo de cultivo (em dias)}
+#'   \item{GEN}{Selected lines in a GXE experiment.}
+#'   \item{ENV}{Selection environments.}
+#'   \item{NG}{Number of grains measured in the lines.}
+#'   \item{MG}{Grain mass measured in the lines (in g)}
+#'   \item{CICLO}{Length of crop cycle (in days)}
 #' }
-#' @source Dados reais de campo para utilização.
+#' @source Real field data for use.
 "genot"

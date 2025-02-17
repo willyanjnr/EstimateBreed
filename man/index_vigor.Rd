@@ -2,25 +2,29 @@
 % Please edit documentation in R/indgerm.R
 \name{index_vigor}
 \alias{index_vigor}
-\title{Índice de vigor multivariado em sementes - COMPLETO}
+\title{Complete vigor index}
 \usage{
 index_vigor(GEN, PC, G, CPA, RAD, MS, EC)
 }
 \arguments{
-\item{PC}{desc}
+\item{GEN}{The column with the genotype name}
 
-\item{G}{desc}
+\item{PC}{The column with the values from the first count}
 
-\item{CPA}{desc}
+\item{G}{The column with the values of percentage of germinated seeds}
 
-\item{RAD}{desc}
+\item{CPA}{The column with the values of shoot length}
 
-\item{MS}{desc}
+\item{RAD}{The column with the values of Root Length}
 
-\item{EC}{desc}
+\item{MS}{The column with the values of dry mass}
+
+\item{EC}{TThe column with the field emergency values}
+
+\item{REP}{The column with the replications}
 }
 \description{
-Determinação do vigor multivariado de sementes
+Determining the multivariate vigor of seeds
 }
 \references{
 Szareski, V. J., Carvalho, I. R., Demari, G. H., Rosa, T. C. D.,
@@ -29,7 +33,17 @@ Multivariate index of soybean seed vigor:
 a new biometric approach applied to the effects of genotypes and
 environments. Journal of Seed Science, 40(4), 396-406.
 }
+\seealso{
+\code{\link{ivig_simp}}
+}
 \author{
-Willyan Jr. A. Bandeira, Ivan R. Carvalho, Murilo V. Loro,
-Leonardo C. Pradebon, José A. G. da Silva
+Willyan Júnior Adorian Bandeira
+
+Ivan Ricardo Carvalho
+
+Murilo Vieira Loro
+
+Leonardo Cesar Pradebon
+
+José Antonio Gonzalez da Silva
 }

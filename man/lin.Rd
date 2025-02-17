@@ -3,27 +3,26 @@
 \docType{data}
 \name{lin}
 \alias{lin}
-\title{Conjunto de Dados de Trigo com Proteína e RG}
+\title{Data: Wheat Data Set with Protein and Grain Yield}
 \format{
-Um data.frame com 24 observações e 7 variáveis:
+A data.frame with 24 observations and 7 variables:
 \describe{
-  \item{POP}{População base.}
-  \item{MGP_MF}{Média fenotípica da massa de grãos por planta.}
-  \item{MGP_GP}{Média genotípica da messa de grãos por planta.}
-  \item{VF}{Variância fenotípica}
-  \item{VG}{Variância genética}
-  \item{H2}{Herdabilidade no sentido amplo}
-  \item{Test}{Parâmetros das testemunhas}
+  \item{POP}{Base population.}
+  \item{MGP_MF}{Phenotypic average of grain mass per plant.}
+  \item{MGP_GP}{Genotypic average of grain mass per plant.}
+  \item{VF}{Phenotypic variance}
+  \item{VG}{Genetic variance}
+  \item{H2}{Heritability in the broad sense}
+  \item{Test}{Witness parameters}
 }
 }
 \source{
-Dados reais de campo para utilização.
+Real field data for use.
 }
 \usage{
 lin
 }
 \description{
-Conjunto de dados com genótipos de trigo, percentual de proteína e rendimento
-de grãos.
+Data set with wheat genotypes, protein percentage and grain yield.
 }
 \keyword{datasets}

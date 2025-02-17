@@ -2,32 +2,32 @@
 % Please edit documentation in R/risco.R
 \name{risco}
 \alias{risco}
-\title{Estimativa do Risco da Ocorrência de Doenças na Soja}
+\title{Risk of Disease Occurrence in Soybeans}
 \usage{
-risco(DIA, MES, TEMP, UR, doença = "ferrugem", plot = F)
+risco(DIA, MES, TEMP, UR, doença = "rust", plot = F)
 }
 \arguments{
-\item{DIA}{Coluna referente ao dia do mês.}
+\item{DIA}{The column for the day of the month.}
 
-\item{MES}{Coluna referente ao mês do ano (valor numérico).}
+\item{MES}{The column for the month of the year (numeric value).}
 
-\item{TEMP}{Coluna da temperatura média do ar (em ºC).}
+\item{TEMP}{A coluna da temperatura média do ar (em ºC).}
 
-\item{UR}{Coluna da umidade relativa (em \%).}
+\item{UR}{The relative humidity column (in \%).}
 
-\item{doença}{Definir a doença da soja (Padrão = "ferrugem").}
+\item{doença}{Define the soybean disease (Standard = “rust”).}
 
-\item{plot}{Plotar um gráfico do acúmulo (Padrão é F (FALSE)).}
+\item{plot}{Plot a graph of the accumulation (Default is F (FALSE)).}
 }
 \description{
-Cálculo do Risco da Ocorrência de Doenças na Soja em função de variáveis
-meteorológicas (Engers et al., 2024).
+Calculation of the Risk of Disease Occurrence in Soybeans as a Function of
+Variables meteorological variables (Engers et al., 2024).
 }
 \examples{
 \donttest{
 library(Breeding)
 
-# Predição de Risco de Ferrugem
+# Rust Risk Prediction
 data("clima")
 with(clima, risco(DY, MO, TMED, RH, doença = "ferrugem"))
 }
@@ -39,6 +39,13 @@ chemical control of Asian soybean rust. Trop. plant pathol. 49, 539–546 (2024)
 https://doi.org/10.1007/s40858-024-00649-1
 }
 \author{
-Willyan Jr. A. Bandeira, Ivan R. Carvalho, Murilo V. Loro,
-Leonardo C. Pradebon, José A. G. da Silva
+Willyan Júnior Adorian Bandeira
+
+Ivan Ricardo Carvalho
+
+Murilo Vieira Loro
+
+Leonardo Cesar Pradebon
+
+José Antonio Gonzalez da Silva
 }

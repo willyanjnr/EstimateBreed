@@ -2,7 +2,7 @@
 % Please edit documentation in R/ambiental.R
 \name{somatermica}
 \alias{somatermica}
-\title{Calculation of thermal sum}
+\title{Accumulated Thermal Sum}
 \usage{
 somatermica(TMED, crop = "milho", plot = F)
 }

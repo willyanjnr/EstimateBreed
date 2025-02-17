@@ -1,12 +1,12 @@
-#' Conjunto de Dados para Desvio Ambiental
+#' Data: Data set for calculating the environmental deviation
 #'
-#' Conjunto de dados com genótipos de aveia e variáveis de indústria.
+#' Data set with average air temperature and precipitation values per environment
 #'
-#' @format Um data.frame com 449 observações e 3 variáveis:
+#' @format A data.frame with 449 observations and 3 variables:
 #' \describe{
-#'   \item{ENV}{Ambiente de seleção.}
+#'   \item{ENV}{Selection environment.}
 #'   \item{TMED}{Temperatura média do ar (em ºC).}
-#'   \item{PREC}{Precpitação pluviométrica.}
+#'   \item{PREC}{Precipitation (in mm)}
 #' }
-#' @source Dados reais de campo para utilização.
+#' @source Real field data for use.
 "desvamb"

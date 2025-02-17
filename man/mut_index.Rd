@@ -2,26 +2,25 @@
 % Please edit documentation in R/mutagenico.R
 \name{mut_index}
 \alias{mut_index}
-\title{Índice de vigor multivariado em sementes}
+\title{Multivariate seed vigor index}
 \usage{
-mut_index(mut, MSG, MST, GT, DT, SL)
+mut_index(mut = NULL, MSG, MST, GT, DT, SL)
 }
 \arguments{
-\item{mut}{Método de mutação}
+\item{mut}{Mutation method}
 
-\item{MSG}{Média de Sementes Germinadas}
+\item{MSG}{The column with the average number of germinated seeds}
 
-\item{MST}{Média de Sementes Total}
+\item{MST}{The column with the average total seeds}
 
-\item{GT}{Número de plântulas por dia durante o tempo t}
+\item{GT}{Number of seedlings germinated per day during 't' time}
 
-\item{DT}{Número de Dias Avaliados}
+\item{DT}{Number of evaluation days}
 
-\item{SL}{Comprimento da plântula}
+\item{SL}{Shoot Length}
 }
 \description{
-Citação: "A new method for mutation inducing in rice
-by using DC electrophoresis bath and its mutagenic ef
+Determining the vigor of seeds obtained from mutation induction processes
 }
 \references{
 Zou, M., Tong, S., Zou, T. et al. A new method for mutation inducing in rice
@@ -29,6 +28,13 @@ by using DC electrophoresis bath and its mutagenic effects. Sci Rep 13, 6707
 (2023). https://doi.org/10.1038/s41598-023-33742-7
 }
 \author{
-Willyan Jr. A. Bandeira, Ivan R. Carvalho, Murilo V. Loro,
-Leonardo C. Pradebon, José A. G. da Silva
+Willyan Júnior Adorian Bandeira
+
+Ivan Ricardo Carvalho
+
+Murilo Vieira Loro
+
+Leonardo Cesar Pradebon
+
+José Antonio Gonzalez da Silva
 }

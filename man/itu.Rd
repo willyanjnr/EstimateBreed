@@ -2,21 +2,36 @@
 % Please edit documentation in R/estresse.R
 \name{itu}
 \alias{itu}
-\title{Índice de Temperatura e Umidade ####Alterar nome}
+\title{Environmental Stress Index}
 \usage{
 itu(CICLO, TM, UR)
 }
 \arguments{
-\item{CICLO}{Coluna referente ao Ciclo}
+\item{CICLO}{The column with the cycle days}
 
-\item{TM}{Colune referente à Temperatura Média}
+\item{TM}{The column with the average air temperature values}
 
-\item{UR}{Coluna referente à Umidade Relativa}
+\item{UR}{The column with the relative humidity values}
 }
 \description{
-Cálculo do Índice de Temperatura e Umidade (ITU)
+Determining the UTI (temperature and humidity index) from the air temperature
+and relative humidity values over a given period of time
+}
+\references{
+Tazzo, I. F., Tarouco, A. K., Allem Junior P. H. C., Bremm, C., Cardoso, L.
+S., & Junges, A. H. (2024). Índice de Temperatura e Umidade (ITU) ao longo do
+verão de 2021/2022 e estimativas dos impactos na bovinocultura de leite no Rio
+Grande do Sul, Brasil. Ciência Animal Brasileira, 2,5, e-77035P.
+https://doi.org/10.1590/1809-6891v25e-77035Pexport
 }
 \author{
-Willyan Jr. A. Bandeira, Ivan R. Carvalho, Murilo V. Loro,
-Leonardo C. Pradebon, José A. G. da Silva
+Willyan Júnior Adorian Bandeira
+
+Ivan Ricardo Carvalho
+
+Murilo Vieira Loro
+
+Leonardo Cesar Pradebon
+
+José Antonio Gonzalez da Silva
 }

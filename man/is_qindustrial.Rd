@@ -2,22 +2,22 @@
 % Please edit documentation in R/indqi.R
 \name{is_qindustrial}
 \alias{is_qindustrial}
-\title{Estimativa do índice de seleção para qualidade industrial do trigo}
+\title{Industrial quality of wheat}
 \usage{
 is_qindustrial(GEN, NQ, W, PTN)
 }
 \arguments{
-\item{GEN}{A coluna com o nome do genótipo}
+\item{GEN}{The column with the genotype name}
 
-\item{NQ}{A coluna com o valor do falling number}
+\item{NQ}{The column with the falling number}
 
-\item{W}{A coluna com a força de glúten (W)}
+\item{W}{The column with the gluten force (W)}
 
-\item{PTN}{A coluna com os valores de proteína}
+\item{PTN}{The column with the protein values}
 }
 \description{
-Função para determinar índices de qualidade industrial de genótipos de trigo,
-descritas por Szareski et al. (2019).
+Function for determining industrial quality indices of wheat genotypes,
+described by Szareski et al. (2019).
 }
 \examples{
 \donttest{
@@ -35,6 +35,13 @@ models for wheat industrial quality analysis.
 Genetics and Molecular Research, 18(3), 1-14.
 }
 \author{
-Willyan Jr. A. Bandeira, Ivan R. Carvalho, Murilo V. Loro,
-Leonardo C. Pradebon, José A. G. da Silva
+Willyan Júnior Adorian Bandeira
+
+Ivan Ricardo Carvalho
+
+Murilo Vieira Loro
+
+Leonardo Cesar Pradebon
+
+José Antonio Gonzalez da Silva
 }

@@ -43,7 +43,7 @@ indger <- function(TESTE,DIA,TSG,NST){
   dados_simulados$indice_germinacao <- ifelse(
     dados_simulados$dia >= dados_simulados$dia[primeiro_dia_germinacao],
     dados_simulados$total_sementes / dados_simulados$sementes_avaliadas * 100,
-    NA  # Deixa como NA para os dias antes da germinação
+    NA
   )
   final <- data.frame(GE,GP,MGT)
 

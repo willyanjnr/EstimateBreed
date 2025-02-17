@@ -2,45 +2,46 @@
 % Please edit documentation in R/isgr.R
 \name{isgr}
 \alias{isgr}
-\title{ISGR - Índice de Seleção Genético para Resiliência.}
+\title{ISGR - Genetic Selection Index for Resilience}
 \usage{
 isgr(GEN, ENV, NG, MG, CICLO, req = 3.5, stage = NULL)
 }
 \arguments{
-\item{GEN}{Coluna referente aos genótipos. As linhagens devem obrigatoriamente
-ter o prefixo "L" antes do número. Ex: L139.}
+\item{GEN}{Column referring to genotypes. Lines must have the prefix “L” before
+the number. Ex: L139.}
 
-\item{ENV}{Coluna referente ao ambiente de seleção.}
+\item{ENV}{The column for the selection environment.}
 
-\item{NG}{Número de grãos de todos os genótipos avaliados}
+\item{NG}{Number of grains of all genotypes evaluated}
 
-\item{MG}{Massa de grãos de todos os genótipos avaliados}
+\item{MG}{Grain mass of all genotypes evaluated}
 
-\item{CICLO}{Número de dias do ciclo, para definir a precipitação pluviométrica
-ideal (valor de 3.5 mm por dia)}
+\item{CICLO}{Number of days in the cycle to define rainfall
+ideal (value of 3.5 mm per day). Can be changed manually in the 'req' argument.}
 
-\item{req}{Valor da demanda hídrica diária média para a cultura da soja
-(padrão 3.5 mm). Pode ser alterado conforme o estádio fenológico.}
+\item{req}{Average daily water demand for the soybean crop (standard 3.5 mm).
+May change depending on the phenological stage.}
 
-\item{stage}{Parâmetro para definir o estádio fenológico que a cultura se
-encontra. Utilizar "veg" para vegetativo e "rep" para reprodutivo, caso as
-avaliações tenham sido realizadas apenas em um determinado período.}
+\item{stage}{Parameter to define the phenological stage the crop is in
+Use “veg” for vegetative and “rep” for reproductive, if the
+evaluations have only been carried out in a given period.}
 }
 \description{
-Estimativa do índice de seleção para resiliência ambiental (Bandeira et al., 2024).
+Estimation of the selection index for environmental resilience
+(Bandeira et al., 2024).
 }
 \examples{
 \donttest{
 library(EstimateBreed)
-#Obter os desvios ambientais
+#Obtain environmental deviations
 data("desvamb")
 with(desvamb, desv_clim(ENV,TMED,PREC))
 
-#Calcular o ISGR
+#Calculate the ISGR
 data("genot")
 with(genot, isgr(GEN,ENV,NG,MG,CICLO))
 
-#Definir o requerimento hídrico por estádio
+#Define the water requirement per stage
 with(genot, isgr(GEN,ENV,NG,MG,CICLO,req=5,stage="rep"))
 }
 }
@@ -52,6 +53,13 @@ to abiotic stresses. Aust J Crop Sci, 18(12), 825-830.
 https://doi.org/10.21475/ajcs.24.18.12.p98
 }
 \author{
-Willyan Jr. A. Bandeira, Ivan R. Carvalho, Murilo V. Loro,
-Leonardo C. Pradebon, José A. G. da Silva
+Willyan Júnior Adorian Bandeira
+
+Ivan Ricardo Carvalho
+
+Murilo Vieira Loro
+
+Leonardo Cesar Pradebon
+
+José Antonio Gonzalez da Silva
 }

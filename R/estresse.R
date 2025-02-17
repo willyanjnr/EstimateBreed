@@ -1,23 +1,26 @@
-#'índices de Estresse para Seleção
+#'Stress indices for genotype selection
 #'@description
-#'Índices de seleção de genótipos conduzidos sob condições de estresse citados
-#'por Ghazvini et al. (2024).
-#'@param GEN Genótipos a serem selecionados.
-#'@param YS Produtividade do genótipo sem condições estressoras.
-#'@param YC Prdotuvidade do genótipo sob condições estressoras.
-#'@param index Índice a ser calculado (Padrão "ALL"). Os índices a serem utilizados
-#'são: "STI" - Stress Tolerance Index, "YI" - Yield Index, "GMP" - Geometric Mean Productivity,
-#'"MP" - Mean Productivity, "MH" - Harmonic Mean, "SSI" - Stress Stability Index,
-#'"YSI" - Yield Stability Index, "RSI" - Relative Stress Index.
-#'@param bygen Retorna a média de cada genótipo se "TRUE". Somente desta forma
-#'será possível plotar gráficos.
-#'@param plot Plotar gráfico se igual a "TRUE" (Padrão "F").
-#'@param xlab Ajustar o título do eixo x no gráfico.
-#'@param ylab Ajustar o título do eixo y no gráfico.
-#'@return Retorna uma tabela com os genótipos e os índices selecionados.
-#'Quanto maior o valor do índice, mais resiliente é o genótipo.
-#' @author Willyan Jr. A. Bandeira, Ivan R. Carvalho, Murilo V. Loro,
-#' Leonardo C. Pradebon, José A. G. da Silva
+#'Selection indices for genotypes conducted under stress conditions cited
+#'by Ghazvini et al. (2024).
+#'@param GEN The column with the genotypes to be selected.
+#'@param YS Productivity of the genotype without stress conditions.
+#'@param YC Genotype productivity under stressful conditions.
+#'@param index Index to be calculated (Standard “ALL”). The indices to be used
+#'are: 'STI' - Stress Tolerance Index, 'YI' - Yield Index, 'GMP' - Geometric Mean
+#' Productivity, 'MP' - Mean Productivity, 'MH' - Harmonic Mean, 'SSI' - Stress
+#' Stability Index, 'YSI' - Yield Stability Index, 'RSI' - Relative Stress Index.
+#'@param bygen Returns the average of each genotype if “TRUE”. Only in this way
+#'it will be possible to plot graphs.
+#'@param plot Plot graph if equal to “TRUE” (Standard “F”).
+#'@param xlab Adjust the title of the x-axis in the graph.
+#'@param ylab Adjust the title of the y-axis in the graph.
+#'@return Returns a table with the genotypes and the selected indices.
+#'The higher the index value, the more resilient the genotype.
+#'@author Willyan Júnior Adorian Bandeira
+#'@author Ivan Ricardo Carvalho
+#'@author Murilo Vieira Loro
+#'@author Leonardo Cesar Pradebon
+#'@author José Antonio Gonzalez da Silva
 #'@references
 #'Ghazvini, H., Pour-Aboughadareh, A., Jasemi, S.S. et al.
 #'A Framework for Selection of High-Yielding and Drought-tolerant
@@ -34,7 +37,7 @@
 #'
 #'}
 
-estresse <- function(GEN,YS,YC,index="ALL",bygen=T,plot=F,xlab="Genótipo",ylab="Valores",...){
+estresse <- function(GEN,YS,YC,index="ALL",bygen=T,plot=F,xlab="Genotype",ylab="Values",...){
   require(dplyr)
   require(ggplot2)
   require(tidyr)
@@ -44,7 +47,7 @@ estresse <- function(GEN,YS,YC,index="ALL",bygen=T,plot=F,xlab="Genótipo",ylab=
   YC1 = YC
   verif <- data.frame(YS1,YC1)
   if (any(is.na(verif))) {
-    warning("O data frame contém valores NA!")
+    warning("The data frame contains NA values!")
   }
 
   if(bygen==T){
@@ -349,15 +352,24 @@ estresse <- function(GEN,YS,YC,index="ALL",bygen=T,plot=F,xlab="Genótipo",ylab=
   }
 }
 
-#' Índice de Temperatura e Umidade ####Alterar nome
+#'Environmental Stress Index
 #'@description
-#'Cálculo do Índice de Temperatura e Umidade (ITU)
-#'
-#'@param CICLO Coluna referente ao Ciclo
-#'@param TM Colune referente à Temperatura Média
-#'@param UR Coluna referente à Umidade Relativa
-#' @author Willyan Jr. A. Bandeira, Ivan R. Carvalho, Murilo V. Loro,
-#' Leonardo C. Pradebon, José A. G. da Silva
+#'Determining the UTI (temperature and humidity index) from the air temperature
+#'and relative humidity values over a given period of time
+#'@param CICLO The column with the cycle days
+#'@param TM The column with the average air temperature values
+#'@param UR The column with the relative humidity values
+#'@author Willyan Júnior Adorian Bandeira
+#'@author Ivan Ricardo Carvalho
+#'@author Murilo Vieira Loro
+#'@author Leonardo Cesar Pradebon
+#'@author José Antonio Gonzalez da Silva
+#'@references
+#'Tazzo, I. F., Tarouco, A. K., Allem Junior P. H. C., Bremm, C., Cardoso, L.
+#'S., & Junges, A. H. (2024). Índice de Temperatura e Umidade (ITU) ao longo do
+#'verão de 2021/2022 e estimativas dos impactos na bovinocultura de leite no Rio
+#'Grande do Sul, Brasil. Ciência Animal Brasileira, 2,5, e-77035P.
+#'https://doi.org/10.1590/1809-6891v25e-77035Pexport
 #'@export
 
 itu <- function(CICLO,TM,UR){
@@ -372,25 +384,25 @@ itu <- function(CICLO,TM,UR){
   if(ITU>=70){
     print(ITU)
     cat("\n-----------------------------------------------------------------\n")
-    cat("Condição não estressante, faixa dentro do conforto térmico")
+    cat("Non-stressful condition, range within thermal comfort")
     cat("\n-----------------------------------------------------------------\n")
   }
   else if (ITU>=71&ITU<=78){
     print(ITU)
     cat("\n-----------------------------------------------------------------\n")
-    cat("Condição de estresse térmico")
+    cat("Heat stress condition")
     cat("\n-----------------------------------------------------------------\n")
   }
   else if (ITU>=79&ITU<=83){
     print(ITU)
     cat("\n-----------------------------------------------------------------\n")
-    cat("Condição de estresse térmico severo (situação de perigo)")
+    cat("Severe heat stress (danger situation)")
     cat("\n-----------------------------------------------------------------\n")
   }
   else if (ITU>=84){
     print(ITU)
     cat("\n-----------------------------------------------------------------\n")
-    cat("Condição de estresse térmico crítico (situação de emergência)")
+    cat("Critical heat stress condition (emergency situation)")
     cat("\n-----------------------------------------------------------------\n")
   }
 }

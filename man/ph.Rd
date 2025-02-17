@@ -2,24 +2,24 @@
 % Please edit documentation in R/indqi.R
 \name{ph}
 \alias{ph}
-\title{Determinação do peso do hectolitro de cereais}
+\title{Hectolitre weight of cereals}
 \usage{
 ph(GEN, PESO, crop = "trigo", stat = "all")
 }
 \arguments{
-\item{GEN}{A coluna com o nome do genótipo}
+\item{GEN}{The column with the genotype name}
 
-\item{PESO}{Peso obtido em balança de 1qt lt, conforme determinado pelas
-Regras de Análises de Sementes (RAS), do Ministério da Agricultura,
-Pecuária e Abastecimento (2009).}
+\item{PESO}{Weight obtained on a 1qt lt scale, as determined by the
+Rules for Seed Analysis (RAS), Ministry of Agriculture,
+Livestock and Supply (2009).}
 }
 \value{
-Retorna o valor estimado do peso do hectolitro (PH) para o ceral
+Returns the estimated value of the hectolitre weight (HW) for the ceral
 selecionado.
 }
 \description{
-Função útil para caracterizar o peso do hectolitro (PH) de experimentos com
-cereais.
+Useful function for characterizing the hectolitre weight (HW) of experiments
+with cereals.
 }
 \examples{
 \donttest{
@@ -34,7 +34,7 @@ data <- data.frame(GEN, REP, MG)
 
 with(data,ph(GEN,MG,crop="trigo"))
 
-#Extrair a média do PH por genótipo
+#Extract the average PH per genotype
 with(data,ph(GEN,MG,crop="trigo",stat="mean"))
 }
 }
@@ -44,6 +44,13 @@ Secretaria de Defesa Agropecuária. Regras para Análise de Sementes.
 Brasília: MAPA/ACS, 2009. 399 p. ISBN 978-85-99851-70-8.
 }
 \author{
-Willyan Jr. A. Bandeira, Ivan R. Carvalho, Murilo V. Loro,
-Leonardo C. Pradebon, José A. G. da Silva
+Willyan Júnior Adorian Bandeira
+
+Ivan Ricardo Carvalho
+
+Murilo Vieira Loro
+
+Leonardo Cesar Pradebon
+
+José Antonio Gonzalez da Silva
 }

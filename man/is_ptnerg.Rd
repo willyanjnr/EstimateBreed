@@ -2,19 +2,19 @@
 % Please edit documentation in R/indqi.R
 \name{is_ptnerg}
 \alias{is_ptnerg}
-\title{Índice de seleção para proteína x rendimento de grãos}
+\title{Selection index for protein and grain yield}
 \usage{
 is_ptnerg(GEN, PTN, RG)
 }
 \arguments{
-\item{GEN}{A coluna com o nome dos genótipos}
+\item{GEN}{The column with the name of the genotype}
 
-\item{PTN}{Proteina Bruta}
+\item{PTN}{The column with the crude protein values}
 
-\item{RG}{Rendimento de grãos}
+\item{RG}{The column with the grain yield values (in kg per ha)}
 }
 \description{
-Índice de seleção para proteína e rendimento de grãos (Pelegrin et al., 2017).
+Selection index for protein and grain yield (Pelegrin et al., 2017).
 }
 \references{
 de Pelegrin, A. J., Carvalho, I. R., Nunes, A. C. P., Demari, G. H., Szareski,
@@ -23,6 +23,13 @@ Adaptability, stability and multivariate selection by mixed models.
 American Journal of Plant Sciences, 8(13), 3324.
 }
 \author{
-Willyan Jr. A. Bandeira, Ivan R. Carvalho, Murilo V. Loro,
-Leonardo C. Pradebon, José A. G. da Silva
+Willyan Júnior Adorian Bandeira
+
+Ivan Ricardo Carvalho
+
+Murilo Vieira Loro
+
+Leonardo Cesar Pradebon
+
+José Antonio Gonzalez da Silva
 }

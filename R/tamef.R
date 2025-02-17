@@ -1,11 +1,14 @@
-#'Tamanho Efetivo Populacional
+#'Effective Population Size
 #'@description
-#'Estimativa do tamanho efetivo populacional adaptado por Morais (1997).
-#'@param GEN A coluna com o nome do genótipo (progênie).
-#'@param SI A coluna com o número de indivíduos selecionados.
-#'@param NE Número de indivíduos conduzidos no período de seleção.
-#' @author Willyan Jr. A. Bandeira, Ivan R. Carvalho, Murilo V. Loro,
-#' Leonardo C. Pradebon, José A. G. da Silva
+#'Estimated effective population size adapted from Morais (1997).
+#'@param GEN The column with the name of the genotype (progeny).
+#'@param SI The column with the number of individuals selected
+#'@param NE Number of individuals conducted during the selection period.
+#'@author Willyan Júnior Adorian Bandeira
+#'@author Ivan Ricardo Carvalho
+#'@author Murilo Vieira Loro
+#'@author Leonardo Cesar Pradebon
+#'@author José Antonio Gonzalez da Silva
 #'@export
 
 tamef <- function(GEN,SI,NE){

@@ -2,28 +2,36 @@
 % Please edit documentation in R/ambiental.R
 \name{fototermal}
 \alias{fototermal}
-\title{Determinação do índice fototermal}
+\title{Photothermal Index}
 \usage{
 fototermal(DIA, TMED, RAD, PER)
 }
 \arguments{
-\item{DIA}{A coluna com o dia de ciclo}
+\item{DIA}{The column with the cycle days}
 
-\item{TMED}{A coluna com os valores de temperatura média}
+\item{TMED}{The column with the average air temperature values}
 
-\item{RAD}{A coluna com os valores de radiação incidente}
+\item{RAD}{The column with the incident radiation values}
 
-\item{PER}{A coluna com o período (utilize VEG para vegetativo e REP para
-reprodutivo)}
+\item{PER}{The column with the period (use VEG for vegetative and REP for
+reproductive)}
 }
 \description{
-Cálculo do índice fototermal
+Calculation of the photothermal index based on average temperature and
+radiation
 }
 \references{
 Zanon, A. J., & Tagliapietra, E. L. (2022). Ecofisiologia da soja:
 Visando altas produtividades (2ª ed.). Field Crops.
 }
 \author{
-Willyan Jr. A. Bandeira, Ivan R. Carvalho, Murilo V. Loro,
-Leonardo C. Pradebon, José A. G. da Silva
+Willyan Júnior Adorian Bandeira
+
+Ivan Ricardo Carvalho
+
+Murilo Vieira Loro
+
+Leonardo Cesar Pradebon
+
+José Antonio Gonzalez da Silva
 }

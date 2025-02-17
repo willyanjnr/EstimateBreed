@@ -1,4 +1,4 @@
-#'Calculation of thermal sum
+#'Accumulated Thermal Sum
 #'@description
 #'Calculates the daily and accumulated thermal sum of crops
 #'@param TMED The column with the average air temperature values
@@ -514,16 +514,20 @@ plastocrono <- function(GEN, TMED, STAD, NN, habit = "ind", plot = FALSE) {
   }
 }
 
-#'Determinação do índice fototermal
+#'Photothermal Index
 #'@description
-#'Cálculo do índice fototermal
-#'@param DIA A coluna com o dia de ciclo
-#'@param TMED A coluna com os valores de temperatura média
-#'@param RAD A coluna com os valores de radiação incidente
-#'@param PER A coluna com o período (utilize VEG para vegetativo e REP para
-#'reprodutivo)
-#'@author Willyan Jr. A. Bandeira, Ivan R. Carvalho, Murilo V. Loro,
-#'Leonardo C. Pradebon, José A. G. da Silva
+#'Calculation of the photothermal index based on average temperature and
+#'radiation
+#'@param DIA The column with the cycle days
+#'@param TMED The column with the average air temperature values
+#'@param RAD The column with the incident radiation values
+#'@param PER The column with the period (use VEG for vegetative and REP for
+#'reproductive)
+#'@author Willyan Júnior Adorian Bandeira
+#'@author Ivan Ricardo Carvalho
+#'@author Murilo Vieira Loro
+#'@author Leonardo Cesar Pradebon
+#'@author José Antonio Gonzalez da Silva
 #'@references
 #'Zanon, A. J., & Tagliapietra, E. L. (2022). Ecofisiologia da soja:
 #'Visando altas produtividades (2ª ed.). Field Crops.
@@ -572,19 +576,19 @@ fototermal <- function(DIA, TMED, RAD, PER) {
 
 #'Optimum conditions for pesticide application
 #'@description
-#'Determinação do momento ideal para aplicação de defensivos agrícolas
-#'@param LON Longitude (em decimal)
-#'@param LAT Latitude (em decimal)
-#'@param type Tipo de análise. Utilize 1 para forecast e 2 para dados temporais.
-#'@param days Número de dias
-#'@param control Tipo de produto a ser aplicado. Utilizar "fung" para fungicida,
-#'"herb" para herbicida, "ins" para inseticidas, "bio" para produtos biológicos.
-#'@param details Retorna o resultado de forma detalhada se TRUE.
-#'@param dates Só utilizar esse argumento se type=2. Data de início e final
-#'para a obtenção dos dados meteorológicos para um ciclo de cultivo.
-#'@return Retorna os momentos ideais de aplicação, considerando cada cenário.
-#'Tomado como parâmetro um DELTA_T entre 2 e 8, velocidade do vento entre 3 e 8,
-#'e ausência de precipitação.
+#'Determining the ideal time for pesticide application using ∆T
+#'@param LON Longitude (in decimal)
+#'@param LAT Latitude (in decimal)
+#'@param type Type of analysis. Use 1 for forecast and 2 for temporal data.
+#'@param days Number of days (only use this argument if type=1).
+#'@param control Type of product to be applied. Use “fung” for fungicide,
+#'“herb” for herbicide, “ins” for insecticides, “bio” for biological products.
+#'@param details Returns the result in detail if TRUE.
+#'@param dates Only use this argument if type=2. Start and end date for obtaining
+#'weather data for a crop cycle.
+#'@return Returns the ideal application times, considering each scenario.
+#'Taking as a parameter a DELTA_T between 2 and 8, wind speed between 3 and 8,
+#'and no precipitation.
 #'@author Willyan Júnior Adorian Bandeira
 #'@author Ivan Ricardo Carvalho
 #'@author Murilo Vieira Loro
@@ -595,13 +599,12 @@ fototermal <- function(DIA, TMED, RAD, PER) {
 #'\donttest{
 #'library(Breeding)
 #'
-#'# Previsão das condições de aplicação
+#'# Forecasting application conditions
 #'deltat(-53.696944444444,-28.063888888889,type=1,days=10)
 #'View(forecast)
 #'
-#'# Análise retrospectiva das condições de aplicação
-#'deltat(-53.696944444444,-28.063888888889,type=1,days=10,
-#'dates=c("2023-01-01","2023-05-01"))
+#'# Retrospective analysis of application conditions
+#'deltat(-53.696944444444,-28.063888888889,type=2,days=10,dates=c("2023-01-01","2023-05-01"))
 #'View(retrospective)
 #'}
 
@@ -625,7 +628,7 @@ deltat <- function(LON,LAT,type=2,days=7,control=NULL,
       forecast_days = days
     ))
     if (status_code(res) != 200) {
-      stop("Verifique as coordenadas")
+      stop("Check the coordinates")
     }
     previsao <- fromJSON(content(res, "text"))
     hora <- previsao$hourly$time
@@ -634,21 +637,21 @@ deltat <- function(LON,LAT,type=2,days=7,control=NULL,
     wind <- previsao$hourly$windspeed_10m
     prec <- previsao$hourly$precipitation
     df1 <- data.frame(
-      Hora = hora,
+      Hour = hora,
       Temp = temp,
-      UR = ur,
+      RH = ur,
       WindS = wind,
       Prec = prec
     )
-    df1$Hora <- as.POSIXct(df1$Hora, format = "%Y-%m-%dT%H:%M", tz = "UTC")
-    df1$Hora <- with_tz(df1$Hora, "America/Sao_Paulo")
-    df1$Dia <- as.Date(df1$Hora, tz = "America/Sao_Paulo")
-    df1$HoraF <- format(df1$Hora, "%H:%M")
-    df1 <- df1[, c("Dia", "HoraF", "Temp", "UR", "WindS", "Prec")]
-    colnames(df1)[2] <- "Hora"
+    df1$Hour <- as.POSIXct(df1$Hour, format = "%Y-%m-%dT%H:%M", tz = "UTC")
+    df1$Hour <- with_tz(df1$Hour, "America/Sao_Paulo")
+    df1$Day <- as.Date(df1$Hour, tz = "America/Sao_Paulo")
+    df1$HourF <- format(df1$Hour, "%H:%M")
+    df1 <- df1[, c("Day", "HourF", "Temp", "RH", "WindS", "Prec")]
+    colnames(df1)[2] <- "Hour"
     #Fazer o cálculo do DELTAT
     dt <- df1 %>%
-      mutate(alpha = log(UR/100)+(17.27*Temp)/(237.7+Temp),
+      mutate(alpha = log(RH/100)+(17.27*Temp)/(237.7+Temp),
              Td = (237.7*alpha)/(17.27-alpha),
              DELTAT = Temp-Td)
     dt <- dt %>% select(-alpha,-Td)
@@ -667,7 +670,7 @@ deltat <- function(LON,LAT,type=2,days=7,control=NULL,
         filter(DELTAT >= 2 & DELTAT <= 8,
                WindS < 10,
                Prec < 2)
-      cat("Momentos com condição ideal de aplicação\n")
+      cat("Moments with ideal application conditions\n")
       cat("--------------------------------------------------------\n")
       print(ideal)
     } else if(control=="fung"){
@@ -676,7 +679,7 @@ deltat <- function(LON,LAT,type=2,days=7,control=NULL,
                WindS < 10,
                Prec < 2,
                Temp >= 15 & Temp <=25)
-      cat("Momentos de condição ideal para aplicação de fungicida\n")
+      cat("Optimum conditions for fungicide application\n")
       cat("--------------------------------------------------------\n")
       print(ideal)
     } else if(control=="ins"){
@@ -685,7 +688,7 @@ deltat <- function(LON,LAT,type=2,days=7,control=NULL,
                WindS < 10,
                Prec < 2,
                Temp >= 15 & Temp <=30)
-      cat("Momentos de condição ideal para aplicação de inseticida\n")
+      cat("Optimum conditions for insecticide application\n")
       cat("--------------------------------------------------------\n")
       print(ideal)
     } else if(control=="herb"){
@@ -694,7 +697,7 @@ deltat <- function(LON,LAT,type=2,days=7,control=NULL,
                WindS < 10,
                Prec < 2,
                Temp >= 15 & Temp <=30)
-      cat("Momentos de condição ideal para aplicação de herbicida\n")
+      cat("Optimum conditions for herbicide application\n")
       cat("--------------------------------------------------------\n")
       print(ideal)
     } else if(control=="bio"){
@@ -703,7 +706,7 @@ deltat <- function(LON,LAT,type=2,days=7,control=NULL,
                WindS < 10,
                Prec < 2,
                Temp >= 15 & Temp <=30)
-      cat("Momentos de condição ideal para aplicação de biológicos\n")
+      cat("Optimal conditions for applying biologicals\n")
       cat("--------------------------------------------------------\n")
       print(ideal)
     }
@@ -714,8 +717,8 @@ deltat <- function(LON,LAT,type=2,days=7,control=NULL,
     require(nasapower)
 
     if(is.null(dates) || length(dates) !=2){
-      stop("O parâmetro 'dates' deve ser um vetor com duas datas
-           no formato 'YYYY-MM-DD'. Exemplo: c('2023-01-01', '2023-05-01').")
+      stop("The 'dates' parameter must be a vector with two dates in the format
+          'YYYY-MM-DD'. Example: c('2023-01-01', '2023-05-01').")
     }
     clim <- get_power(
               community = "ag",

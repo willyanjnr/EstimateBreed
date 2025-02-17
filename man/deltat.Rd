@@ -2,7 +2,7 @@
 % Please edit documentation in R/ambiental.R
 \name{deltat}
 \alias{deltat}
-\title{Condições ótimas para aplicação de defensivos agrícolas}
+\title{Optimum conditions for pesticide application}
 \usage{
 deltat(
   LON,
@@ -16,45 +16,51 @@ deltat(
 )
 }
 \arguments{
-\item{LON}{Longitude (em decimal)}
+\item{LON}{Longitude (in decimal)}
 
-\item{LAT}{Latitude (em decimal)}
+\item{LAT}{Latitude (in decimal)}
 
-\item{type}{Tipo de análise. Utilize 1 para forecast e 2 para dados temporais.}
+\item{type}{Type of analysis. Use 1 for forecast and 2 for temporal data.}
 
-\item{days}{Número de dias}
+\item{days}{Number of days (only use this argument if type=1).}
 
-\item{control}{Tipo de produto a ser aplicado. Utilizar "fung" para fungicida,
-"herb" para herbicida, "ins" para inseticidas, "bio" para produtos biológicos.}
+\item{control}{Type of product to be applied. Use “fung” for fungicide,
+“herb” for herbicide, “ins” for insecticides, “bio” for biological products.}
 
-\item{details}{Retorna o resultado de forma detalhada se TRUE.}
+\item{details}{Returns the result in detail if TRUE.}
 
-\item{dates}{Só utilizar esse argumento se type=2. Data de início e final
-para a obtenção dos dados meteorológicos para um ciclo de cultivo.}
+\item{dates}{Only use this argument if type=2. Start and end date for obtaining
+weather data for a crop cycle.}
 }
 \value{
-Retorna os momentos ideais de aplicação, considerando cada cenário.
-Tomado como parâmetro um DELTA_T entre 2 e 8, velocidade do vento entre 3 e 8,
-e ausência de precipitação.
+Returns the ideal application times, considering each scenario.
+Taking as a parameter a DELTA_T between 2 and 8, wind speed between 3 and 8,
+and no precipitation.
 }
 \description{
-Determinação do momento ideal para aplicação de defensivos agrícolas
+Determining the ideal time for pesticide application using ∆T
 }
 \examples{
 \donttest{
 library(Breeding)
 
-# Previsão das condições de aplicação
+# Forecasting application conditions
 deltat(-53.696944444444,-28.063888888889,type=1,days=10)
 View(forecast)
 
-# Análise retrospectiva das condições de aplicação
-deltat(-53.696944444444,-28.063888888889,type=1,days=10,
-dates=c("2023-01-01","2023-05-01"))
+# Retrospective analysis of application conditions
+deltat(-53.696944444444,-28.063888888889,type=2,days=10,dates=c("2023-01-01","2023-05-01"))
 View(retrospective)
 }
 }
 \author{
-Willyan Jr. A. Bandeira, Ivan R. Carvalho, Murilo V. Loro,
-Leonardo C. Pradebon, José A. G. da Silva
+Willyan Júnior Adorian Bandeira
+
+Ivan Ricardo Carvalho
+
+Murilo Vieira Loro
+
+Leonardo Cesar Pradebon
+
+José Antonio Gonzalez da Silva
 }

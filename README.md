@@ -1,14 +1,12 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# EstimateBreed \<img src=“man/figures/logo.png” align=“right” height=“140/”
+# EstimateBreed <img src="man/figures/logo.png" align="right" height="140/">
 
 <!-- badges: start -->
 
 ![Lifecycle:
 experimental](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg)
-[![Lifecycle:
-experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 <!-- badges: end -->
 
 EstimateBreed is an R package designed to perform analyses and estimate

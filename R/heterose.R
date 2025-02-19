@@ -5,7 +5,7 @@
 #'@param GM The column with the average of the maternal parent
 #'@param GP The column with the average of the paternal parent
 #'@param PR The column with the average of the progeny
-#'@param REP The column with the repetitions
+#'@param REP The column with the repetitions (if exists)
 #'@param param Value to determine the parameter to be calculated. Default is “all”.
 #'To calculate heterosis only, use “het”. To calculate only heterobeltiosis,
 #'use “hetb”.
@@ -17,17 +17,17 @@
 #'@export
 #'@examples
 #'\donttest{
-#' library(Breeding)
+#' library(EstimateBreed)
 #'
 #' data("maize")
 #' #Extract heterosis and heterobeltiosis
-#' with(maize,heterose(HIB,GM,GP,P,stat="all"))
+#' with(maize,heterose(GEN,GM,GP,PR,REP,param="all"))
 #'
 #' #Only extract heterosis
-#' with(maize,heterose(HIB,GM,GP,P,param = "het"))
+#' with(maize,heterose(GEN,GM,GP,PR,REP,param = "het"))
 #'
 #' #Extract only heterobeltiosis
-#' with(maize,heterose(HIB,GM,GP,P,param = "hetb"))
+#' with(maize,heterose(GEN,GM,GP,PR,REP,param = "hetb"))
 #'}
 
 heterose <- function(GEN, GM, GP, PR, REP, param = "all") {
@@ -40,24 +40,34 @@ heterose <- function(GEN, GM, GP, PR, REP, param = "all") {
   r <- length(unique(REP))
   data <- data %>%
     mutate(
-      Heterose = ((PR - ((GM + GP) / 2)) / ((GM + GP) / 2)) * 100,
-      SE_Heterose = sqrt((3 * MSe) / (2 * r))
+      Heterosis = ((PR - ((GM + GP) / 2)) / ((GM + GP) / 2)) * 100,
+      SE_Heterosis = sqrt((3 * MSe) / (2 * r))
     )
   Genitor <- pmax(GM, GP)
   data <- data %>%
     mutate(
-      Heterobeltiose = ((PR - Genitor) / Genitor) * 100,
-      SE_Heterobeltiose = sqrt((2 * MSe) / r)
+      Heterobeltiosis = ((PR - Genitor) / Genitor) * 100,
+      SE_Heterobeltiosis = sqrt((2 * MSe) / r)
     )
 
   if (param == "all") {
-    return(data[, c("GEN", "Heterosis", "SE_Heterosis", "Heterobeltiosis",
-                    "SE_Heterobeltiosis")])
+    cat("Parameters\n")
+    cat("SE_Heterosis:",paste(first(data$SE_Heterosis)),"\n")
+    cat("SE_Heterobeltiosis:",paste(first(data$SE_Heterobeltiosis)),"\n")
+    cat("-------------------------------------------\n")
+    return(data[, c("GEN", "Heterosis", "Heterobeltiosis")])
 
   } else if (param == "het") {
-    return(data[, c("GEN", "Heterosis", "SE_Heterosis")])
+    cat("Parameters\n")
+    cat("SE_Heterosis:",paste(first(data$SE_Heterosis)),"\n")
+    cat("-------------------------------------------\n")
+    return(data[, c("GEN", "Heterosis")])
 
   } else if (param == "hetb") {
-    return(data[, c("GEN", "Heterobeltiosis", "SE_Heterobeltiosis")])
+    cat("Parameters\n")
+    cat("SE_Heterobeltiosis:",paste(first(data$SE_Heterobeltiosis)),"\n")
+    cat("-------------------------------------------\n")
+    print(first(data$SE_Heterobeltiosis))
+    return(data[, c("GEN", "Heterobeltiosis")])
   }
 }

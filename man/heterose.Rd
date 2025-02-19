@@ -15,7 +15,7 @@ heterose(GEN, GM, GP, PR, REP, param = "all")
 
 \item{PR}{The column with the average of the progeny}
 
-\item{REP}{The column with the repetitions}
+\item{REP}{The column with the repetitions (if exists)}
 
 \item{param}{Value to determine the parameter to be calculated. Default is “all”.
 To calculate heterosis only, use “het”. To calculate only heterobeltiosis,
@@ -26,17 +26,17 @@ Calculation of heterosis and heterobeltiosis parameters of hybrids
 }
 \examples{
 \donttest{
-library(Breeding)
+library(EstimateBreed)
 
 data("maize")
 #Extract heterosis and heterobeltiosis
-with(maize,heterose(HIB,GM,GP,P,stat="all"))
+with(maize,heterose(GEN,GM,GP,PR,REP,param="all"))
 
 #Only extract heterosis
-with(maize,heterose(HIB,GM,GP,P,param = "het"))
+with(maize,heterose(GEN,GM,GP,PR,REP,param = "het"))
 
 #Extract only heterobeltiosis
-with(maize,heterose(HIB,GM,GP,P,param = "hetb"))
+with(maize,heterose(GEN,GM,GP,PR,REP,param = "hetb"))
 }
 }
 \author{

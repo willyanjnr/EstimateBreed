@@ -4,6 +4,8 @@
 #'@param GEN The column with the genotype name
 #'@param W The column with the width of the leaf.
 #'@param L The column with the length of the leaf.
+#'@param TNL The column with the total number of leaves.
+#'@param TDL The column with the total number of dry leaves.
 #'@param crop Crop sampled. Use “soy” for soybean and “maize” for corn, “trit”
 #'for wheat, “rice” for rice, “bean” for bean, “sunflower” for sunflower,
 #'“cotton” for cotton, “sugarcane” for sugarcane, “potato” for potato and
@@ -20,15 +22,20 @@
 #'D. N., Meier, C., Brezolin, P., Ferrari, M., & Pelegrin, A. J. (2015).
 #'Plastocrono e caracteres morfológicos da soja com hábito de crescimento
 #'indeterminado. Revista Cultivando o Saber, 8(2), 184-200.
+#'@export
 #'@examples
 #'\donttest{
 #'library(EstimateBreed)
 #'
-#'#Finalizar o exemplo
+#'data("leafarea)
+#'#Crop selection
+#'with(leafarea,lai(GEN,C,L,TNL,TDL,crop="soy"))
+#'
+#'Changing row spacing and sowing density
+#'with(leafarea,lai(GEN,C,L,TNL,TDL,crop="maize",sp=0.45,sden=4))
 #'}
-#'@export
 
-iaf <- function(GEN, W, L, crop = "soy", sp = 0.45, sden = 14) {
+lai <- function(GEN, W, L, TNL, TDL, crop = "soy", sp = 0.45, sden = 14) {
   require(dplyr)
 
   k_correction <- c(
@@ -50,32 +57,34 @@ iaf <- function(GEN, W, L, crop = "soy", sp = 0.45, sden = 14) {
   }
   k <- k_correction[crop]
   if (missing(W)) {
-    stop("Please enter the width of the sheet", call. = FALSE)
+    stop("Please enter the width of the leaf", call. = FALSE)
   }
   if (missing(L)) {
-    stop("Please enter the length of the sheet", call. = FALSE)
+    stop("Please enter the length of the leaf", call. = FALSE)
   }
   if (missing(GEN)) {
     stop("Please enter the genotype", call. = FALSE)
   }
   if(!is.numeric(W) || !is.numeric(L)){
-    stop("The width and length of the sheet must be numerical",call. = F)
+    stop("The width and length of the leaf must be numerical",call. = F)
   }
-    a1 <- data.frame(GEN, W, L)
+    a1 <- data.frame(GEN, W, L, TNL, TDL)
     a1 <- a1 %>%
       mutate(AF = (W * L) * k)
     resultado <- a1 %>%
       group_by(GEN) %>%
       summarise(
-        AFA = sum(AF)/10000,
+        ALA = sum(AF)/10000,
         SD = (10000 / sp) * sden,
         AS = 10000 / ((10000 / sp) * sden),
-        LAI = AFA / AS
+        RED = TDL/TNL,
+        PotLAI = (ALA / AS)*TNL,
+        RealLAI = PotLAI-(PotLAI*RED)
       )
     resultado_f <- resultado %>%
-      select(GEN,AFA,IAF)
+      select(GEN,ALA,PotLAI,RealLAI)
     cat("Selected crop:",paste(crop),"\n")
-    cat("Row Spacing used: ",paste(sp),"\n")
+    cat("Row spacing used: ",paste(sp),"\n")
     cat("Sowing density used: ",paste(sden),"\n")
     return(resultado_f)
   }

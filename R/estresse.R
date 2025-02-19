@@ -30,11 +30,15 @@
 #'@export
 #'@examples
 #'\donttest{
-#'library(Breeding)
+#'library(EstimateBreed)
 #'
 #'data("aveia")
+#'
+#'#General
 #'with(aveia,estresse(GEN,MC,MG,index = "ALL",bygen=T))
 #'
+#'#Only the desired index
+#'with(aveia,estresse(GEN,MC,MG,index = "STI",bygen=T))
 #'}
 
 estresse <- function(GEN,YS,YC,index="ALL",bygen=T,plot=F,xlab="Genotype",ylab="Values",...){

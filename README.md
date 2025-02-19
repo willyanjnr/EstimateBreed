@@ -125,7 +125,7 @@ A BibTeX entry for LaTeX users is
 
 ## Getting Help
 
-- If you find any errors, please make a report with the commands used so
+If you find any errors, please make a report with the commands used so
   that we can repeat, check and adjust the functions! Send it to
   [github](https://github.com/willyanjnr/EstimateBreed/issues) or send
   an email to <bandeira.wjab@gmail.com>.

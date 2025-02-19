@@ -15,6 +15,10 @@ is_qindustrial(GEN, NQ, W, PTN)
 
 \item{PTN}{The column with the protein values}
 }
+\value{
+Determines the industrial quality index for wheat crops, when
+considering variables used to classify wheat cultivars.
+}
 \description{
 Function for determining industrial quality indices of wheat genotypes,
 described by Szareski et al. (2019).

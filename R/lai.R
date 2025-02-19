@@ -2,8 +2,8 @@
 #'@description
 #'Utility function for estimating crop LAI
 #'@param GEN The column with the genotype name
-#'@param W The column with the width of the leaf.
-#'@param L The column with the length of the leaf.
+#'@param W The column with the width of the leaf (in meters).
+#'@param L The column with the length of the leaf (in meters).
 #'@param TNL The column with the total number of leaves.
 #'@param TDL The column with the total number of dry leaves.
 #'@param crop Crop sampled. Use “soy” for soybean and “maize” for corn, “trit”
@@ -12,6 +12,9 @@
 #'“tomato” for tomato.
 #'@param sp Row spacing (Standard sp=0.45).
 #'@param sden Sowing density, in plants per linear meter (standard sden=14).
+#'@return Returns the accumulated leaf area, the potential leaf area index
+#'(considering the total number of leaves) and the actual leaf area index
+#'(making the adjustment considering the number of dry leaves) for each genotype
 #'@author Willyan Júnior Adorian Bandeira
 #'@author Ivan Ricardo Carvalho
 #'@author Murilo Vieira Loro
@@ -27,11 +30,11 @@
 #'\donttest{
 #'library(EstimateBreed)
 #'
-#'data("leafarea)
+#'data("leafarea")
 #'#Crop selection
 #'with(leafarea,lai(GEN,C,L,TNL,TDL,crop="soy"))
 #'
-#'Changing row spacing and sowing density
+#'#Changing row spacing and sowing density
 #'with(leafarea,lai(GEN,C,L,TNL,TDL,crop="maize",sp=0.45,sden=4))
 #'}
 
@@ -78,7 +81,7 @@ lai <- function(GEN, W, L, TNL, TDL, crop = "soy", sp = 0.45, sden = 14) {
         SD = (10000 / sp) * sden,
         AS = 10000 / ((10000 / sp) * sden),
         RED = TDL/TNL,
-        PotLAI = (ALA / AS)*TNL,
+        PotLAI = (ALA / AS),
         RealLAI = PotLAI-(PotLAI*RED)
       )
     resultado_f <- resultado %>%

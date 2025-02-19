@@ -19,7 +19,17 @@ indviab(
 
 \item{var2}{The column containing the second variable}
 
+\item{ylab}{The name of the chart's Y axis}
+
+\item{xlab}{The name of the chart's X axis}
+
+\item{plot}{Logical argument. Plot a graphic if 'TRUE'.}
+
 \item{genot}{The column with the name of the genotypes}
+}
+\value{
+Returns the index obtained between the reported variables. The higher
+the index, the better the genotype.
 }
 \description{
 Estimating the viability index from the combination of two field variables.

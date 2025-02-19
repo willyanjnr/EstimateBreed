@@ -20,6 +20,10 @@ rend_ind(GEN, NG2M, MG, MC, RG, stat = "all", ...)
 \item{stat}{Logical argument. Use “all” to keep all the observations or “mean”
 to extract the overall average.}
 }
+\value{
+Returns the peeling index and industrial yield considering the
+standards desired by the industry.
+}
 \description{
 Calculating the Hulling Index and Industrial Yield of White Oats
 }

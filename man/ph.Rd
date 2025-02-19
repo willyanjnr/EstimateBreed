@@ -4,14 +4,20 @@
 \alias{ph}
 \title{Hectolitre weight of cereals}
 \usage{
-ph(GEN, PESO, crop = "trigo", stat = "all")
+ph(GEN, HL, crop = "trit", stat = "all")
 }
 \arguments{
 \item{GEN}{The column with the genotype name}
 
-\item{PESO}{Weight obtained on a 1qt lt scale, as determined by the
+\item{HL}{Weight obtained on a 1qt lt scale, as determined by the
 Rules for Seed Analysis (RAS), Ministry of Agriculture,
 Livestock and Supply (2009).}
+
+\item{crop}{Argument for selecting culture. Use "trit" for wheat, "oats" for
+white oats, "rye" for rye and "barley" for barley}
+
+\item{stat}{Argument to select the function output type. Use "all" to estimate
+the HW for all replicates, or "mean" to extract the mean for each genotype.}
 }
 \value{
 Returns the estimated value of the hectolitre weight (HW) for the ceral

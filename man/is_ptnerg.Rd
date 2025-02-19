@@ -13,6 +13,10 @@ is_ptnerg(GEN, PTN, RG)
 
 \item{RG}{The column with the grain yield values (in kg per ha)}
 }
+\value{
+Returns an industrial wheat quality index based solely on protein and
+grain yield.
+}
 \description{
 Selection index for protein and grain yield (Pelegrin et al., 2017).
 }

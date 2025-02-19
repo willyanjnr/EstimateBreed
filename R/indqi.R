@@ -6,6 +6,8 @@
 #'@param NQ The column with the falling number
 #'@param W The column with the gluten force (W)
 #'@param PTN The column with the protein values
+#'@return Determines the industrial quality index for wheat crops, when
+#'considering variables used to classify wheat cultivars.
 #'@author Willyan Júnior Adorian Bandeira
 #'@author Ivan Ricardo Carvalho
 #'@author Murilo Vieira Loro
@@ -64,6 +66,8 @@ is_qindustrial <- function(GEN, NQ, W, PTN){
 #'@param RG The column with the grain yield values (kg per ha).
 #'@param stat Logical argument. Use “all” to keep all the observations or “mean”
 #'to extract the overall average.
+#'@return Returns the peeling index and industrial yield considering the
+#'standards desired by the industry.
 #'@author Willyan Júnior Adorian Bandeira
 #'@author Ivan Ricardo Carvalho
 #'@author Murilo Vieira Loro
@@ -118,6 +122,11 @@ rend_ind <- function(GEN,NG2M,MG,MC,RG,stat="all",...){
 #'@param genot The column with the name of the genotypes
 #'@param var1 The column containing the first variable
 #'@param var2 The column containing the second variable
+#'@param ylab The name of the chart's Y axis
+#'@param xlab The name of the chart's X axis
+#'@param plot Logical argument. Plot a graphic if 'TRUE'.
+#'@return Returns the index obtained between the reported variables. The higher
+#'the index, the better the genotype.
 #'@author Willyan Júnior Adorian Bandeira
 #'@author Ivan Ricardo Carvalho
 #'@author Murilo Vieira Loro
@@ -175,7 +184,7 @@ indviab <- function(GEN,var1,var2,ylab="Index",xlab="Genotype",stat="all",plot=F
                            na.rm = TRUE)
     colnames(media_gen) <- c("Genotype","Index")
     if(plot==T){
-      grafico=ggplot(media_gen, aes(x=Genótipo, y=Índice)) +
+      grafico=ggplot(media_gen, aes(x=GEN, y=indesp)) +
         geom_bar(stat = "identity")+
         ylab(ylab)+xlab(xlab)+theme_classic()
       print(grafico)
@@ -191,9 +200,13 @@ indviab <- function(GEN,var1,var2,ylab="Index",xlab="Genotype",stat="all",plot=F
 #'Useful function for characterizing the hectolitre weight (HW) of experiments
 #' with cereals.
 #'@param GEN The column with the genotype name
-#'@param PESO Weight obtained on a 1qt lt scale, as determined by the
+#'@param HL Weight obtained on a 1qt lt scale, as determined by the
 #'Rules for Seed Analysis (RAS), Ministry of Agriculture,
 #'Livestock and Supply (2009).
+#'@param crop Argument for selecting culture. Use "trit" for wheat, "oats" for
+#'white oats, "rye" for rye and "barley" for barley
+#'@param stat  Argument to select the function output type. Use "all" to estimate
+#' the HW for all replicates, or "mean" to extract the mean for each genotype.
 #'@return Returns the estimated value of the hectolitre weight (HW) for the ceral
 #'selecionado.
 #'@author Willyan Júnior Adorian Bandeira
@@ -223,16 +236,22 @@ indviab <- function(GEN,var1,var2,ylab="Index",xlab="Genotype",stat="all",plot=F
 #'with(data,ph(GEN,MG,crop="trigo",stat="mean"))
 #'}
 
-ph <- function(GEN, PESO, crop="trigo", stat="all") {
+ph <- function(GEN, HL, crop="trit", stat="all") {
   require(dplyr)
-  dados <- data.frame(GEN, PESO)
+  dados <- data.frame(GEN, HL)
 
-  if(crop == "trigo") {
+  if(crop == "trit") {
     dados <- dados %>%
-      mutate(HW = -9.935757 + (PESO * 0.451821))
-  } else if (crop == "aveia") {
+      mutate(HW = -9.935757 + (HL * 0.451821))
+  } else if (crop == "oat") {
     dados <- dados %>%
-      mutate(HW = -3.512294 + (PESO * 0.425507))
+      mutate(HW = -3.512294 + (HL * 0.425507))
+  } else if (crop == "rye") {
+    dados <- dados %>%
+      mutate(HW = -5.8241877 + HL * 0.4319325)
+  } else if (crop == "barley") {
+    dados <- dados %>%
+      mutate(HW = -8.14433 + HL * 0.44523)
   }
 
   if(stat == "mean") {
@@ -254,6 +273,8 @@ ph <- function(GEN, PESO, crop="trigo", stat="all") {
 #'@param GEN The column with the name of the genotype
 #'@param PTN The column with the crude protein values
 #'@param RG The column with the grain yield values (in kg per ha)
+#'@return Returns an industrial wheat quality index based solely on protein and
+#'grain yield.
 #'@author Willyan Júnior Adorian Bandeira
 #'@author Ivan Ricardo Carvalho
 #'@author Murilo Vieira Loro

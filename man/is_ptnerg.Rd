@@ -20,6 +20,19 @@ grain yield.
 \description{
 Selection index for protein and grain yield (Pelegrin et al., 2017).
 }
+\examples{
+\donttest{
+library(EstimateBreed)
+
+Gen <- c("G1", "G2", "G3", "G4", "G5")
+PTN <- c(12.5, 14.2, 13.0, 11.8, 15.1)
+RG <- c(3500, 4000, 3700, 3300, 4100)
+
+data <- data.frame(Gen,PTN,RG)
+
+with(data,is_ptnerg(Gen,PTN,RG))
+}
+}
 \references{
 de Pelegrin, A. J., Carvalho, I. R., Nunes, A. C. P., Demari, G. H., Szareski,
 V. J., Barbosa, M. H., ... & da Maia, L. C. (2017).

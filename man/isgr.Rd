@@ -33,12 +33,15 @@ Estimation of the selection index for environmental resilience
 \examples{
 \donttest{
 library(EstimateBreed)
+
 #Obtain environmental deviations
 data("desvamb")
+head(desvamb)
 with(desvamb, desv_clim(ENV,TMED,PREC))
 
 #Calculate the ISGR
 data("genot")
+head(genot)
 with(genot, isgr(GEN,ENV,NG,MG,CICLO))
 
 #Define the water requirement per stage

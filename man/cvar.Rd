@@ -8,7 +8,7 @@ witnesses.}
 cvar(GEN, REP, Xi, approach = NULL, zstat = NULL)
 }
 \arguments{
-\item{GEN}{The column with the name of the genotypes (without witnesses).}
+\item{GEN}{The column with the name of the genotypes (without controls).}
 
 \item{REP}{The column with the repetitions (if any).}
 

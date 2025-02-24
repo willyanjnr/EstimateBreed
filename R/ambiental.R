@@ -11,11 +11,20 @@
 #'@author Leonardo Cesar Pradebon
 #'@author José Antonio Gonzalez da Silva
 #'@export
+#'@examples
+#'\donttest{
+#'library(EstimateBreed)
+#'
+#'data("clima")
+#'clima <- clima(1:150,)
+#'
+#'with(clima,atsum(TMED,crop="maize"))
+#'}
 
-somatermica <- function(TMED,crop="milho",plot=F){
+atsum <- function(TMED,crop="maize",plot=F){
   require(ggplot2)
   TMED = TMED
-  if(cultura=="maize"){
+  if(crop=="maize"){
     TBi=10
     ST=TMED-TBi
     STot <- sum(ST)
@@ -25,9 +34,9 @@ somatermica <- function(TMED,crop="milho",plot=F){
     VMin <- min(TMED)
     acumulado <- data.frame(STAc)
     acumulado$Ciclo <- 1:nrow(acumulado)
-    cat("\n----------------------------\n")
+    cat("\n------------------------------\n")
     cat("Thermal sum for the maize crop")
-    cat("\n----------------------------\n")
+    cat("\n------------------------------\n")
     cat("Total Cycle =",tail(acumulado$Ciclo, n = 1),"Days\n")
     cat("TS =",paste(STot),"GDD\n")
     cat("TBi =",paste(TBi),"ºC\n")
@@ -42,7 +51,7 @@ somatermica <- function(TMED,crop="milho",plot=F){
       plot(grafico)
   }
   }
-  else if(cultura=="soybean"){
+  else if(crop=="soybean"){
     TBi=5
     ST=TMED-TBi
     STot <- sum(ST)
@@ -69,7 +78,7 @@ somatermica <- function(TMED,crop="milho",plot=F){
       plot(grafico)
     }
   }
-  else if (cultura=="flax"){
+  else if (crop=="flax"){
     TBi=-4
     ST=TMED-TBi
     STot <- sum(ST)
@@ -96,7 +105,7 @@ somatermica <- function(TMED,crop="milho",plot=F){
       plot(grafico)
     }
   }
-  else if (cultura=="trit"){
+  else if (crop=="trit"){
     TBi=-4
     ST=TMED-TBi
     STot <- sum(ST)
@@ -123,7 +132,7 @@ somatermica <- function(TMED,crop="milho",plot=F){
         scale_x_continuous(breaks=seq(0,tail(acumulado$Ciclo, n = 1)+5,10))
       plot(grafico)
     }
-  else if (cultura=="oat"){
+  else if (crop=="oat"){
     TBi=-4
     ST=TMED-TBi
     STot <- sum(ST)
@@ -156,9 +165,9 @@ somatermica <- function(TMED,crop="milho",plot=F){
 #'Plotting the optimum and cardinal temperatures for crops
 #'@description
 #'Utility function for plotting graphs of thermal preferences for crops
-#'@param DAS descrption
+#'@param DAS Days after sowing
 #'@param Var desc
-#'@param Cultura Soja, Milho, Trigo
+#'@param crop Soja, Milho, Trigo
 #'@param ylab desc
 #'@param xlab description
 #'@author Willyan Júnior Adorian Bandeira
@@ -167,12 +176,14 @@ somatermica <- function(TMED,crop="milho",plot=F){
 #'@author Leonardo Cesar Pradebon
 #'@author José Antonio Gonzalez da Silva
 #'@export
+#'@examples
+#'\donttest{
+#'library(EstimateBreed)
+#'
+#'}
 
-TEMP_BASE<-function(DAS,
-                    Var,
-                    crop = "soybean",
-                    ylab = "Atributo meteorológico",
-                    xlab = "Dias após Semeadura"){
+optemp <-function(DAS,Var,crop = "soybean",ylab = "Meteorological Atribute",
+                    xlab = "Days After Sowing"){
 
   require(dplyr)
   require(ggplot2)
@@ -181,7 +192,7 @@ TEMP_BASE<-function(DAS,
   Var = Var
   Cultura=Cultura
 
-  if(Cultura=="soybean"){
+  if(crop=="soybean"){
     TbInferior<-10
     TbSuperior<-35
     ToInferior<-20
@@ -195,13 +206,13 @@ TEMP_BASE<-function(DAS,
     grafico=ggplot(dados, aes(x = DAS, y = Var))+
       geom_line(col = "red", size =0.8, linetype = 2,group=1)+ylab(ylab)+xlab(xlab)+theme_classic()+
       geom_segment(aes(x = 0, y =TbInferior, xend =DAS, yend = TbInferior), linetype = 1, color = "blue")+
-      geom_label(aes(x=15, y=TbInferior, label="Temperatura base inferior"))+theme_classic()+
+      geom_label(aes(x=15, y=TbInferior, label="Lower base temperature"))+theme_classic()+
       geom_segment(aes(x = 0, y =TbSuperior, xend = DAS, yend =TbSuperior), linetype = 1, color = "blue")+
-      geom_label(aes(x=15, y=TbSuperior, label="Temperatura base superior"))+theme_classic()+
+      geom_label(aes(x=15, y=TbSuperior, label="Upper base temperature"))+theme_classic()+
       geom_segment(aes(x = 0, y =ToInferior, xend =DAS, yend =ToInferior), linetype = 2, color = "darkgreen")+
-      geom_label(aes(x=15, y=ToInferior, label="Temperatura ótima inferior"))+theme_classic()+
+      geom_label(aes(x=15, y=ToInferior, label="Lower optimum temperature"))+theme_classic()+
       geom_segment(aes(x = 0, y =ToSuperior, xend =DAS, yend =ToSuperior), linetype = 2, color = "darkgreen")+
-      geom_label(aes(x=15, y=ToSuperior, label="Temperatura ótima superior"))+theme_classic()
+      geom_label(aes(x=15, y=ToSuperior, label="Upper optimum temperature"))+theme_classic()
 
     parâmetros<-list(
 
@@ -217,11 +228,11 @@ TEMP_BASE<-function(DAS,
     print(grafico)
 
     cat("\n-----------------------------------------------------------------\n")
-    cat("Parâmetros gerais - SOJA")
+    cat("General Parameters - Soybean")
     cat("\n-----------------------------------------------------------------\n")
     print(parâmetros)
   }
-  else if (Cultura=="Milho"){
+  else if (crop=="maize"){
     TbInferior<-10
     TbSuperior<-34
     ToInferior<-18
@@ -234,13 +245,13 @@ TEMP_BASE<-function(DAS,
     grafico=ggplot(dados, aes(x = DAS, y = Var))+
       geom_line(col = "red", size =0.8, linetype = 2,group=1)+ylab(ylab)+xlab(xlab)+theme_classic()+
       geom_segment(aes(x = 0, y =TbInferior, xend =DAS, yend = TbInferior), linetype = 1, color = "blue")+
-      geom_label(aes(x=15, y=TbInferior, label="Temperatura base inferior"))+theme_classic()+
+      geom_label(aes(x=15, y=TbInferior, label="Lower base temperature"))+theme_classic()+
       geom_segment(aes(x = 0, y =TbSuperior, xend = DAS, yend =TbSuperior), linetype = 1, color = "blue")+
-      geom_label(aes(x=15, y=TbSuperior, label="Temperatura base superior"))+theme_classic()+
+      geom_label(aes(x=15, y=TbSuperior, label="Upper base temperature"))+theme_classic()+
       geom_segment(aes(x = 0, y =ToInferior, xend =DAS, yend =ToInferior), linetype = 2, color = "darkgreen")+
-      geom_label(aes(x=15, y=ToInferior, label="Temperatura ótima inferior"))+theme_classic()+
+      geom_label(aes(x=15, y=ToInferior, label="Lower optimum temperature"))+theme_classic()+
       geom_segment(aes(x = 0, y =ToSuperior, xend =DAS, yend =ToSuperior), linetype = 2, color = "darkgreen")+
-      geom_label(aes(x=15, y=ToSuperior, label="Temperatura ótima superior"))+theme_classic()
+      geom_label(aes(x=15, y=ToSuperior, label="Upper optimum temperature"))+theme_classic()
 
     parâmetros<-list(
       TbInferior=TbInferior,
@@ -254,12 +265,12 @@ TEMP_BASE<-function(DAS,
 
     print(grafico)
     cat("\n-----------------------------------------------------------------\n")
-    cat("Parâmetros gerais - MILHO")
+    cat("General Parameters - Maize")
     cat("\n-----------------------------------------------------------------\n")
     print(parâmetros)
   }
 
-  else if (Cultura=="Trigo"){
+  else if (crop=="trit"){
     TbInferior<-1.5
     TbSuperior<-30
     ToInferior<-17.2
@@ -272,13 +283,13 @@ TEMP_BASE<-function(DAS,
     grafico=ggplot(dados, aes(x = DAS, y = Var))+
       geom_line(col = "red", size =0.8, linetype = 2,group=1)+ylab(ylab)+xlab(xlab)+theme_classic()+
       geom_segment(aes(x = 0, y =TbInferior, xend =DAS, yend = TbInferior), linetype = 1, color = "blue")+
-      geom_label(aes(x=15, y=TbInferior, label="Temperatura base inferior"))+theme_classic()+
+      geom_label(aes(x=15, y=TbInferior, label="Lower base temperature"))+theme_classic()+
       geom_segment(aes(x = 0, y =TbSuperior, xend = DAS, yend =TbSuperior), linetype = 1, color = "blue")+
-      geom_label(aes(x=15, y=TbSuperior, label="Temperatura base superior"))+theme_classic()+
+      geom_label(aes(x=15, y=TbSuperior, label="Upper base temperature"))+theme_classic()+
       geom_segment(aes(x = 0, y =ToInferior, xend =DAS, yend =ToInferior), linetype = 2, color = "darkgreen")+
-      geom_label(aes(x=15, y=ToInferior, label="Temperatura ótima inferior"))+theme_classic()+
+      geom_label(aes(x=15, y=ToInferior, label="Lower optimum temperature"))+theme_classic()+
       geom_segment(aes(x = 0, y =ToSuperior, xend =DAS, yend =ToSuperior), linetype = 2, color = "darkgreen")+
-      geom_label(aes(x=15, y=ToSuperior, label="Temperatura ótima superior"))+theme_classic()
+      geom_label(aes(x=15, y=ToSuperior, label="Upper optimum temperature"))+theme_classic()
 
     parâmetros<-list(
       TbInferior=TbInferior,
@@ -292,7 +303,7 @@ TEMP_BASE<-function(DAS,
 
     print(grafico)
     cat("\n-----------------------------------------------------------------\n")
-    cat("Parâmetros gerais - Trigo")
+    cat("General Parameters - Wheat")
     cat("\n-----------------------------------------------------------------\n")
     print(parâmetros)
   }
@@ -334,10 +345,10 @@ TEMP_BASE<-function(DAS,
 #'library(EstimateBreed)
 #'data("pheno")
 #'
-#'with(pheno, plastocrono(GEN,TMED,EST,NN,habito="ind",plot=T))
+#'with(pheno, plast(GEN,TMED,EST,NN,habit="ind",plot=T))
 #'}
 
-plastocrono <- function(GEN, TMED, STAD, NN, habit = "ind", plot = FALSE) {
+plast <- function(GEN, TMED, STAD, NN, habit = "ind", plot = FALSE) {
   require(dplyr)
   require(ggplot2)
   require(hrbrthemes)
@@ -346,7 +357,6 @@ plastocrono <- function(GEN, TMED, STAD, NN, habit = "ind", plot = FALSE) {
   require(ggrepel)
   require(grid)
 
-  #Falta adicionar o caso de ter mais de um genótipo
   Tb = 7.6
   Tot = 31
   TB = 40
@@ -518,7 +528,7 @@ plastocrono <- function(GEN, TMED, STAD, NN, habit = "ind", plot = FALSE) {
 #'@description
 #'Calculation of the photothermal index based on average temperature and
 #'radiation
-#'@param DIA The column with the cycle days
+#'@param DAY The column with the cycle days
 #'@param TMED The column with the average air temperature values
 #'@param RAD The column with the incident radiation values
 #'@param PER The column with the period (use VEG for vegetative and REP for
@@ -533,26 +543,26 @@ plastocrono <- function(GEN, TMED, STAD, NN, habit = "ind", plot = FALSE) {
 #'Visando altas produtividades (2ª ed.). Field Crops.
 #'@export
 
-fototermal <- function(DIA, TMED, RAD, PER) {
+fototermal <- function(DAY, TMED, RAD, PER) {
   # Verificações iniciais
-  if (length(DIA) != length(TMED)) {
-    stop("O comprimento de 'DIA' deve ser igual ao comprimento de 'TMED'.")
+  if (length(DAY) != length(TMED)) {
+    stop("The length of 'DAY' must be equal to the length of 'TMED'.")
   }
   if (length(DIA) != length(RAD)) {
-    stop("O comprimento de 'DIA' deve ser igual ao comprimento de 'RAD'.")
+    stop("The length of 'DAY' must be equal to the length of 'RAD'.")
   }
-  if (length(DIA) != length(PER)) {
-    stop("O comprimento de 'DIA' deve ser igual ao comprimento de 'PER'.")
+  if (length(DAY) != length(PER)) {
+      stop("The length of 'DAY' must be equal to the length of 'PER'.")
   }
   if (!is.numeric(TMED) || any(TMED < 0)) {
-    stop("Os valores de 'TMED' devem ser numéricos e positivos.")
+    stop("Average Air Temperature values must be numeric and positive.")
   }
   if (!is.numeric(RAD) || any(RAD <= 0)) {
-    stop("Os valores de 'RAD' (radiação) devem ser numéricos e positivos.")
+    stop("Radiation values must be numeric and positive.")
   }
 
-  data <- data.frame(DIA, PER, TMED, RAD, stringsAsFactors = FALSE)
-  data <- data[order(data$DIA), ]
+  data <- data.frame(DAY, PER, TMED, RAD, stringsAsFactors = FALSE)
+  data <- data[order(data$DAY), ]
   T_base_dict <- c("vegetativo" = 7.6, "reprodutivo" = 0)
 
   data$Qac_final <- NA

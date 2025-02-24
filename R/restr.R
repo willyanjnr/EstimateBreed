@@ -22,9 +22,25 @@
 #'Acta Scientiarum. Agronomy, 45, e56156.
 #'https://doi.org/10.4025/actasciagron.v45i1.56156
 #'@export
+#'@examples
+#'\donttest{
+#'library(EstimateBreed)
+#'
+#'TEST <- rep(paste("T", 1:5, sep=""), each=3)
+#'REP <- rep(1:3, times=5)
+#'Xi <- rnorm(15, mean=10, sd=2)
+#'
+#'data <- data.frame(TEST,REP,Xi)
+#'
+#'#Apply the witness variability constraint
+#'with(data, restr(TEST,REP,Xi,scenario = "restr",zstat = FALSE))
+#'print(Control)
+#'
+#'#Apply witness variability restriction with normalization (Z statistic)
+#'with(data, restr(TEST,REP,Xi,scenario = "restr",zstat = T))
+#'print(Control)
+#'}
 
-#Usar o assign para criar um objeto, para o usuário imprimir apenas os resultados desejados
-#Função finalizada
 restr <- function(TEST, REP, Xi, scenario = NULL, zstat = NULL){
   require(dplyr)
   require(ggplot2)
@@ -37,17 +53,19 @@ restr <- function(TEST, REP, Xi, scenario = NULL, zstat = NULL){
     desvio <- sd(Xi)
     lim_1s <- c(media - desvio, media + desvio)
     dentro_limite <- Xi >= lim_1s[1] & Xi <= lim_1s[2]
-    ream <- data.frame(TEST = TEST[dentro_limite], REP = REP[dentro_limite], Xi = Xi[dentro_limite])
+    ream <- data.frame(TEST = TEST[dentro_limite], REP = REP[dentro_limite],
+                       Xi = Xi[dentro_limite])
     removidos <- TEST[!dentro_limite]
     rep_removidos <- REP[!dentro_limite]
     gen_rep_removidos <- paste(removidos, rep_removidos, sep = "R")
     n_desvio <- sd(ream$Xi)
     n_media <- mean(ream$Xi)
+    cat("Removed Controls\n")
     print(gen_rep_removidos)
   }
 
   if (is.null(zstat)){
-    stop("Please let us know if standardization will be applied!")
+    stop("Please inform if standardization will be applied!")
   }
   if (zstat == FALSE){
     if (scenario == "restr"){
@@ -82,7 +100,7 @@ restr <- function(TEST, REP, Xi, scenario = NULL, zstat = NULL){
 #'@description
 #'Estimation of variance components and genetic parameters from the restriction
 #'of witness values
-#'@param GEN The column with the name of the genotypes (without witnesses).
+#'@param GEN The column with the name of the genotypes (without controls).
 #'@param REP The column with the repetitions (if any).
 #'@param Xi The column with the observed value for the variable in a given genotype.
 #'@param approach Method to be used for estimating variance components. Use “apI”

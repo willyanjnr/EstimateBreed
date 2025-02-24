@@ -26,6 +26,7 @@ and calculates the standard deviation of these parameters for each environment.
 \donttest{
 library(EstimateBreed)
 data("desvamb")
+head(desvamb)
 
 with(desvamb,desv_clim(ENV,TMED,PREC))
 }

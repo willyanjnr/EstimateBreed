@@ -72,5 +72,5 @@ risco <- function(DIA,MES,TEMP,UR,doença="rust",plot=F){
       boxplot(diarioGeral$riscoTotal ~ diarioGeral$Mês, col=rgb(0.3,0.5,0.4,0.6),
               ylab="Total Risk (%)",xlab="Mês",outline=F)
     }
-  }#ELSEIF
+  }#ELSEIF - ###ENVARG
   }

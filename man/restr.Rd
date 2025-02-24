@@ -24,6 +24,25 @@ Method for restricting the variability of witnesses proposed by Carvalho et al.
 (2023). It uses the restriction of the mean plus or minus one standard deviation.
 standard deviation, which restricts variation by removing asymmetric values.
 }
+\examples{
+\donttest{
+library(EstimateBreed)
+
+TEST <- rep(paste("T", 1:5, sep=""), each=3)
+REP <- rep(1:3, times=5)
+Xi <- rnorm(15, mean=10, sd=2)
+
+data <- data.frame(TEST,REP,Xi)
+
+#Apply the witness variability constraint
+with(data, restr(TEST,REP,Xi,scenario = "restr",zstat = FALSE))
+print(Control)
+
+#Apply witness variability restriction with normalization (Z statistic)
+with(data, restr(TEST,REP,Xi,scenario = "restr",zstat = T))
+print(Control)
+}
+}
 \references{
 Carvalho, I. R., Silva, J. A. G. da, Moura, N. B., Ferreira, L. L.,
 Lautenchleger, F., & Souza, V. Q. de. (2023). Methods for estimation of

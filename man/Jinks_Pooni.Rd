@@ -23,7 +23,7 @@ populations by the Jinks and Pooni method
 Port, E. D., Carvalho, I. R., Pradebon, L. C., Loro, M. V., Colet, C. D. F.,
 Silva, J. A. G. D., & Sausen, N. H. (2024).
 Early selection of resilient progenies to seed yield in soybean populations.
-Ciência Rural, 54, e20230287.
+Ciencia Rural, 54, e20230287.
 }
 \author{
 Willyan Júnior Adorian Bandeira

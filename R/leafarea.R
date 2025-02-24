@@ -12,4 +12,4 @@
 #'   \item{TDL}{Total dry leavesh.}
 #' }
 #' @source Simulated data.
-"vig"
+"leafarea"

@@ -4,18 +4,18 @@
 \alias{risco}
 \title{Risk of Disease Occurrence in Soybeans}
 \usage{
-risco(DIA, MES, TEMP, UR, doença = "rust", plot = F)
+risco(DAY, MONTH, TEMP, RH, disease = "rust", plot = F)
 }
 \arguments{
-\item{DIA}{The column for the day of the month.}
+\item{DAY}{The column for the day of the month.}
 
-\item{MES}{The column for the month of the year (numeric value).}
+\item{MONTH}{The column for the month of the year (numeric value).}
 
 \item{TEMP}{A coluna da temperatura média do ar (em ºC).}
 
-\item{UR}{The relative humidity column (in \%).}
+\item{RH}{The relative humidity column (in \%).}
 
-\item{doença}{Define the soybean disease (Standard = “rust”).}
+\item{disease}{Define the soybean disease (Standard = “rust”).}
 
 \item{plot}{Plot a graph of the accumulation (Default is F (FALSE)).}
 }
@@ -25,11 +25,11 @@ Variables meteorological variables (Engers et al., 2024).
 }
 \examples{
 \donttest{
-library(Breeding)
+library(EstimateBreed)
 
 # Rust Risk Prediction
 data("clima")
-with(clima, risco(DY, MO, TMED, RH, doença = "ferrugem"))
+with(clima, risco(DY, MO, TMED, RH, disease = "rust"))
 }
 }
 \references{

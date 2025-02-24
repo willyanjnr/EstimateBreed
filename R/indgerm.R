@@ -24,8 +24,6 @@
 #'@export
 
 index_vigor <- function(GEN,PC,G,CPA,RAD,MS,EC){
-require("dplyr")
-require("ggplot2")
 
 genot <- as.factor(GEN)
 variav1 <- PC
@@ -72,7 +70,6 @@ print(dadosfinal)
 #'@export
 
 ivig_simp <- function(GEN,PC,G){
-  requireNamespace("dplyr")
 
   genot <- as.factor(GEN)
   variav1 <- PC
@@ -122,13 +119,13 @@ ivig_simp <- function(GEN,PC,G){
 #'library(EstimateBreed)
 #'set.seed(123)
 #'
-#'data <- tibble::tibble(
-#'Gen = rep(paste0("G", 1:10), each = 3),
-#'Rep = rep(1:3, times = 10),
-#'L = round(rnorm(30, mean = 3.2, sd = 0.3), 2),
-#'C = round(rnorm(30, mean = 8.5, sd = 0.5), 2),
+#'Gen = rep(paste0("G", 1:10), each = 3)
+#'Rep = rep(1:3, times = 10)
+#'L = round(rnorm(30, mean = 3.2, sd = 0.3), 2)
+#'C = round(rnorm(30, mean = 8.5, sd = 0.5), 2)
 #'E = round(rnorm(30, mean = 2.1, sd = 0.2), 2)
-#')
+#'
+#'data <- data.frame(Gen,Rep,L,C,E)
 #'
 #'with(data,gvri(Gen,C,L,E, stat="mean", plot=T))
 #'}

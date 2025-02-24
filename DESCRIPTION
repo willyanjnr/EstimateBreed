@@ -33,7 +33,6 @@ Imports:
     nasapower,
     tidyr,
     viridis,
-    stats,
     knitr,
     cowplot,
     sommer,

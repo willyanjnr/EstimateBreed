@@ -4,3 +4,12 @@
 ^README\.Rmd$
 ^doc$
 ^Meta$
+^\\.gitignore$
+^\\.Rproj\\.user$
+^\\.git$
+^vignettes/\\.gitignore$
+^CODE_OF_CONDUCT.md$
+^README.html$
+^docs/
+^pkgdown/
+^pkgdown.yml$

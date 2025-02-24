@@ -15,24 +15,22 @@
 #'Port, E. D., Carvalho, I. R., Pradebon, L. C., Loro, M. V., Colet, C. D. F.,
 #'Silva, J. A. G. D., & Sausen, N. H. (2024).
 #'Early selection of resilient progenies to seed yield in soybean populations.
-#'Ciência Rural, 54, e20230287.
+#'Ciencia Rural, 54, e20230287.
 #'@export
 
 #Finalizar
 Jinks_Pooni<-function(Pop, Var, VG, Test){
 
-  População <- Pop
+  Population <- Pop
   Var <- Var
   VG <- VG
   Testemunhas <- Test
 
   Z<-((Testemunhas-Var)/(sqrt(VG)))
   P<-((1-pnorm(Z, mean = 0, sd = 1, lower.tail = TRUE, log.p = FALSE))*100)
-  Valor_Genético<- ifelse(P > 50, "High", "Low")
+  Gen_Value <- ifelse(P > 50, "High", "Low")
 
-  Parâmetros<-
-    data.frame(População, Z, P, Valor_Genético)
-
+  Parameters <- data.frame(Populations, Z, P, Gen_Value)
 
   cat("\n-----------------------------------------------------------------\n")
   cat("Probability of extracting superior strains from populations
@@ -40,6 +38,6 @@ Jinks_Pooni<-function(Pop, Var, VG, Test){
   cat("\n-----------------------------------------------------------------\n")
   cat("Parameters")
   cat("\n-----------------------------------------------------------------\n")
-  print(Parâmetros)
+  print(Parameters)
   cat("\n-----------------------------------------------------------------\n")
 }

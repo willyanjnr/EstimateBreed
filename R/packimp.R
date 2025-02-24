@@ -8,6 +8,7 @@
 #' @import ggrepel
 #' @import grid
 #' @import httr
+#' @import stats
 #' @import nasapower
 #' @import tidyr
 #' @import viridis

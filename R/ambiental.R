@@ -596,18 +596,18 @@ fototermal <- function(DAY, TMED, RAD, PER) {
 #'@export
 #'@examples
 #'\donttest{
-#'library(Breeding)
+#'library(EstimateBreed)
 #'
 #'# Forecasting application conditions
-#'deltat(-53.696944444444,-28.063888888889,type=1,days=10)
+#'tdelta(-53.696944444444,-28.063888888889,type=1,days=10)
 #'View(forecast)
 #'
 #'# Retrospective analysis of application conditions
-#'deltat(-53.696944444444,-28.063888888889,type=2,days=10,dates=c("2023-01-01","2023-05-01"))
+#'tdelta(-53.696944444444,-28.063888888889,type=2,days=10,dates=c("2023-01-01","2023-05-01"))
 #'View(retrospective)
 #'}
 
-deltat <- function(LON,LAT,type=2,days=7,control=NULL,
+tdelta <- function(LON,LAT,type=2,days=7,control=NULL,
                    details=FALSE,dates=NULL,plot=FALSE){
   #Verificações inicias
 

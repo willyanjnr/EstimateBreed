@@ -35,8 +35,8 @@ risco <- function(DIA,MES,TEMP,UR,doença="rust",plot=F){
   UR <- UR
   dados <- data.frame(DIA,MES,TEMP,UR)
   if(doença=="rust"){
-  alfa = log(2)/log(2.30508474576)
-  umidade = aggregate(UR~DIA+MES,data=dados,FUN=function(x)sum(x>85))
+  alfa <- log(2)/log(2.30508474576)
+  umidade <- aggregate(UR~DIA+MES,data=dados,FUN=function(x)sum(x>85))
   print(umidade)
   colnames(umidade) <- c("Dia","Mês","W")
   umidade <- as.data.frame(umidade)
@@ -48,7 +48,7 @@ risco <- function(DIA,MES,TEMP,UR,doença="rust",plot=F){
   Temp <- aggregate(TEMP~DIA+MES,data=Temp_f,FUN=mean)
   colnames(Temp) <- c("Dia","Mês","TMed")
   Temp <- as.data.frame(Temp)
-  Temp$riscoTEMP = (2*(Temp$TMed-8)*alfa*(22.75-8)*alfa-(Temp$TMed-8)*2*alfa)/(22.75-8)*2*alfa
+  Temp$riscoTEMP <- (2*(Temp$TMed-8)*alfa*(22.75-8)*alfa-(Temp$TMed-8)*2*alfa)/(22.75-8)*2*alfa
   mediaTemp <- aggregate(riscoTEMP~Mês,data=Temp,FUN=mean)
   riscofinal <- merge(mediaUR,mediaTemp)
   riscofinal <- as.data.frame(riscofinal)

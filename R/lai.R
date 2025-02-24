@@ -39,7 +39,6 @@
 #'}
 
 lai <- function(GEN, W, L, TNL, TDL, crop = "soy", sp = 0.45, sden = 14) {
-  require(dplyr)
 
   k_correction <- c(
     soy = 0.7,

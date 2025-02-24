@@ -42,13 +42,9 @@
 #'}
 
 estresse <- function(GEN,YS,YC,index="ALL",bygen=T,plot=F,xlab="Genotype",ylab="Values",...){
-  require(dplyr)
-  require(ggplot2)
-  require(tidyr)
-  require(viridis)
-  GEN1 = as.factor(GEN)
-  YS1 = YS
-  YC1 = YC
+  GEN1 <- as.factor(GEN)
+  YS1 <- YS
+  YC1 <- YC
   verif <- data.frame(YS1,YC1)
   if (any(is.na(verif))) {
     warning("The data frame contains NA values!")
@@ -60,7 +56,7 @@ estresse <- function(GEN,YS,YC,index="ALL",bygen=T,plot=F,xlab="Genotype",ylab="
                            data = media,
                            FUN = mean,
                            na.rm = TRUE)
-    GEN = media_gen$GEN1;YS = media_gen$YS;YC = media_gen$YC
+    GEN <- media_gen$GEN1;YS <- media_gen$YS;YC <- media_gen$YC
     if(index=="STI"){
       STI <- ((YS*YC)/(YC^2))
       STI <- data.frame(GEN,STI)
@@ -83,8 +79,8 @@ estresse <- function(GEN,YS,YC,index="ALL",bygen=T,plot=F,xlab="Genotype",ylab="
       }
     }
     else if(index=="YI"){
-      YI = YS/YC
-      YI = data.frame(GEN,YI)
+      YI <- YS/YC
+      YI <- data.frame(GEN,YI)
       cat("YI Index")
       cat("\n----------------------------\n")
       print(YI)
@@ -104,8 +100,8 @@ estresse <- function(GEN,YS,YC,index="ALL",bygen=T,plot=F,xlab="Genotype",ylab="
       }
     }
     else if(index=="GMP"){
-      GMP = sqrt(YS*YC)
-      GMP = data.frame(GEN,GMP)
+      GMP <- sqrt(YS*YC)
+      GMP <- data.frame(GEN,GMP)
       cat("GMP Index")
       cat("\n----------------------------\n")
       print(GMP)
@@ -125,8 +121,8 @@ estresse <- function(GEN,YS,YC,index="ALL",bygen=T,plot=F,xlab="Genotype",ylab="
       }
     }
     else if(index=="MP"){
-      MP = (YS*YC)/2
-      MP = data.frame(GEN,MP)
+      MP <- (YS*YC)/2
+      MP <- data.frame(GEN,MP)
       cat("MP Index")
       cat("\n----------------------------\n")
       print(MP)
@@ -146,8 +142,8 @@ estresse <- function(GEN,YS,YC,index="ALL",bygen=T,plot=F,xlab="Genotype",ylab="
       }
     }
     else if(index=="MH"){
-      MH = (2*(YC-YS))/(YC+YS)
-      MH = data.frame(GEN,MH)
+      MH <- (2*(YC-YS))/(YC+YS)
+      MH <- data.frame(GEN,MH)
       cat("MH Index")
       cat("\n----------------------------\n")
       print(MH)
@@ -169,8 +165,8 @@ estresse <- function(GEN,YS,YC,index="ALL",bygen=T,plot=F,xlab="Genotype",ylab="
     else if(index=="SSI"){
       xYC <- mean(media_gen$YC)
       xYS <- mean(media_gen$YS)
-      SSI = (1-(YC/YS))/(1-(xYC/xYS))
-      SSI = data.frame(GEN,SSI)
+      SSI <- (1-(YC/YS))/(1-(xYC/xYS))
+      SSI <- data.frame(GEN,SSI)
       cat("SSI Index")
       cat("\n----------------------------\n")
       print(SSI)
@@ -190,8 +186,8 @@ estresse <- function(GEN,YS,YC,index="ALL",bygen=T,plot=F,xlab="Genotype",ylab="
       }
     }
     else if(index=="YSI"){
-      YSI = YS/YC
-      YSI = data.frame(GEN,YSI)
+      YSI <- YS/YC
+      YSI <- data.frame(GEN,YSI)
       cat("YSI Index")
       cat("\n----------------------------\n")
       print(YSI)
@@ -213,8 +209,8 @@ estresse <- function(GEN,YS,YC,index="ALL",bygen=T,plot=F,xlab="Genotype",ylab="
     else if(index=="RSI"){
       xYC <- mean(media_gen$YC)
       xYS <- mean(media_gen$YS)
-      RSI = (YC/YS)/(xYC/xYS)
-      RSI = data.frame(GEN,RSI)
+      RSI <- (YC/YS)/(xYC/xYS)
+      RSI <- data.frame(GEN,RSI)
       cat("RSI Index")
       cat("\n----------------------------\n")
       print(RSI)
@@ -234,16 +230,16 @@ estresse <- function(GEN,YS,YC,index="ALL",bygen=T,plot=F,xlab="Genotype",ylab="
       }
     }
     else if(index=="ALL"){
-      STI = ((YS*YC)/(YC^2))
-      YI = YS/YC
-      GMP = sqrt(YS*YC)
-      MP = (YS*YC)/2
-      MH = (2*(YC-YS))/(YC+YS)
+      STI <- ((YS*YC)/(YC^2))
+      YI <- YS/YC
+      GMP <- sqrt(YS*YC)
+      MP <- (YS*YC)/2
+      MH <- (2*(YC-YS))/(YC+YS)
       xYC <- mean(media_gen$YC)
       xYS <- mean(media_gen$YS)
-      SSI = (1-(YC/YS))/(1-(xYC/xYS))
-      YSI = YS/YC
-      RSI = (YC/YS)/(xYC/xYS)
+      SSI <- (1-(YC/YS))/(1-(xYC/xYS))
+      YSI <- YS/YC
+      RSI <- (YC/YS)/(xYC/xYS)
       final <- data.frame(GEN,STI,YI,GMP,MP,MH,SSI,YSI,RSI)
       cat("\n---------------------------------------------------------------------------------------------\n")
       cat("Índices de Estresse")
@@ -284,29 +280,29 @@ estresse <- function(GEN,YS,YC,index="ALL",bygen=T,plot=F,xlab="Genotype",ylab="
     print(STI)
   }
   else if(index=="YI"){
-    YI = YS/YC
-    YI = data.frame(GEN,YI)
+    YI <- YS/YC
+    YI <- data.frame(GEN,YI)
     cat("YI Index")
     cat("\n----------------------------\n")
     print(YI)
   }
   else if(index=="GMP"){
-    GMP = sqrt(YS*YC)
-    GMP = data.frame(GEN,GMP)
+    GMP <- sqrt(YS*YC)
+    GMP <- data.frame(GEN,GMP)
     cat("GMP Index")
     cat("\n----------------------------\n")
     print(GMP)
   }
   else if(index=="MP"){
-    MP = (YS*YC)/2
-    MP = data.frame(GEN,MP)
+    MP <- (YS*YC)/2
+    MP <- data.frame(GEN,MP)
     cat("MP Index")
     cat("\n----------------------------\n")
     print(MP)
   }
   else if(index=="MH"){
-    MH = (2*(YC-YS))/(YC+YS)
-    MH = data.frame(GEN,MH)
+    MH <- (2*(YC-YS))/(YC+YS)
+    MH <- data.frame(GEN,MH)
     cat("MH Index")
     cat("\n----------------------------\n")
     print(MH)
@@ -314,15 +310,15 @@ estresse <- function(GEN,YS,YC,index="ALL",bygen=T,plot=F,xlab="Genotype",ylab="
   else if(index=="SSI"){
     xYC <- mean(media$YC)
     xYS <- mean(media$YS)
-    SSI = (1-(YC/YS))/(1-(xYC/xYS))
-    SSI = data.frame(GEN,SSI)
+    SSI <- (1-(YC/YS))/(1-(xYC/xYS))
+    SSI <- data.frame(GEN,SSI)
     cat("SSI Index")
     cat("\n----------------------------\n")
     print(SSI)
   }
   else if(index=="YSI"){
-    YSI = YS/YC
-    YSI = data.frame(GEN,YSI)
+    YSI <- YS/YC
+    YSI <- data.frame(GEN,YSI)
     cat("YSI Index")
     cat("\n----------------------------\n")
     print(YSI)
@@ -330,24 +326,24 @@ estresse <- function(GEN,YS,YC,index="ALL",bygen=T,plot=F,xlab="Genotype",ylab="
   else if(index=="RSI"){
     xYC <- mean(media$YC)
     xYS <- mean(media$YS)
-    RSI = (YC/YS)/(xYC/xYS)
-    RSI = data.frame(GEN,RSI)
+    RSI <- (YC/YS)/(xYC/xYS)
+    RSI <- data.frame(GEN,RSI)
     cat("RSI Index")
     cat("\n----------------------------\n")
     print(RSI)
   }
   else if(index=="ALL"){
     media <- data.frame(GEN1,YS1,YC1)
-    STI = ((YS*YC)/(YC^2))
-    YI = YS/YC
-    GMP = sqrt(YS*YC)
-    MP = (YS*YC)/2
-    MH = (2*(YC-YS))/(YC+YS)
+    STI <- ((YS*YC)/(YC^2))
+    YI <- YS/YC
+    GMP <- sqrt(YS*YC)
+    MP <- (YS*YC)/2
+    MH <- (2*(YC-YS))/(YC+YS)
     xYC <- mean(media$YC)
     xYS <- mean(media$YS)
-    SSI = (1-(YC/YS))/(1-(xYC/xYS))
-    YSI = YS/YC
-    RSI = (YC/YS)/(xYC/xYS)
+    SSI <- (1-(YC/YS))/(1-(xYC/xYS))
+    YSI <- YS/YC
+    RSI <- (YC/YS)/(xYC/xYS)
     final <- data.frame(GEN,STI,YI,GMP,MP,MH,SSI,YSI,RSI)
     cat("\n-----------------------------------------------------------------------------------------------\n")
     cat("Índices de Estresse")
@@ -377,8 +373,6 @@ estresse <- function(GEN,YS,YC,index="ALL",bygen=T,plot=F,xlab="Genotype",ylab="
 #'@export
 
 itu <- function(CICLO,TM,UR){
-  require(dplyr)
-  require(ggplot2)
   Ciclo <- CICLO
   TM <- TM
   UR <- UR

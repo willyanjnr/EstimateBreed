@@ -19,8 +19,7 @@
 #'@export
 
 mut_index <- function(mut=NULL,MSG,MST,GT,DT,SL) {
-  require(dplyr)
-  require(ggplot2)
+
   mut <- mut
   MSG <- MSG
   MST <- MST

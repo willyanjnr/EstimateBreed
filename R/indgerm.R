@@ -28,12 +28,12 @@ require("dplyr")
 require("ggplot2")
 
 genot <- as.factor(GEN)
-variav1 = PC
-variav2 = G
-variav3 = CPA
-variav4 = RAD
-variav5 = MS
-variav6 = EC
+variav1 <- PC
+variav2 <- G
+variav3 <- CPA
+variav4 <- RAD
+variav5 <- MS
+variav6 <- EC
 
 sd_pc <- sd(variav1)
 sd_g <- sd(variav2)
@@ -75,8 +75,8 @@ ivig_simp <- function(GEN,PC,G){
   requireNamespace("dplyr")
 
   genot <- as.factor(GEN)
-  variav1 = PC
-  variav2 = G
+  variav1 <- PC
+  variav2 <- G
 
   sd_pc <- sd(variav1)
   sd_g <- sd(variav2)
@@ -134,21 +134,20 @@ ivig_simp <- function(GEN,PC,G){
 #'}
 
 gvri <- function(GEN,C,L,E,stat="all",plot=F,ylab="GVRI",xlab="Genotype"){
-  require(dplyr)
-  require(ggplot2)
-  GEN = as.factor(GEN)
-  Comp = C
-  Larg = L
-  Esp = E
+
+  GEN <- as.factor(GEN)
+  Comp <- C
+  Larg <- L
+  Esp <- E
   if(stat=="all"){
-    gvri = ((Comp*Larg*Esp)/sum(Comp+Larg+Esp))
+    gvri <- ((Comp*Larg*Esp)/sum(Comp+Larg+Esp))
     final <- data.frame(GEN,gvri)
     cat("\n-----------------------------------------------------------------\n")
     cat("Grain Volume Relative Index (GVRI)")
     cat("\n-----------------------------------------------------------------\n")
     print(final)
   }else if (stat=="mean"){
-    gvri = ((Comp*Larg*Esp)/sum(Comp+Larg+Esp))
+    gvri <- ((Comp*Larg*Esp)/sum(Comp+Larg+Esp))
     dados <- data.frame(GEN,gvri)
     media_geral <- mean(dados$gvri)
     media_gen <- aggregate(gvri ~ GEN,
@@ -161,7 +160,7 @@ gvri <- function(GEN,C,L,E,stat="all",plot=F,ylab="GVRI",xlab="Genotype"){
     print(media_gen)
     cat("General Mean =",paste(round(media_geral,digits = 5)))
     if(plot==T){
-      grafico=ggplot(media_gen, aes(x=GEN, y=gvri)) +
+      grafico <- ggplot(media_gen, aes(x=GEN, y=gvri)) +
         geom_bar(stat = "identity")+
         geom_hline(yintercept = media_geral, color = "red", linetype = "dashed", size = 1)+
         ylab(ylab)+xlab(xlab)+theme_classic()

@@ -12,12 +12,12 @@
 #'@export
 
 tamef <- function(GEN,SI,NE){
-  require(dplyr)
+
   data <- data.frame(GEN,SI,NE)
-  Sum_SI = (sum(data$SI))^2
+  Sum_SI <- (sum(data$SI))^2
   data <- data %>%
     mutate(Gen_SI=SI^2)
-  Pond_SI=sum(data$Gen_SI/data$NE)
-  Nej=Sum_SI/Pond_SI
+  Pond_SI <- sum(data$Gen_SI/data$NE)
+  Nej <- Sum_SI/Pond_SI
   return(Nej)
 }

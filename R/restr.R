@@ -42,8 +42,6 @@
 #'}
 
 restr <- function(TEST, REP, Xi, scenario = NULL, zstat = NULL){
-  require(dplyr)
-  require(ggplot2)
 
   if (is.null(scenario)){
     stop("Please inform if the restriction will be applied!")
@@ -122,9 +120,6 @@ restr <- function(TEST, REP, Xi, scenario = NULL, zstat = NULL){
 #'@export
 
 cvar <- function(GEN,REP,Xi,approach=NULL,zstat=NULL){
-  require(dplyr)
-  require(lme4)
-  require(minque)
 
   if(is.null(approach)){
     stop("Please provide a method for estimating variance components!")
@@ -151,7 +146,7 @@ cvar <- function(GEN,REP,Xi,approach=NULL,zstat=NULL){
 
   #apIII Modelo Linear Misto
   if(approach=="apIII"){
-    mod1 = lmm(Xi~+1|GEN,method=c("reml"),data=datag)
+    mod1 <- lmm(Xi~+1|GEN,method=c("reml"),data=datag)
     assign("mod1",mod1,envir = .GlobalEnv)
 
     V_GEN <- mod1$Var$Xi["V(GEN)", "Est"]

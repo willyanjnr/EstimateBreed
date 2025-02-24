@@ -4,10 +4,10 @@
 \alias{fototermal}
 \title{Photothermal Index}
 \usage{
-fototermal(DIA, TMED, RAD, PER)
+fototermal(DAY, TMED, RAD, PER)
 }
 \arguments{
-\item{DIA}{The column with the cycle days}
+\item{DAY}{The column with the cycle days}
 
 \item{TMED}{The column with the average air temperature values}
 

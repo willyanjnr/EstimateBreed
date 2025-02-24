@@ -24,10 +24,10 @@
 #'}
 
 desv_clim <- function(ENV,TMED,PREC) {
-  require(dplyr)
-  ENV = ENV
-  TMED = TMED
-  PREC = PREC
+
+  ENV <- ENV
+  TMED <- TMED
+  PREC <- PREC
   desvio <- data.frame(ENV,TMED,PREC)
 
   resultado <- desvio %>%
@@ -90,7 +90,6 @@ desv_clim <- function(ENV,TMED,PREC) {
 #'}
 
 isgr <- function(GEN, ENV, NG, MG, CICLO,req=3.5, stage=NULL) {
-  require(dplyr)
 
   GEN <- as.factor(GEN)
   ENV <- as.factor(ENV)

@@ -31,8 +31,6 @@
 #'}
 
 heterose <- function(GEN, GM, GP, PR, REP, param = "all") {
-  require(dplyr)
-  require(stats)
 
   data <- data.frame(GEN, GM, GP, PR, REP)
   model1 <- aov(REP ~ GEN, data = data)

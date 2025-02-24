@@ -29,12 +29,11 @@
 #'}
 
 is_qindustrial <- function(GEN, NQ, W, PTN){
-  require("dplyr")
 
   genot <- as.factor(GEN)
-  variav1 = NQ
-  variav2 = W
-  variav3 = PTN
+  variav1 <- NQ
+  variav2 <- W
+  variav3 <- PTN
 
   sd_FN <- sd(variav1)
   sd_W <- sd(variav2)
@@ -87,23 +86,23 @@ is_qindustrial <- function(GEN, NQ, W, PTN){
 #'}
 
 rend_ind <- function(GEN,NG2M,MG,MC,RG,stat="all",...){
-  require(dplyr)
-  GEN = as.factor(GEN)
-  NG2M = NG2M
-  MG = MG
-  MC = MC
-  RG = RG
+
+  GEN <- as.factor(GEN)
+  NG2M <- NG2M
+  MG <- MG
+  MC <- MC
+  RG <- RG
   if(stat=="all"){
-    ID = MC/MG
-    RI = RG*(NG2M/100)*ID
+    ID <- MC/MG
+    RI <- RG*(NG2M/100)*ID
     final <- data.frame(GEN,ID,RI)
     cat("\n-----------------------------------------------------------------\n")
     cat("Peeling Index and Industrial Yield")
     cat("\n-----------------------------------------------------------------\n")
     print(final)
   }else if (stat=="mean"){
-    ID = MC/MG
-    RI = RG*(NG2M/100)*ID
+    ID <- MC/MG
+    RI <- RG*(NG2M/100)*ID
     dados <- data.frame(GEN,ID,RI)
     media_gen <- aggregate(cbind(ID, RI) ~ GEN,
                            data = dados,
@@ -155,12 +154,10 @@ rend_ind <- function(GEN,NG2M,MG,MC,RG,stat="all",...){
 #' }
 
 indviab <- function(GEN,var1,var2,ylab="Index",xlab="Genotype",stat="all",plot=F){
-  require("dplyr")
-  require("ggplot2")
 
-  GEN = as.factor(GEN)
-  variav1 = var1
-  variav2 = var2
+  GEN <- as.factor(GEN)
+  variav1 <- var1
+  variav2 <- var2
 
   if(stat=="all"){
     indesp <- variav1/variav2
@@ -176,7 +173,7 @@ indviab <- function(GEN,var1,var2,ylab="Index",xlab="Genotype",stat="all",plot=F
     }
   }
   else if (stat=="mean"){
-    indesp = variav1/variav2
+    indesp <- variav1/variav2
     dados <- data.frame(GEN,indesp)
     media_gen <- aggregate(indesp ~ GEN,
                            data = dados,
@@ -184,7 +181,7 @@ indviab <- function(GEN,var1,var2,ylab="Index",xlab="Genotype",stat="all",plot=F
                            na.rm = TRUE)
     colnames(media_gen) <- c("Genotype","Index")
     if(plot==T){
-      grafico=ggplot(media_gen, aes(x=GEN, y=indesp)) +
+      grafico <- ggplot(media_gen, aes(x=GEN, y=indesp)) +
         geom_bar(stat = "identity")+
         ylab(ylab)+xlab(xlab)+theme_classic()
       print(grafico)
@@ -237,7 +234,7 @@ indviab <- function(GEN,var1,var2,ylab="Index",xlab="Genotype",stat="all",plot=F
 #'}
 
 ph <- function(GEN, HL, crop="trit", stat="all") {
-  require(dplyr)
+
   dados <- data.frame(GEN, HL)
 
   if(crop == "trit") {
@@ -300,12 +297,10 @@ ph <- function(GEN, HL, crop="trit", stat="all") {
 #'}
 
 is_ptnerg <- function(GEN, PTN, RG){
-  requireNamespace("dplyr")
-  requireNamespace("crayon")
 
   genot <- as.factor(GEN)
-  variav1 = PTN
-  variav2 = RG
+  variav1 <- PTN
+  variav2 <- RG
 
   sd_ptn <- sd(variav1)
   sd_rg <- sd(variav2)

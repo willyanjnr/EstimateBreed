@@ -13,13 +13,12 @@
 #'@export
 
 GS<-function(Var, h, VF, P = "1"){
-  require(dplyr)
 
-  Var = as.factor(Var)
-  h = h
-  VF = VF
+  Var <- as.factor(Var)
+  h <- h
+  VF <- VF
   if(P=="1"){
-    GS = (h*2.7*(sqrt(VF)))
+    GS <- (h*2.7*(sqrt(VF)))
 
     final <- data.frame(Var,GS)
     cat("\n-----------------------------------------------------------------\n")
@@ -27,7 +26,7 @@ GS<-function(Var, h, VF, P = "1"){
     cat("\n-----------------------------------------------------------------\n")
     print(final)
   }else if(P=="2"){
-    GS = (h*2.44*(sqrt(VF)))
+    GS <- (h*2.44*(sqrt(VF)))
 
     final <- data.frame(Var,GS)
     cat("\n-----------------------------------------------------------------\n")
@@ -35,7 +34,7 @@ GS<-function(Var, h, VF, P = "1"){
     cat("\n-----------------------------------------------------------------\n")
     print(final)
   }else if(P=="3"){
-    GS = (h*2.27*(sqrt(VF)))
+    GS <- (h*2.27*(sqrt(VF)))
 
     final <- data.frame(Var,GS)
     cat("\n-----------------------------------------------------------------\n")
@@ -43,7 +42,7 @@ GS<-function(Var, h, VF, P = "1"){
     cat("\n-----------------------------------------------------------------\n")
     print(final)
   }else if(P=="4"){
-    GS = (h*2.16*(sqrt(VF)))
+    GS <- (h*2.16*(sqrt(VF)))
 
     final <- data.frame(Var,GS)
     cat("\n-----------------------------------------------------------------\n")
@@ -51,7 +50,7 @@ GS<-function(Var, h, VF, P = "1"){
     cat("\n-----------------------------------------------------------------\n")
     print(final)
   }else if(P=="5"){
-    GS = (h*2.08*(sqrt(VF)))
+    GS <- (h*2.08*(sqrt(VF)))
 
     final <- data.frame(Var,GS)
     cat("\n-----------------------------------------------------------------\n")
@@ -59,7 +58,7 @@ GS<-function(Var, h, VF, P = "1"){
     cat("\n-----------------------------------------------------------------\n")
     print(final)
   }else if(P=="10"){
-    GS = (h*1.76*(sqrt(VF)))
+    GS <- (h*1.76*(sqrt(VF)))
 
     final <- data.frame(Var,GS)
     cat("\n-----------------------------------------------------------------\n")
@@ -67,7 +66,7 @@ GS<-function(Var, h, VF, P = "1"){
     cat("\n-----------------------------------------------------------------\n")
     print(final)
   }else if(P=="20"){
-    GS = (h*1.4*(sqrt(VF)))
+    GS <- (h*1.4*(sqrt(VF)))
 
     final <- data.frame(Var,GS)
     cat("\n-----------------------------------------------------------------\n")
@@ -75,7 +74,7 @@ GS<-function(Var, h, VF, P = "1"){
     cat("\n-----------------------------------------------------------------\n")
     print(final)
   }else if(P=="40"){
-    GS = (h*0.97*(sqrt(VF)))
+    GS <- (h*0.97*(sqrt(VF)))
 
     final <- data.frame(Var,GS)
     cat("\n-----------------------------------------------------------------\n")
@@ -83,7 +82,7 @@ GS<-function(Var, h, VF, P = "1"){
     cat("\n-----------------------------------------------------------------\n")
     print(final)
   }else if(P=="50"){
-    GS = (h*0.8*(sqrt(VF)))
+    GS <- (h*0.8*(sqrt(VF)))
 
     final <- data.frame(Var,GS)
     cat("\n-----------------------------------------------------------------\n")
@@ -91,7 +90,7 @@ GS<-function(Var, h, VF, P = "1"){
     cat("\n-----------------------------------------------------------------\n")
     print(final)
   }else if(P=="60"){
-    GS = (h*0.64*(sqrt(VF)))
+    GS <- (h*0.64*(sqrt(VF)))
 
     final <- data.frame(Var,GS)
     cat("\n-----------------------------------------------------------------\n")
@@ -99,7 +98,7 @@ GS<-function(Var, h, VF, P = "1"){
     cat("\n-----------------------------------------------------------------\n")
     print(final)
   }else if(P=="70"){
-    GS = (h*0.5*(sqrt(VF)))
+    GS <- (h*0.5*(sqrt(VF)))
 
     final <- data.frame(Var,GS)
     cat("\n-----------------------------------------------------------------\n")
@@ -107,7 +106,7 @@ GS<-function(Var, h, VF, P = "1"){
     cat("\n-----------------------------------------------------------------\n")
     print(final)
   }else if(P=="80"){
-    GS = (h*0.35*(sqrt(VF)))
+    GS <- (h*0.35*(sqrt(VF)))
 
     final <- data.frame(Var,GS)
     cat("\n-----------------------------------------------------------------\n")
@@ -115,7 +114,7 @@ GS<-function(Var, h, VF, P = "1"){
     cat("\n-----------------------------------------------------------------\n")
     print(final)
   }else if(P=="90"){
-    GS = (h*0.2*(sqrt(VF)))
+    GS <- (h*0.2*(sqrt(VF)))
 
     final <- data.frame(Var,GS)
     cat("\n-----------------------------------------------------------------\n")
@@ -139,12 +138,11 @@ GS<-function(Var, h, VF, P = "1"){
 #'@export
 
 GS2<-function(Var, h, DS){
-  require(dplyr)
 
-  Var = as.factor(Var)
-  h = h
-  DS = DS
-  GS = h*DS
+  Var <- as.factor(Var)
+  h <- h
+  DS <- DS
+  GS <- h*DS
   final <- data.frame(Var,GS)
   cat("\n-----------------------------------------------------------------\n")
   cat("Selection Gain Weighted by Selection Differential")
@@ -169,13 +167,12 @@ GS2<-function(Var, h, DS){
 #'@export
 
 GS3<-function(Var, h, VF, P = "1"){
-  require(dplyr)
 
-  Var = as.factor(Var)
-  h = h
-  VF = VF
+  Var <- as.factor(Var)
+  h <- h
+  VF <- VF
   if(P=="1"){
-    GS = (h*2.7*0.5*(sqrt(VF)))
+    GS <- (h*2.7*0.5*(sqrt(VF)))
 
     final <- data.frame(Var,GS)
     cat("\n-----------------------------------------------------------------\n")
@@ -183,7 +180,7 @@ GS3<-function(Var, h, VF, P = "1"){
     cat("\n-----------------------------------------------------------------\n")
     print(final)
   }else if(P=="2"){
-    GS = (h*2.44*0.5*(sqrt(VF)))
+    GS <- (h*2.44*0.5*(sqrt(VF)))
 
     final <- data.frame(Var,GS)
     cat("\n-----------------------------------------------------------------\n")
@@ -191,7 +188,7 @@ GS3<-function(Var, h, VF, P = "1"){
     cat("\n-----------------------------------------------------------------\n")
     print(final)
   }else if(P=="3"){
-    GS = (h*2.27*0.5*(sqrt(VF)))
+    GS <- (h*2.27*0.5*(sqrt(VF)))
 
     final <- data.frame(Var,GS)
     cat("\n-----------------------------------------------------------------\n")
@@ -199,7 +196,7 @@ GS3<-function(Var, h, VF, P = "1"){
     cat("\n-----------------------------------------------------------------\n")
     print(final)
   }else if(P=="4"){
-    GS = (h*2.16*0.5*(sqrt(VF)))
+    GS <- (h*2.16*0.5*(sqrt(VF)))
 
     final <- data.frame(Var,GS)
     cat("\n-----------------------------------------------------------------\n")
@@ -207,7 +204,7 @@ GS3<-function(Var, h, VF, P = "1"){
     cat("\n-----------------------------------------------------------------\n")
     print(final)
   }else if(P=="5"){
-    GS = (h*2.08*0.5*(sqrt(VF)))
+    GS <- (h*2.08*0.5*(sqrt(VF)))
 
     final <- data.frame(Var,GS)
     cat("\n-----------------------------------------------------------------\n")
@@ -215,7 +212,7 @@ GS3<-function(Var, h, VF, P = "1"){
     cat("\n-----------------------------------------------------------------\n")
     print(final)
   }else if(P=="10"){
-    GS = (h*1.76*0.5*(sqrt(VF)))
+    GS <- (h*1.76*0.5*(sqrt(VF)))
 
     final <- data.frame(Var,GS)
     cat("\n-----------------------------------------------------------------\n")
@@ -223,7 +220,7 @@ GS3<-function(Var, h, VF, P = "1"){
     cat("\n-----------------------------------------------------------------\n")
     print(final)
   }else if(P=="20"){
-    GS = (h*1.4*0.5*(sqrt(VF)))
+    GS <- (h*1.4*0.5*(sqrt(VF)))
 
     final <- data.frame(Var,GS)
     cat("\n-----------------------------------------------------------------\n")
@@ -231,7 +228,7 @@ GS3<-function(Var, h, VF, P = "1"){
     cat("\n-----------------------------------------------------------------\n")
     print(final)
   }else if(P=="40"){
-    GS = (h*0.97*0.5*(sqrt(VF)))
+    GS <- (h*0.97*0.5*(sqrt(VF)))
 
     final <- data.frame(Var,GS)
     cat("\n-----------------------------------------------------------------\n")
@@ -239,7 +236,7 @@ GS3<-function(Var, h, VF, P = "1"){
     cat("\n-----------------------------------------------------------------\n")
     print(final)
   }else if(P=="50"){
-    GS = (h*0.8*0.5*(sqrt(VF)))
+    GS <- (h*0.8*0.5*(sqrt(VF)))
 
     final <- data.frame(Var,GS)
     cat("\n-----------------------------------------------------------------\n")
@@ -247,7 +244,7 @@ GS3<-function(Var, h, VF, P = "1"){
     cat("\n-----------------------------------------------------------------\n")
     print(final)
   }else if(P=="60"){
-    GS = (h*0.64*0.5*(sqrt(VF)))
+    GS <- (h*0.64*0.5*(sqrt(VF)))
 
     final <- data.frame(Var,GS)
     cat("\n-----------------------------------------------------------------\n")
@@ -255,7 +252,7 @@ GS3<-function(Var, h, VF, P = "1"){
     cat("\n-----------------------------------------------------------------\n")
     print(final)
   }else if(P=="70"){
-    GS = (h*0.5*0.5*(sqrt(VF)))
+    GS <- (h*0.5*0.5*(sqrt(VF)))
 
     final <- data.frame(Var,GS)
     cat("\n-----------------------------------------------------------------\n")
@@ -263,7 +260,7 @@ GS3<-function(Var, h, VF, P = "1"){
     cat("\n-----------------------------------------------------------------\n")
     print(final)
   }else if(P=="80"){
-    GS = (h*0.35*0.5*(sqrt(VF)))
+    GS <- (h*0.35*0.5*(sqrt(VF)))
 
     final <- data.frame(Var,GS)
     cat("\n-----------------------------------------------------------------\n")
@@ -271,7 +268,7 @@ GS3<-function(Var, h, VF, P = "1"){
     cat("\n-----------------------------------------------------------------\n")
     print(final)
   }else if(P=="90"){
-    GS = (h*0.2*0.5*(sqrt(VF)))
+    GS <- (h*0.2*0.5*(sqrt(VF)))
 
     final <- data.frame(Var,GS)
     cat("\n-----------------------------------------------------------------\n")
@@ -297,14 +294,13 @@ GS3<-function(Var, h, VF, P = "1"){
 #'@export
 
 GS4<-function(Var, h, VF, P = "1", Ano){
-  require(dplyr)
 
-  Var = as.factor(Var)
-  h = h
-  VF = VF
-  Ano = Ano
+  Var <- as.factor(Var)
+  h <- h
+  VF <- VF
+  Ano <- Ano
   if(P=="1"){
-    GS = (h*2.7*(sqrt(VF)))/Ano
+    GS <- (h*2.7*(sqrt(VF)))/Ano
 
     final <- data.frame(Var,GS)
     cat("\n-----------------------------------------------------------------\n")
@@ -312,7 +308,7 @@ GS4<-function(Var, h, VF, P = "1", Ano){
     cat("\n-----------------------------------------------------------------\n")
     print(final)
   }else if(P=="2"){
-    GS = (h*2.44*(sqrt(VF)))/Ano
+    GS <- (h*2.44*(sqrt(VF)))/Ano
 
     final <- data.frame(Var,GS)
     cat("\n-----------------------------------------------------------------\n")
@@ -320,7 +316,7 @@ GS4<-function(Var, h, VF, P = "1", Ano){
     cat("\n-----------------------------------------------------------------\n")
     print(final)
   }else if(P=="3"){
-    GS = (h*2.27*(sqrt(VF)))/Ano
+    GS <- (h*2.27*(sqrt(VF)))/Ano
 
     final <- data.frame(Var,GS)
     cat("\n-----------------------------------------------------------------\n")
@@ -328,7 +324,7 @@ GS4<-function(Var, h, VF, P = "1", Ano){
     cat("\n-----------------------------------------------------------------\n")
     print(final)
   }else if(P=="4"){
-    GS = (h*2.16*(sqrt(VF)))/Ano
+    GS <- (h*2.16*(sqrt(VF)))/Ano
 
     final <- data.frame(Var,GS)
     cat("\n-----------------------------------------------------------------\n")
@@ -336,7 +332,7 @@ GS4<-function(Var, h, VF, P = "1", Ano){
     cat("\n-----------------------------------------------------------------\n")
     print(final)
   }else if(P=="5"){
-    GS = (h*2.08*(sqrt(VF)))/Ano
+    GS <- (h*2.08*(sqrt(VF)))/Ano
 
     final <- data.frame(Var,GS)
     cat("\n-----------------------------------------------------------------\n")
@@ -344,7 +340,7 @@ GS4<-function(Var, h, VF, P = "1", Ano){
     cat("\n-----------------------------------------------------------------\n")
     print(final)
   }else if(P=="10"){
-    GS = (h*1.76*(sqrt(VF)))/Ano
+    GS <- (h*1.76*(sqrt(VF)))/Ano
 
     final <- data.frame(Var,GS)
     cat("\n-----------------------------------------------------------------\n")
@@ -352,7 +348,7 @@ GS4<-function(Var, h, VF, P = "1", Ano){
     cat("\n-----------------------------------------------------------------\n")
     print(final)
   }else if(P=="20"){
-    GS = (h*1.4*(sqrt(VF)))/Ano
+    GS <- (h*1.4*(sqrt(VF)))/Ano
 
     final <- data.frame(Var,GS)
     cat("\n-----------------------------------------------------------------\n")
@@ -360,7 +356,7 @@ GS4<-function(Var, h, VF, P = "1", Ano){
     cat("\n-----------------------------------------------------------------\n")
     print(final)
   }else if(P=="40"){
-    GS = (h*0.97*(sqrt(VF)))/Ano
+    GS <- (h*0.97*(sqrt(VF)))/Ano
 
     final <- data.frame(Var,GS)
     cat("\n-----------------------------------------------------------------\n")
@@ -368,7 +364,7 @@ GS4<-function(Var, h, VF, P = "1", Ano){
     cat("\n-----------------------------------------------------------------\n")
     print(final)
   }else if(P=="50"){
-    GS = (h*0.8*(sqrt(VF)))/Ano
+    GS <- (h*0.8*(sqrt(VF)))/Ano
 
     final <- data.frame(Var,GS)
     cat("\n-----------------------------------------------------------------\n")
@@ -376,7 +372,7 @@ GS4<-function(Var, h, VF, P = "1", Ano){
     cat("\n-----------------------------------------------------------------\n")
     print(final)
   }else if(P=="60"){
-    GS = (h*0.64*(sqrt(VF)))/Ano
+    GS <- (h*0.64*(sqrt(VF)))/Ano
 
     final <- data.frame(Var,GS)
     cat("\n-----------------------------------------------------------------\n")
@@ -384,7 +380,7 @@ GS4<-function(Var, h, VF, P = "1", Ano){
     cat("\n-----------------------------------------------------------------\n")
     print(final)
   }else if(P=="70"){
-    GS = (h*0.5*(sqrt(VF)))/Ano
+    GS <- (h*0.5*(sqrt(VF)))/Ano
 
     final <- data.frame(Var,GS)
     cat("\n-----------------------------------------------------------------\n")
@@ -392,7 +388,7 @@ GS4<-function(Var, h, VF, P = "1", Ano){
     cat("\n-----------------------------------------------------------------\n")
     print(final)
   }else if(P=="80"){
-    GS = (h*0.35*(sqrt(VF)))/Ano
+    GS <- (h*0.35*(sqrt(VF)))/Ano
 
     final <- data.frame(Var,GS)
     cat("\n-----------------------------------------------------------------\n")
@@ -400,7 +396,7 @@ GS4<-function(Var, h, VF, P = "1", Ano){
     cat("\n-----------------------------------------------------------------\n")
     print(final)
   }else if(P=="90"){
-    GS = (h*0.2*(sqrt(VF)))/Ano
+    GS <- (h*0.2*(sqrt(VF)))/Ano
 
     final <- data.frame(Var,GS)
     cat("\n-----------------------------------------------------------------\n")
@@ -423,12 +419,10 @@ GS4<-function(Var, h, VF, P = "1", Ano){
 #'@export
 
 transgressivos<-function(Gen, Var, Testemunha,ylab="Selection",xlab="Genotypes"){
-  require(dplyr)
-  require(ggplot2)
 
-  Gen = as.factor(Gen)
-  Var = Var
-  Testemunha = Testemunha
+  Gen <- as.factor(Gen)
+  Var <- Var
+  Testemunha <- Testemunha
 
   Média<-mean(Var)
   DSg<-mean(Testemunha)
@@ -438,10 +432,10 @@ transgressivos<-function(Gen, Var, Testemunha,ylab="Selection",xlab="Genotypes")
   DS3S<-Média+(3*Desvio)
 
   parametros <- list(Média=Média,DSg=DSg,Desvio=Desvio,DS1S=DS1S,DS2S=DS2S,DS3S=DS3S)
-  dados=data.frame(Gen,Var, Testemunha)
+  dados <- data.frame(Gen,Var, Testemunha)
 
 
-  grafico=ggplot(dados, aes(x = Gen, y = Var))+
+  grafico <- ggplot(dados, aes(x = Gen, y = Var))+
     geom_text(
       label=rownames(dados),
       nudge_x =0, nudge_y = 0, color = "red",hjust =3,
@@ -488,7 +482,7 @@ transgressivos<-function(Gen, Var, Testemunha,ylab="Selection",xlab="Genotypes")
 #'@export
 
 SEGREGAÇÃO_PADRÃO<-function(MELHORAMENTO){
-  require("dplyr")
+
   AUTÓGAMAS<-c("Genitores","F1","F2","F3","F4","F5","F6","F7","F8","F9")
   HETEROZIGOSE<-c(0,100,50,25,12.5,6.25,3.12,1.56,0.78,0.39)
   ALÓGAMAS<-c("-","-","S0","S1","S2","S3","S4","S5","S6","S7")
@@ -523,15 +517,9 @@ SEGREGAÇÃO_PADRÃO<-function(MELHORAMENTO){
 
 Coeficiente_endogamia<-function(var, VG, VF){
 
-  require("dplyr")
-  require("ggplot2")
-  require("knitr")
-  require("crayon")
-  require("cowplot")
-
-  var = as.factor(var)
-  VG = VG
-  VF = VF
+  var <- as.factor(var)
+  VG <- VG
+  VF <- VF
   ################################
   VA_total_F3<-VG/1.5
   VD_total_F3<-VG/0.75
@@ -713,12 +701,9 @@ Coeficiente_endogamia<-function(var, VG, VF){
 
 reg_GP <- function(ind, Genitor, Progenie) {
 
-  require("dplyr")
-  require("ggplot2")
-
-  ind = as.factor(ind)
-  Genitor = Genitor
-  Progenie = Progenie
+  ind <- as.factor(ind)
+  Genitor <- Genitor
+  Progenie <- Progenie
 
   model <- lm(Progenie ~ Genitor)
 
@@ -731,7 +716,7 @@ reg_GP <- function(ind, Genitor, Progenie) {
 
   equation <- paste("y =", round(intercept, 2), "+", round(slope, 2), "* x")
 
-  dados=data.frame(Genitor, Progenie)
+  dados<-data.frame(Genitor, Progenie)
 
   grafico<-ggplot(dados, aes(x=Genitor, y=Progenie)) +
     geom_line()+
@@ -772,7 +757,6 @@ reg_GP <- function(ind, Genitor, Progenie) {
 #'@export
 
 ALELICA<-function(type=NULL,ge=NULL){
-  require(ggplot2)
 
   if(!is.null(type)){
   if(type=="ad"){
@@ -903,7 +887,7 @@ ALELICA<-function(type=NULL,ge=NULL){
 #'@export
 
 gga <- function(GEN, VAR, h2, P) {
-  require(dplyr)
+
   data <- data.frame(GEN,VAR,h2,P)
   data <- data %>%
     group_by(VAR) %>%
@@ -912,58 +896,6 @@ gga <- function(GEN, VAR, h2, P) {
     group_by(GEN) %>%
     mutate(AGV=h2*(P-u))
   return(ganho)
-}
-
-#'Number of individuals to be selected in each family
-#'@description
-#'Definition of the number of individuals to be selected by BLUPis
-#'@param y Response variable
-#'@param r The column with the repetition effect (fixed)
-#'@param p The column with the plot effect (random)
-#'@param f The column with the genetic effect of dominance associated with
-#'families of full siblings (random)
-#'@param b The column with the effect of incomplete blocks (random)
-#'@param A Kinship matrix obtained with AGHmatrix
-#'@author Willyan Júnior Adorian Bandeira
-#'@author Ivan Ricardo Carvalho
-#'@author Murilo Vieira Loro
-#'@author Leonardo Cesar Pradebon
-#'@author José Antonio Gonzalez da Silva
-#'@references
-#'Oliveira, R. A., Daros, E., Resende, M. D. V., Bespalhok-Filho, J. C.,
-#'Zambon, J. L. C., Souza, T. R., & Lucius, A. S. F. (2011). Procedimento
-#'Blupis e seleção massal em cana-de-açúcar. Bragantia, 70(4), 796–800.
-#'Model 35 (SELEGEN)
-#'@export
-
-blupis <- function(){
-  #Verificações
-  #Função incompleta, finalizar###
-  if(!is.matrix(A) || nrow(A) != ncol(A)){
-    stop("Kinship Matrix must be square!")
-  }
-
-  #Alterar "dados" conforme a função
-  if(!all(dados[[id_col]] %in% rownames(A))){
-    stop("IDs in dataframe need to be the same of the Kinship Matrix")
-    #Ver a necessidade de utilizar stop em vez de warning
-  }
-  #Processo de filtragem dos genótipos que estão na matriz A mas não estão no DF
-  A <- A[as.character(dados[[id_col]]), as.character(dados[[id_col]])]
-  require(sommer)
-  #Fazer verificação do modelo
-  #Quais procedimentos precisam ser realizados para o modelo?
-  #Fazer o modelo com o sommer, requer matriz de parentesco
-  modelo <- mmer(
-    formula = as.formula(paste(y_col,"~1")),
-    random = ~vs(ID,Gu=A),
-    data = dados
-  )
-  summary(modelo)
-  modelo$sigma
-
-  #Ajustar o modelo para o sommer
-  modelo <- lmer(y~r+(1|a)+(1|p)+(1|f)+(1|b),data=dados)
 }
 
 #'General parameters for selection
@@ -995,8 +927,6 @@ blupis <- function(){
 #'@export
 
 genpar <- function(POP, GEN, REP = NULL, vars, K = 0.05, type = "balanced", check = FALSE) {
-  require(dplyr)
-  require(lme4)
 
   if (is.null(REP)) {
     stop("Please infomr the replications", call. = FALSE)

@@ -21,13 +21,10 @@
 #Finalizar
 Jinks_Pooni<-function(Pop, Var, VG, Test){
 
-  require(dplyr)
-  require(ggplot2)
-
-  População = Pop
-  Var = Var
-  VG = VG
-  Testemunhas = Test
+  População <- Pop
+  Var <- Var
+  VG <- VG
+  Testemunhas <- Test
 
   Z<-((Testemunhas-Var)/(sqrt(VG)))
   P<-((1-pnorm(Z, mean = 0, sd = 1, lower.tail = TRUE, log.p = FALSE))*100)

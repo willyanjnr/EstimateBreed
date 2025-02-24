@@ -22,11 +22,10 @@
 #'}
 
 atsum <- function(TMED,crop="maize",plot=F){
-  require(ggplot2)
-  TMED = TMED
+
   if(crop=="maize"){
-    TBi=10
-    ST=TMED-TBi
+    TBi <- 10
+    ST <- TMED-TBi
     STot <- sum(ST)
     STAc <- cumsum(ST)
     CV <- (sd(TMED)/mean(TMED))*100
@@ -44,7 +43,7 @@ atsum <- function(TMED,crop="maize",plot=F){
     cat("Min Value =",paste(VMin),"ºC\n")
     cat("CV(%) =",paste(round(CV,digits = 2)),"\n")
     if(plot==T){
-        grafico=ggplot(acumulado, aes(x=Ciclo, y=STAc)) +
+        grafico <- ggplot(acumulado, aes(x=Ciclo, y=STAc)) +
         geom_line(color="red", size=1, alpha=0.9, linetype=1) +
         ylab("Accumulated TS (ºC)")+xlab("Maize Cycle")+theme_classic()+
         scale_x_continuous(breaks=seq(0,tail(acumulado$Ciclo, n = 1)+5,10))
@@ -52,8 +51,8 @@ atsum <- function(TMED,crop="maize",plot=F){
   }
   }
   else if(crop=="soybean"){
-    TBi=5
-    ST=TMED-TBi
+    TBi <- 5
+    ST <- TMED-TBi
     STot <- sum(ST)
     STAc <- cumsum(ST)
     CV <- (sd(TMED)/mean(TMED))*100
@@ -71,7 +70,7 @@ atsum <- function(TMED,crop="maize",plot=F){
     cat("Min Value =",paste(VMin),"ºC\n")
     cat("CV(%) =",paste(round(CV,digits = 2)),"\n")
     if(plot==T){
-      grafico=ggplot(acumulado, aes(x=Ciclo, y=STAc)) +
+      grafico <- ggplot(acumulado, aes(x=Ciclo, y=STAc)) +
         geom_line(color="red", size=1, alpha=0.9, linetype=1) +
         ylab("Accumulated TS (ºC)")+xlab("Soybean Cycle")+theme_classic()+
         scale_x_continuous(breaks=seq(0,tail(acumulado$Ciclo, n = 1)+5,10))
@@ -79,8 +78,8 @@ atsum <- function(TMED,crop="maize",plot=F){
     }
   }
   else if (crop=="flax"){
-    TBi=-4
-    ST=TMED-TBi
+    TBi <- -4
+    ST <- TMED-TBi
     STot <- sum(ST)
     STAc <- cumsum(ST)
     CV <- (sd(TMED)/mean(TMED))*100
@@ -98,7 +97,7 @@ atsum <- function(TMED,crop="maize",plot=F){
     cat("Min Value =",paste(VMin),"ºC\n")
     cat("CV(%) =",paste(round(CV,digits = 2)),"\n")
     if(plot==T){
-      grafico=ggplot(acumulado, aes(x=Ciclo, y=STAc)) +
+      grafico <- ggplot(acumulado, aes(x=Ciclo, y=STAc)) +
         geom_line(color="red", size=1, alpha=0.9, linetype=1) +
         ylab("Accumulated TS (ºC)")+xlab("Flaxseed Cycle")+theme_classic()+
         scale_x_continuous(breaks=seq(0,tail(acumulado$Ciclo, n = 1)+5,10))
@@ -106,8 +105,8 @@ atsum <- function(TMED,crop="maize",plot=F){
     }
   }
   else if (crop=="trit"){
-    TBi=-4
-    ST=TMED-TBi
+    TBi <- -4
+    ST <- TMED-TBi
     STot <- sum(ST)
     STAc <- cumsum(ST)
     CV <- (sd(TMED)/mean(TMED))*100
@@ -126,15 +125,15 @@ atsum <- function(TMED,crop="maize",plot=F){
     cat("Min Value =",paste(VMin),"ºC\n")
     cat("CV(%) =",paste(round(CV,digits = 2)),"\n")
     if(plot==T){
-      grafico=ggplot(acumulado, aes(x=Ciclo, y=STAc)) +
+      grafico <- ggplot(acumulado, aes(x=Ciclo, y=STAc)) +
         geom_line(color="red", size=1, alpha=0.9, linetype=1) +
         ylab("Accumulated TS (ºC)")+xlab("Wheat Cycle")+theme_classic()+
         scale_x_continuous(breaks=seq(0,tail(acumulado$Ciclo, n = 1)+5,10))
       plot(grafico)
     }
   else if (crop=="oat"){
-    TBi=-4
-    ST=TMED-TBi
+    TBi <- -4
+    ST <- TMED-TBi
     STot <- sum(ST)
     STAc <- cumsum(ST)
     CV <- (sd(TMED)/mean(TMED))*100
@@ -152,7 +151,7 @@ atsum <- function(TMED,crop="maize",plot=F){
     cat("Min Value =",paste(VMin),"ºC\n")
     cat("CV(%) =",paste(round(CV,digits = 2)),"\n")
     if(plot==T){
-      grafico=ggplot(acumulado, aes(x=Ciclo, y=STAc)) +
+      grafico <- ggplot(acumulado, aes(x=Ciclo, y=STAc)) +
         geom_line(color="red", size=1, alpha=0.9, linetype=1) +
         ylab("Accumulated TS (ºC)")+xlab("Oat Cycle")+theme_classic()+
         scale_x_continuous(breaks=seq(0,tail(acumulado$Ciclo, n = 1)+5,10))
@@ -185,12 +184,9 @@ atsum <- function(TMED,crop="maize",plot=F){
 optemp <-function(DAS,Var,crop = "soybean",ylab = "Meteorological Atribute",
                     xlab = "Days After Sowing"){
 
-  require(dplyr)
-  require(ggplot2)
-
-  DAS = as.numeric(DAS)
-  Var = Var
-  Cultura=Cultura
+  DAS <- as.numeric(DAS)
+  Var <- Var
+  Cultura <- Cultura
 
   if(crop=="soybean"){
     TbInferior<-10
@@ -203,7 +199,7 @@ optemp <-function(DAS,Var,crop = "soybean",ylab = "Meteorological Atribute",
 
     dados<-data.frame(DAS, Var)
 
-    grafico=ggplot(dados, aes(x = DAS, y = Var))+
+    grafico <- ggplot(dados, aes(x = DAS, y = Var))+
       geom_line(col = "red", size =0.8, linetype = 2,group=1)+ylab(ylab)+xlab(xlab)+theme_classic()+
       geom_segment(aes(x = 0, y =TbInferior, xend =DAS, yend = TbInferior), linetype = 1, color = "blue")+
       geom_label(aes(x=15, y=TbInferior, label="Lower base temperature"))+theme_classic()+
@@ -242,7 +238,7 @@ optemp <-function(DAS,Var,crop = "soybean",ylab = "Meteorological Atribute",
     Tmin<-min(Var)
 
     dados<-data.frame(DAS, Var)
-    grafico=ggplot(dados, aes(x = DAS, y = Var))+
+    grafico <- ggplot(dados, aes(x = DAS, y = Var))+
       geom_line(col = "red", size =0.8, linetype = 2,group=1)+ylab(ylab)+xlab(xlab)+theme_classic()+
       geom_segment(aes(x = 0, y =TbInferior, xend =DAS, yend = TbInferior), linetype = 1, color = "blue")+
       geom_label(aes(x=15, y=TbInferior, label="Lower base temperature"))+theme_classic()+
@@ -280,7 +276,7 @@ optemp <-function(DAS,Var,crop = "soybean",ylab = "Meteorological Atribute",
     Tmin<-min(Var)
 
     dados<-data.frame(DAS, Var)
-    grafico=ggplot(dados, aes(x = DAS, y = Var))+
+    grafico <- ggplot(dados, aes(x = DAS, y = Var))+
       geom_line(col = "red", size =0.8, linetype = 2,group=1)+ylab(ylab)+xlab(xlab)+theme_classic()+
       geom_segment(aes(x = 0, y =TbInferior, xend =DAS, yend = TbInferior), linetype = 1, color = "blue")+
       geom_label(aes(x=15, y=TbInferior, label="Lower base temperature"))+theme_classic()+
@@ -349,17 +345,10 @@ optemp <-function(DAS,Var,crop = "soybean",ylab = "Meteorological Atribute",
 #'}
 
 plast <- function(GEN, TMED, STAD, NN, habit = "ind", plot = FALSE) {
-  require(dplyr)
-  require(ggplot2)
-  require(hrbrthemes)
-  require(broom)
-  require(purrr)
-  require(ggrepel)
-  require(grid)
 
-  Tb = 7.6
-  Tot = 31
-  TB = 40
+  Tb <- 7.6
+  Tot <- 31
+  TB <- 40
   resultado <- data.frame(GEN, TMED, STAD, NN) %>%
     group_by(GEN) %>%
     mutate(
@@ -624,10 +613,6 @@ deltat <- function(LON,LAT,type=2,days=7,control=NULL,
 
   if (type==1) {
     # Tipo 1 - Forecast
-    require(httr)
-    require(jsonlite)
-    require(dplyr)
-    require(lubridate)
 
     url <- "https://api.open-meteo.com/v1/forecast"
     res <- GET(url, query = list(
@@ -671,7 +656,6 @@ deltat <- function(LON,LAT,type=2,days=7,control=NULL,
       print(dt)
     }
     if(plot==TRUE){
-      require(ggplot2)
 
       #Fazer gráfico
     }
@@ -724,7 +708,6 @@ deltat <- function(LON,LAT,type=2,days=7,control=NULL,
 
   if(type==2){
     #Tipo 2 - Dados históricos
-    require(nasapower)
 
     if(is.null(dates) || length(dates) !=2){
       stop("The 'dates' parameter must be a vector with two dates in the format

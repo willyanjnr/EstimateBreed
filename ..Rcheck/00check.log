@@ -1,0 +1,323 @@
+* using log directory 'C:/Users/willy/Documents/EstimateBreed/..Rcheck'
+* using R version 4.4.2 (2024-10-31 ucrt)
+* using platform: x86_64-w64-mingw32
+* R was compiled by
+    gcc.exe (GCC) 13.3.0
+    GNU Fortran (GCC) 13.3.0
+* running under: Windows 11 x64 (build 26100)
+* using session charset: UTF-8
+* checking for file './DESCRIPTION' ... OK
+* checking extension type ... Package
+* this is package 'EstimateBreed' version '0.1.0'
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... OK
+* checking if this is a source package ... OK
+* checking if there is a namespace ... OK
+* checking for executable files ... OK
+* checking for hidden files and directories ... NOTE
+Found the following hidden files and directories:
+  .Rhistory
+  .gitignore
+  vignettes/.gitignore
+  ..Rcheck
+  .Rproj.user
+  .git
+These were most likely included in error. See section 'Package
+structure' in the 'Writing R Extensions' manual.
+* checking for portable file names ... NOTE
+Found the following non-portable file paths:
+  EstimateBreed/.Rproj.user/1AB3D9DA/ctx/ctx-44491/plots_dir/02d030b8-a387-4ef3-8937-e561af30a7ac.snapshot
+  EstimateBreed/.Rproj.user/1AB3D9DA/ctx/ctx-44491/plots_dir/0f9d8c10-d4b7-4c21-9565-b0f65a793290.snapshot
+  EstimateBreed/.Rproj.user/1AB3D9DA/ctx/ctx-44491/plots_dir/31c94664-0d6b-4440-8bfd-149bf58a06f7.snapshot
+  EstimateBreed/.Rproj.user/1AB3D9DA/ctx/ctx-44491/plots_dir/521f3bd3-d7ef-4163-9a2b-ac384ffee99e.snapshot
+  EstimateBreed/.Rproj.user/1AB3D9DA/ctx/ctx-44491/plots_dir/6ddbf568-0eb7-44b0-b1cb-cfe1c015359a.snapshot
+  EstimateBreed/.Rproj.user/1AB3D9DA/ctx/ctx-44491/plots_dir/8a770ef6-9614-456c-8bcd-17cfd095f364.snapshot
+  EstimateBreed/.Rproj.user/1AB3D9DA/ctx/ctx-44491/plots_dir/8ba5942a-3688-401d-8bfb-8cfa8e2d21b1.snapshot
+  EstimateBreed/.Rproj.user/1AB3D9DA/ctx/ctx-44491/plots_dir/8bcb18c8-1b2f-47c6-8a26-2cb140a75e3d.snapshot
+  EstimateBreed/.Rproj.user/1AB3D9DA/ctx/ctx-44491/plots_dir/ca44792b-ecaf-44bd-8eb3-97d4178161fb.snapshot
+
+Tarballs are only required to store paths of up to 100 bytes and cannot
+store those of more than 256 bytes, with restrictions including to 100
+bytes for the final component.
+See section 'Package structure' in the 'Writing R Extensions' manual.
+* checking whether package 'EstimateBreed' can be installed ... OK
+* checking installed package size ... OK
+* checking package directory ... OK
+* checking DESCRIPTION meta-information ... NOTE
+Checking should be performed on sources prepared by 'R CMD build'.
+* checking top-level files ... OK
+* checking for left-over files ... OK
+* checking index information ... OK
+* checking package subdirectories ... WARNING
+Found the following directory with the name of a check directory:
+  ./..Rcheck
+Most likely, these were included erroneously.
+* checking code files for non-ASCII characters ... WARNING
+Found the following files with non-ASCII characters:
+  NAMESPACE
+  R/JPooni.R
+  R/ambiental.R
+  R/estresse.R
+  R/indgerarroz.R
+  R/linearest.R
+  R/mtgerm.R
+  R/risco.R
+  R/selecao.R
+Portable packages must use only ASCII characters in their R code and
+NAMESPACE directives, except perhaps in comments.
+Use \uxxxx escapes for other characters.
+Function 'tools::showNonASCIIfile' can help in finding non-ASCII
+characters in files.
+* checking R files for syntax errors ... OK
+* checking whether the package can be loaded ... OK
+* checking whether the package can be loaded with stated dependencies ... OK
+* checking whether the package can be unloaded cleanly ... OK
+* checking whether the namespace can be loaded with stated dependencies ... OK
+* checking whether the namespace can be unloaded cleanly ... OK
+* checking loading without being on the library search path ... OK
+* checking dependencies in R code ... WARNING
+'::' or ':::' import not declared from: 'crayon'
+'library' or 'require' calls not declared from:
+  'dplyr' 'ggplot2'
+'library' or 'require' calls in package code:
+  'dplyr' 'ggplot2'
+  Please use :: or requireNamespace() instead.
+  See section 'Suggested packages' in the 'Writing R Extensions' manual.
+Namespace in Imports field not imported from: 'stats'
+  All declared Imports should be used.
+* checking S3 generic/method consistency ... OK
+* checking replacement functions ... OK
+* checking foreign function calls ... OK
+* checking R code for possible problems ... NOTE
+ALELICA: no visible binding for global variable 'ambiente'
+Coeficiente_endogamia: no visible global function definition for 'bold'
+Coeficiente_endogamia: no visible global function definition for
+  'green'
+Coeficiente_endogamia: no visible global function definition for
+  'italic'
+Jinks_Pooni: no visible global function definition for 'pnorm'
+atsum: no visible global function definition for 'sd'
+atsum: no visible global function definition for 'tail'
+atsum: no visible binding for global variable 'Ciclo'
+atsum: no visible binding for global variable 'MONTH'
+cvar: no visible binding for global variable 'Control'
+cvar: no visible global function definition for 'sd'
+deltat: no visible binding for global variable 'RH'
+deltat: no visible binding for global variable 'Temp'
+deltat: no visible binding for global variable 'Td'
+deltat: no visible binding for global variable 'DELTAT'
+deltat: no visible binding for global variable 'WindS'
+deltat: no visible binding for global variable 'Prec'
+deltat: no visible binding for global variable 'RH2M'
+deltat: no visible binding for global variable 'T2M'
+deltat: no visible binding for global variable 'PRECTOTCORR'
+desv_clim: no visible global function definition for 'sd'
+estresse: no visible global function definition for 'aggregate'
+estresse: no visible binding for global variable 'valores'
+fototermal: no visible binding for global variable 'DIA'
+fototermal: no visible global function definition for 'tail'
+genpar: no visible binding for global variable 'dados'
+genpar: no visible global function definition for ':='
+genpar: no visible global function definition for 'aov'
+genpar: no visible binding for global variable 'sigmaE'
+genpar: no visible binding for global variable 'sigmaG'
+genpar: no visible binding for global variable 'sigmaP'
+genpar: no visible binding for global variable 'ECV'
+genpar: no visible binding for global variable 'GCV'
+genpar: no visible binding for global variable 'PCV'
+genpar: no visible binding for global variable 'H2'
+genpar: no visible binding for global variable 'GA'
+genpar: no visible binding for global variable 'GAM'
+gga: no visible binding for global variable 'u'
+gvri: no visible global function definition for 'aggregate'
+heterose: no visible global function definition for 'aov'
+index_vigor: no visible global function definition for 'sd'
+indger: no visible binding for global variable
+  'primeiro_dia_germinacao'
+indviab: no visible global function definition for 'aggregate'
+is_ptnerg: no visible global function definition for 'sd'
+is_ptnerg: no visible global function definition for 'bold'
+is_ptnerg: no visible global function definition for 'green'
+is_ptnerg: no visible global function definition for 'italic'
+is_qindustrial: no visible global function definition for 'sd'
+isgr: no visible global function definition for 'sd'
+isgr: no visible binding for global variable 'tipo'
+isgr: no visible binding for global variable 'PREC'
+isgr: no visible binding for global variable 'NGL'
+isgr: no visible binding for global variable 'MGL'
+isgr: no visible binding for global variable 'STMED'
+isgr: no visible binding for global variable 'TMEDR'
+isgr: no visible binding for global variable 'SPREC'
+isgr: no visible binding for global variable 'PRECIR'
+ivig_simp: no visible global function definition for 'sd'
+lai: no visible binding for global variable 'AF'
+lai: no visible binding for global variable 'ALA'
+lai: no visible binding for global variable 'AS'
+lai: no visible binding for global variable 'PotLAI'
+lai: no visible binding for global variable 'RED'
+lai: no visible binding for global variable 'RealLAI'
+linearest: no visible global function definition for 'lm'
+linearest: no visible global function definition for 'coef'
+linearest : der1: no visible binding for global variable 'b2'
+linearest: no visible binding for global variable 'b2'
+linearest : derivada_2: no visible binding for global variable 'b2'
+linearest: no visible global function definition for 'nls'
+linearest: no visible global function definition for 'nls.control'
+ph: no visible global function definition for 'aggregate'
+ph: no visible binding for global variable 'HW'
+plast: no visible binding for global variable 'TTd'
+plast: no visible binding for global variable 'ATT'
+plast: no visible binding for global variable 'Class'
+plast: no visible global function definition for 'lm'
+plast: no visible binding for global variable 'modelo'
+plast: no visible binding for global variable 'coef'
+plast: no visible binding for global variable 'model'
+plast: no visible binding for global variable 'model_summary'
+plast: no visible binding for global variable 'rsq'
+plast: no visible binding for global variable 'STA'
+plast: no visible binding for global variable 'eq_text'
+plast: no visible binding for global variable 'pred'
+reg_GP: no visible global function definition for 'lm'
+reg_GP: no visible global function definition for 'coef'
+rend_ind: no visible global function definition for 'aggregate'
+restr: no visible global function definition for 'sd'
+risco: no visible global function definition for 'aggregate'
+risco: no visible global function definition for 'layout'
+risco: no visible global function definition for 'boxplot'
+risco: no visible global function definition for 'rgb'
+tindex: no visible binding for global variable 'sd'
+tindex: no visible binding for global variable 'dados'
+transgressivos: no visible global function definition for 'sd'
+Undefined global functions or variables:
+  := AF ALA AS ATT Ciclo Class Control DELTAT DIA ECV GA GAM GCV H2 HW
+  MGL MONTH NGL PCV PREC PRECIR PRECTOTCORR PotLAI Prec RED RH RH2M
+  RealLAI SPREC STA STMED T2M TMEDR TTd Td Temp WindS aggregate
+  ambiente aov b2 bold boxplot coef dados eq_text green italic layout
+  lm model model_summary modelo nls nls.control pnorm pred
+  primeiro_dia_germinacao rgb rsq sd sigmaE sigmaG sigmaP tail tipo u
+  valores
+Consider adding
+  importFrom("grDevices", "rgb")
+  importFrom("graphics", "boxplot", "layout")
+  importFrom("stats", "aggregate", "aov", "coef", "lm", "nls",
+             "nls.control", "pnorm", "sd")
+  importFrom("utils", "tail")
+to your NAMESPACE file.
+* checking Rd files ... NOTE
+checkRd: (-1) SEGREGA-O_PADR-O.Rd:3: \name should only contain printable ASCII characters
+* checking Rd metadata ... OK
+* checking Rd cross-references ... OK
+* checking for missing documentation entries ... WARNING
+Undocumented code objects:
+  'leafarea'
+Undocumented data sets:
+  'leafarea'
+All user-level objects in a package should have documentation entries.
+See chapter 'Writing R documentation files' in the 'Writing R
+Extensions' manual.
+* checking for code/documentation mismatches ... WARNING
+Functions or methods with usage in Rd file 'hello.Rd' but not in code:
+  'hello'
+
+* checking Rd \usage sections ... WARNING
+Undocumented arguments in Rd file 'GS4.Rd'
+  'Ano'
+Documented arguments not in \usage in Rd file 'GS4.Rd':
+  'Year'
+
+Undocumented arguments in Rd file 'deltat.Rd'
+  'plot'
+
+Undocumented arguments in Rd file 'estresse.Rd'
+  '...'
+
+Undocumented arguments in Rd file 'genpar.Rd'
+  'vars'
+Documented arguments not in \usage in Rd file 'genpar.Rd':
+  'VAR'
+
+Documented arguments not in \usage in Rd file 'index_vigor.Rd':
+  'REP'
+
+Undocumented arguments in Rd file 'indviab.Rd'
+  'GEN' 'stat'
+Documented arguments not in \usage in Rd file 'indviab.Rd':
+  'genot'
+
+Undocumented arguments in Rd file 'ivig_simp.Rd'
+  'GEN'
+
+Undocumented arguments in Rd file 'rend_ind.Rd'
+  '...'
+
+Undocumented arguments in Rd file 'tindex.Rd'
+  'fc' 'germ' 'sdm' 'sl' 'radl' 'index'
+
+Undocumented arguments in Rd file 'transgressivos.Rd'
+  'Testemunha' 'ylab' 'xlab'
+Documented arguments not in \usage in Rd file 'transgressivos.Rd':
+  'Witness'
+
+Functions with \usage entries need to have the appropriate \alias
+entries, and all their arguments documented.
+The \usage entries must correspond to syntactically valid R code.
+See chapter 'Writing R documentation files' in the 'Writing R
+Extensions' manual.
+* checking Rd contents ... OK
+* checking for unstated dependencies in examples ... WARNING
+'::' or ':::' import not declared from: 'tibble'
+'library' or 'require' call not declared from: 'Breeding'
+* checking contents of 'data' directory ... OK
+* checking data for non-ASCII characters ... OK
+* checking LazyData ... OK
+* checking data for ASCII and uncompressed saves ... OK
+* checking files in 'vignettes' ... WARNING
+Files in the 'vignettes' directory but no files in 'inst/doc':
+  'Introduction.Rmd'
+* checking examples ... ERROR
+Running examples in 'EstimateBreed-Ex.R' failed
+The error most likely occurred in:
+
+> ### Name: hello
+> ### Title: Hello, World!
+> ### Aliases: hello
+> 
+> ### ** Examples
+> 
+> hello()
+Error in hello() : could not find function "hello"
+Execution halted
+* checking for unstated dependencies in 'tests' ... OK
+* checking tests ... ERROR
+  Running 'testthat.R'
+Running the tests in 'tests/testthat.R' failed.
+Last 13 lines of output:
+  
+  The following object is masked from 'package:stats':
+  
+      deltat
+  
+  > 
+  > test_check("EstimateBreed")
+  Error in `test_dir()`:
+  ! No test files found
+  Backtrace:
+      ▆
+   1. └─testthat::test_check("EstimateBreed")
+   2.   └─testthat::test_dir("testthat", package = package, reporter = reporter, ..., load_package = "installed")
+   3.     └─rlang::abort("No test files found")
+  Execution halted
+* checking for unstated dependencies in vignettes ... OK
+* checking package vignettes ... WARNING
+Directory 'inst/doc' does not exist.
+Package vignette without corresponding single PDF/HTML:
+  'Introduction.Rmd'
+* checking re-building of vignette outputs ... OK
+* checking PDF version of manual ... WARNING
+LaTeX errors when creating PDF version.
+This typically indicates Rd problems.
+* checking PDF version of manual without index ... ERROR
+Re-running with no redirection of stdout/stderr.
+* DONE
+Status: 3 ERRORs, 10 WARNINGs, 5 NOTEs

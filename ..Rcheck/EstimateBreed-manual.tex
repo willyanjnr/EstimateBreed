@@ -1,0 +1,2445 @@
+\nonstopmode{}
+\documentclass[a4paper]{book}
+\usepackage[times,inconsolata,hyper]{Rd}
+\usepackage{makeidx}
+\makeatletter\@ifl@t@r\fmtversion{2018/04/01}{}{\usepackage[utf8]{inputenc}}\makeatother
+% \usepackage{graphicx} % @USE GRAPHICX@
+\makeindex{}
+\begin{document}
+\chapter*{}
+\begin{center}
+{\textbf{\huge Package `EstimateBreed'}}
+\par\bigskip{\large \today}
+\end{center}
+\ifthenelse{\boolean{Rd@use@hyper}}{\hypersetup{pdftitle = {EstimateBreed: Estimation of Environmental Variables and Genetic Parameters}}}{}
+\begin{description}
+\raggedright{}
+\item[Type]\AsIs{Package}
+\item[Title]\AsIs{Estimation of Environmental Variables and Genetic Parameters}
+\item[Version]\AsIs{0.1.0}
+\item[Date]\AsIs{2025-02-13}
+\item[Author]\AsIs{Willyan Jr. A. Bandeira }\email{willyanpacm@gmail.com}\AsIs{, 
+Ivan R. Carvalho }\email{carvalho.irc@gmail.com}\AsIs{, 
+Murilo V. Loro }\email{muriloloro@gmail.com}\AsIs{,
+Leonardo C. Pradebon }\email{leonardopradebon@gmail.com}\AsIs{, 
+José A. G. da Silva }\email{jagsfaem@yahoo.com.br}\AsIs{}
+\item[Maintainer]\AsIs{Willyan Jr. A. Bandeira }\email{willyanpacm@gmail.com}\AsIs{}
+\item[Description]\AsIs{Performs analyzes and estimates of environmental covariates 
+and genetic parameters related to selection strategies and development 
+of superior genotypes. It has two main functionalities, the first being 
+about prediction models of covariates and environmental processes, while 
+the second deals with the estimation of genetic parameters and selection 
+strategies.}
+\item[License]\AsIs{GPL (>= 3)}
+\item[URL]\AsIs{}\url{https://github.com/willyanjnr/EstimateBreed}\AsIs{}
+\item[Depends]\AsIs{R (>= 4.1.0)}
+\item[Imports]\AsIs{dplyr, ggplot2, hrbrthemes, broom, purrr, ggrepel, grid, httr,
+jsonlite, lubridate, nasapower, tidyr, viridis, stats, knitr,
+cowplot, sommer, lme4, minque}
+\item[Suggests]\AsIs{rmarkdown, testthat (>= 3.0.0), roxygen2, DT}
+\item[VignetteBuilder]\AsIs{knitr}
+\item[Encoding]\AsIs{UTF-8}
+\item[LazyData]\AsIs{true}
+\item[LazyLoad]\AsIs{true}
+\item[Language]\AsIs{en-US}
+\item[RoxygenNote]\AsIs{7.3.2}
+\item[Config/testthat/edition]\AsIs{3}
+\end{description}
+\Rdcontents{Contents}
+\HeaderA{ALELICA}{Allelic interactions}{ALELICA}
+%
+\begin{Description}
+Examples of allelic and gene interactions
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+ALELICA(type = NULL, ge = NULL)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{type}] Type of allelic interaction. Use “ad” for additivity, “dom”
+for complete dominance, “domp” for partial dominance and “sob” for
+overdominance.
+
+\item[\code{ge}] Type of GxE interaction. Use “aus” for no interaction,
+“simple” for simple interaction and “complex” for complex interaction.
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Author}
+Willyan Júnior Adorian Bandeira
+
+Ivan Ricardo Carvalho
+
+Murilo Vieira Loro
+
+Leonardo Cesar Pradebon
+
+José Antonio Gonzalez da Silva
+\end{Author}
+\HeaderA{atsum}{Accumulated Thermal Sum}{atsum}
+%
+\begin{Description}
+Calculates the daily and accumulated thermal sum of crops
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+atsum(TMED, crop = "maize", plot = F)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{TMED}] The column with the average air temperature values
+
+\item[\code{crop}] Parameter to define the culture. Use "maize", "soybean", "flax",
+"trit" or "oat"
+
+\item[\code{plot}] Logical argument. Plot a graph of thermal accumulation if TRUE.
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Author}
+Willyan Júnior Adorian Bandeira
+
+Ivan Ricardo Carvalo
+
+Murilo Vieira Loro
+
+Leonardo Cesar Pradebon
+
+José Antonio Gonzalez da Silva
+\end{Author}
+%
+\begin{Examples}
+\begin{ExampleCode}
+
+library(EstimateBreed)
+
+data("clima")
+clima <- clima(1:150,)
+
+with(clima,atsum(TMED,crop="maize"))
+
+\end{ExampleCode}
+\end{Examples}
+\HeaderA{aveia}{Dataset: Oat data}{aveia}
+\keyword{datasets}{aveia}
+%
+\begin{Description}
+Data set with oat genotypes and industry variables.
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+aveia
+\end{verbatim}
+\end{Usage}
+%
+\begin{Format}
+A data.frame with 54 observations and 6 variables:
+\begin{description}
+
+\item[GEN] 14 white oat genotypes.
+\item[BLOCO] Experiment blocks.
+\item[NG2M] Number of grains larger than 2 mm.
+\item[MG] Grain mass
+\item[MC] Caryopsis dough
+\item[RG] Grain yield (in kg per ha)
+
+\end{description}
+
+\end{Format}
+%
+\begin{Source}
+Real field data for use.
+\end{Source}
+\HeaderA{clima}{Data: Climate Data Set for Predictions}{clima}
+\keyword{datasets}{clima}
+%
+\begin{Description}
+Average air temperature and relative humidity data for the period of
+one year, with time, day and month.
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+clima
+\end{verbatim}
+\end{Usage}
+%
+\begin{Format}
+A data.frame with 8760 observations and 5 variables:
+\begin{description}
+
+\item[MO] Month of the year.
+\item[DY] Day of the year.
+\item[HR] Time of the day.
+\item[TMED] Average Air Temperature - in ºC.
+\item[RH] Relative Humidity - in \%.
+
+\end{description}
+
+\end{Format}
+%
+\begin{Source}
+Data obtained from the Nasa Power platform (https://power.larc.nasa.gov/).
+\end{Source}
+\HeaderA{coefend}{Data: Data: Endogamy Coefficient Data Set}{coefend}
+\keyword{datasets}{coefend}
+%
+\begin{Description}
+Data set of phenotypic and genotypic variance, heritability and
+differential selection for different variables.
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+coefend
+\end{verbatim}
+\end{Usage}
+%
+\begin{Format}
+A data.frame with 7 observations and 5 variables:
+\begin{description}
+
+\item[Var] Variable name.
+\item[VF] Phenotypic Variance.
+\item[VG] Genotypic Variance.
+\item[h] Broad-sense heritability
+\item[DS] Selection Differential
+
+\end{description}
+
+\end{Format}
+%
+\begin{Source}
+Real data for use.
+\end{Source}
+\HeaderA{Coeficiente\_endogamia}{Inbreeding coefficient}{Coeficiente.Rul.endogamia}
+%
+\begin{Description}
+Function for calculating the inbreeding coefficient
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+Coeficiente_endogamia(var, VG, VF)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{var}] Column with the variable name
+
+\item[\code{VG}] Column with genotypic variance
+
+\item[\code{VF}] Column with phenotypic variance
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Author}
+Willyan Júnior Adorian Bandeira
+
+Ivan Ricardo Carvalho
+
+Murilo Vieira Loro
+
+Leonardo Cesar Pradebon
+
+José Antonio Gonzalez da Silva
+\end{Author}
+\HeaderA{cvar}{Estimation of variance components by restricting the variability of the witnesses.}{cvar}
+%
+\begin{Description}
+Estimation of variance components and genetic parameters from the restriction
+of witness values
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+cvar(GEN, REP, Xi, approach = NULL, zstat = NULL)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{GEN}] The column with the name of the genotypes (without controls).
+
+\item[\code{REP}] The column with the repetitions (if any).
+
+\item[\code{Xi}] The column with the observed value for the variable in a given genotype.
+
+\item[\code{approach}] Method to be used for estimating variance components. Use “apI”
+for parent-offspring regression, “apII” for the of the sum of squares of
+augmented blocks with intercalary parents, “apIII” for the method with linear
+mixed models with random genetic effects.
+
+\item[\code{zstat}] Logical argument. Applies Z-notation normalization if “TRUE”.
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Author}
+Willyan Júnior Adorian Bandeira
+
+Ivan Ricardo Carvalho
+
+Murilo Vieira Loro
+
+Leonardo Cesar Pradebon
+
+José Antonio Gonzalez da Silva
+\end{Author}
+%
+\begin{References}
+Carvalho, I. R., Silva, J. A. G. da, Moura, N. B., Ferreira, L. L.,
+Lautenchleger, F., \& Souza, V. Q. de. (2023). Methods for estimation of
+genetic parameters in soybeans: An alternative to adjust residual variability.
+Acta Scientiarum. Agronomy, 45, e56156.
+https://doi.org/10.4025/actasciagron.v45i1.56156
+\end{References}
+\HeaderA{deltat}{Optimum conditions for pesticide application}{deltat}
+%
+\begin{Description}
+Determining the ideal time for pesticide application using ∆T
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+deltat(
+  LON,
+  LAT,
+  type = 2,
+  days = 7,
+  control = NULL,
+  details = FALSE,
+  dates = NULL,
+  plot = FALSE
+)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{LON}] Longitude (in decimal)
+
+\item[\code{LAT}] Latitude (in decimal)
+
+\item[\code{type}] Type of analysis. Use 1 for forecast and 2 for temporal data.
+
+\item[\code{days}] Number of days (only use this argument if type=1).
+
+\item[\code{control}] Type of product to be applied. Use “fung” for fungicide,
+“herb” for herbicide, “ins” for insecticides, “bio” for biological products.
+
+\item[\code{details}] Returns the result in detail if TRUE.
+
+\item[\code{dates}] Only use this argument if type=2. Start and end date for obtaining
+weather data for a crop cycle.
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Value}
+Returns the ideal application times, considering each scenario.
+Taking as a parameter a DELTA\_T between 2 and 8, wind speed between 3 and 8,
+and no precipitation.
+\end{Value}
+%
+\begin{Author}
+Willyan Júnior Adorian Bandeira
+
+Ivan Ricardo Carvalho
+
+Murilo Vieira Loro
+
+Leonardo Cesar Pradebon
+
+José Antonio Gonzalez da Silva
+\end{Author}
+%
+\begin{Examples}
+\begin{ExampleCode}
+
+library(Breeding)
+
+# Forecasting application conditions
+deltat(-53.696944444444,-28.063888888889,type=1,days=10)
+View(forecast)
+
+# Retrospective analysis of application conditions
+deltat(-53.696944444444,-28.063888888889,type=2,days=10,dates=c("2023-01-01","2023-05-01"))
+View(retrospective)
+
+\end{ExampleCode}
+\end{Examples}
+\HeaderA{desvamb}{Data: Data set for calculating the environmental deviation}{desvamb}
+\keyword{datasets}{desvamb}
+%
+\begin{Description}
+Data set with average air temperature and precipitation values per environment
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+desvamb
+\end{verbatim}
+\end{Usage}
+%
+\begin{Format}
+A data.frame with 449 observations and 3 variables:
+\begin{description}
+
+\item[ENV] Selection environment.
+\item[TMED] Temperatura média do ar (em ºC).
+\item[PREC] Precipitation (in mm)
+
+\end{description}
+
+\end{Format}
+%
+\begin{Source}
+Real field data for use.
+\end{Source}
+\HeaderA{desv\_clim}{Auxiliary function for calculating ISGR}{desv.Rul.clim}
+%
+\begin{Description}
+This function receives a dataframe with temperature and precipitation data
+and calculates the standard deviation of these parameters for each environment.
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+desv_clim(ENV, TMED, PREC)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{ENV}] Identification of each selection environment (to differentiate if
+there is more than one cultivation cycle).
+
+\item[\code{TMED}] Average air temperature (in ºC) during the cycle in each environment.
+
+\item[\code{PREC}] Rainfall (in mm) during the cultivation cycle in each environment
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Value}
+A dataframe containing the identifier of the selection environment and
+the standard deviations for temperature and precipitation.
+\end{Value}
+%
+\begin{Author}
+Willyan Júnior Adorian Bandeira
+
+Ivan Ricardo Carvalho
+
+Murilo Vieira Loro
+
+Leonardo Cesar Pradebon
+
+José Antonio Gonzalez da Silva
+\end{Author}
+%
+\begin{Examples}
+\begin{ExampleCode}
+
+library(EstimateBreed)
+data("desvamb")
+head(desvamb)
+
+with(desvamb,desv_clim(ENV,TMED,PREC))
+
+\end{ExampleCode}
+\end{Examples}
+\HeaderA{estresse}{Stress indices for genotype selection}{estresse}
+%
+\begin{Description}
+Selection indices for genotypes conducted under stress conditions cited
+by Ghazvini et al. (2024).
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+estresse(
+  GEN,
+  YS,
+  YC,
+  index = "ALL",
+  bygen = T,
+  plot = F,
+  xlab = "Genotype",
+  ylab = "Values",
+  ...
+)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{GEN}] The column with the genotypes to be selected.
+
+\item[\code{YS}] Productivity of the genotype without stress conditions.
+
+\item[\code{YC}] Genotype productivity under stressful conditions.
+
+\item[\code{index}] Index to be calculated (Standard “ALL”). The indices to be used
+are: 'STI' - Stress Tolerance Index, 'YI' - Yield Index, 'GMP' - Geometric Mean
+Productivity, 'MP' - Mean Productivity, 'MH' - Harmonic Mean, 'SSI' - Stress
+Stability Index, 'YSI' - Yield Stability Index, 'RSI' - Relative Stress Index.
+
+\item[\code{bygen}] Returns the average of each genotype if “TRUE”. Only in this way
+it will be possible to plot graphs.
+
+\item[\code{plot}] Plot graph if equal to “TRUE” (Standard “F”).
+
+\item[\code{xlab}] Adjust the title of the x-axis in the graph.
+
+\item[\code{ylab}] Adjust the title of the y-axis in the graph.
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Value}
+Returns a table with the genotypes and the selected indices.
+The higher the index value, the more resilient the genotype.
+\end{Value}
+%
+\begin{Author}
+Willyan Júnior Adorian Bandeira
+
+Ivan Ricardo Carvalho
+
+Murilo Vieira Loro
+
+Leonardo Cesar Pradebon
+
+José Antonio Gonzalez da Silva
+\end{Author}
+%
+\begin{References}
+Ghazvini, H., Pour-Aboughadareh, A., Jasemi, S.S. et al.
+A Framework for Selection of High-Yielding and Drought-tolerant
+Genotypes of Barley: Applying Yield-Based Indices and Multi-index
+Selection Models. Journal of Crop Health 76, 601–616 (2024).
+https://doi.org/10.1007/s10343-024-00981-1
+\end{References}
+%
+\begin{Examples}
+\begin{ExampleCode}
+
+library(EstimateBreed)
+
+data("aveia")
+
+#General
+with(aveia,estresse(GEN,MC,MG,index = "ALL",bygen=T))
+
+#Only the desired index
+with(aveia,estresse(GEN,MC,MG,index = "STI",bygen=T))
+
+\end{ExampleCode}
+\end{Examples}
+\HeaderA{fototermal}{Photothermal Index}{fototermal}
+%
+\begin{Description}
+Calculation of the photothermal index based on average temperature and
+radiation
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+fototermal(DAY, TMED, RAD, PER)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{DAY}] The column with the cycle days
+
+\item[\code{TMED}] The column with the average air temperature values
+
+\item[\code{RAD}] The column with the incident radiation values
+
+\item[\code{PER}] The column with the period (use VEG for vegetative and REP for
+reproductive)
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Author}
+Willyan Júnior Adorian Bandeira
+
+Ivan Ricardo Carvalho
+
+Murilo Vieira Loro
+
+Leonardo Cesar Pradebon
+
+José Antonio Gonzalez da Silva
+\end{Author}
+%
+\begin{References}
+Zanon, A. J., \& Tagliapietra, E. L. (2022). Ecofisiologia da soja:
+Visando altas produtividades (2ª ed.). Field Crops.
+\end{References}
+\HeaderA{genot}{Data: GxE Interaction}{genot}
+\keyword{datasets}{genot}
+%
+\begin{Description}
+Data set with strains and test subjects from a GxE experiment.
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+genot
+\end{verbatim}
+\end{Usage}
+%
+\begin{Format}
+A data.frame with 55 observations and 5 variables:
+\begin{description}
+
+\item[GEN] Selected lines in a GXE experiment.
+\item[ENV] Selection environments.
+\item[NG] Number of grains measured in the lines.
+\item[MG] Grain mass measured in the lines (in g)
+\item[CICLO] Length of crop cycle (in days)
+
+\end{description}
+
+\end{Format}
+%
+\begin{Source}
+Real field data for use.
+\end{Source}
+\HeaderA{genpar}{General parameters for selection}{genpar}
+%
+\begin{Description}
+Function for determining selection parameters, based on an experiment
+carried out on the rice crop. Intended for isolated evaluation of the performance
+of strains within a given population.
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+genpar(POP, GEN, REP = NULL, vars, K = 0.05, type = "balanced", check = FALSE)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{POP}] The column with the population under improvement.
+
+\item[\code{GEN}] The column with the selected genotypes within the population.
+
+\item[\code{REP}] The column with the repetitions (if any).
+
+\item[\code{K}] Selection pressure (Default 0.05).
+
+\item[\code{type}] Type of experiment (balanced or unbalanced). Use
+“balanced” for balanced and “unb” for unbalanced.
+
+\item[\code{check}] Logical argument. Checks the model's assumptions
+statistical if the value is equal to TRUE.
+
+\item[\code{VAR}] The column with the variable of interest.
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Author}
+Willyan Júnior Adorian Bandeira
+
+Ivan Ricardo Carvalho
+
+Murilo Vieira Loro
+
+Leonardo Cesar Pradebon
+
+José Antonio Gonzalez da Silva
+\end{Author}
+%
+\begin{References}
+Yadav, S. P. S., Bhandari, S., Ghimire, N. P., Mehata, D. K., Majhi, S. K.,
+Bhattarai, S., Shrestha, S., Yadav, B., Chaudhary, P., \& Bhujel, S. (2024).
+Genetic variability, character association, path coefficient, and diversity
+analysis of rice (Oryza sativa L.) genotypes based on agro-morphological
+traits. International Journal of Agronomy, 2024, Article ID 9946332.
+https://doi.org/10.1155/2024/9946332
+\end{References}
+\HeaderA{gga}{Additive Genetic Gain}{gga}
+%
+\begin{Description}
+Estimates the additive genetic gain, as described by Falconer (1987).
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+gga(GEN, VAR, h2, P)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{GEN}] Vector or dataframe containing the genotypes to be selected.
+
+\item[\code{VAR}] Variable of interest for analysis.
+
+\item[\code{h2}] Heritability of the character (a value between 0 and 1).
+
+\item[\code{P}] Performance of the progeny (a numerical value or vector).
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Author}
+Willyan Júnior Adorian Bandeira
+
+Ivan Ricardo Carvalho
+
+Murilo Vieira Loro
+
+Leonardo Cesar Pradebon
+
+José Antonio Gonzalez da Silva
+\end{Author}
+\HeaderA{GS}{Selection pressure}{GS}
+%
+\begin{Description}
+Response to selection weighted by selection pressure
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+GS(Var, h, VF, P = "1")
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{Var}] The column with the name of the variables of interest
+
+\item[\code{h}] The column with the restricted heritability values
+
+\item[\code{VF}] The column with the phenotypic variance values
+
+\item[\code{P}] The column with the values observed for the progenies
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Author}
+Willyan Júnior Adorian Bandeira
+
+Ivan Ricardo Carvalho
+
+Murilo Vieira Loro
+
+Leonardo Cesar Pradebon
+
+José Antonio Gonzalez da Silva
+\end{Author}
+\HeaderA{GS2}{Single Selection Differential}{GS2}
+%
+\begin{Description}
+Response to selection weighted by the Simple Selection Differential
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+GS2(Var, h, DS)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{Var}] The column with the name of the variables of interest
+
+\item[\code{h}] The column with the heritability values in the strict sense
+
+\item[\code{DS}] The column with the value of the selection differential to be applied
+to each variable
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Author}
+Willyan Júnior Adorian Bandeira
+
+Ivan Ricardo Carvalho
+
+Murilo Vieira Loro
+
+Leonardo Cesar Pradebon
+
+José Antonio Gonzalez da Silva
+\end{Author}
+\HeaderA{GS3}{Response to Selection by Control of Genitors}{GS3}
+%
+\begin{Description}
+Consider knowing only the maternal parent, without controlling the pollinator,
+or direct selection without parents
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+GS3(Var, h, VF, P = "1")
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{Var}] The column with the variables of interest
+
+\item[\code{h}] The column with the restricted heritability values
+
+\item[\code{VF}] The column with the phenotypic variance values
+
+\item[\code{P}] The column with the progeny values
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Author}
+Willyan Júnior Adorian Bandeira
+
+Ivan Ricardo Carvalho
+
+Murilo Vieira Loro
+
+Leonardo Cesar Pradebon
+
+José Antonio Gonzalez da Silva
+\end{Author}
+\HeaderA{GS4}{Response to Selection by Year}{GS4}
+%
+\begin{Description}
+Response to selection weighted by Pressure Weighted by Year of selection and
+Year
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+GS4(Var, h, VF, P = "1", Ano)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{Var}] The column with the variables of interest
+
+\item[\code{h}] The column with the restricted heritability values
+
+\item[\code{VF}] The column with the phenotypic variance values
+
+\item[\code{P}] The column with the value obtained for the progenies
+
+\item[\code{Year}] The column with the year of selection
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Author}
+Willyan Júnior Adorian Bandeira
+
+Ivan Ricardo Carvalho
+
+Murilo Vieira Loro
+
+Leonardo Cesar Pradebon
+
+José Antonio Gonzalez da Silva
+\end{Author}
+\HeaderA{gvri}{Selection for Grain Volume}{gvri}
+%
+\begin{Description}
+Calculation of the selection index for grain volume, based on the values for
+grain length, width and thickness
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+gvri(GEN, C, L, E, stat = "all", plot = F, ylab = "GVRI", xlab = "Genotype")
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{GEN}] The column with the genotype name
+
+\item[\code{C}] Grain length
+
+\item[\code{L}] Grain width
+
+\item[\code{E}] Grain thickness
+
+\item[\code{stat}] Extract or not the average per genotype. Use `“all”` to obtain
+information on all the observations or “mean” to extract the average.
+
+\item[\code{plot}] Logical argument. Plot a graph if TRUE
+
+\item[\code{ylab}] Y axis name
+
+\item[\code{xlab}] X axis name
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Author}
+Willyan Júnior Adorian Bandeira
+
+Ivan Ricardo Carvalho
+
+Murilo Vieira Loro
+
+Leonardo Cesar Pradebon
+
+José Antonio Gonzalez da Silva
+\end{Author}
+%
+\begin{References}
+Carvalho, I. R., de Pelegrin, A. J., Szareski, V. J., Ferrari, M., da Rosa, T.
+C., Martins, T. S., dos Santos, N. L., Nardino, M., de Souza, V. Q., de
+Oliveira, A. C., \& da Maia, L. C. (2017). Diallel and prediction (REML/BLUP)
+for yield components in intervarietal maize hybrids. Genetics and Molecular
+Research, 16(3), gmr16039734.
+https://doi.org/10.4238/gmr16039734
+\end{References}
+%
+\begin{Examples}
+\begin{ExampleCode}
+
+library(EstimateBreed)
+set.seed(123)
+
+data <- tibble::tibble(
+Gen = rep(paste0("G", 1:10), each = 3),
+Rep = rep(1:3, times = 10),
+L = round(rnorm(30, mean = 3.2, sd = 0.3), 2),
+C = round(rnorm(30, mean = 8.5, sd = 0.5), 2),
+E = round(rnorm(30, mean = 2.1, sd = 0.2), 2)
+)
+
+with(data,gvri(Gen,C,L,E, stat="mean", plot=T))
+
+\end{ExampleCode}
+\end{Examples}
+\HeaderA{hello}{Hello, World!}{hello}
+%
+\begin{Description}
+Prints 'Hello, world!'.
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+hello()
+\end{verbatim}
+\end{Usage}
+%
+\begin{Examples}
+\begin{ExampleCode}
+hello()
+\end{ExampleCode}
+\end{Examples}
+\HeaderA{heterose}{Heterosis and Heterobeltiosis}{heterose}
+%
+\begin{Description}
+Calculation of heterosis and heterobeltiosis parameters of hybrids
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+heterose(GEN, GM, GP, PR, REP, param = "all")
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{GEN}] The column with the genotype name
+
+\item[\code{GM}] The column with the average of the maternal parent
+
+\item[\code{GP}] The column with the average of the paternal parent
+
+\item[\code{PR}] The column with the average of the progeny
+
+\item[\code{REP}] The column with the repetitions (if exists)
+
+\item[\code{param}] Value to determine the parameter to be calculated. Default is “all”.
+To calculate heterosis only, use “het”. To calculate only heterobeltiosis,
+use “hetb”.
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Author}
+Willyan Júnior Adorian Bandeira
+
+Ivan Ricardo Carvalho
+
+Murilo Vieira Loro
+
+Leonardo Cesar Pradebon
+
+José Antonio Gonzalez da Silva
+\end{Author}
+%
+\begin{Examples}
+\begin{ExampleCode}
+
+library(EstimateBreed)
+
+data("maize")
+#Extract heterosis and heterobeltiosis
+with(maize,heterose(GEN,GM,GP,PR,REP,param="all"))
+
+#Only extract heterosis
+with(maize,heterose(GEN,GM,GP,PR,REP,param = "het"))
+
+#Extract only heterobeltiosis
+with(maize,heterose(GEN,GM,GP,PR,REP,param = "hetb"))
+
+\end{ExampleCode}
+\end{Examples}
+\HeaderA{index\_vigor}{Complete vigor index}{index.Rul.vigor}
+%
+\begin{Description}
+Determining the multivariate vigor of seeds
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+index_vigor(GEN, PC, G, CPA, RAD, MS, EC)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{GEN}] The column with the genotype name
+
+\item[\code{PC}] The column with the values from the first count
+
+\item[\code{G}] The column with the values of percentage of germinated seeds
+
+\item[\code{CPA}] The column with the values of shoot length
+
+\item[\code{RAD}] The column with the values of Root Length
+
+\item[\code{MS}] The column with the values of dry mass
+
+\item[\code{EC}] TThe column with the field emergency values
+
+\item[\code{REP}] The column with the replications
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Author}
+Willyan Júnior Adorian Bandeira
+
+Ivan Ricardo Carvalho
+
+Murilo Vieira Loro
+
+Leonardo Cesar Pradebon
+
+José Antonio Gonzalez da Silva
+\end{Author}
+%
+\begin{References}
+Szareski, V. J., Carvalho, I. R., Demari, G. H., Rosa, T. C. D.,
+Souza, V. Q. D., Villela, F. A.,Aumonde, T. Z. (2018).
+Multivariate index of soybean seed vigor:
+a new biometric approach applied to the effects of genotypes and
+environments. Journal of Seed Science, 40(4), 396-406.
+\end{References}
+%
+\begin{SeeAlso}
+\code{\LinkA{ivig\_simp}{ivig.Rul.simp}}
+\end{SeeAlso}
+\HeaderA{indger}{Índice de germinação pela contagem subsequente}{indger}
+%
+\begin{Description}
+Estimativa do índice de germinação pela contagem subsequente de plântulas
+germinadas em determinado período (Wang et al., 2017)
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+indger(TESTE, DIA, TSG, NST)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{TESTE}] Número identificador do teste realizdo
+
+\item[\code{DIA}] Valores numéricos para os dias testados
+
+\item[\code{TSG}] Nome da coluna com o total de sementes germinadas em cada período
+
+\item[\code{NST}] Nome da coluna padrão com o número de sementes testadas
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Author}
+Willyan Jr. A. Bandeira, Ivan R. Carvalho, Murilo V. Loro,
+Leonardo C. Pradebon, José A. G. da Silva
+\end{Author}
+%
+\begin{References}
+Wang, Pan, Li, Dong, Wang, Li-jun and Adhikari, Benu. "Effect of High
+Temperature Intermittent Drying on Rice Seed Viability and Vigor" International
+Journal of Food Engineering, vol. 13, no. 10, 2017, pp. 20160433.
+https://doi.org/10.1515/ijfe-2016-043
+\end{References}
+%
+\begin{Examples}
+\begin{ExampleCode}
+with(data,indviab(genot,var1,var2))
+\end{ExampleCode}
+\end{Examples}
+\HeaderA{indviab}{Ear Indexes}{indviab}
+%
+\begin{Description}
+Estimating the viability index from the combination of two field variables.
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+indviab(
+  GEN,
+  var1,
+  var2,
+  ylab = "Index",
+  xlab = "Genotype",
+  stat = "all",
+  plot = F
+)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{var1}] The column containing the first variable
+
+\item[\code{var2}] The column containing the second variable
+
+\item[\code{ylab}] The name of the chart's Y axis
+
+\item[\code{xlab}] The name of the chart's X axis
+
+\item[\code{plot}] Logical argument. Plot a graphic if 'TRUE'.
+
+\item[\code{genot}] The column with the name of the genotypes
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Value}
+Returns the index obtained between the reported variables. The higher
+the index, the better the genotype.
+\end{Value}
+%
+\begin{Author}
+Willyan Júnior Adorian Bandeira
+
+Ivan Ricardo Carvalho
+
+Murilo Vieira Loro
+
+Leonardo Cesar Pradebon
+
+José Antonio Gonzalez da Silva
+\end{Author}
+%
+\begin{References}
+Rigotti, E. J., Carvalho, I. R., Loro, M. V., Pradebon, L. C., Dalla Roza,
+J. P., \& Sangiovo, J. P. (2024). Seed and grain yield and quality of wheat
+subjected to advanced harvest using a physiological ripening process.
+Revista Engenharia na Agricultura - REVENG, 32(Contínua), 54–64.
+https://doi.org/10.13083/reveng.v32i1.17394
+\end{References}
+%
+\begin{Examples}
+\begin{ExampleCode}
+
+library(EstimateBreed)
+
+data("trigo")
+#Ear viability index
+with(trigo,indviab(TEST,NGE,NEE))
+
+#Ear harvest index
+with(trigo,indviab(TEST,MGE,ME))
+
+#Spikelet deposition index in the ear
+#'with(trigo,indviab(TEST,NEE,CE))
+
+\end{ExampleCode}
+\end{Examples}
+\HeaderA{isgr}{ISGR - Genetic Selection Index for Resilience}{isgr}
+%
+\begin{Description}
+Estimation of the selection index for environmental resilience
+(Bandeira et al., 2024).
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+isgr(GEN, ENV, NG, MG, CICLO, req = 3.5, stage = NULL)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{GEN}] Column referring to genotypes. Lines must have the prefix “L” before
+the number. Ex: L139.
+
+\item[\code{ENV}] The column for the selection environment.
+
+\item[\code{NG}] Number of grains of all genotypes evaluated
+
+\item[\code{MG}] Grain mass of all genotypes evaluated
+
+\item[\code{CICLO}] Number of days in the cycle to define rainfall
+ideal (value of 3.5 mm per day). Can be changed manually in the 'req' argument.
+
+\item[\code{req}] Average daily water demand for the soybean crop (standard 3.5 mm).
+May change depending on the phenological stage.
+
+\item[\code{stage}] Parameter to define the phenological stage the crop is in
+Use “veg” for vegetative and “rep” for reproductive, if the
+evaluations have only been carried out in a given period.
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Author}
+Willyan Júnior Adorian Bandeira
+
+Ivan Ricardo Carvalho
+
+Murilo Vieira Loro
+
+Leonardo Cesar Pradebon
+
+José Antonio Gonzalez da Silva
+\end{Author}
+%
+\begin{References}
+Bandeira, W. J. A., Carvalho, I. R., Loro, M. V., da Silva, J. A. G.,
+Dalla Roza, J. P., Scarton, V. D. B., Bruinsma, G. M. W., \& Pradebon, L. C. (2024).
+Identifying soybean progenies with high grain productivity and stress resilience
+to abiotic stresses. Aust J Crop Sci, 18(12), 825-830.
+https://doi.org/10.21475/ajcs.24.18.12.p98
+\end{References}
+%
+\begin{Examples}
+\begin{ExampleCode}
+
+library(EstimateBreed)
+
+#Obtain environmental deviations
+data("desvamb")
+head(desvamb)
+with(desvamb, desv_clim(ENV,TMED,PREC))
+
+#Calculate the ISGR
+data("genot")
+head(genot)
+with(genot, isgr(GEN,ENV,NG,MG,CICLO))
+
+#Define the water requirement per stage
+with(genot, isgr(GEN,ENV,NG,MG,CICLO,req=5,stage="rep"))
+
+\end{ExampleCode}
+\end{Examples}
+\HeaderA{is\_ptnerg}{Selection index for protein and grain yield}{is.Rul.ptnerg}
+%
+\begin{Description}
+Selection index for protein and grain yield (Pelegrin et al., 2017).
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+is_ptnerg(GEN, PTN, RG)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{GEN}] The column with the name of the genotype
+
+\item[\code{PTN}] The column with the crude protein values
+
+\item[\code{RG}] The column with the grain yield values (in kg per ha)
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Value}
+Returns an industrial wheat quality index based solely on protein and
+grain yield.
+\end{Value}
+%
+\begin{Author}
+Willyan Júnior Adorian Bandeira
+
+Ivan Ricardo Carvalho
+
+Murilo Vieira Loro
+
+Leonardo Cesar Pradebon
+
+José Antonio Gonzalez da Silva
+\end{Author}
+%
+\begin{References}
+de Pelegrin, A. J., Carvalho, I. R., Nunes, A. C. P., Demari, G. H., Szareski,
+V. J., Barbosa, M. H., ... \& da Maia, L. C. (2017).
+Adaptability, stability and multivariate selection by mixed models.
+American Journal of Plant Sciences, 8(13), 3324.
+\end{References}
+%
+\begin{Examples}
+\begin{ExampleCode}
+
+library(EstimateBreed)
+
+Gen <- c("G1", "G2", "G3", "G4", "G5")
+PTN <- c(12.5, 14.2, 13.0, 11.8, 15.1)
+RG <- c(3500, 4000, 3700, 3300, 4100)
+
+data <- data.frame(Gen,PTN,RG)
+
+with(data,is_ptnerg(Gen,PTN,RG))
+
+\end{ExampleCode}
+\end{Examples}
+\HeaderA{is\_qindustrial}{Industrial quality of wheat}{is.Rul.qindustrial}
+%
+\begin{Description}
+Function for determining industrial quality indices of wheat genotypes,
+described by Szareski et al. (2019).
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+is_qindustrial(GEN, NQ, W, PTN)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{GEN}] The column with the genotype name
+
+\item[\code{NQ}] The column with the falling number
+
+\item[\code{W}] The column with the gluten force (W)
+
+\item[\code{PTN}] The column with the protein values
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Value}
+Determines the industrial quality index for wheat crops, when
+considering variables used to classify wheat cultivars.
+\end{Value}
+%
+\begin{Author}
+Willyan Júnior Adorian Bandeira
+
+Ivan Ricardo Carvalho
+
+Murilo Vieira Loro
+
+Leonardo Cesar Pradebon
+
+José Antonio Gonzalez da Silva
+\end{Author}
+%
+\begin{References}
+Szareski, V. J., Carvalho, I. R., Kehl, K., Levien, A. M.,
+Lautenchleger, F., Barbosa, M. H., ... \& Aumonde, T. Z. (2019).
+Genetic and phenotypic multi-character approach applied to multivariate
+models for wheat industrial quality analysis.
+Genetics and Molecular Research, 18(3), 1-14.
+\end{References}
+%
+\begin{Examples}
+\begin{ExampleCode}
+
+library(EstimateBreed)
+
+data("ptn")
+with(ptn,is_qindustrial(Cult,NQ,W,PTN))
+
+\end{ExampleCode}
+\end{Examples}
+\HeaderA{itu}{Environmental Stress Index}{itu}
+%
+\begin{Description}
+Determining the UTI (temperature and humidity index) from the air temperature
+and relative humidity values over a given period of time
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+itu(CICLO, TM, UR)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{CICLO}] The column with the cycle days
+
+\item[\code{TM}] The column with the average air temperature values
+
+\item[\code{UR}] The column with the relative humidity values
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Author}
+Willyan Júnior Adorian Bandeira
+
+Ivan Ricardo Carvalho
+
+Murilo Vieira Loro
+
+Leonardo Cesar Pradebon
+
+José Antonio Gonzalez da Silva
+\end{Author}
+%
+\begin{References}
+Tazzo, I. F., Tarouco, A. K., Allem Junior P. H. C., Bremm, C., Cardoso, L.
+S., \& Junges, A. H. (2024). Índice de Temperatura e Umidade (ITU) ao longo do
+verão de 2021/2022 e estimativas dos impactos na bovinocultura de leite no Rio
+Grande do Sul, Brasil. Ciência Animal Brasileira, 2,5, e-77035P.
+https://doi.org/10.1590/1809-6891v25e-77035Pexport
+\end{References}
+\HeaderA{ivig\_simp}{Simple Vigor Index}{ivig.Rul.simp}
+%
+\begin{Description}
+Simple seed vigor index described by Szareski et al. (2018).
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+ivig_simp(GEN, PC, G)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{PC}] First count values
+
+\item[\code{G}] Germination percentage
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Author}
+Willyan Júnior Adorian Bandeira
+
+Ivan Ricardo Carvalho
+
+Murilo Vieira Loro
+
+Leonardo Cesar Pradebon
+
+José Antonio Gonzalez da Silva
+\end{Author}
+%
+\begin{References}
+Szareski, V. J., Carvalho, I. R., Kehl, K., Levien, A. M., Nardino,
+M., Dellagostin, S. M., ... \& Aumonde, T. Z. (2018).
+Adaptability and stability of wheat genotypes according to the
+phenotypic index of seed vigor. Pesquisa Agropecuária Brasileira,
+53, 727-735.
+\end{References}
+%
+\begin{SeeAlso}
+\code{\LinkA{index\_vigor}{index.Rul.vigor}}
+\end{SeeAlso}
+\HeaderA{Jinks\_Pooni}{Jinks and Pooni method}{Jinks.Rul.Pooni}
+%
+\begin{Description}
+Function for estimating the probability of extracting superior lines from
+populations by the Jinks and Pooni method
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+Jinks_Pooni(Pop, Var, VG, Test)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{Pop}] The column with the population name
+
+\item[\code{Var}] The column with the variable name
+
+\item[\code{VG}] The column with the genotypic variance values
+
+\item[\code{Test}] The column with the witnesses' names
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Author}
+Willyan Júnior Adorian Bandeira
+
+Ivan Ricardo Carvalho
+
+Murilo Vieira Loro
+
+Leonardo Cesar Pradebon
+
+José Antonio Gonzalez da Silva
+\end{Author}
+%
+\begin{References}
+Port, E. D., Carvalho, I. R., Pradebon, L. C., Loro, M. V., Colet, C. D. F.,
+Silva, J. A. G. D., \& Sausen, N. H. (2024).
+Early selection of resilient progenies to seed yield in soybean populations.
+Ciência Rural, 54, e20230287.
+\end{References}
+\HeaderA{lai}{Leaf Area Index (LAI)}{lai}
+%
+\begin{Description}
+Utility function for estimating crop LAI
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+lai(GEN, W, L, TNL, TDL, crop = "soy", sp = 0.45, sden = 14)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{GEN}] The column with the genotype name
+
+\item[\code{W}] The column with the width of the leaf (in meters).
+
+\item[\code{L}] The column with the length of the leaf (in meters).
+
+\item[\code{TNL}] The column with the total number of leaves.
+
+\item[\code{TDL}] The column with the total number of dry leaves.
+
+\item[\code{crop}] Crop sampled. Use “soy” for soybean and “maize” for corn, “trit”
+for wheat, “rice” for rice, “bean” for bean, “sunflower” for sunflower,
+“cotton” for cotton, “sugarcane” for sugarcane, “potato” for potato and
+“tomato” for tomato.
+
+\item[\code{sp}] Row spacing (Standard sp=0.45).
+
+\item[\code{sden}] Sowing density, in plants per linear meter (standard sden=14).
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Value}
+Returns the accumulated leaf area, the potential leaf area index
+(considering the total number of leaves) and the actual leaf area index
+(making the adjustment considering the number of dry leaves) for each genotype
+\end{Value}
+%
+\begin{Author}
+Willyan Júnior Adorian Bandeira
+
+Ivan Ricardo Carvalho
+
+Murilo Vieira Loro
+
+Leonardo Cesar Pradebon
+
+José Antonio Gonzalez da Silva
+\end{Author}
+%
+\begin{References}
+Meira, D., Queiróz de Souza, V., Carvalho, I. R., Nardino, M., Follmann,
+D. N., Meier, C., Brezolin, P., Ferrari, M., \& Pelegrin, A. J. (2015).
+Plastocrono e caracteres morfológicos da soja com hábito de crescimento
+indeterminado. Revista Cultivando o Saber, 8(2), 184-200.
+\end{References}
+%
+\begin{Examples}
+\begin{ExampleCode}
+
+library(EstimateBreed)
+
+data("leafarea")
+#Crop selection
+with(leafarea,lai(GEN,C,L,TNL,TDL,crop="soy"))
+
+#Changing row spacing and sowing density
+with(leafarea,lai(GEN,C,L,TNL,TDL,crop="maize",sp=0.45,sden=4))
+
+\end{ExampleCode}
+\end{Examples}
+\HeaderA{lin}{Data: Wheat Data Set with Protein and Grain Yield}{lin}
+\keyword{datasets}{lin}
+%
+\begin{Description}
+Data set with wheat genotypes, protein percentage and grain yield.
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+lin
+\end{verbatim}
+\end{Usage}
+%
+\begin{Format}
+A data.frame with 24 observations and 7 variables:
+\begin{description}
+
+\item[POP] Base population.
+\item[MGP\_MF] Phenotypic average of grain mass per plant.
+\item[MGP\_GP] Genotypic average of grain mass per plant.
+\item[VF] Phenotypic variance
+\item[VG] Genetic variance
+\item[H2] Heritability in the broad sense
+\item[Test] Witness parameters
+
+\end{description}
+
+\end{Format}
+%
+\begin{Source}
+Real field data for use.
+\end{Source}
+\HeaderA{linearest}{Estimates using polynomial equations.}{linearest}
+%
+\begin{Description}
+Determination of maximum technical efficiency (MET), maximum and minimum points
+and plateau function.
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+linearest(indep, dep, type = NULL, alpha = 0.05)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{indep}] Name of the column with the independent variable.
+
+\item[\code{dep}] Name of the dependent variable column
+
+\item[\code{type}] Type of analysis to be carried out. Use “MET” to extract the
+maximum technical efficiency, “x3” to obtain the maximum and minimum points
+and “plateau” to extract the parameters using the plateau function.
+
+\item[\code{alpha}] Significance of the test.
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Author}
+Willyan Júnior Adorian Bandeira
+
+Ivan Ricardo Carvalho
+
+Murilo Vieira Loro
+
+Leonardo Cesar Pradebon
+
+José Antonio Gonzalez da Silva
+\end{Author}
+\HeaderA{maize}{Data: Maize Dataset}{maize}
+\keyword{datasets}{maize}
+%
+\begin{Description}
+Data set with progenies and maternal and paternal maize genitors.
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+maize
+\end{verbatim}
+\end{Usage}
+%
+\begin{Format}
+A data.frame with 4 observations and 3 variables:
+\begin{description}
+
+\item[P] Progenies.
+\item[GM] Maternal Parent
+\item[GP] Patern Parent
+
+\end{description}
+
+\end{Format}
+%
+\begin{Source}
+Simulated Data.
+\end{Source}
+\HeaderA{mut\_index}{Multivariate seed vigor index}{mut.Rul.index}
+%
+\begin{Description}
+Determining the vigor of seeds obtained from mutation induction processes
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+mut_index(mut = NULL, MSG, MST, GT, DT, SL)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{mut}] Mutation method
+
+\item[\code{MSG}] The column with the average number of germinated seeds
+
+\item[\code{MST}] The column with the average total seeds
+
+\item[\code{GT}] Number of seedlings germinated per day during 't' time
+
+\item[\code{DT}] Number of evaluation days
+
+\item[\code{SL}] Shoot Length
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Author}
+Willyan Júnior Adorian Bandeira
+
+Ivan Ricardo Carvalho
+
+Murilo Vieira Loro
+
+Leonardo Cesar Pradebon
+
+José Antonio Gonzalez da Silva
+\end{Author}
+%
+\begin{References}
+Zou, M., Tong, S., Zou, T. et al. A new method for mutation inducing in rice
+by using DC electrophoresis bath and its mutagenic effects. Sci Rep 13, 6707
+(2023). https://doi.org/10.1038/s41598-023-33742-7
+\end{References}
+\HeaderA{optemp}{Plotting the optimum and cardinal temperatures for crops}{optemp}
+%
+\begin{Description}
+Utility function for plotting graphs of thermal preferences for crops
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+optemp(
+  DAS,
+  Var,
+  crop = "soybean",
+  ylab = "Meteorological Atribute",
+  xlab = "Days After Sowing"
+)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{DAS}] Days after sowing
+
+\item[\code{Var}] desc
+
+\item[\code{crop}] Soja, Milho, Trigo
+
+\item[\code{ylab}] desc
+
+\item[\code{xlab}] description
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Author}
+Willyan Júnior Adorian Bandeira
+
+Ivan Ricardo Carvalho
+
+Murilo Vieira Loro
+
+Leonardo Cesar Pradebon
+
+José Antonio Gonzalez da Silva
+\end{Author}
+%
+\begin{Examples}
+\begin{ExampleCode}
+
+library(EstimateBreed)
+
+
+\end{ExampleCode}
+\end{Examples}
+\HeaderA{packimp}{Importação dos pacotes necessários}{packimp}
+%
+\begin{Description}
+Importação dos pacotes necessários
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+packimp()
+\end{verbatim}
+\end{Usage}
+\HeaderA{ph}{Hectolitre weight of cereals}{ph}
+%
+\begin{Description}
+Useful function for characterizing the hectolitre weight (HW) of experiments
+with cereals.
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+ph(GEN, HL, crop = "trit", stat = "all")
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{GEN}] The column with the genotype name
+
+\item[\code{HL}] Weight obtained on a 1qt lt scale, as determined by the
+Rules for Seed Analysis (RAS), Ministry of Agriculture,
+Livestock and Supply (2009).
+
+\item[\code{crop}] Argument for selecting culture. Use "trit" for wheat, "oats" for
+white oats, "rye" for rye and "barley" for barley
+
+\item[\code{stat}] Argument to select the function output type. Use "all" to estimate
+the HW for all replicates, or "mean" to extract the mean for each genotype.
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Value}
+Returns the estimated value of the hectolitre weight (HW) for the ceral
+selecionado.
+\end{Value}
+%
+\begin{Author}
+Willyan Júnior Adorian Bandeira
+
+Ivan Ricardo Carvalho
+
+Murilo Vieira Loro
+
+Leonardo Cesar Pradebon
+
+José Antonio Gonzalez da Silva
+\end{Author}
+%
+\begin{References}
+Brasil. Ministério da Agricultura, Pecuária e Abastecimento.
+Secretaria de Defesa Agropecuária. Regras para Análise de Sementes.
+Brasília: MAPA/ACS, 2009. 399 p. ISBN 978-85-99851-70-8.
+\end{References}
+%
+\begin{Examples}
+\begin{ExampleCode}
+
+library(EstimateBreed)
+
+GEN <- rep(paste("G", 1:5, sep=""), each = 3)
+REP <- rep(1:3, times = 5)
+MG <- c(78.5, 80.2, 79.1, 81.3, 82.0, 80.8, 76.9, 78.1, 77.5, 83.2,
+84.1, 82.9, 77.4, 78.9, 79.3)
+
+data <- data.frame(GEN, REP, MG)
+
+with(data,ph(GEN,MG,crop="trigo"))
+
+#Extract the average PH per genotype
+with(data,ph(GEN,MG,crop="trigo",stat="mean"))
+
+\end{ExampleCode}
+\end{Examples}
+\HeaderA{pheno}{Soybean Plastochron Estimation Data Set}{pheno}
+\keyword{datasets}{pheno}
+%
+\begin{Description}
+Fictitious data set for estimating soybean plastochron based on
+on the number of nodes
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+pheno
+\end{verbatim}
+\end{Usage}
+%
+\begin{Format}
+A data.frame with 135 observations and 5 variables:
+\begin{description}
+
+\item[CICLO] Days in the soybean cycle.
+\item[GEN] The column with the name of the genotype.
+\item[TMED] The column with the average temperature values.
+\item[EST] The column with the phenological stage.
+\item[NN] The column with the number of nodes.
+
+\end{description}
+
+\end{Format}
+%
+\begin{Source}
+Simulated data for use.
+\end{Source}
+\HeaderA{plast}{Soybean plastochron estimation}{plast}
+%
+\begin{Description}
+Estimation of soybean plastochron using average air temperature and number of
+nodes
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+plast(GEN, TMED, STAD, NN, habit = "ind", plot = FALSE)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{GEN}] The column with the genotype name.
+
+\item[\code{TMED}] The column with the average air temperature values.
+
+\item[\code{STAD}] The column with the phenological stages of soybean, as described by
+Fehr \& Caviness (1977).
+
+\item[\code{NN}] The column with the number of nodes measured in field.
+
+\item[\code{habit}] Growth habit of the genotype (default = "ind"). Use "ind" for
+indeterminate and "det" for determinate.
+
+\item[\code{plot}] Logical argument. Returns a graph with the linear models if TRUE.
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Value}
+If the growth habit is determined, the function returns a linear model
+for the V1 to R1 stages (Early Pheno) and a linear model for the R1 to R5
+stages (Late Pheno). If the growth habit is indeterminate, returns three linear
+models: Early Pheno (V1 to R1), Intermediate Pheno (R1 to R3) and Late Pheno
+(R3 to R5).
+\end{Value}
+%
+\begin{Author}
+Willyan Júnior Adorian Bandeira
+
+Ivan Ricardo Carvalho
+
+Murilo Vieira Loro
+
+Leonardo Cesar Pradebon
+
+José Antonio Gonzalez da Silva
+\end{Author}
+%
+\begin{References}
+Porta, F. S. D., Streck, N. A., Alberto, C. M., da Silva, M. R.,
+\& Tura, E. F. (2024). Improving understanding of the plastochron of
+determinate and indeterminate soybean cultivars. Revista Brasileira de
+Engenharia Agrícola e Ambiental, 28(10), e278299.
+https://doi.org/10.1590/1807-1929/agriambi.v28n10e278299
+
+Fehr, W. R., \& Caviness, C. E. (1977). Stages of soybean development.
+Iowa State University of Science and Technology Special Report, 80, 1-11.
+\end{References}
+%
+\begin{Examples}
+\begin{ExampleCode}
+
+library(EstimateBreed)
+data("pheno")
+
+with(pheno, plast(GEN,TMED,EST,NN,habit="ind",plot=T))
+
+\end{ExampleCode}
+\end{Examples}
+\HeaderA{ptn}{Data: Wheat Dataset 1}{ptn}
+\keyword{datasets}{ptn}
+%
+\begin{Description}
+Data set with wheat cultivars and grain rheological characters.
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+ptn
+\end{verbatim}
+\end{Usage}
+%
+\begin{Format}
+A data.frame with 360 observations and 5 variables:
+\begin{description}
+
+\item[Cult] Wheat cultivars.
+\item[Am] Sample identification number.
+\item[NQ] Falling Number.
+\item[W] Gluten Strength (W).
+\item[PTN] Grain Protein.
+
+\end{description}
+
+\end{Format}
+%
+\begin{Source}
+Real laboratory data.
+\end{Source}
+\HeaderA{ptnrg}{Data: Wheat Dataset 2}{ptnrg}
+\keyword{datasets}{ptnrg}
+%
+\begin{Description}
+Wheat genotype, protein and grain yield data set
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+ptnrg
+\end{verbatim}
+\end{Usage}
+%
+\begin{Format}
+A data.frame with 360 observations and 5 variables:
+\begin{description}
+
+\item[CULTIVAR] Wheat cultivars.
+\item[REP] Repetition number.
+\item[PTN] Grain protein.
+\item[RG] Grain yield (kg ha)
+
+\end{description}
+
+\end{Format}
+%
+\begin{Source}
+Real field data.
+\end{Source}
+\HeaderA{reg\_GP}{Regression Genitor Progeny}{reg.Rul.GP}
+%
+\begin{Description}
+Estimation of Genitor x Progeny Regression
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+reg_GP(ind, Genitor, Progenie)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{ind}] description
+
+\item[\code{Genitor}] description
+
+\item[\code{Progenie}] description
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Author}
+Willyan Júnior Adorian Bandeira
+
+Ivan Ricardo Carvalho
+
+Murilo Vieira Loro
+
+Leonardo Cesar Pradebon
+
+José Antonio Gonzalez da Silva
+\end{Author}
+\HeaderA{rend\_ind}{Peeling Index and Industrial Yield}{rend.Rul.ind}
+%
+\begin{Description}
+Calculating the Hulling Index and Industrial Yield of White Oats
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+rend_ind(GEN, NG2M, MG, MC, RG, stat = "all", ...)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{GEN}] The column with the name of the genotypes.
+
+\item[\code{NG2M}] The column with values for the number of grains larger than 2mm.
+
+\item[\code{MG}] The column with grain mass values.
+
+\item[\code{MC}] The column with karyopsis mass values.
+
+\item[\code{RG}] The column with the grain yield values (kg per ha).
+
+\item[\code{stat}] Logical argument. Use “all” to keep all the observations or “mean”
+to extract the overall average.
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Value}
+Returns the peeling index and industrial yield considering the
+standards desired by the industry.
+\end{Value}
+%
+\begin{Author}
+Willyan Júnior Adorian Bandeira
+
+Ivan Ricardo Carvalho
+
+Murilo Vieira Loro
+
+Leonardo Cesar Pradebon
+
+José Antonio Gonzalez da Silva
+\end{Author}
+%
+\begin{Examples}
+\begin{ExampleCode}
+
+library(EstimateBreed)
+
+data("aveia")
+# Calculate the industrial yield without extracting the average
+with(aveia, rend_ind(GEN,NG2M,MG,MC,RG))
+
+# Calculate the industrial yield by extracting the average per genotype
+with(aveia, rend_ind(GEN,NG2M,MG,MC,RG,stat="mean"))
+
+\end{ExampleCode}
+\end{Examples}
+\HeaderA{restr}{Restriction of witness variability}{restr}
+%
+\begin{Description}
+Method for restricting the variability of witnesses proposed by Carvalho et al.
+(2023). It uses the restriction of the mean plus or minus one standard deviation.
+standard deviation, which restricts variation by removing asymmetric values.
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+restr(TEST, REP, Xi, scenario = NULL, zstat = NULL)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{TEST}] The column with the name of the witness
+
+\item[\code{REP}] The column with the replications
+
+\item[\code{Xi}] The column with the observed value for a given genotype.
+
+\item[\code{scenario}] Scenario to be used for the calculation. Use “original” to
+do not restrict the witnesses by the mean plus or minus the standard deviations,
+or “restr” to apply the restriction.
+
+\item[\code{zstat}] Logical argument. Applies Z-notation normalization if “TRUE”.
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Author}
+Willyan Júnior Adorian Bandeira
+
+Ivan Ricardo Carvalho
+
+Murilo Vieira Loro
+
+Leonardo Cesar Pradebon
+
+José Antonio Gonzalez da Silva
+\end{Author}
+%
+\begin{References}
+Carvalho, I. R., Silva, J. A. G. da, Moura, N. B., Ferreira, L. L.,
+Lautenchleger, F., \& Souza, V. Q. de. (2023). Methods for estimation of
+genetic parameters in soybeans: An alternative to adjust residual variability.
+Acta Scientiarum. Agronomy, 45, e56156.
+https://doi.org/10.4025/actasciagron.v45i1.56156
+\end{References}
+%
+\begin{Examples}
+\begin{ExampleCode}
+
+library(EstimateBreed)
+
+TEST <- rep(paste("T", 1:5, sep=""), each=3)
+REP <- rep(1:3, times=5)
+Xi <- rnorm(15, mean=10, sd=2)
+
+data <- data.frame(TEST,REP,Xi)
+
+#Apply the witness variability constraint
+with(data, restr(TEST,REP,Xi,scenario = "restr",zstat = FALSE))
+print(Control)
+
+#Apply witness variability restriction with normalization (Z statistic)
+with(data, restr(TEST,REP,Xi,scenario = "restr",zstat = T))
+print(Control)
+
+\end{ExampleCode}
+\end{Examples}
+\HeaderA{risco}{Risk of Disease Occurrence in Soybeans}{risco}
+%
+\begin{Description}
+Calculation of the Risk of Disease Occurrence in Soybeans as a Function of
+Variables meteorological variables (Engers et al., 2024).
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+risco(DIA, MES, TEMP, UR, doença = "rust", plot = F)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{DIA}] The column for the day of the month.
+
+\item[\code{MES}] The column for the month of the year (numeric value).
+
+\item[\code{TEMP}] A coluna da temperatura média do ar (em ºC).
+
+\item[\code{UR}] The relative humidity column (in \%).
+
+\item[\code{doença}] Define the soybean disease (Standard = “rust”).
+
+\item[\code{plot}] Plot a graph of the accumulation (Default is F (FALSE)).
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Author}
+Willyan Júnior Adorian Bandeira
+
+Ivan Ricardo Carvalho
+
+Murilo Vieira Loro
+
+Leonardo Cesar Pradebon
+
+José Antonio Gonzalez da Silva
+\end{Author}
+%
+\begin{References}
+de Oliveira Engers, L.B., Radons, S.Z., Henck, A.U. et al.
+Evaluation of a forecasting system to facilitate decision-making for the
+chemical control of Asian soybean rust. Trop. plant pathol. 49, 539–546 (2024).
+https://doi.org/10.1007/s40858-024-00649-1
+\end{References}
+%
+\begin{Examples}
+\begin{ExampleCode}
+
+library(Breeding)
+
+# Rust Risk Prediction
+data("clima")
+with(clima, risco(DY, MO, TMED, RH, doença = "ferrugem"))
+
+\end{ExampleCode}
+\end{Examples}
+\HeaderA{SEGREGAÇÃO\_PADRÃO}{Standard Segregation}{SEGREGAÇÃO.Rul.PADRÃO}
+%
+\begin{Description}
+Didactic table of standard segregation by generation
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+SEGREGAÇÃO_PADRÃO(MELHORAMENTO)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{MELHORAMENTO}] Base parameter for the print table function
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Author}
+Willyan Júnior Adorian Bandeira
+
+Ivan Ricardo Carvalho
+
+Murilo Vieira Loro
+
+Leonardo Cesar Pradebon
+
+José Antonio Gonzalez da Silva
+\end{Author}
+\HeaderA{tamef}{Effective Population Size}{tamef}
+%
+\begin{Description}
+Estimated effective population size adapted from Morais (1997).
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+tamef(GEN, SI, NE)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{GEN}] The column with the name of the genotype (progeny).
+
+\item[\code{SI}] The column with the number of individuals selected
+
+\item[\code{NE}] Number of individuals conducted during the selection period.
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Author}
+Willyan Júnior Adorian Bandeira
+
+Ivan Ricardo Carvalho
+
+Murilo Vieira Loro
+
+Leonardo Cesar Pradebon
+
+José Antonio Gonzalez da Silva
+\end{Author}
+\HeaderA{tindex}{AIC e multitrait de sementes de aveia preta}{tindex}
+%
+\begin{Description}
+Índices de seleção multicaracterística
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+tindex(fc, germ, sdm, sl, radl, index = "PI")
+\end{verbatim}
+\end{Usage}
+%
+\begin{Author}
+Willyan Júnior Adorian Bandeira
+
+Ivan Ricardo Carvalho
+
+Murilo Vieira Loro
+
+Leonardo Cesar Pradebon
+
+José Antonio Gonzalez da Silva
+\end{Author}
+%
+\begin{References}
+Moura, N. B., Carvalho, I. R., Silva, J. A. G., Loro, M. V., Barbosa, M. H.,
+Lautenchleger, F., Marchioro, V. S., \& Souza, V. Q. (2021). Akaike criteria
+and selection of physiological multi-character indexes for the production of
+black oat seeds. Current Plant Studies, 11, 1–8.
+https://doi.org/10.26814/cps2021003
+\end{References}
+\HeaderA{transgressivos}{Seleção pelo Diferencial de Seleção (Média e Desvios)}{transgressivos}
+%
+\begin{Description}
+Selection of Transgressive Genotypes - Selection Differential (SD)
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+transgressivos(Gen, Var, Testemunha, ylab = "Selection", xlab = "Genotypes")
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{Gen}] The column with the genotype name
+
+\item[\code{Var}] The column with the variable of interest
+
+\item[\code{Witness}] The column with the value of the variable 'X' for the witnesses
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Author}
+Willyan Júnior Adorian Bandeira
+
+Ivan Ricardo Carvalho
+
+Murilo Vieira Loro
+
+Leonardo Cesar Pradebon
+
+José Antonio Gonzalez da Silva
+\end{Author}
+\HeaderA{trigo}{Data: Wheat Dataset 3}{trigo}
+\keyword{datasets}{trigo}
+%
+\begin{Description}
+Data set from a wheat experiment with different herbicide management.
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+trigo
+\end{verbatim}
+\end{Usage}
+%
+\begin{Format}
+A data.frame with 19 observations and 6 variables:
+\begin{description}
+
+\item[TEST] Treatment identification.
+\item[CE] Ear length.
+\item[ME] Ear mass
+\item[NGE] Number of grains on the cob.
+\item[MGE] Grain mass of ear.
+\item[NEE] Number of spikelets per spike
+
+\end{description}
+
+\end{Format}
+%
+\begin{Source}
+Real field data for use.
+\end{Source}
+\HeaderA{vig}{Data Set for Leaf Area Index}{vig}
+\keyword{datasets}{vig}
+%
+\begin{Description}
+Data set with 10 genotypes and values for leaf length, leaf width, number
+of total leaves and number of dry leaves
+
+Data set from experiment with wheat genotypes subjected to different
+sowing density.
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+vig
+
+vig
+\end{verbatim}
+\end{Usage}
+%
+\begin{Format}
+A data.frame with 10 observations and 5 variables:
+\begin{description}
+
+\item[GEN] Column with the genotypes.
+\item[C] Leaf lenght
+\item[L] Leaf width
+\item[TNL] Total number of leaves.
+\item[TDL] Total dry leavesh.
+
+\end{description}
+
+
+A data.frame with 54 observations and 6 variables:
+\begin{description}
+
+\item[Trat] Column with treatments.
+\item[PC] First Count
+\item[G] Germination percentage.
+\item[CPA] Length of aerial part.
+\item[RAD] Root length.
+\item[MS] Seedling dry mass.
+\item[EC] See what EC is.
+
+\end{description}
+
+\end{Format}
+%
+\begin{Source}
+Simulated data.
+
+Real field data for use.
+\end{Source}
+\printindex{}
+\end{document}

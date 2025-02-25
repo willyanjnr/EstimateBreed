@@ -4,15 +4,15 @@
 #'and calculates the standard deviation of these parameters for each environment.
 #'@param ENV Identification of each selection environment (to differentiate if
 #'there is more than one cultivation cycle).
-#'@param TMED Average air temperature (in ºC) during the cycle in each environment.
+#'@param TMED Average air temperature (in degree Celsius) during the cycle in each environment.
 #'@param PREC Rainfall (in mm) during the cultivation cycle in each environment
 #'@return A dataframe containing the identifier of the selection environment and
 #'the standard deviations for temperature and precipitation.
-#'@author Willyan Júnior Adorian Bandeira
-#'@author Ivan Ricardo Carvalho
+#'@author Willyan Junior Adorian Bandeira
+#'@author Ivan Ricardo Carvalo
 #'@author Murilo Vieira Loro
 #'@author Leonardo Cesar Pradebon
-#'@author José Antonio Gonzalez da Silva
+#'@author Jose Antonio Gonzalez da Silva
 #'@export
 #'@examples
 #'\donttest{
@@ -25,9 +25,6 @@
 
 desv_clim <- function(ENV,TMED,PREC) {
 
-  ENV <- ENV
-  TMED <- TMED
-  PREC <- PREC
   desvio <- data.frame(ENV,TMED,PREC)
 
   resultado <- desvio %>%
@@ -47,7 +44,7 @@ desv_clim <- function(ENV,TMED,PREC) {
 #'@description
 #'Estimation of the selection index for environmental resilience
 #'(Bandeira et al., 2024).
-#'@param GEN Column referring to genotypes. Lines must have the prefix “L” before
+#'@param GEN Column referring to genotypes. Lines must have the prefix 'L' before
 #' the number. Ex: L139.
 #'@param ENV The column for the selection environment.
 #'@param NG Number of grains of all genotypes evaluated
@@ -57,13 +54,13 @@ desv_clim <- function(ENV,TMED,PREC) {
 #'@param req Average daily water demand for the soybean crop (standard 3.5 mm).
 #'May change depending on the phenological stage.
 #'@param stage Parameter to define the phenological stage the crop is in
-#'Use “veg” for vegetative and “rep” for reproductive, if the
+#'Use 'veg' for vegetative and 'rep' for reproductive, if the
 #'evaluations have only been carried out in a given period.
-#'@author Willyan Júnior Adorian Bandeira
-#'@author Ivan Ricardo Carvalho
+#'@author Willyan Junior Adorian Bandeira
+#'@author Ivan Ricardo Carvalo
 #'@author Murilo Vieira Loro
 #'@author Leonardo Cesar Pradebon
-#'@author José Antonio Gonzalez da Silva
+#'@author Jose Antonio Gonzalez da Silva
 #'@references
 #'Bandeira, W. J. A., Carvalho, I. R., Loro, M. V., da Silva, J. A. G.,
 #'Dalla Roza, J. P., Scarton, V. D. B., Bruinsma, G. M. W., & Pradebon, L. C. (2024).
@@ -98,7 +95,6 @@ isgr <- function(GEN, ENV, NG, MG, CICLO,req=3.5, stage=NULL) {
   CICLO <- as.numeric(CICLO)
   dados <- data.frame(GEN, ENV, NG, MG,CICLO)
 
-  # Verificação inicial dos dados
 ##############################################################################
   if(is.null(stage)){
     req <- req

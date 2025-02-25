@@ -1,4 +1,4 @@
-#' Importação dos pacotes necessários
+#' Importing the necessary packages
 #'
 #' @import dplyr
 #' @import ggplot2
@@ -8,7 +8,6 @@
 #' @import ggrepel
 #' @import grid
 #' @import httr
-#' @import stats
 #' @import nasapower
 #' @import tidyr
 #' @import viridis
@@ -17,11 +16,15 @@
 #' @import sommer
 #' @import lme4
 #' @import minque
+#' @import utils
 #' @importFrom lubridate with_tz
 #' @importFrom jsonlite fromJSON
 #' @importFrom purrr flatten
+#' @importFrom grDevices rgb
+#' @importFrom graphics boxplot layout
+#' @importFrom stats aggregate aov coef lm nls nls.control pnorm sd
+#'
 #'
 #' @export
 packimp <- function() {
-  # função vazia ou código que use esses pacotes
 }

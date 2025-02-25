@@ -23,15 +23,15 @@ estresse(
 
 \item{YC}{Genotype productivity under stressful conditions.}
 
-\item{index}{Index to be calculated (Standard “ALL”). The indices to be used
+\item{index}{Index to be calculated (Standard 'ALL'). The indices to be used
 are: 'STI' - Stress Tolerance Index, 'YI' - Yield Index, 'GMP' - Geometric Mean
 Productivity, 'MP' - Mean Productivity, 'MH' - Harmonic Mean, 'SSI' - Stress
 Stability Index, 'YSI' - Yield Stability Index, 'RSI' - Relative Stress Index.}
 
-\item{bygen}{Returns the average of each genotype if “TRUE”. Only in this way
+\item{bygen}{Returns the average of each genotype if 'TRUE'. Only in this way
 it will be possible to plot graphs.}
 
-\item{plot}{Plot graph if equal to “TRUE” (Standard “F”).}
+\item{plot}{Plot graph if equal to 'TRUE' (Standard 'FALSE').}
 
 \item{xlab}{Adjust the title of the x-axis in the graph.}
 
@@ -61,18 +61,18 @@ with(aveia,estresse(GEN,MC,MG,index = "STI",bygen=T))
 \references{
 Ghazvini, H., Pour-Aboughadareh, A., Jasemi, S.S. et al.
 A Framework for Selection of High-Yielding and Drought-tolerant
-Genotypes of Barley: Applying Yield-Based Indices and Multi-index
-Selection Models. Journal of Crop Health 76, 601–616 (2024).
+Genotypes of Barley: Applying Yield-Based Indices and Multi-index Selecion
+Models. Journal of Crop Health 76, 601-616 (2024).
 https://doi.org/10.1007/s10343-024-00981-1
 }
 \author{
-Willyan Júnior Adorian Bandeira
+Willyan Junior Adorian Bandeira
 
-Ivan Ricardo Carvalho
+Ivan Ricardo Carvalo
 
 Murilo Vieira Loro
 
 Leonardo Cesar Pradebon
 
-José Antonio Gonzalez da Silva
+Jose Antonio Gonzalez da Silva
 }

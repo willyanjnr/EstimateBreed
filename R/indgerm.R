@@ -9,11 +9,11 @@
 #'@param RAD The column with the values of Root Length
 #'@param MS The column with the values of dry mass
 #'@param EC TThe column with the field emergency values
-#'@author Willyan Júnior Adorian Bandeira
-#'@author Ivan Ricardo Carvalho
+#'@author Willyan Junior Adorian Bandeira
+#'@author Ivan Ricardo Carvalo
 #'@author Murilo Vieira Loro
 #'@author Leonardo Cesar Pradebon
-#'@author José Antonio Gonzalez da Silva
+#'@author Jose Antonio Gonzalez da Silva
 #'@references
 #'Szareski, V. J., Carvalho, I. R., Demari, G. H., Rosa, T. C. D.,
 #'Souza, V. Q. D., Villela, F. A.,Aumonde, T. Z. (2018).
@@ -55,16 +55,16 @@ print(dadosfinal)
 #'Simple seed vigor index described by Szareski et al. (2018).
 #'@param PC First count values
 #'@param G Germination percentage
-#'@author Willyan Júnior Adorian Bandeira
-#'@author Ivan Ricardo Carvalho
+#'@author Willyan Junior Adorian Bandeira
+#'@author Ivan Ricardo Carvalo
 #'@author Murilo Vieira Loro
 #'@author Leonardo Cesar Pradebon
-#'@author José Antonio Gonzalez da Silva
+#'@author Jose Antonio Gonzalez da Silva
 #'@references
 #'Szareski, V. J., Carvalho, I. R., Kehl, K., Levien, A. M., Nardino,
 #'M., Dellagostin, S. M., ... & Aumonde, T. Z. (2018).
 #'Adaptability and stability of wheat genotypes according to the
-#'phenotypic index of seed vigor. Pesquisa Agropecuária Brasileira,
+#'phenotypic index of seed vigor. Pesquisa Agropecuaria Brasileira,
 #'53, 727-735.
 #'@seealso \code{\link{index_vigor}}
 #'@export
@@ -96,16 +96,16 @@ ivig_simp <- function(GEN,PC,G){
 #'@param C Grain length
 #'@param L Grain width
 #'@param E Grain thickness
-#'@param stat Extract or not the average per genotype. Use `“all”` to obtain
-#' information on all the observations or “mean” to extract the average.
+#'@param stat Extract or not the average per genotype. Use 'everything' to obtain
+#' information on all the observations or 'mean' to extract the average.
 #'@param plot Logical argument. Plot a graph if TRUE
 #'@param ylab Y axis name
 #'@param xlab X axis name
-#'@author Willyan Júnior Adorian Bandeira
-#'@author Ivan Ricardo Carvalho
+#'@author Willyan Junior Adorian Bandeira
+#'@author Ivan Ricardo Carvalo
 #'@author Murilo Vieira Loro
 #'@author Leonardo Cesar Pradebon
-#'@author José Antonio Gonzalez da Silva
+#'@author Jose Antonio Gonzalez da Silva
 #'@references
 #'Carvalho, I. R., de Pelegrin, A. J., Szareski, V. J., Ferrari, M., da Rosa, T.
 #' C., Martins, T. S., dos Santos, N. L., Nardino, M., de Souza, V. Q., de
@@ -130,13 +130,13 @@ ivig_simp <- function(GEN,PC,G){
 #'with(data,gvri(Gen,C,L,E, stat="mean", plot=T))
 #'}
 
-gvri <- function(GEN,C,L,E,stat="all",plot=F,ylab="GVRI",xlab="Genotype"){
+gvri <- function(GEN,C,L,E,stat="everything",plot=F,ylab="GVRI",xlab="Genotype"){
 
   GEN <- as.factor(GEN)
   Comp <- C
   Larg <- L
   Esp <- E
-  if(stat=="all"){
+  if(stat=="everything"){
     gvri <- ((Comp*Larg*Esp)/sum(Comp+Larg+Esp))
     final <- data.frame(GEN,gvri)
     cat("\n-----------------------------------------------------------------\n")

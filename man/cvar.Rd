@@ -14,12 +14,12 @@ cvar(GEN, REP, Xi, approach = NULL, zstat = NULL)
 
 \item{Xi}{The column with the observed value for the variable in a given genotype.}
 
-\item{approach}{Method to be used for estimating variance components. Use “apI”
-for parent-offspring regression, “apII” for the of the sum of squares of
-augmented blocks with intercalary parents, “apIII” for the method with linear
+\item{approach}{Method to be used for estimating variance components. Use 'apI'
+for parent-offspring regression, 'apII' for the of the sum of squares of
+augmented blocks with intercalary parents, 'apIII' for the method with linear
  mixed models with random genetic effects.}
 
-\item{zstat}{Logical argument. Applies Z-notation normalization if “TRUE”.}
+\item{zstat}{Logical argument. Applies Z-notation normalization if 'TRUE'.}
 }
 \description{
 Estimation of variance components and genetic parameters from the restriction
@@ -33,13 +33,13 @@ Acta Scientiarum. Agronomy, 45, e56156.
 https://doi.org/10.4025/actasciagron.v45i1.56156
 }
 \author{
-Willyan Júnior Adorian Bandeira
+Willyan Junior Adorian Bandeira
 
-Ivan Ricardo Carvalho
+Ivan Ricardo Carvalo
 
 Murilo Vieira Loro
 
 Leonardo Cesar Pradebon
 
-José Antonio Gonzalez da Silva
+Jose Antonio Gonzalez da Silva
 }

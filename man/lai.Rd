@@ -17,10 +17,10 @@ lai(GEN, W, L, TNL, TDL, crop = "soy", sp = 0.45, sden = 14)
 
 \item{TDL}{The column with the total number of dry leaves.}
 
-\item{crop}{Crop sampled. Use “soy” for soybean and “maize” for corn, “trit”
-for wheat, “rice” for rice, “bean” for bean, “sunflower” for sunflower,
-“cotton” for cotton, “sugarcane” for sugarcane, “potato” for potato and
-“tomato” for tomato.}
+\item{crop}{Crop sampled. Use 'soy' for soybean and 'maize' for maize, 'trit'
+for wheat, 'rice' for rice, 'bean' for bean, 'sunflower' for sunflower,
+'cotton' for cotton, 'sugarcane' for sugarcane, 'potato' for potato and
+'tomato' for tomato.}
 
 \item{sp}{Row spacing (Standard sp=0.45).}
 
@@ -47,19 +47,19 @@ with(leafarea,lai(GEN,C,L,TNL,TDL,crop="maize",sp=0.45,sden=4))
 }
 }
 \references{
-Meira, D., Queiróz de Souza, V., Carvalho, I. R., Nardino, M., Follmann,
+Meira, D., Queiroz de Souza, V., Carvalho, I. R., Nardino, M., Follmann,
 D. N., Meier, C., Brezolin, P., Ferrari, M., & Pelegrin, A. J. (2015).
-Plastocrono e caracteres morfológicos da soja com hábito de crescimento
+Plastocrono e caracteres morfologicos da soja com habito de crescimento
 indeterminado. Revista Cultivando o Saber, 8(2), 184-200.
 }
 \author{
-Willyan Júnior Adorian Bandeira
+Willyan Junior Adorian Bandeira
 
-Ivan Ricardo Carvalho
+Ivan Ricardo Carvalo
 
 Murilo Vieira Loro
 
 Leonardo Cesar Pradebon
 
-José Antonio Gonzalez da Silva
+Jose Antonio Gonzalez da Silva
 }

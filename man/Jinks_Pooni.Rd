@@ -26,13 +26,13 @@ Early selection of resilient progenies to seed yield in soybean populations.
 Ciencia Rural, 54, e20230287.
 }
 \author{
-Willyan Júnior Adorian Bandeira
+Willyan Junior Adorian Bandeira
 
-Ivan Ricardo Carvalho
+Ivan Ricardo Carvalo
 
 Murilo Vieira Loro
 
 Leonardo Cesar Pradebon
 
-José Antonio Gonzalez da Silva
+Jose Antonio Gonzalez da Silva
 }

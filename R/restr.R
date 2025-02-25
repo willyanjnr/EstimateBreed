@@ -6,15 +6,15 @@
 #'@param TEST The column with the name of the witness
 #'@param REP The column with the replications
   #'@param Xi The column with the observed value for a given genotype.
-#'@param scenario Scenario to be used for the calculation. Use “original” to
+#'@param scenario Scenario to be used for the calculation. Use 'original' to
 #'do not restrict the witnesses by the mean plus or minus the standard deviations,
-#' or “restr” to apply the restriction.
-#'@param zstat Logical argument. Applies Z-notation normalization if “TRUE”.
-#'@author Willyan Júnior Adorian Bandeira
-#'@author Ivan Ricardo Carvalho
+#' or 'restr' to apply the restriction.
+#'@param zstat Logical argument. Applies Z-notation normalization if 'TRUE'.
+#'@author Willyan Junior Adorian Bandeira
+#'@author Ivan Ricardo Carvalo
 #'@author Murilo Vieira Loro
 #'@author Leonardo Cesar Pradebon
-#'@author José Antonio Gonzalez da Silva
+#'@author Jose Antonio Gonzalez da Silva
 #'@references
 #'Carvalho, I. R., Silva, J. A. G. da, Moura, N. B., Ferreira, L. L.,
 #'Lautenchleger, F., & Souza, V. Q. de. (2023). Methods for estimation of
@@ -101,16 +101,16 @@ restr <- function(TEST, REP, Xi, scenario = NULL, zstat = NULL){
 #'@param GEN The column with the name of the genotypes (without controls).
 #'@param REP The column with the repetitions (if any).
 #'@param Xi The column with the observed value for the variable in a given genotype.
-#'@param approach Method to be used for estimating variance components. Use “apI”
-#' for parent-offspring regression, “apII” for the of the sum of squares of
-#' augmented blocks with intercalary parents, “apIII” for the method with linear
+#'@param approach Method to be used for estimating variance components. Use 'apI'
+#' for parent-offspring regression, 'apII' for the of the sum of squares of
+#' augmented blocks with intercalary parents, 'apIII' for the method with linear
 #'  mixed models with random genetic effects.
-#'@param zstat Logical argument. Applies Z-notation normalization if “TRUE”.
-#'@author Willyan Júnior Adorian Bandeira
-#'@author Ivan Ricardo Carvalho
+#'@param zstat Logical argument. Applies Z-notation normalization if 'TRUE'.
+#'@author Willyan Junior Adorian Bandeira
+#'@author Ivan Ricardo Carvalo
 #'@author Murilo Vieira Loro
 #'@author Leonardo Cesar Pradebon
-#'@author José Antonio Gonzalez da Silva
+#'@author Jose Antonio Gonzalez da Silva
 #'@references
 #'Carvalho, I. R., Silva, J. A. G. da, Moura, N. B., Ferreira, L. L.,
 #'Lautenchleger, F., & Souza, V. Q. de. (2023). Methods for estimation of

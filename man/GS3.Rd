@@ -20,13 +20,13 @@ Consider knowing only the maternal parent, without controlling the pollinator,
 or direct selection without parents
 }
 \author{
-Willyan Júnior Adorian Bandeira
+Willyan Junior Adorian Bandeira
 
-Ivan Ricardo Carvalho
+Ivan Ricardo Carvalo
 
 Murilo Vieira Loro
 
 Leonardo Cesar Pradebon
 
-José Antonio Gonzalez da Silva
+Jose Antonio Gonzalez da Silva
 }

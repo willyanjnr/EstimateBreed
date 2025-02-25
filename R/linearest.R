@@ -4,15 +4,15 @@
 #'and plateau function.
 #'@param indep Name of the column with the independent variable.
 #'@param dep Name of the dependent variable column
-#'@param type Type of analysis to be carried out. Use “MET” to extract the
-#'maximum technical efficiency, “x3” to obtain the maximum and minimum points
-#'and “plateau” to extract the parameters using the plateau function.
+#'@param type Type of analysis to be carried out. Use 'MET' to extract the
+#'maximum technical efficiency, 'x3' to obtain the maximum and minimum points
+#'and 'plateau' to extract the parameters using the plateau function.
 #'@param alpha Significance of the test.
-#'@author Willyan Júnior Adorian Bandeira
-#'@author Ivan Ricardo Carvalho
+#'@author Willyan Junior Adorian Bandeira
+#'@author Ivan Ricardo Carvalo
 #'@author Murilo Vieira Loro
 #'@author Leonardo Cesar Pradebon
-#'@author José Antonio Gonzalez da Silva
+#'@author Jose Antonio Gonzalez da Silva
 #'@export
 
 linearest <- function(indep,dep,type=NULL,alpha=0.05){
@@ -40,7 +40,7 @@ linearest <- function(indep,dep,type=NULL,alpha=0.05){
     }}
 
   if (type == "x3"){
-    #Função incompleta, finalizar
+
     mod2 <- lm(dep ~ poly(indep,3,raw = T))
     coeff <- coef(mod2)
     cat("Coefficients of the cubic model:\n",coeff,"\n")
@@ -51,16 +51,16 @@ linearest <- function(indep,dep,type=NULL,alpha=0.05){
     b4 <- coeff[4]
     der1 <- function(x) b1 + 2 * b2 * x + 3 * b3 * x^2
 
-    # Resolver f'(x) = 0 para encontrar os pontos críticos
+
     pontos_criticos <- polyroot(c(b1, 2 * b2, 3 * b3))
-    pontos_criticos <- Re(pontos_criticos[Im(pontos_criticos) == 0]) # Apenas raízes reais
+    pontos_criticos <- Re(pontos_criticos[Im(pontos_criticos) == 0])
 
     cat("Critical points (x):\n", pontos_criticos, "\n")
 
-    # Derivada de 2ª ordem: f''(x) = 2*b2 + 6*b3*x
+
     derivada_2 <- function(x) 2 * b2 + 6 * b3 * x
 
-    # Classificar os pontos críticos como máxima, mínima ou inflexão
+
     for (ponto in pontos_criticos) {
       valor_segunda_derivada <- derivada_2(ponto)
       if (valor_segunda_derivada > 0) {
@@ -85,14 +85,14 @@ linearest <- function(indep,dep,type=NULL,alpha=0.05){
       resumo_log <- summary(modelo_logistico)
       print(resumo_log)
 
-      L <- coef(modelo_logistico)["L"]   # Platô
-      k <- coef(modelo_logistico)["k"]   # Taxa de crescimento
-      x0 <- coef(modelo_logistico)["x0"] # Ponto de inflexão
+      L <- coef(modelo_logistico)["L"]
+      k <- coef(modelo_logistico)["k"]
+      x0 <- coef(modelo_logistico)["x0"]
 
       cat("Plateau value (L):", round(L, digits = 5), "\n")
       cat("Growth rate (k):", round(k, digits = 5), "\n")
       cat("Inflection point (x0):", round(x0, digits = 5), "\n")
-      return(list(platô = L, taxa_crescimento = k, ponto_inflexao = x0))
+      return(list(plato = L, taxa_crescimento = k, ponto_inflexao = x0))
     }, error = function(e) {
       cat("Model fitting error:", e$message, "\n")
       return(NULL)

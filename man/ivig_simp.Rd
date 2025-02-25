@@ -18,20 +18,20 @@ Simple seed vigor index described by Szareski et al. (2018).
 Szareski, V. J., Carvalho, I. R., Kehl, K., Levien, A. M., Nardino,
 M., Dellagostin, S. M., ... & Aumonde, T. Z. (2018).
 Adaptability and stability of wheat genotypes according to the
-phenotypic index of seed vigor. Pesquisa Agropecuária Brasileira,
+phenotypic index of seed vigor. Pesquisa Agropecuaria Brasileira,
 53, 727-735.
 }
 \seealso{
 \code{\link{index_vigor}}
 }
 \author{
-Willyan Júnior Adorian Bandeira
+Willyan Junior Adorian Bandeira
 
-Ivan Ricardo Carvalho
+Ivan Ricardo Carvalo
 
 Murilo Vieira Loro
 
 Leonardo Cesar Pradebon
 
-José Antonio Gonzalez da Silva
+Jose Antonio Gonzalez da Silva
 }

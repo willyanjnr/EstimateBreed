@@ -22,13 +22,13 @@ Calculates the daily and accumulated thermal sum of crops
 library(EstimateBreed)
 
 data("clima")
-clima <- clima(1:150,)
+clima <- get("clima")[1:150, ]
 
 with(clima,atsum(TMED,crop="maize"))
 }
 }
 \author{
-Willyan Júnior Adorian Bandeira
+Willyan Junior Adorian Bandeira
 
 Ivan Ricardo Carvalo
 
@@ -36,5 +36,5 @@ Murilo Vieira Loro
 
 Leonardo Cesar Pradebon
 
-José Antonio Gonzalez da Silva
+Jose Antonio Gonzalez da Silva
 }

@@ -5,27 +5,27 @@
 #'@param GEN The column with the genotypes to be selected.
 #'@param YS Productivity of the genotype without stress conditions.
 #'@param YC Genotype productivity under stressful conditions.
-#'@param index Index to be calculated (Standard “ALL”). The indices to be used
+#'@param index Index to be calculated (Standard 'ALL'). The indices to be used
 #'are: 'STI' - Stress Tolerance Index, 'YI' - Yield Index, 'GMP' - Geometric Mean
 #' Productivity, 'MP' - Mean Productivity, 'MH' - Harmonic Mean, 'SSI' - Stress
 #' Stability Index, 'YSI' - Yield Stability Index, 'RSI' - Relative Stress Index.
-#'@param bygen Returns the average of each genotype if “TRUE”. Only in this way
+#'@param bygen Returns the average of each genotype if 'TRUE'. Only in this way
 #'it will be possible to plot graphs.
-#'@param plot Plot graph if equal to “TRUE” (Standard “F”).
+#'@param plot Plot graph if equal to 'TRUE' (Standard 'FALSE').
 #'@param xlab Adjust the title of the x-axis in the graph.
 #'@param ylab Adjust the title of the y-axis in the graph.
 #'@return Returns a table with the genotypes and the selected indices.
 #'The higher the index value, the more resilient the genotype.
-#'@author Willyan Júnior Adorian Bandeira
-#'@author Ivan Ricardo Carvalho
+#'@author Willyan Junior Adorian Bandeira
+#'@author Ivan Ricardo Carvalo
 #'@author Murilo Vieira Loro
 #'@author Leonardo Cesar Pradebon
-#'@author José Antonio Gonzalez da Silva
+#'@author Jose Antonio Gonzalez da Silva
 #'@references
 #'Ghazvini, H., Pour-Aboughadareh, A., Jasemi, S.S. et al.
 #'A Framework for Selection of High-Yielding and Drought-tolerant
-#'Genotypes of Barley: Applying Yield-Based Indices and Multi-index
-#'Selection Models. Journal of Crop Health 76, 601–616 (2024).
+#'Genotypes of Barley: Applying Yield-Based Indices and Multi-index Selecion
+#'Models. Journal of Crop Health 76, 601-616 (2024).
 #'https://doi.org/10.1007/s10343-024-00981-1
 #'@export
 #'@examples
@@ -242,7 +242,7 @@ estresse <- function(GEN,YS,YC,index="ALL",bygen=T,plot=F,xlab="Genotype",ylab="
       RSI <- (YC/YS)/(xYC/xYS)
       final <- data.frame(GEN,STI,YI,GMP,MP,MH,SSI,YSI,RSI)
       cat("\n---------------------------------------------------------------------------------------------\n")
-      cat("Índices de Estresse")
+      cat("Stress Index")
       cat("\n---------------------------------------------------------------------------------------------\n")
       print(final)
       if(plot==T){
@@ -251,11 +251,11 @@ estresse <- function(GEN,YS,YC,index="ALL",bygen=T,plot=F,xlab="Genotype",ylab="
           mutate(across(starts_with("GEN"), as.factor),
                  across(c(STI, YI, GMP, MP, MH, SSI, YSI, RSI), as.numeric))
 
-        #Agrupar todos os índices na mesma coluna
+        #Agrupar todos os indices na mesma coluna
         dados_long <- pivot_longer(final, cols = c(STI, YI, GMP, MP, MH, SSI, YSI, RSI),
                                    names_to = "indice", values_to = "valores")
 
-        #Gráfico com FW
+        #Grafico com FW
         ggplot(dados_long, aes(x = GEN, y = valores, fill = GEN)) +
           geom_bar(stat = "identity") +
           facet_wrap(~ indice, ncol = 4) +
@@ -267,7 +267,7 @@ estresse <- function(GEN,YS,YC,index="ALL",bygen=T,plot=F,xlab="Genotype",ylab="
             strip.text = element_text(size = 14),
             plot.title = element_text(size = 16, face = "bold"),
             legend.position = "none") +
-          labs(title = "Valores dos Índices por Genótipo", x = xlab, y = ylab) +
+          labs(title = "Index Values by Genotype", x = xlab, y = ylab) +
           scale_fill_viridis_d()
       }
     }
@@ -346,7 +346,7 @@ estresse <- function(GEN,YS,YC,index="ALL",bygen=T,plot=F,xlab="Genotype",ylab="
     RSI <- (YC/YS)/(xYC/xYS)
     final <- data.frame(GEN,STI,YI,GMP,MP,MH,SSI,YSI,RSI)
     cat("\n-----------------------------------------------------------------------------------------------\n")
-    cat("Índices de Estresse")
+    cat("Stress Index")
     cat("\n-----------------------------------------------------------------------------------------------\n")
     print(final)
   }
@@ -359,16 +359,16 @@ estresse <- function(GEN,YS,YC,index="ALL",bygen=T,plot=F,xlab="Genotype",ylab="
 #'@param CICLO The column with the cycle days
 #'@param TM The column with the average air temperature values
 #'@param UR The column with the relative humidity values
-#'@author Willyan Júnior Adorian Bandeira
-#'@author Ivan Ricardo Carvalho
+#'@author Willyan Junior Adorian Bandeira
+#'@author Ivan Ricardo Carvalo
 #'@author Murilo Vieira Loro
 #'@author Leonardo Cesar Pradebon
-#'@author José Antonio Gonzalez da Silva
+#'@author Jose Antonio Gonzalez da Silva
 #'@references
 #'Tazzo, I. F., Tarouco, A. K., Allem Junior P. H. C., Bremm, C., Cardoso, L.
-#'S., & Junges, A. H. (2024). Índice de Temperatura e Umidade (ITU) ao longo do
-#'verão de 2021/2022 e estimativas dos impactos na bovinocultura de leite no Rio
-#'Grande do Sul, Brasil. Ciência Animal Brasileira, 2,5, e-77035P.
+#'S., & Junges, A. H. (2024). Indice de Temperatura e Umidade (ITU) ao longo do
+#'verao de 2021/2022 e estimativas dos impactos na bovinocultura de leite no Rio
+#'Grande do Sul, Brasil. Ciencia Animal Brasileira, 2,5, e-77035P.
 #'https://doi.org/10.1590/1809-6891v25e-77035Pexport
 #'@export
 

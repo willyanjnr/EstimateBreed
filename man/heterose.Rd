@@ -17,9 +17,9 @@ heterose(GEN, GM, GP, PR, REP, param = "all")
 
 \item{REP}{The column with the repetitions (if exists)}
 
-\item{param}{Value to determine the parameter to be calculated. Default is “all”.
-To calculate heterosis only, use “het”. To calculate only heterobeltiosis,
-use “hetb”.}
+\item{param}{Value to determine the parameter to be calculated. Default is 'all'.
+To calculate heterosis only, use 'het'. To calculate only heterobeltiosis,
+use 'hetb'.}
 }
 \description{
 Calculation of heterosis and heterobeltiosis parameters of hybrids
@@ -40,13 +40,13 @@ with(maize,heterose(GEN,GM,GP,PR,REP,param = "hetb"))
 }
 }
 \author{
-Willyan Júnior Adorian Bandeira
+Willyan Junior Adorian Bandeira
 
-Ivan Ricardo Carvalho
+Ivan Ricardo Carvalo
 
 Murilo Vieira Loro
 
 Leonardo Cesar Pradebon
 
-José Antonio Gonzalez da Silva
+Jose Antonio Gonzalez da Silva
 }

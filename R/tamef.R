@@ -4,11 +4,11 @@
 #'@param GEN The column with the name of the genotype (progeny).
 #'@param SI The column with the number of individuals selected
 #'@param NE Number of individuals conducted during the selection period.
-#'@author Willyan Júnior Adorian Bandeira
-#'@author Ivan Ricardo Carvalho
+#'@author Willyan Junior Adorian Bandeira
+#'@author Ivan Ricardo Carvalo
 #'@author Murilo Vieira Loro
 #'@author Leonardo Cesar Pradebon
-#'@author José Antonio Gonzalez da Silva
+#'@author Jose Antonio Gonzalez da Silva
 #'@export
 
 tamef <- function(GEN,SI,NE){

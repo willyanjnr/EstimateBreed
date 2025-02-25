@@ -8,11 +8,11 @@
 #'@param PTN The column with the protein values
 #'@return Determines the industrial quality index for wheat crops, when
 #'considering variables used to classify wheat cultivars.
-#'@author Willyan Júnior Adorian Bandeira
-#'@author Ivan Ricardo Carvalho
+#'@author Willyan Junior Adorian Bandeira
+#'@author Ivan Ricardo Carvalo
 #'@author Murilo Vieira Loro
 #'@author Leonardo Cesar Pradebon
-#'@author José Antonio Gonzalez da Silva
+#'@author Jose Antonio Gonzalez da Silva
 #'@references
 #'Szareski, V. J., Carvalho, I. R., Kehl, K., Levien, A. M.,
 #'Lautenchleger, F., Barbosa, M. H., ... & Aumonde, T. Z. (2019).
@@ -63,15 +63,15 @@ is_qindustrial <- function(GEN, NQ, W, PTN){
 #'@param MG The column with grain mass values.
 #'@param MC The column with karyopsis mass values.
 #'@param RG The column with the grain yield values (kg per ha).
-#'@param stat Logical argument. Use “all” to keep all the observations or “mean”
+#'@param stat Logical argument. Use 'all' to keep all the observations or 'mean'
 #'to extract the overall average.
 #'@return Returns the peeling index and industrial yield considering the
 #'standards desired by the industry.
-#'@author Willyan Júnior Adorian Bandeira
-#'@author Ivan Ricardo Carvalho
+#'@author Willyan Junior Adorian Bandeira
+#'@author Ivan Ricardo Carvalo
 #'@author Murilo Vieira Loro
 #'@author Leonardo Cesar Pradebon
-#'@author José Antonio Gonzalez da Silva
+#'@author Jose Antonio Gonzalez da Silva
 #'@export
 #'@examples
 #'\donttest{
@@ -126,16 +126,16 @@ rend_ind <- function(GEN,NG2M,MG,MC,RG,stat="all",...){
 #'@param plot Logical argument. Plot a graphic if 'TRUE'.
 #'@return Returns the index obtained between the reported variables. The higher
 #'the index, the better the genotype.
-#'@author Willyan Júnior Adorian Bandeira
-#'@author Ivan Ricardo Carvalho
+#'@author Willyan Junior Adorian Bandeira
+#'@author Ivan Ricardo Carvalo
 #'@author Murilo Vieira Loro
 #'@author Leonardo Cesar Pradebon
-#'@author José Antonio Gonzalez da Silva
+#'@author Jose Antonio Gonzalez da Silva
 #'@references
 #'Rigotti, E. J., Carvalho, I. R., Loro, M. V., Pradebon, L. C., Dalla Roza,
 #'J. P., & Sangiovo, J. P. (2024). Seed and grain yield and quality of wheat
 #'subjected to advanced harvest using a physiological ripening process.
-#'Revista Engenharia na Agricultura - REVENG, 32(Contínua), 54–64.
+#'Revista Engenharia na Agricultura - REVENG, 32, 54-64.
 #'https://doi.org/10.13083/reveng.v32i1.17394
 #'@export
 #'@examples
@@ -200,21 +200,21 @@ indviab <- function(GEN,var1,var2,ylab="Index",xlab="Genotype",stat="all",plot=F
 #'@param HL Weight obtained on a 1qt lt scale, as determined by the
 #'Rules for Seed Analysis (RAS), Ministry of Agriculture,
 #'Livestock and Supply (2009).
-#'@param crop Argument for selecting culture. Use "trit" for wheat, "oats" for
-#'white oats, "rye" for rye and "barley" for barley
-#'@param stat  Argument to select the function output type. Use "all" to estimate
-#' the HW for all replicates, or "mean" to extract the mean for each genotype.
+#'@param crop Argument for selecting culture. Use 'trit' for wheat, 'oats' for
+#'white oats, 'rye' for rye and 'barley' for barley
+#'@param stat  Argument to select the function output type. Use 'all' to estimate
+#' the HW for all replicates, or 'mean' to extract the mean for each genotype.
 #'@return Returns the estimated value of the hectolitre weight (HW) for the ceral
 #'selecionado.
-#'@author Willyan Júnior Adorian Bandeira
-#'@author Ivan Ricardo Carvalho
+#'@author Willyan Junior Adorian Bandeira
+#'@author Ivan Ricardo Carvalo
 #'@author Murilo Vieira Loro
 #'@author Leonardo Cesar Pradebon
-#'@author José Antonio Gonzalez da Silva
+#'@author Jose Antonio Gonzalez da Silva
 #'@references
-#'Brasil. Ministério da Agricultura, Pecuária e Abastecimento.
-#'Secretaria de Defesa Agropecuária. Regras para Análise de Sementes.
-#' Brasília: MAPA/ACS, 2009. 399 p. ISBN 978-85-99851-70-8.
+#'Brasil. Ministerio da Agricultura, Pecuaria e Abastecimento.
+#'Secretaria de Defesa Agropecuaria. Regras para Analise de Sementes.
+#' Brasilia: MAPA/ACS, 2009. 399 p. ISBN 978-85-99851-70-8.
 #'@export
 #'@examples
 #'\donttest{
@@ -272,11 +272,11 @@ ph <- function(GEN, HL, crop="trit", stat="all") {
 #'@param RG The column with the grain yield values (in kg per ha)
 #'@return Returns an industrial wheat quality index based solely on protein and
 #'grain yield.
-#'@author Willyan Júnior Adorian Bandeira
-#'@author Ivan Ricardo Carvalho
+#'@author Willyan Junior Adorian Bandeira
+#'@author Ivan Ricardo Carvalo
 #'@author Murilo Vieira Loro
 #'@author Leonardo Cesar Pradebon
-#'@author José Antonio Gonzalez da Silva
+#'@author Jose Antonio Gonzalez da Silva
 #'@references
 #'de Pelegrin, A. J., Carvalho, I. R., Nunes, A. C. P., Demari, G. H., Szareski,
 #'V. J., Barbosa, M. H., ... & da Maia, L. C. (2017).
@@ -309,8 +309,8 @@ is_ptnerg <- function(GEN, PTN, RG){
   index <- ((variav1/sd_ptn)*(variav2/sd_rg))
 
   dadosfinal <- data.frame(genot,index)
-  cat(crayon::white(bold("\n-----------------------------------------------------------------\n")))
-  green(italic(cat("Genotype")))
-  cat(crayon::white(bold("\n-----------------------------------------------------------------\n")))
+  cat("\n-----------------------------------------------------------------\n")
+  cat("Genotype")
+  cat("\n-----------------------------------------------------------------\n")
   print(dadosfinal)
 }

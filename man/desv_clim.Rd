@@ -10,7 +10,7 @@ desv_clim(ENV, TMED, PREC)
 \item{ENV}{Identification of each selection environment (to differentiate if
 there is more than one cultivation cycle).}
 
-\item{TMED}{Average air temperature (in ºC) during the cycle in each environment.}
+\item{TMED}{Average air temperature (in degree Celsius) during the cycle in each environment.}
 
 \item{PREC}{Rainfall (in mm) during the cultivation cycle in each environment}
 }
@@ -32,13 +32,13 @@ with(desvamb,desv_clim(ENV,TMED,PREC))
 }
 }
 \author{
-Willyan Júnior Adorian Bandeira
+Willyan Junior Adorian Bandeira
 
-Ivan Ricardo Carvalho
+Ivan Ricardo Carvalo
 
 Murilo Vieira Loro
 
 Leonardo Cesar Pradebon
 
-José Antonio Gonzalez da Silva
+Jose Antonio Gonzalez da Silva
 }

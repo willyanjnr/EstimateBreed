@@ -5,11 +5,11 @@
 #'@param h The column with the restricted heritability values
 #'@param VF The column with the phenotypic variance values
 #'@param P The column with the values observed for the progenies
-#'@author Willyan Júnior Adorian Bandeira
-#'@author Ivan Ricardo Carvalho
+#'@author Willyan Junior Adorian Bandeira
+#'@author Ivan Ricardo Carvalo
 #'@author Murilo Vieira Loro
 #'@author Leonardo Cesar Pradebon
-#'@author José Antonio Gonzalez da Silva
+#'@author Jose Antonio Gonzalez da Silva
 #'@export
 
 GS<-function(Var, h, VF, P = "1"){
@@ -130,11 +130,11 @@ GS<-function(Var, h, VF, P = "1"){
 #'@param h The column with the heritability values in the strict sense
 #'@param DS The column with the value of the selection differential to be applied
 #'to each variable
-#'@author Willyan Júnior Adorian Bandeira
-#'@author Ivan Ricardo Carvalho
+#'@author Willyan Junior Adorian Bandeira
+#'@author Ivan Ricardo Carvalo
 #'@author Murilo Vieira Loro
 #'@author Leonardo Cesar Pradebon
-#'@author José Antonio Gonzalez da Silva
+#'@author Jose Antonio Gonzalez da Silva
 #'@export
 
 GS2<-function(Var, h, DS){
@@ -159,11 +159,11 @@ GS2<-function(Var, h, DS){
 #'@param h The column with the restricted heritability values
 #'@param VF The column with the phenotypic variance values
 #'@param P The column with the progeny values
-#'@author Willyan Júnior Adorian Bandeira
-#'@author Ivan Ricardo Carvalho
+#'@author Willyan Junior Adorian Bandeira
+#'@author Ivan Ricardo Carvalo
 #'@author Murilo Vieira Loro
 #'@author Leonardo Cesar Pradebon
-#'@author José Antonio Gonzalez da Silva
+#'@author Jose Antonio Gonzalez da Silva
 #'@export
 
 GS3<-function(Var, h, VF, P = "1"){
@@ -286,11 +286,11 @@ GS3<-function(Var, h, VF, P = "1"){
 #'@param VF The column with the phenotypic variance values
 #'@param P The column with the value obtained for the progenies
 #'@param Year The column with the year of selection
-#'@author Willyan Júnior Adorian Bandeira
-#'@author Ivan Ricardo Carvalho
+#'@author Willyan Junior Adorian Bandeira
+#'@author Ivan Ricardo Carvalo
 #'@author Murilo Vieira Loro
 #'@author Leonardo Cesar Pradebon
-#'@author José Antonio Gonzalez da Silva
+#'@author Jose Antonio Gonzalez da Silva
 #'@export
 
 GS4<-function(Var, h, VF, P = "1", Ano){
@@ -405,17 +405,17 @@ GS4<-function(Var, h, VF, P = "1", Ano){
     print(final)}}
 
 ####
-#'Seleção pelo Diferencial de Seleção (Média e Desvios)
+#'Selection by Selection Differential (Mean and Deviations)
 #'@description
 #'Selection of Transgressive Genotypes - Selection Differential (SD)
 #'@param Gen The column with the genotype name
 #'@param Var The column with the variable of interest
 #'@param Witness The column with the value of the variable 'X' for the witnesses
-#'@author Willyan Júnior Adorian Bandeira
-#'@author Ivan Ricardo Carvalho
+#'@author Willyan Junior Adorian Bandeira
+#'@author Ivan Ricardo Carvalo
 #'@author Murilo Vieira Loro
 #'@author Leonardo Cesar Pradebon
-#'@author José Antonio Gonzalez da Silva
+#'@author Jose Antonio Gonzalez da Silva
 #'@export
 
 transgressivos<-function(Gen, Var, Testemunha,ylab="Selection",xlab="Genotypes"){
@@ -424,14 +424,14 @@ transgressivos<-function(Gen, Var, Testemunha,ylab="Selection",xlab="Genotypes")
   Var <- Var
   Testemunha <- Testemunha
 
-  Média<-mean(Var)
+  Media<-mean(Var)
   DSg<-mean(Testemunha)
   Desvio<-sd(Var)
-  DS1S<-Média+Desvio
-  DS2S<-Média+(2*Desvio)
-  DS3S<-Média+(3*Desvio)
+  DS1S<-Media+Desvio
+  DS2S<-Media+(2*Desvio)
+  DS3S<-Media+(3*Desvio)
 
-  parametros <- list(Média=Média,DSg=DSg,Desvio=Desvio,DS1S=DS1S,DS2S=DS2S,DS3S=DS3S)
+  parametros <- list(Media=Media,DSg=DSg,Desvio=Desvio,DS1S=DS1S,DS2S=DS2S,DS3S=DS3S)
   dados <- data.frame(Gen,Var, Testemunha)
 
 
@@ -442,8 +442,8 @@ transgressivos<-function(Gen, Var, Testemunha,ylab="Selection",xlab="Genotypes")
       size = 10,
       check_overlap = F)+ylab(ylab)+xlab(xlab)+theme_classic()+
 
-    geom_segment(aes(x = 0, y =Média, xend =Gen, yend = Média), linetype = 1, color = "darkred")+
-    geom_label(aes(x=0.5, y=Média, label="Mean"))+
+    geom_segment(aes(x = 0, y =Media, xend =Gen, yend = Media), linetype = 1, color = "darkred")+
+    geom_label(aes(x=0.5, y=Media, label="Mean"))+
 
     geom_segment(aes(x = 0, y =DSg, xend =Gen, yend =DSg), linetype = 2, color = "darkgray")+
     geom_label(aes(x=0.5, y=DSg, label="DS T"))+
@@ -474,30 +474,30 @@ transgressivos<-function(Gen, Var, Testemunha,ylab="Selection",xlab="Genotypes")
 #'@description
 #'Didactic table of standard segregation by generation
 #'@param MELHORAMENTO Base parameter for the print table function
-#'@author Willyan Júnior Adorian Bandeira
-#'@author Ivan Ricardo Carvalho
+#'@author Willyan Junior Adorian Bandeira
+#'@author Ivan Ricardo Carvalo
 #'@author Murilo Vieira Loro
 #'@author Leonardo Cesar Pradebon
-#'@author José Antonio Gonzalez da Silva
+#'@author Jose Antonio Gonzalez da Silva
 #'@export
 
 default_seg <- function(MELHORAMENTO){
 
-  AUTÓGAMAS<-c("Genitores","F1","F2","F3","F4","F5","F6","F7","F8","F9")
-  HETEROZIGOSE<-c(0,100,50,25,12.5,6.25,3.12,1.56,0.78,0.39)
-  ALÓGAMAS<-c("-","-","S0","S1","S2","S3","S4","S5","S6","S7")
-  HOMOZIGOSE<-c(100, 0,50,75,87.5,93.75,96.88,98.44,99.22, 99.61)
-  MUTANTES<-c("-", "M0", "M1","M2", "M3","M4","M5","M6", "M7", "M8")
-  SELEÇÃO<-c("Não","Não","Qualitativo","Qualitativo",
-             "Quantitativo","Quantitativo","Quantitativo","Quantitativo",
-             "Quantitativo","Quantitativo")
+  AUTOGAM<-c("Genitores","F1","F2","F3","F4","F5","F6","F7","F8","F9")
+  HETEROZIGOSITY<-c(0,100,50,25,12.5,6.25,3.12,1.56,0.78,0.39)
+  ALOGAM<-c("-","-","S0","S1","S2","S3","S4","S5","S6","S7")
+  HOMOZIGOSITY<-c(100, 0,50,75,87.5,93.75,96.88,98.44,99.22, 99.61)
+  MUTANTS<-c("-", "M0", "M1","M2", "M3","M4","M5","M6", "M7", "M8")
+  SELECTION<-c("N","N","Quali","Quali",
+             "Quant","Quanti","Quanti","Quanti",
+             "Quanti","Quanti")
   N_GENES<-c("-","-","1 a 2",
              "1 a 2", "3 ou +", "3 ou +","3 ou +","3 ou +","3 ou +","3 ou +")
-  E_AMBIENTE<-c("-","-","baixo",
-                "baixo", "alto", "alto","alto","alto","alto","alto")
+  ENV_EF<-c("-","-","low",
+                "low", "high", "high","high","high","high","high")
   COEF_F<-c(0.000,0.500,0.750,0.875,0.937,0.969,0.984,0.992,0.996,0.998)
-  TABELA<-data.frame(AUTÓGAMAS,ALÓGAMAS,HETEROZIGOSE,HOMOZIGOSE,MUTANTES,
-                     SELEÇÃO,N_GENES, E_AMBIENTE, COEF_F)
+  TABELA<-data.frame(AUTOGAM,ALOGAM,HETEROZIGOSITY,HOMOZIGOSITY,MUTANTS,
+                     SELECTION,N_GENES, ENV_EF, COEF_F)
   return(TABELA)
 }
 
@@ -508,11 +508,11 @@ default_seg <- function(MELHORAMENTO){
 #'@param var Column with the variable name
 #'@param VG Column with genotypic variance
 #'@param VF Column with phenotypic variance
-#'@author Willyan Júnior Adorian Bandeira
-#'@author Ivan Ricardo Carvalho
+#'@author Willyan Junior Adorian Bandeira
+#'@author Ivan Ricardo Carvalo
 #'@author Murilo Vieira Loro
 #'@author Leonardo Cesar Pradebon
-#'@author José Antonio Gonzalez da Silva
+#'@author Jose Antonio Gonzalez da Silva
 #'@export
 
 Coeficiente_endogamia<-function(var, VG, VF){
@@ -692,11 +692,11 @@ Coeficiente_endogamia<-function(var, VG, VF){
 #'@param ind description
 #'@param Genitor description
 #'@param Progenie description
-#'@author Willyan Júnior Adorian Bandeira
-#'@author Ivan Ricardo Carvalho
+#'@author Willyan Junior Adorian Bandeira
+#'@author Ivan Ricardo Carvalo
 #'@author Murilo Vieira Loro
 #'@author Leonardo Cesar Pradebon
-#'@author José Antonio Gonzalez da Silva
+#'@author Jose Antonio Gonzalez da Silva
 #'@export
 
 reg_GP <- function(ind, Genitor, Progenie) {
@@ -711,8 +711,8 @@ reg_GP <- function(ind, Genitor, Progenie) {
   slope <- coef(model)[2]
   Progenie_umPai<-0.5*slope
   Progenie_MPais<-slope
-  Meio_Irmão<-slope*0.25
-  Irmão_Completo<-slope*0.50
+  Meio_Irmao<-slope*0.25
+  Irmao_Completo<-slope*0.50
 
   equation <- paste("y =", round(intercept, 2), "+", round(slope, 2), "* x")
 
@@ -730,8 +730,8 @@ reg_GP <- function(ind, Genitor, Progenie) {
     coefficients = coef(model),
     Progenie_umPai=Progenie_umPai,
     Progenie_MPais=Progenie_MPais,
-    Meio_Irmão=Meio_Irmão,
-    Irmão_Completo=Irmão_Completo,
+    Meio_Irmao=Meio_Irmao,
+    Irmao_Completo=Irmao_Completo,
     grafico=grafico)
 
   cat("\n-----------------------------------------------------------------\n")
@@ -744,16 +744,16 @@ reg_GP <- function(ind, Genitor, Progenie) {
 #'Allelic interactions
 #'@description
 #'Examples of allelic and gene interactions
-#'@param type Type of allelic interaction. Use “ad” for additivity, “dom”
-#'for complete dominance, “domp” for partial dominance and “sob” for
+#'@param type Type of allelic interaction. Use 'ad' for additivity, 'dom'
+#'for complete dominance, 'domp' for partial dominance and 'sob' for
 #'overdominance.
-#'@param ge Type of GxE interaction. Use “aus” for no interaction,
-#'“simple” for simple interaction and “complex” for complex interaction.
-#'@author Willyan Júnior Adorian Bandeira
-#'@author Ivan Ricardo Carvalho
+#'@param ge Type of GxE interaction. Use 'aus' for no interaction,
+#''simple' for simple interaction and 'complex' for complex interaction.
+#'@author Willyan Junior Adorian Bandeira
+#'@author Ivan Ricardo Carvalo
 #'@author Murilo Vieira Loro
 #'@author Leonardo Cesar Pradebon
-#'@author José Antonio Gonzalez da Silva
+#'@author Jose Antonio Gonzalez da Silva
 #'@export
 
 ALELICA<-function(type=NULL,ge=NULL){
@@ -879,11 +879,11 @@ ALELICA<-function(type=NULL,ge=NULL){
 #'@param VAR Variable of interest for analysis.
 #'@param h2 Heritability of the character (a value between 0 and 1).
 #'@param P Performance of the progeny (a numerical value or vector).
-#'@author Willyan Júnior Adorian Bandeira
-#'@author Ivan Ricardo Carvalho
+#'@author Willyan Junior Adorian Bandeira
+#'@author Ivan Ricardo Carvalo
 #'@author Murilo Vieira Loro
 #'@author Leonardo Cesar Pradebon
-#'@author José Antonio Gonzalez da Silva
+#'@author Jose Antonio Gonzalez da Silva
 #'@export
 
 gga <- function(GEN, VAR, h2, P) {
@@ -909,14 +909,14 @@ gga <- function(GEN, VAR, h2, P) {
 #'@param REP The column with the repetitions (if any).
 #'@param K Selection pressure (Default 0.05).
 #'@param type Type of experiment (balanced or unbalanced). Use
-#'“balanced” for balanced and “unb” for unbalanced.
+#''balanced' for balanced and 'unb' for unbalanced.
 #'@param check Logical argument. Checks the model's assumptions
 #'statistical if the value is equal to TRUE.
-#'@author Willyan Júnior Adorian Bandeira
-#'@author Ivan Ricardo Carvalho
+#'@author Willyan Junior Adorian Bandeira
+#'@author Ivan Ricardo Carvalo
 #'@author Murilo Vieira Loro
 #'@author Leonardo Cesar Pradebon
-#'@author José Antonio Gonzalez da Silva
+#'@author Jose Antonio Gonzalez da Silva
 #'@references
 #'Yadav, S. P. S., Bhandari, S., Ghimire, N. P., Mehata, D. K., Majhi, S. K.,
 #'Bhattarai, S., Shrestha, S., Yadav, B., Chaudhary, P., & Bhujel, S. (2024).

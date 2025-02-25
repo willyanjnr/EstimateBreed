@@ -7,11 +7,11 @@
 #'@param GT Number of seedlings germinated per day during 't' time
 #'@param DT Number of evaluation days
 #'@param SL Shoot Length
-#'@author Willyan Júnior Adorian Bandeira
-#'@author Ivan Ricardo Carvalho
+#'@author Willyan Junior Adorian Bandeira
+#'@author Ivan Ricardo Carvalo
 #'@author Murilo Vieira Loro
 #'@author Leonardo Cesar Pradebon
-#'@author José Antonio Gonzalez da Silva
+#'@author Jose Antonio Gonzalez da Silva
 #'@references
 #'Zou, M., Tong, S., Zou, T. et al. A new method for mutation inducing in rice
 #'by using DC electrophoresis bath and its mutagenic effects. Sci Rep 13, 6707
@@ -28,13 +28,13 @@ mut_index <- function(mut=NULL,MSG,MST,GT,DT,SL) {
   PER <- PER
   SL <- SL
 
-  #Cálculo da Germinação Relativa (GR)
+  #Calculo da Germ Relativa (GR)
   GR <- (MSG/MST)*100
 
-  #Cálculo do Índice de Germinação (GI)
+  #Calculo do Indice de Germ (GI)
   GI <- GT/DT
 
-  #Cálculo do Índice de Vitalidade (VI)
+  #Calculo do Indice de Vitalidade (VI)
   VI <- SL*GI
 
   # Retornar os resultados

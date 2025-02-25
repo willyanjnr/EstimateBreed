@@ -8,7 +8,7 @@
 #'   \item{MO}{Month of the year.}
 #'   \item{DY}{Day of the year.}
 #'   \item{HR}{Time of the day.}
-#'   \item{TMED}{Average Air Temperature - in ºC.}
+#'   \item{TMED}{Average Air Temperature - in  degree C.}
 #'   \item{RH}{Relative Humidity - in \%.}
 #' }
 #' @source Data obtained from the Nasa Power platform (https://power.larc.nasa.gov/).

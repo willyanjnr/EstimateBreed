@@ -24,8 +24,8 @@ tdelta(
 
 \item{days}{Number of days (only use this argument if type=1).}
 
-\item{control}{Type of product to be applied. Use “fung” for fungicide,
-“herb” for herbicide, “ins” for insecticides, “bio” for biological products.}
+\item{control}{Type of product to be applied. Use 'fung' for fungicide,
+'herb' for herbicide, 'ins' for insecticides, 'bio' for biological products.}
 
 \item{details}{Returns the result in detail if TRUE.}
 
@@ -34,11 +34,11 @@ weather data for a crop cycle.}
 }
 \value{
 Returns the ideal application times, considering each scenario.
-Taking as a parameter a DELTA_T between 2 and 8, wind speed between 3 and 8,
+Taking as a parameter a TDELTA between 2 and 8, wind speed between 3 and 8,
 and no precipitation.
 }
 \description{
-Determining the ideal time for pesticide application using ∆T
+Determining the ideal time for pesticide application using TDELTA
 }
 \examples{
 \donttest{
@@ -54,13 +54,13 @@ View(retrospective)
 }
 }
 \author{
-Willyan Júnior Adorian Bandeira
+Willyan Junior Adorian Bandeira
 
-Ivan Ricardo Carvalho
+Ivan Ricardo Carvalo
 
 Murilo Vieira Loro
 
 Leonardo Cesar Pradebon
 
-José Antonio Gonzalez da Silva
+Jose Antonio Gonzalez da Silva
 }

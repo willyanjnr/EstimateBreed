@@ -6,11 +6,11 @@
 #'@param Var The column with the variable name
 #'@param VG The column with the genotypic variance values
 #'@param Test The column with the witnesses' names
-#'@author Willyan Júnior Adorian Bandeira
-#'@author Ivan Ricardo Carvalho
+#'@author Willyan Junior Adorian Bandeira
+#'@author Ivan Ricardo Carvalo
 #'@author Murilo Vieira Loro
 #'@author Leonardo Cesar Pradebon
-#'@author José Antonio Gonzalez da Silva
+#'@author Jose Antonio Gonzalez da Silva
 #'@references
 #'Port, E. D., Carvalho, I. R., Pradebon, L. C., Loro, M. V., Colet, C. D. F.,
 #'Silva, J. A. G. D., & Sausen, N. H. (2024).

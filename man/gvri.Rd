@@ -4,7 +4,16 @@
 \alias{gvri}
 \title{Selection for Grain Volume}
 \usage{
-gvri(GEN, C, L, E, stat = "all", plot = F, ylab = "GVRI", xlab = "Genotype")
+gvri(
+  GEN,
+  C,
+  L,
+  E,
+  stat = "everything",
+  plot = F,
+  ylab = "GVRI",
+  xlab = "Genotype"
+)
 }
 \arguments{
 \item{GEN}{The column with the genotype name}
@@ -15,8 +24,8 @@ gvri(GEN, C, L, E, stat = "all", plot = F, ylab = "GVRI", xlab = "Genotype")
 
 \item{E}{Grain thickness}
 
-\item{stat}{Extract or not the average per genotype. Use `“all”` to obtain
-information on all the observations or “mean” to extract the average.}
+\item{stat}{Extract or not the average per genotype. Use 'everything' to obtain
+information on all the observations or 'mean' to extract the average.}
 
 \item{plot}{Logical argument. Plot a graph if TRUE}
 
@@ -33,13 +42,13 @@ grain length, width and thickness
 library(EstimateBreed)
 set.seed(123)
 
-data <- tibble::tibble(
-Gen = rep(paste0("G", 1:10), each = 3),
-Rep = rep(1:3, times = 10),
-L = round(rnorm(30, mean = 3.2, sd = 0.3), 2),
-C = round(rnorm(30, mean = 8.5, sd = 0.5), 2),
+Gen = rep(paste0("G", 1:10), each = 3)
+Rep = rep(1:3, times = 10)
+L = round(rnorm(30, mean = 3.2, sd = 0.3), 2)
+C = round(rnorm(30, mean = 8.5, sd = 0.5), 2)
 E = round(rnorm(30, mean = 2.1, sd = 0.2), 2)
-)
+
+data <- data.frame(Gen,Rep,L,C,E)
 
 with(data,gvri(Gen,C,L,E, stat="mean", plot=T))
 }
@@ -53,13 +62,13 @@ Research, 16(3), gmr16039734.
  https://doi.org/10.4238/gmr16039734
 }
 \author{
-Willyan Júnior Adorian Bandeira
+Willyan Junior Adorian Bandeira
 
-Ivan Ricardo Carvalho
+Ivan Ricardo Carvalo
 
 Murilo Vieira Loro
 
 Leonardo Cesar Pradebon
 
-José Antonio Gonzalez da Silva
+Jose Antonio Gonzalez da Silva
 }

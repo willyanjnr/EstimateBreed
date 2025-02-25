@@ -7,24 +7,24 @@
 ALELICA(type = NULL, ge = NULL)
 }
 \arguments{
-\item{type}{Type of allelic interaction. Use “ad” for additivity, “dom”
-for complete dominance, “domp” for partial dominance and “sob” for
+\item{type}{Type of allelic interaction. Use 'ad' for additivity, 'dom'
+for complete dominance, 'domp' for partial dominance and 'sob' for
 overdominance.}
 
-\item{ge}{Type of GxE interaction. Use “aus” for no interaction,
-“simple” for simple interaction and “complex” for complex interaction.}
+\item{ge}{Type of GxE interaction. Use 'aus' for no interaction,
+'simple' for simple interaction and 'complex' for complex interaction.}
 }
 \description{
 Examples of allelic and gene interactions
 }
 \author{
-Willyan Júnior Adorian Bandeira
+Willyan Junior Adorian Bandeira
 
-Ivan Ricardo Carvalho
+Ivan Ricardo Carvalo
 
 Murilo Vieira Loro
 
 Leonardo Cesar Pradebon
 
-José Antonio Gonzalez da Silva
+Jose Antonio Gonzalez da Silva
 }

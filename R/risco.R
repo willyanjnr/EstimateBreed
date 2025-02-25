@@ -4,20 +4,20 @@
 #'Variables meteorological variables (Engers et al., 2024).
 #'@param DAY The column for the day of the month.
 #'@param MONTH The column for the month of the year (numeric value).
-#'@param TEMP A coluna da temperatura média do ar (em ºC).
+#'@param TEMP The average air temperature column (in degree Celsius).
 #'@param RH The relative humidity column (in \%).
-#'@param disease Define the soybean disease (Standard = “rust”).
+#'@param disease Define the soybean disease (Standard = 'rust').
 #'@param plot Plot a graph of the accumulation (Default is F (FALSE)).
 #'@references
 #'de Oliveira Engers, L.B., Radons, S.Z., Henck, A.U. et al.
 #'Evaluation of a forecasting system to facilitate decision-making for the
-#'chemical control of Asian soybean rust. Trop. plant pathol. 49, 539–546 (2024).
+#'chemical control of Asina soybean rust. Trop. plant pathol. 49, 539-546 (2024).
 #'https://doi.org/10.1007/s40858-024-00649-1
-#'@author Willyan Júnior Adorian Bandeira
-#'@author Ivan Ricardo Carvalho
+#'@author Willyan Junior Adorian Bandeira
+#'@author Ivan Ricardo Carvalo
 #'@author Murilo Vieira Loro
 #'@author Leonardo Cesar Pradebon
-#'@author José Antonio Gonzalez da Silva
+#'@author Jose Antonio Gonzalez da Silva
 #'@examples
 #'\donttest{
 #'library(EstimateBreed)

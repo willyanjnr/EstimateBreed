@@ -13,11 +13,11 @@ restr(TEST, REP, Xi, scenario = NULL, zstat = NULL)
 
 \item{Xi}{The column with the observed value for a given genotype.}
 
-\item{scenario}{Scenario to be used for the calculation. Use “original” to
+\item{scenario}{Scenario to be used for the calculation. Use 'original' to
 do not restrict the witnesses by the mean plus or minus the standard deviations,
-or “restr” to apply the restriction.}
+or 'restr' to apply the restriction.}
 
-\item{zstat}{Logical argument. Applies Z-notation normalization if “TRUE”.}
+\item{zstat}{Logical argument. Applies Z-notation normalization if 'TRUE'.}
 }
 \description{
 Method for restricting the variability of witnesses proposed by Carvalho et al.
@@ -51,13 +51,13 @@ Acta Scientiarum. Agronomy, 45, e56156.
 https://doi.org/10.4025/actasciagron.v45i1.56156
 }
 \author{
-Willyan Júnior Adorian Bandeira
+Willyan Junior Adorian Bandeira
 
-Ivan Ricardo Carvalho
+Ivan Ricardo Carvalo
 
 Murilo Vieira Loro
 
 Leonardo Cesar Pradebon
 
-José Antonio Gonzalez da Silva
+Jose Antonio Gonzalez da Silva
 }

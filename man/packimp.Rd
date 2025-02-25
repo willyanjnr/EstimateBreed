@@ -2,10 +2,10 @@
 % Please edit documentation in R/packimp.R
 \name{packimp}
 \alias{packimp}
-\title{Importação dos pacotes necessários}
+\title{Importing the necessary packages}
 \usage{
 packimp()
 }
 \description{
-Importação dos pacotes necessários
+Importing the necessary packages
 }

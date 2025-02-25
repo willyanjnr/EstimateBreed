@@ -2,28 +2,28 @@
 % Please edit documentation in R/mtgerm.R
 \name{tindex}
 \alias{tindex}
-\title{AIC e multitrait de sementes de aveia preta}
+\title{AIC and black oat seed multitrait}
 \usage{
 tindex(fc, germ, sdm, sl, radl, index = "PI")
 }
 \description{
-Índices de seleção multicaracterística
+Multitrait selection index for variables of interest
 }
 \references{
 Moura, N. B., Carvalho, I. R., Silva, J. A. G., Loro, M. V., Barbosa, M. H.,
 Lautenchleger, F., Marchioro, V. S., & Souza, V. Q. (2021). Akaike criteria
 and selection of physiological multi-character indexes for the production of
-black oat seeds. Current Plant Studies, 11, 1–8.
+black oat seeds. Current Plant Studies, 11, 1-8.
 https://doi.org/10.26814/cps2021003
 }
 \author{
-Willyan Júnior Adorian Bandeira
+Willyan Junior Adorian Bandeira
 
-Ivan Ricardo Carvalho
+Ivan Ricardo Carvalo
 
 Murilo Vieira Loro
 
 Leonardo Cesar Pradebon
 
-José Antonio Gonzalez da Silva
+Jose Antonio Gonzalez da Silva
 }

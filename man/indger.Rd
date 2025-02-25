@@ -2,22 +2,22 @@
 % Please edit documentation in R/indgerarroz.R
 \name{indger}
 \alias{indger}
-\title{Índice de germinação pela contagem subsequente}
+\title{Germination index by subsequent counting}
 \usage{
 indger(TESTE, DIA, TSG, NST)
 }
 \arguments{
-\item{TESTE}{Número identificador do teste realizdo}
+\item{TESTE}{Identification number of the test performed}
 
-\item{DIA}{Valores numéricos para os dias testados}
+\item{DIA}{Numerical values for the days tested}
 
-\item{TSG}{Nome da coluna com o total de sementes germinadas em cada período}
+\item{TSG}{Name of the column with the total number of seeds germinated in each period}
 
-\item{NST}{Nome da coluna padrão com o número de sementes testadas}
+\item{NST}{Default column name with number of seeds tested}
 }
 \description{
-Estimativa do índice de germinação pela contagem subsequente de plântulas
-germinadas em determinado período (Wang et al., 2017)
+Estimation of germination index by subsequent seedling count
+germinated in a given period (Wang et al., 2017)
 }
 \examples{
 with(data,indviab(genot,var1,var2))
@@ -29,6 +29,13 @@ Journal of Food Engineering, vol. 13, no. 10, 2017, pp. 20160433.
 https://doi.org/10.1515/ijfe-2016-043
 }
 \author{
-Willyan Jr. A. Bandeira, Ivan R. Carvalho, Murilo V. Loro,
-Leonardo C. Pradebon, José A. G. da Silva
+Willyan Junior Adorian Bandeira
+
+Ivan Ricardo Carvalo
+
+Murilo Vieira Loro
+
+Leonardo Cesar Pradebon
+
+Jose Antonio Gonzalez da Silva
 }

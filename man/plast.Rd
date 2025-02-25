@@ -44,20 +44,20 @@ with(pheno, plast(GEN,TMED,EST,NN,habit="ind",plot=T))
 Porta, F. S. D., Streck, N. A., Alberto, C. M., da Silva, M. R.,
 & Tura, E. F. (2024). Improving understanding of the plastochron of
 determinate and indeterminate soybean cultivars. Revista Brasileira de
-Engenharia Agrícola e Ambiental, 28(10), e278299.
+Engenharia Agricola e Ambiental, 28(10), e278299.
 https://doi.org/10.1590/1807-1929/agriambi.v28n10e278299
 
 Fehr, W. R., & Caviness, C. E. (1977). Stages of soybean development.
 Iowa State University of Science and Technology Special Report, 80, 1-11.
 }
 \author{
-Willyan Júnior Adorian Bandeira
+Willyan Junior Adorian Bandeira
 
-Ivan Ricardo Carvalho
+Ivan Ricardo Carvalo
 
 Murilo Vieira Loro
 
 Leonardo Cesar Pradebon
 
-José Antonio Gonzalez da Silva
+Jose Antonio Gonzalez da Silva
 }

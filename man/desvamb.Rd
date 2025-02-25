@@ -8,7 +8,7 @@
 A data.frame with 449 observations and 3 variables:
 \describe{
   \item{ENV}{Selection environment.}
-  \item{TMED}{Temperatura média do ar (em ºC).}
+  \item{TMED}{Average Air Temperature (in degree C).}
   \item{PREC}{Precipitation (in mm)}
 }
 }

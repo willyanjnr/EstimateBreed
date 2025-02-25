@@ -28,13 +28,13 @@ by using DC electrophoresis bath and its mutagenic effects. Sci Rep 13, 6707
 (2023). https://doi.org/10.1038/s41598-023-33742-7
 }
 \author{
-Willyan Júnior Adorian Bandeira
+Willyan Junior Adorian Bandeira
 
-Ivan Ricardo Carvalho
+Ivan Ricardo Carvalo
 
 Murilo Vieira Loro
 
 Leonardo Cesar Pradebon
 
-José Antonio Gonzalez da Silva
+Jose Antonio Gonzalez da Silva
 }

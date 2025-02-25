@@ -17,7 +17,7 @@ rend_ind(GEN, NG2M, MG, MC, RG, stat = "all", ...)
 
 \item{RG}{The column with the grain yield values (kg per ha).}
 
-\item{stat}{Logical argument. Use “all” to keep all the observations or “mean”
+\item{stat}{Logical argument. Use 'all' to keep all the observations or 'mean'
 to extract the overall average.}
 }
 \value{
@@ -40,13 +40,13 @@ with(aveia, rend_ind(GEN,NG2M,MG,MC,RG,stat="mean"))
 }
 }
 \author{
-Willyan Júnior Adorian Bandeira
+Willyan Junior Adorian Bandeira
 
-Ivan Ricardo Carvalho
+Ivan Ricardo Carvalo
 
 Murilo Vieira Loro
 
 Leonardo Cesar Pradebon
 
-José Antonio Gonzalez da Silva
+Jose Antonio Gonzalez da Silva
 }

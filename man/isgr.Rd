@@ -7,7 +7,7 @@
 isgr(GEN, ENV, NG, MG, CICLO, req = 3.5, stage = NULL)
 }
 \arguments{
-\item{GEN}{Column referring to genotypes. Lines must have the prefix “L” before
+\item{GEN}{Column referring to genotypes. Lines must have the prefix 'L' before
 the number. Ex: L139.}
 
 \item{ENV}{The column for the selection environment.}
@@ -23,7 +23,7 @@ ideal (value of 3.5 mm per day). Can be changed manually in the 'req' argument.}
 May change depending on the phenological stage.}
 
 \item{stage}{Parameter to define the phenological stage the crop is in
-Use “veg” for vegetative and “rep” for reproductive, if the
+Use 'veg' for vegetative and 'rep' for reproductive, if the
 evaluations have only been carried out in a given period.}
 }
 \description{
@@ -56,13 +56,13 @@ to abiotic stresses. Aust J Crop Sci, 18(12), 825-830.
 https://doi.org/10.21475/ajcs.24.18.12.p98
 }
 \author{
-Willyan Júnior Adorian Bandeira
+Willyan Junior Adorian Bandeira
 
-Ivan Ricardo Carvalho
+Ivan Ricardo Carvalo
 
 Murilo Vieira Loro
 
 Leonardo Cesar Pradebon
 
-José Antonio Gonzalez da Silva
+Jose Antonio Gonzalez da Silva
 }

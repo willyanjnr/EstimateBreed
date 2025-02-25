@@ -11,11 +11,11 @@ risco(DAY, MONTH, TEMP, RH, disease = "rust", plot = F)
 
 \item{MONTH}{The column for the month of the year (numeric value).}
 
-\item{TEMP}{A coluna da temperatura média do ar (em ºC).}
+\item{TEMP}{The average air temperature column (in degree Celsius).}
 
 \item{RH}{The relative humidity column (in \%).}
 
-\item{disease}{Define the soybean disease (Standard = “rust”).}
+\item{disease}{Define the soybean disease (Standard = 'rust').}
 
 \item{plot}{Plot a graph of the accumulation (Default is F (FALSE)).}
 }
@@ -35,17 +35,17 @@ with(clima, risco(DY, MO, TMED, RH, disease = "rust"))
 \references{
 de Oliveira Engers, L.B., Radons, S.Z., Henck, A.U. et al.
 Evaluation of a forecasting system to facilitate decision-making for the
-chemical control of Asian soybean rust. Trop. plant pathol. 49, 539–546 (2024).
+chemical control of Asina soybean rust. Trop. plant pathol. 49, 539-546 (2024).
 https://doi.org/10.1007/s40858-024-00649-1
 }
 \author{
-Willyan Júnior Adorian Bandeira
+Willyan Junior Adorian Bandeira
 
-Ivan Ricardo Carvalho
+Ivan Ricardo Carvalo
 
 Murilo Vieira Loro
 
 Leonardo Cesar Pradebon
 
-José Antonio Gonzalez da Silva
+Jose Antonio Gonzalez da Silva
 }

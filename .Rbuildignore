@@ -12,4 +12,5 @@
 ^README.html$
 ^docs/
 ^pkgdown/
+^.github/
 ^pkgdown.yml$

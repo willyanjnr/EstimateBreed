@@ -2,7 +2,7 @@
 % Please edit documentation in R/selecao.R
 \name{transgressivos}
 \alias{transgressivos}
-\title{Seleção pelo Diferencial de Seleção (Média e Desvios)}
+\title{Selection by Selection Differential (Mean and Deviations)}
 \usage{
 transgressivos(Gen, Var, Testemunha, ylab = "Selection", xlab = "Genotypes")
 }
@@ -17,13 +17,13 @@ transgressivos(Gen, Var, Testemunha, ylab = "Selection", xlab = "Genotypes")
 Selection of Transgressive Genotypes - Selection Differential (SD)
 }
 \author{
-Willyan Júnior Adorian Bandeira
+Willyan Junior Adorian Bandeira
 
-Ivan Ricardo Carvalho
+Ivan Ricardo Carvalo
 
 Murilo Vieira Loro
 
 Leonardo Cesar Pradebon
 
-José Antonio Gonzalez da Silva
+Jose Antonio Gonzalez da Silva
 }

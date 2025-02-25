@@ -1,27 +1,27 @@
-#'AIC e multitrait de sementes de aveia preta
+#'AIC and black oat seed multitrait
 #'@description
-#'Índices de seleção multicaracterística
-#'@author Willyan Júnior Adorian Bandeira
-#'@author Ivan Ricardo Carvalho
+#'Multitrait selection index for variables of interest
+#'@author Willyan Junior Adorian Bandeira
+#'@author Ivan Ricardo Carvalo
 #'@author Murilo Vieira Loro
 #'@author Leonardo Cesar Pradebon
-#'@author José Antonio Gonzalez da Silva
+#'@author Jose Antonio Gonzalez da Silva
 #'@references
 #'Moura, N. B., Carvalho, I. R., Silva, J. A. G., Loro, M. V., Barbosa, M. H.,
 #'Lautenchleger, F., Marchioro, V. S., & Souza, V. Q. (2021). Akaike criteria
 #'and selection of physiological multi-character indexes for the production of
-#'black oat seeds. Current Plant Studies, 11, 1–8.
+#'black oat seeds. Current Plant Studies, 11, 1-8.
 #'https://doi.org/10.26814/cps2021003
 #'@export
 
 tindex <- function(fc, germ, sdm, sl, radl, index="PI") {
-  #Função não testada
+  #Funcao nao testada
 
   variaveis <- list(fc = fc, germ = germ, sdm = sdm, sl = sl, radl = radl)
   medias <- sapply(variaveis, mean)
   desvios <- sapply(variaveis, sd)
 
-  #Fenotípicas
+  #Fenotipicas
   indices <- lapply(names(variaveis), function(nome) {
     valores <- variaveis[[nome]]
     media <- medias[nome]
@@ -30,10 +30,10 @@ tindex <- function(fc, germ, sdm, sl, radl, index="PI") {
     ZI <- (valores - media) / desvio
     pesos <- c(0.5, 0.2, 0.125, 0.125, 0.05)
     WI <- sum(medias * pesos)
-    data.frame(Variável = nome, Valor_Original = valores, PI = PI, ZI = ZI, WI = WI)
+    data.frame(Variavel = nome, Valor_Original = valores, PI = PI, ZI = ZI, WI = WI)
   })
 
-  #Valor Genético
+  #Valor Genetico
   modelo_fc <- lmer(fc ~ 1 + (1|repeticao), data = dados, REML = TRUE)
   modelo_germ <- lmer(germ ~ 1 + (1|repeticao), data = dados, REML = TRUE)
   modelo_sdm <- lmer(sdm ~ 1 + (1|repeticao), data = dados, REML = TRUE)

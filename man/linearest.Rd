@@ -11,9 +11,9 @@ linearest(indep, dep, type = NULL, alpha = 0.05)
 
 \item{dep}{Name of the dependent variable column}
 
-\item{type}{Type of analysis to be carried out. Use “MET” to extract the
-maximum technical efficiency, “x3” to obtain the maximum and minimum points
-and “plateau” to extract the parameters using the plateau function.}
+\item{type}{Type of analysis to be carried out. Use 'MET' to extract the
+maximum technical efficiency, 'x3' to obtain the maximum and minimum points
+and 'plateau' to extract the parameters using the plateau function.}
 
 \item{alpha}{Significance of the test.}
 }
@@ -22,13 +22,13 @@ Determination of maximum technical efficiency (MET), maximum and minimum points
 and plateau function.
 }
 \author{
-Willyan Júnior Adorian Bandeira
+Willyan Junior Adorian Bandeira
 
-Ivan Ricardo Carvalho
+Ivan Ricardo Carvalo
 
 Murilo Vieira Loro
 
 Leonardo Cesar Pradebon
 
-José Antonio Gonzalez da Silva
+Jose Antonio Gonzalez da Silva
 }

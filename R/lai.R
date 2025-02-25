@@ -6,24 +6,24 @@
 #'@param L The column with the length of the leaf (in meters).
 #'@param TNL The column with the total number of leaves.
 #'@param TDL The column with the total number of dry leaves.
-#'@param crop Crop sampled. Use “soy” for soybean and “maize” for corn, “trit”
-#'for wheat, “rice” for rice, “bean” for bean, “sunflower” for sunflower,
-#'“cotton” for cotton, “sugarcane” for sugarcane, “potato” for potato and
-#'“tomato” for tomato.
+#'@param crop Crop sampled. Use 'soy' for soybean and 'maize' for maize, 'trit'
+#'for wheat, 'rice' for rice, 'bean' for bean, 'sunflower' for sunflower,
+#''cotton' for cotton, 'sugarcane' for sugarcane, 'potato' for potato and
+#''tomato' for tomato.
 #'@param sp Row spacing (Standard sp=0.45).
 #'@param sden Sowing density, in plants per linear meter (standard sden=14).
 #'@return Returns the accumulated leaf area, the potential leaf area index
 #'(considering the total number of leaves) and the actual leaf area index
 #'(making the adjustment considering the number of dry leaves) for each genotype
-#'@author Willyan Júnior Adorian Bandeira
-#'@author Ivan Ricardo Carvalho
+#'@author Willyan Junior Adorian Bandeira
+#'@author Ivan Ricardo Carvalo
 #'@author Murilo Vieira Loro
 #'@author Leonardo Cesar Pradebon
-#'@author José Antonio Gonzalez da Silva
+#'@author Jose Antonio Gonzalez da Silva
 #'@references
-#'Meira, D., Queiróz de Souza, V., Carvalho, I. R., Nardino, M., Follmann,
+#'Meira, D., Queiroz de Souza, V., Carvalho, I. R., Nardino, M., Follmann,
 #'D. N., Meier, C., Brezolin, P., Ferrari, M., & Pelegrin, A. J. (2015).
-#'Plastocrono e caracteres morfológicos da soja com hábito de crescimento
+#'Plastocrono e caracteres morfologicos da soja com habito de crescimento
 #'indeterminado. Revista Cultivando o Saber, 8(2), 184-200.
 #'@export
 #'@examples

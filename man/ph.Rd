@@ -13,11 +13,11 @@ ph(GEN, HL, crop = "trit", stat = "all")
 Rules for Seed Analysis (RAS), Ministry of Agriculture,
 Livestock and Supply (2009).}
 
-\item{crop}{Argument for selecting culture. Use "trit" for wheat, "oats" for
-white oats, "rye" for rye and "barley" for barley}
+\item{crop}{Argument for selecting culture. Use 'trit' for wheat, 'oats' for
+white oats, 'rye' for rye and 'barley' for barley}
 
-\item{stat}{Argument to select the function output type. Use "all" to estimate
-the HW for all replicates, or "mean" to extract the mean for each genotype.}
+\item{stat}{Argument to select the function output type. Use 'all' to estimate
+the HW for all replicates, or 'mean' to extract the mean for each genotype.}
 }
 \value{
 Returns the estimated value of the hectolitre weight (HW) for the ceral
@@ -45,18 +45,18 @@ with(data,ph(GEN,MG,crop="trigo",stat="mean"))
 }
 }
 \references{
-Brasil. Ministério da Agricultura, Pecuária e Abastecimento.
-Secretaria de Defesa Agropecuária. Regras para Análise de Sementes.
-Brasília: MAPA/ACS, 2009. 399 p. ISBN 978-85-99851-70-8.
+Brasil. Ministerio da Agricultura, Pecuaria e Abastecimento.
+Secretaria de Defesa Agropecuaria. Regras para Analise de Sementes.
+Brasilia: MAPA/ACS, 2009. 399 p. ISBN 978-85-99851-70-8.
 }
 \author{
-Willyan Júnior Adorian Bandeira
+Willyan Junior Adorian Bandeira
 
-Ivan Ricardo Carvalho
+Ivan Ricardo Carvalo
 
 Murilo Vieira Loro
 
 Leonardo Cesar Pradebon
 
-José Antonio Gonzalez da Silva
+Jose Antonio Gonzalez da Silva
 }

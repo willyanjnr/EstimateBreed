@@ -5,18 +5,18 @@
 #'@param crop Parameter to define the culture. Use "maize", "soybean", "flax",
 #'"trit" or "oat"
 #'@param plot Logical argument. Plot a graph of thermal accumulation if TRUE.
-#'@author Willyan Júnior Adorian Bandeira
+#'@author Willyan Junior Adorian Bandeira
 #'@author Ivan Ricardo Carvalo
 #'@author Murilo Vieira Loro
 #'@author Leonardo Cesar Pradebon
-#'@author José Antonio Gonzalez da Silva
+#'@author Jose Antonio Gonzalez da Silva
 #'@export
 #'@examples
 #'\donttest{
 #'library(EstimateBreed)
 #'
 #'data("clima")
-#'clima <- clima(1:150,)
+#'clima <- get("clima")[1:150, ]
 #'
 #'with(clima,atsum(TMED,crop="maize"))
 #'}
@@ -38,14 +38,14 @@ atsum <- function(TMED,crop="maize",plot=F){
     cat("\n------------------------------\n")
     cat("Total Cycle =",tail(acumulado$Ciclo, n = 1),"Days\n")
     cat("TS =",paste(STot),"GDD\n")
-    cat("TBi =",paste(TBi),"ºC\n")
-    cat("Max Value =",paste(VMax),"ºC\n")
-    cat("Min Value =",paste(VMin),"ºC\n")
+    cat("TBi =",paste(TBi),"degrees Celsius\n")
+    cat("Max Value =",paste(VMax),"degrees Celsius\n")
+    cat("Min Value =",paste(VMin),"degrees Celsius\n")
     cat("CV(%) =",paste(round(CV,digits = 2)),"\n")
     if(plot==T){
         grafico <- ggplot(acumulado, aes(x=Ciclo, y=STAc)) +
         geom_line(color="red", size=1, alpha=0.9, linetype=1) +
-        ylab("Accumulated TS (ºC)")+xlab("Maize Cycle")+theme_classic()+
+        ylab("Accumulated TS (degrees Celsius)")+xlab("Maize Cycle")+theme_classic()+
         scale_x_continuous(breaks=seq(0,tail(acumulado$Ciclo, n = 1)+5,10))
       plot(grafico)
   }
@@ -65,14 +65,14 @@ atsum <- function(TMED,crop="maize",plot=F){
     cat("\n----------------------------\n")
     cat("Total Cycle =",tail(acumulado$Ciclo, n = 1),"Days\n")
     cat("TS =",paste(STot),"GDD\n")
-    cat("TBi =",paste(TBi),"ºC\n")
-    cat("Max Value =",paste(VMax),"ºC\n")
-    cat("Min Value =",paste(VMin),"ºC\n")
+    cat("TBi =",paste(TBi),"degrees Celsius\n")
+    cat("Max Value =",paste(VMax),"degrees Celsius\n")
+    cat("Min Value =",paste(VMin),"degrees Celsius\n")
     cat("CV(%) =",paste(round(CV,digits = 2)),"\n")
     if(plot==T){
       grafico <- ggplot(acumulado, aes(x=Ciclo, y=STAc)) +
         geom_line(color="red", size=1, alpha=0.9, linetype=1) +
-        ylab("Accumulated TS (ºC)")+xlab("Soybean Cycle")+theme_classic()+
+        ylab("Accumulated TS (degrees Celsius)")+xlab("Soybean Cycle")+theme_classic()+
         scale_x_continuous(breaks=seq(0,tail(acumulado$Ciclo, n = 1)+5,10))
       plot(grafico)
     }
@@ -92,14 +92,14 @@ atsum <- function(TMED,crop="maize",plot=F){
     cat("\n----------------------------\n")
     cat("Total Cycle =",tail(acumulado$Ciclo, n = 1),"Days\n")
     cat("TS =",paste(STot),"GDD\n")
-    cat("TBi =",paste(TBi),"ºC\n")
-    cat("Max Value =",paste(VMax),"ºC\n")
-    cat("Min Value =",paste(VMin),"ºC\n")
+    cat("TBi =",paste(TBi),"degrees Celsius\n")
+    cat("Max Value =",paste(VMax),"degrees Celsius\n")
+    cat("Min Value =",paste(VMin),"degrees Celsius\n")
     cat("CV(%) =",paste(round(CV,digits = 2)),"\n")
     if(plot==T){
       grafico <- ggplot(acumulado, aes(x=Ciclo, y=STAc)) +
         geom_line(color="red", size=1, alpha=0.9, linetype=1) +
-        ylab("Accumulated TS (ºC)")+xlab("Flaxseed Cycle")+theme_classic()+
+        ylab("Accumulated TS (degrees Celsius)")+xlab("Flaxseed Cycle")+theme_classic()+
         scale_x_continuous(breaks=seq(0,tail(acumulado$Ciclo, n = 1)+5,10))
       plot(grafico)
     }
@@ -120,14 +120,14 @@ atsum <- function(TMED,crop="maize",plot=F){
     cat("\n----------------------------\n")
     cat("Total Cycle =",tail(acumulado$Ciclo, n = 1),"Days\n")
     cat("TS =",paste(STot),"GDD\n")
-    cat("TBi =",paste(TBi),"ºC\n")
-    cat("Max Value =",paste(VMax),"ºC\n")
-    cat("Min Value =",paste(VMin),"ºC\n")
+    cat("TBi =",paste(TBi),"degrees Celsius\n")
+    cat("Max Value =",paste(VMax),"degrees Celsius\n")
+    cat("Min Value =",paste(VMin),"degrees Celsius\n")
     cat("CV(%) =",paste(round(CV,digits = 2)),"\n")
     if(plot==T){
       grafico <- ggplot(acumulado, aes(x=Ciclo, y=STAc)) +
         geom_line(color="red", size=1, alpha=0.9, linetype=1) +
-        ylab("Accumulated TS (ºC)")+xlab("Wheat Cycle")+theme_classic()+
+        ylab("Accumulated TS (degrees Celsius)")+xlab("Wheat Cycle")+theme_classic()+
         scale_x_continuous(breaks=seq(0,tail(acumulado$Ciclo, n = 1)+5,10))
       plot(grafico)
     }
@@ -146,14 +146,14 @@ atsum <- function(TMED,crop="maize",plot=F){
     cat("\n----------------------------\n")
     cat("Total Cycle =",tail(acumulado$Ciclo, n = 1),"Days\n")
     cat("TS =",paste(STot),"GDD\n")
-    cat("TBi =",paste(TBi),"ºC\n")
-    cat("Max Value =",paste(VMax),"ºC\n")
-    cat("Min Value =",paste(VMin),"ºC\n")
+    cat("TBi =",paste(TBi),"degrees Celsius\n")
+    cat("Max Value =",paste(VMax),"degrees Celsius\n")
+    cat("Min Value =",paste(VMin),"degrees Celsius\n")
     cat("CV(%) =",paste(round(CV,digits = 2)),"\n")
     if(plot==T){
       grafico <- ggplot(acumulado, aes(x=Ciclo, y=STAc)) +
         geom_line(color="red", size=1, alpha=0.9, linetype=1) +
-        ylab("Accumulated TS (ºC)")+xlab("Oat Cycle")+theme_classic()+
+        ylab("Accumulated TS (degrees Celsius)")+xlab("Oat Cycle")+theme_classic()+
         scale_x_continuous(breaks=seq(0,tail(acumulado$Ciclo, n = 1)+5,10))
       plot(grafico)
   }
@@ -169,11 +169,11 @@ atsum <- function(TMED,crop="maize",plot=F){
 #'@param crop Soja, Milho, Trigo
 #'@param ylab desc
 #'@param xlab description
-#'@author Willyan Júnior Adorian Bandeira
-#'@author Ivan Ricardo Carvalho
+#'@author Willyan Junior Adorian Bandeira
+#'@author Ivan Ricardo Carvalo
 #'@author Murilo Vieira Loro
 #'@author Leonardo Cesar Pradebon
-#'@author José Antonio Gonzalez da Silva
+#'@author Jose Antonio Gonzalez da Silva
 #'@export
 #'@examples
 #'\donttest{
@@ -210,7 +210,7 @@ optemp <-function(DAS,Var,crop = "soybean",ylab = "Meteorological Atribute",
       geom_segment(aes(x = 0, y =ToSuperior, xend =DAS, yend =ToSuperior), linetype = 2, color = "darkgreen")+
       geom_label(aes(x=15, y=ToSuperior, label="Upper optimum temperature"))+theme_classic()
 
-    parâmetros<-list(
+    parameters<-list(
 
       TbInferior=TbInferior,
       TbSuperior=TbSuperior,
@@ -226,7 +226,7 @@ optemp <-function(DAS,Var,crop = "soybean",ylab = "Meteorological Atribute",
     cat("\n-----------------------------------------------------------------\n")
     cat("General Parameters - Soybean")
     cat("\n-----------------------------------------------------------------\n")
-    print(parâmetros)
+    print(parameters)
   }
   else if (crop=="maize"){
     TbInferior<-10
@@ -249,7 +249,7 @@ optemp <-function(DAS,Var,crop = "soybean",ylab = "Meteorological Atribute",
       geom_segment(aes(x = 0, y =ToSuperior, xend =DAS, yend =ToSuperior), linetype = 2, color = "darkgreen")+
       geom_label(aes(x=15, y=ToSuperior, label="Upper optimum temperature"))+theme_classic()
 
-    parâmetros<-list(
+    parameters<-list(
       TbInferior=TbInferior,
       TbSuperior=TbSuperior,
       ToInferior=ToInferior,
@@ -263,7 +263,7 @@ optemp <-function(DAS,Var,crop = "soybean",ylab = "Meteorological Atribute",
     cat("\n-----------------------------------------------------------------\n")
     cat("General Parameters - Maize")
     cat("\n-----------------------------------------------------------------\n")
-    print(parâmetros)
+    print(parameters)
   }
 
   else if (crop=="trit"){
@@ -287,7 +287,7 @@ optemp <-function(DAS,Var,crop = "soybean",ylab = "Meteorological Atribute",
       geom_segment(aes(x = 0, y =ToSuperior, xend =DAS, yend =ToSuperior), linetype = 2, color = "darkgreen")+
       geom_label(aes(x=15, y=ToSuperior, label="Upper optimum temperature"))+theme_classic()
 
-    parâmetros<-list(
+    parameters<-list(
       TbInferior=TbInferior,
       TbSuperior=TbSuperior,
       ToInferior=ToInferior,
@@ -301,7 +301,7 @@ optemp <-function(DAS,Var,crop = "soybean",ylab = "Meteorological Atribute",
     cat("\n-----------------------------------------------------------------\n")
     cat("General Parameters - Wheat")
     cat("\n-----------------------------------------------------------------\n")
-    print(parâmetros)
+    print(parameters)
   }
 }
 
@@ -322,15 +322,15 @@ optemp <-function(DAS,Var,crop = "soybean",ylab = "Meteorological Atribute",
 #'stages (Late Pheno). If the growth habit is indeterminate, returns three linear
 #'models: Early Pheno (V1 to R1), Intermediate Pheno (R1 to R3) and Late Pheno
 #'(R3 to R5).
-#'@author Willyan Júnior Adorian Bandeira
-#'@author Ivan Ricardo Carvalho
+#'@author Willyan Junior Adorian Bandeira
+#'@author Ivan Ricardo Carvalo
 #'@author Murilo Vieira Loro
 #'@author Leonardo Cesar Pradebon
-#'@author José Antonio Gonzalez da Silva
+#'@author Jose Antonio Gonzalez da Silva
 #'@references Porta, F. S. D., Streck, N. A., Alberto, C. M., da Silva, M. R.,
 #'& Tura, E. F. (2024). Improving understanding of the plastochron of
 #'determinate and indeterminate soybean cultivars. Revista Brasileira de
-#'Engenharia Agrícola e Ambiental, 28(10), e278299.
+#'Engenharia Agricola e Ambiental, 28(10), e278299.
 #'https://doi.org/10.1590/1807-1929/agriambi.v28n10e278299
 #'
 #'Fehr, W. R., & Caviness, C. E. (1977). Stages of soybean development.
@@ -440,11 +440,11 @@ plast <- function(GEN, TMED, STAD, NN, habit = "ind", plot = FALSE) {
       mutate(
         stats = map(model, ~ tidy(.x)),
         model_summary = map(model, ~ summary(.x)),
-        rsq = map_dbl(model_summary, ~ .$r.squared),  # R²
+        rsq = map_dbl(model_summary, ~ .$r.squared),
         slope_pval = map_dbl(model_summary, ~ coef(.x)[2, "Pr(>|t|)"]),
         eq_text = map2(model, rsq, ~ paste(
           "y =", signif(coef(.x)[2], 6), "x +", signif(coef(.x)[1], 6), "\n",
-          "R² =", signif(.y, 2), "\n",
+          "R-squared =", signif(.y, 2), "\n",
           "Pr(>t) =", format.pval(coef(summary(.x))[2, "Pr(>|t|)"],
                                   digits = 5, eps = 1e-16)
         ))
@@ -465,7 +465,7 @@ plast <- function(GEN, TMED, STAD, NN, habit = "ind", plot = FALSE) {
       geom_point(size = 3) +
       geom_line(aes(y = pred), size = 1.2) +
       labs(title = "Soybean Plastochron",
-           x = "Accumulated Thermal Sum (ATT, ºC Day)",
+           x = "Accumulated Thermal Sum (ATT, degress Celsius Day)",
            y = "Number of Nodes (NN)",
            color = "Class",
            shape = "Class") +
@@ -522,18 +522,18 @@ plast <- function(GEN, TMED, STAD, NN, habit = "ind", plot = FALSE) {
 #'@param RAD The column with the incident radiation values
 #'@param PER The column with the period (use VEG for vegetative and REP for
 #'reproductive)
-#'@author Willyan Júnior Adorian Bandeira
-#'@author Ivan Ricardo Carvalho
+#'@author Willyan Junior Adorian Bandeira
+#'@author Ivan Ricardo Carvalo
 #'@author Murilo Vieira Loro
 #'@author Leonardo Cesar Pradebon
-#'@author José Antonio Gonzalez da Silva
+#'@author Jose Antonio Gonzalez da Silva
 #'@references
 #'Zanon, A. J., & Tagliapietra, E. L. (2022). Ecofisiologia da soja:
-#'Visando altas produtividades (2ª ed.). Field Crops.
+#'Visando altas produtividades (2a ed.). Field Crops.
 #'@export
 
 fototermal <- function(DAY, TMED, RAD, PER) {
-  # Verificações iniciais
+
   if (length(DAY) != length(TMED)) {
     stop("The length of 'DAY' must be equal to the length of 'TMED'.")
   }
@@ -575,24 +575,24 @@ fototermal <- function(DAY, TMED, RAD, PER) {
 
 #'Optimum conditions for pesticide application
 #'@description
-#'Determining the ideal time for pesticide application using ∆T
+#'Determining the ideal time for pesticide application using TDELTA
 #'@param LON Longitude (in decimal)
 #'@param LAT Latitude (in decimal)
 #'@param type Type of analysis. Use 1 for forecast and 2 for temporal data.
 #'@param days Number of days (only use this argument if type=1).
-#'@param control Type of product to be applied. Use “fung” for fungicide,
-#'“herb” for herbicide, “ins” for insecticides, “bio” for biological products.
+#'@param control Type of product to be applied. Use 'fung' for fungicide,
+#''herb' for herbicide, 'ins' for insecticides, 'bio' for biological products.
 #'@param details Returns the result in detail if TRUE.
 #'@param dates Only use this argument if type=2. Start and end date for obtaining
 #'weather data for a crop cycle.
 #'@return Returns the ideal application times, considering each scenario.
-#'Taking as a parameter a DELTA_T between 2 and 8, wind speed between 3 and 8,
+#'Taking as a parameter a TDELTA between 2 and 8, wind speed between 3 and 8,
 #'and no precipitation.
-#'@author Willyan Júnior Adorian Bandeira
-#'@author Ivan Ricardo Carvalho
+#'@author Willyan Junior Adorian Bandeira
+#'@author Ivan Ricardo Carvalo
 #'@author Murilo Vieira Loro
 #'@author Leonardo Cesar Pradebon
-#'@author José Antonio Gonzalez da Silva
+#'@author Jose Antonio Gonzalez da Silva
 #'@export
 #'@examples
 #'\donttest{
@@ -609,7 +609,6 @@ fototermal <- function(DAY, TMED, RAD, PER) {
 
 tdelta <- function(LON,LAT,type=2,days=7,control=NULL,
                    details=FALSE,dates=NULL,plot=FALSE){
-  #Verificações inicias
 
   if (type==1) {
     # Tipo 1 - Forecast
@@ -644,7 +643,7 @@ tdelta <- function(LON,LAT,type=2,days=7,control=NULL,
     df1$HourF <- format(df1$Hour, "%H:%M")
     df1 <- df1[, c("Day", "HourF", "Temp", "RH", "WindS", "Prec")]
     colnames(df1)[2] <- "Hour"
-    #Fazer o cálculo do DELTAT
+
     dt <- df1 %>%
       mutate(alpha = log(RH/100)+(17.27*Temp)/(237.7+Temp),
              Td = (237.7*alpha)/(17.27-alpha),
@@ -654,10 +653,6 @@ tdelta <- function(LON,LAT,type=2,days=7,control=NULL,
     if(details==TRUE){
       print(previsao$hourly_units)
       print(dt)
-    }
-    if(plot==TRUE){
-
-      #Fazer gráfico
     }
     if(is.null(control)){
       ideal <- dt %>%
@@ -707,7 +702,6 @@ tdelta <- function(LON,LAT,type=2,days=7,control=NULL,
   }
 
   if(type==2){
-    #Tipo 2 - Dados históricos
 
     if(is.null(dates) || length(dates) !=2){
       stop("The 'dates' parameter must be a vector with two dates in the format
@@ -724,7 +718,7 @@ tdelta <- function(LON,LAT,type=2,days=7,control=NULL,
     clim <- clim %>%
       select(-LON,-LAT)
 
-    #Cálculo DELTAT
+    #Calculo DELTAT
     dt <- clim %>%
       mutate(alpha = log(RH2M/100)+(17.27*T2M)/(237.7+T2M),
              Td = (237.7*alpha)/(17.27-alpha),

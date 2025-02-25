@@ -6,14 +6,14 @@
 #'@param GP The column with the average of the paternal parent
 #'@param PR The column with the average of the progeny
 #'@param REP The column with the repetitions (if exists)
-#'@param param Value to determine the parameter to be calculated. Default is “all”.
-#'To calculate heterosis only, use “het”. To calculate only heterobeltiosis,
-#'use “hetb”.
-#'@author Willyan Júnior Adorian Bandeira
-#'@author Ivan Ricardo Carvalho
+#'@param param Value to determine the parameter to be calculated. Default is 'all'.
+#'To calculate heterosis only, use 'het'. To calculate only heterobeltiosis,
+#'use 'hetb'.
+#'@author Willyan Junior Adorian Bandeira
+#'@author Ivan Ricardo Carvalo
 #'@author Murilo Vieira Loro
 #'@author Leonardo Cesar Pradebon
-#'@author José Antonio Gonzalez da Silva
+#'@author Jose Antonio Gonzalez da Silva
 #'@export
 #'@examples
 #'\donttest{

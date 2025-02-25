@@ -16,7 +16,7 @@ genpar(POP, GEN, REP = NULL, vars, K = 0.05, type = "balanced", check = FALSE)
 \item{K}{Selection pressure (Default 0.05).}
 
 \item{type}{Type of experiment (balanced or unbalanced). Use
-“balanced” for balanced and “unb” for unbalanced.}
+'balanced' for balanced and 'unb' for unbalanced.}
 
 \item{check}{Logical argument. Checks the model's assumptions
 statistical if the value is equal to TRUE.}
@@ -37,13 +37,13 @@ traits. International Journal of Agronomy, 2024, Article ID 9946332.
 https://doi.org/10.1155/2024/9946332
 }
 \author{
-Willyan Júnior Adorian Bandeira
+Willyan Junior Adorian Bandeira
 
-Ivan Ricardo Carvalho
+Ivan Ricardo Carvalo
 
 Murilo Vieira Loro
 
 Leonardo Cesar Pradebon
 
-José Antonio Gonzalez da Silva
+Jose Antonio Gonzalez da Silva
 }

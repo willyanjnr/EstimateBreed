@@ -37,7 +37,8 @@ Imports:
     cowplot,
     sommer,
     lme4,
-    minque
+    minque,
+    utils
 Suggests:
     rmarkdown,  
     testthat (>= 3.0.0),
@@ -49,4 +50,3 @@ LazyData: true
 LazyLoad: true
 Language: en-US
 RoxygenNote: 7.3.2
-Config/testthat/edition: 3

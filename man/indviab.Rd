@@ -53,17 +53,17 @@ with(trigo,indviab(TEST,MGE,ME))
 Rigotti, E. J., Carvalho, I. R., Loro, M. V., Pradebon, L. C., Dalla Roza,
 J. P., & Sangiovo, J. P. (2024). Seed and grain yield and quality of wheat
 subjected to advanced harvest using a physiological ripening process.
-Revista Engenharia na Agricultura - REVENG, 32(Contínua), 54–64.
+Revista Engenharia na Agricultura - REVENG, 32, 54-64.
 https://doi.org/10.13083/reveng.v32i1.17394
 }
 \author{
-Willyan Júnior Adorian Bandeira
+Willyan Junior Adorian Bandeira
 
-Ivan Ricardo Carvalho
+Ivan Ricardo Carvalo
 
 Murilo Vieira Loro
 
 Leonardo Cesar Pradebon
 
-José Antonio Gonzalez da Silva
+Jose Antonio Gonzalez da Silva
 }

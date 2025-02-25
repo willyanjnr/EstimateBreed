@@ -7,6 +7,8 @@
 ivig_simp(GEN, PC, G)
 }
 \arguments{
+\item{GEN}{The column with the genotypes.}
+
 \item{PC}{First count values}
 
 \item{G}{Germination percentage}

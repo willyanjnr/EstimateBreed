@@ -9,8 +9,8 @@ estresse(
   YS,
   YC,
   index = "ALL",
-  bygen = T,
-  plot = F,
+  bygen = TRUE,
+  plot = FALSE,
   xlab = "Genotype",
   ylab = "Values",
   ...
@@ -36,6 +36,8 @@ it will be possible to plot graphs.}
 \item{xlab}{Adjust the title of the x-axis in the graph.}
 
 \item{ylab}{Adjust the title of the y-axis in the graph.}
+
+\item{...}{General parameters of ggplot2 for utilization}
 }
 \value{
 Returns a table with the genotypes and the selected indices.
@@ -52,10 +54,10 @@ library(EstimateBreed)
 data("aveia")
 
 #General
-with(aveia,estresse(GEN,MC,MG,index = "ALL",bygen=T))
+with(aveia,estresse(GEN,MC,MG,index = "ALL",bygen=TRUE))
 
 #Only the desired index
-with(aveia,estresse(GEN,MC,MG,index = "STI",bygen=T))
+with(aveia,estresse(GEN,MC,MG,index = "STI",bygen=TRUE))
 }
 }
 \references{

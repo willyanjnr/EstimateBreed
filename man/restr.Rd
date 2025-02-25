@@ -39,7 +39,7 @@ with(data, restr(TEST,REP,Xi,scenario = "restr",zstat = FALSE))
 print(Control)
 
 #Apply witness variability restriction with normalization (Z statistic)
-with(data, restr(TEST,REP,Xi,scenario = "restr",zstat = T))
+with(data, restr(TEST,REP,Xi,scenario = "restr",zstat = TRUE))
 print(Control)
 }
 }

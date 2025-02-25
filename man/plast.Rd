@@ -37,7 +37,7 @@ nodes
 library(EstimateBreed)
 data("pheno")
 
-with(pheno, plast(GEN,TMED,EST,NN,habit="ind",plot=T))
+with(pheno, plast(GEN,TMED,EST,NN,habit="ind",plot=TRUE))
 }
 }
 \references{

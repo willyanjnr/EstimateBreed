@@ -4,14 +4,18 @@
 \alias{transgressivos}
 \title{Selection by Selection Differential (Mean and Deviations)}
 \usage{
-transgressivos(Gen, Var, Testemunha, ylab = "Selection", xlab = "Genotypes")
+transgressivos(Gen, Var, Control, ylab = "Selection", xlab = "Genotypes")
 }
 \arguments{
 \item{Gen}{The column with the genotype name}
 
 \item{Var}{The column with the variable of interest}
 
-\item{Witness}{The column with the value of the variable 'X' for the witnesses}
+\item{Control}{The column with the value of the variable 'X' for the witnesses}
+
+\item{ylab}{The name of the Y axis.}
+
+\item{xlab}{The name of the X axis.}
 }
 \description{
 Selection of Transgressive Genotypes - Selection Differential (SD)

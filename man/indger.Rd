@@ -19,9 +19,6 @@ indger(TESTE, DIA, TSG, NST)
 Estimation of germination index by subsequent seedling count
 germinated in a given period (Wang et al., 2017)
 }
-\examples{
-with(data,indviab(genot,var1,var2))
-}
 \references{
 Wang, Pan, Li, Dong, Wang, Li-jun and Adhikari, Benu. "Effect of High
 Temperature Intermittent Drying on Rice Seed Viability and Vigor" International

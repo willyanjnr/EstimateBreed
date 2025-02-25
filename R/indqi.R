@@ -65,6 +65,7 @@ is_qindustrial <- function(GEN, NQ, W, PTN){
 #'@param RG The column with the grain yield values (kg per ha).
 #'@param stat Logical argument. Use 'all' to keep all the observations or 'mean'
 #'to extract the overall average.
+#'@param ... General parameters of ggplot2 for utilization
 #'@return Returns the peeling index and industrial yield considering the
 #'standards desired by the industry.
 #'@author Willyan Junior Adorian Bandeira
@@ -118,11 +119,13 @@ rend_ind <- function(GEN,NG2M,MG,MC,RG,stat="all",...){
 #'Ear Indexes
 #'@description
 #'Estimating the viability index from the combination of two field variables.
-#'@param genot The column with the name of the genotypes
+#'@param GEN The column with the name of the genotypes
 #'@param var1 The column containing the first variable
 #'@param var2 The column containing the second variable
 #'@param ylab The name of the chart's Y axis
 #'@param xlab The name of the chart's X axis
+#'@param stat Logical argument. Use 'all' to return the values obtained for all
+#' observations or 'mean' to return the mean per genotype.
 #'@param plot Logical argument. Plot a graphic if 'TRUE'.
 #'@return Returns the index obtained between the reported variables. The higher
 #'the index, the better the genotype.
@@ -227,10 +230,10 @@ indviab <- function(GEN,var1,var2,ylab="Index",xlab="Genotype",stat="all",plot=F
 #'
 #'data <- data.frame(GEN, REP, MG)
 #'
-#'with(data,ph(GEN,MG,crop="trigo"))
+#'with(data,ph(GEN,MG,crop="trit"))
 #'
 #'#Extract the average PH per genotype
-#'with(data,ph(GEN,MG,crop="trigo",stat="mean"))
+#'with(data,ph(GEN,MG,crop="trit",stat="mean"))
 #'}
 
 ph <- function(GEN, HL, crop="trit", stat="all") {

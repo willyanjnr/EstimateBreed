@@ -2,7 +2,6 @@
 #'@description
 #'Determining the multivariate vigor of seeds
 #'@param GEN The column with the genotype name
-#'@param REP The column with the replications
 #'@param PC The column with the values from the first count
 #'@param G The column with the values of percentage of germinated seeds
 #'@param CPA The column with the values of shoot length
@@ -53,6 +52,7 @@ print(dadosfinal)
 #'Simple Vigor Index
 #'@description
 #'Simple seed vigor index described by Szareski et al. (2018).
+#'@param GEN The column with the genotypes.
 #'@param PC First count values
 #'@param G Germination percentage
 #'@author Willyan Junior Adorian Bandeira
@@ -117,7 +117,6 @@ ivig_simp <- function(GEN,PC,G){
 #'@examples
 #'\donttest{
 #'library(EstimateBreed)
-#'set.seed(123)
 #'
 #'Gen = rep(paste0("G", 1:10), each = 3)
 #'Rep = rep(1:3, times = 10)
@@ -127,7 +126,7 @@ ivig_simp <- function(GEN,PC,G){
 #'
 #'data <- data.frame(Gen,Rep,L,C,E)
 #'
-#'with(data,gvri(Gen,C,L,E, stat="mean", plot=T))
+#'with(data,gvri(Gen,C,L,E, stat="mean", plot=TRUE))
 #'}
 
 gvri <- function(GEN,C,L,E,stat="everything",plot=F,ylab="GVRI",xlab="Genotype"){

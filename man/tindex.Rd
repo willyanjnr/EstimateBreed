@@ -6,6 +6,19 @@
 \usage{
 tindex(fc, germ, sdm, sl, radl, index = "PI")
 }
+\arguments{
+\item{fc}{First germination count.}
+
+\item{germ}{Germination percentage.}
+
+\item{sdm}{Shoot dry mass.}
+
+\item{sl}{Shoot lenght.}
+
+\item{radl}{Radicle lenght.}
+
+\item{index}{Argument to choose the desired index.}
+}
 \description{
 Multitrait selection index for variables of interest
 }

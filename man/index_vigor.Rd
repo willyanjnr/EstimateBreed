@@ -20,8 +20,6 @@ index_vigor(GEN, PC, G, CPA, RAD, MS, EC)
 \item{MS}{The column with the values of dry mass}
 
 \item{EC}{TThe column with the field emergency values}
-
-\item{REP}{The column with the replications}
 }
 \description{
 Determining the multivariate vigor of seeds

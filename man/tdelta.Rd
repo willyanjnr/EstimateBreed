@@ -31,6 +31,8 @@ tdelta(
 
 \item{dates}{Only use this argument if type=2. Start and end date for obtaining
 weather data for a crop cycle.}
+
+\item{plot}{Logical argument. Plots a graphic if 'TRUE'.}
 }
 \value{
 Returns the ideal application times, considering each scenario.
@@ -45,12 +47,13 @@ Determining the ideal time for pesticide application using TDELTA
 library(EstimateBreed)
 
 # Forecasting application conditions
-tdelta(-53.696944444444,-28.063888888889,type=1,days=10)
-View(forecast)
+forecast <- tdelta(-53.696944444444,-28.063888888889,type=1,days=10)
+forecast
 
 # Retrospective analysis of application conditions
-tdelta(-53.696944444444,-28.063888888889,type=2,days=10,dates=c("2023-01-01","2023-05-01"))
-View(retrospective)
+retrospective <- tdelta(-53.696944444444,-28.063888888889,type=2,days=10,
+dates=c("2023-01-01","2023-05-01"))
+retrospective
 }
 }
 \author{

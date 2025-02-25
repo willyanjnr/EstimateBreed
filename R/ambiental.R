@@ -341,11 +341,10 @@ optemp <-function(DAS,Var,crop = "soybean",ylab = "Meteorological Atribute",
 #'library(EstimateBreed)
 #'data("pheno")
 #'
-#'with(pheno, plast(GEN,TMED,EST,NN,habit="ind",plot=T))
+#'with(pheno, plast(GEN,TMED,EST,NN,habit="ind",plot=TRUE))
 #'}
 
 plast <- function(GEN, TMED, STAD, NN, habit = "ind", plot = FALSE) {
-
   Tb <- 7.6
   Tot <- 31
   TB <- 40
@@ -359,6 +358,7 @@ plast <- function(GEN, TMED, STAD, NN, habit = "ind", plot = FALSE) {
       ),
       ATT = cumsum(TTd)
     )
+
   total <- resultado %>%
     group_by(GEN) %>%
     summarize(TST = max(ATT, na.rm = TRUE))
@@ -368,8 +368,7 @@ plast <- function(GEN, TMED, STAD, NN, habit = "ind", plot = FALSE) {
       group_by(NN) %>%
       mutate(STA = max(ATT)) %>%
       ungroup() %>%
-      filter(STAD %in% c("V1", "V2", "V3", "V4", "V5", "V6", "V7", "V8", "V9", "V10",
-                         "R1", "R2", "R3", "R4", "R5")) %>%
+      filter(STAD %in% c("V1", "V2", "V3", "V4", "V5", "V6", "V7", "V8", "V9", "V10", "R1", "R2", "R3", "R4", "R5")) %>%
       mutate(Class = case_when(
         STAD %in% c("V1", "V2", "V3", "V4", "V5", "V6", "V7", "V8", "V9", "V10") ~ "Early",
         STAD %in% c("R1", "R2") ~ "Intermediate",
@@ -377,17 +376,17 @@ plast <- function(GEN, TMED, STAD, NN, habit = "ind", plot = FALSE) {
         TRUE ~ "Undefined"
       ))
 
-    #LM by Class
+    # LM by Class
     modc <- dadosf %>%
       group_by(Class) %>%
       summarise(
-        modelo = list(lm(NN~STA,data=cur_data())),
+        modelo = list(lm(NN ~ STA, data = cur_data())),
         .groups = "drop"
       )
-    coefic <- modc %>%
-      mutate(coeff = lapply(modelo,coef))
+
     res <- modc %>%
-      mutate(resumo = lapply(modelo,summary))
+      mutate(resumo = lapply(modelo, summary))
+
     cat("-------------------------------\n")
     cat("Early Soybean Pheno (V1 to R1)\n")
     print(res$resumo[[1]])
@@ -399,30 +398,29 @@ plast <- function(GEN, TMED, STAD, NN, habit = "ind", plot = FALSE) {
     print(res$resumo[[3]])
   }
 
-  if(habit=="det"){
+  if (habit == "det") {
     dadosf <- resultado %>%
       group_by(NN) %>%
       mutate(STA = max(ATT)) %>%
       ungroup() %>%
-      filter(STAD %in% c("V1", "V2", "V3", "V4", "V5", "V6", "V7", "V8", "V9", "V10",
-                         "R1", "R2", "R3")) %>%
+      filter(STAD %in% c("V1", "V2", "V3", "V4", "V5", "V6", "V7", "V8", "V9", "V10", "R1", "R2", "R3")) %>%
       mutate(Class = case_when(
         STAD %in% c("V1", "V2", "V3", "V4", "V5", "V6", "V7", "V8", "V9", "V10") ~ "Early",
-        STAD %in% c("R1","R2","R3") ~ "Late",
+        STAD %in% c("R1", "R2", "R3") ~ "Late",
         TRUE ~ "Undefined"
       ))
 
-    #LM by Class
+    # LM by Class
     modc <- dadosf %>%
       group_by(Class) %>%
       summarise(
-        modelo = list(lm(NN~STA,data=cur_data())),
+        modelo = list(lm(NN ~ STA, data = cur_data())),
         .groups = "drop"
       )
-    coefic <- modc %>%
-      mutate(coeff = lapply(modelo,coef))
+
     res <- modc %>%
-      mutate(resumo = lapply(modelo,summary))
+      mutate(resumo = lapply(modelo, summary))
+
     cat("-------------------------------\n")
     cat("Early Soybean Pheno (V1 to R1)\n")
     print(res$resumo[[1]])
@@ -431,7 +429,7 @@ plast <- function(GEN, TMED, STAD, NN, habit = "ind", plot = FALSE) {
     print(res$resumo[[2]])
   }
 
-  if (plot == TRUE) {
+  if (plot) {
     modelos <- dadosf %>%
       group_by(Class) %>%
       summarise(model = list(lm(NN ~ STA, data = cur_data())), .groups = "drop")
@@ -445,8 +443,7 @@ plast <- function(GEN, TMED, STAD, NN, habit = "ind", plot = FALSE) {
         eq_text = map2(model, rsq, ~ paste(
           "y =", signif(coef(.x)[2], 6), "x +", signif(coef(.x)[1], 6), "\n",
           "R-squared =", signif(.y, 2), "\n",
-          "Pr(>t) =", format.pval(coef(summary(.x))[2, "Pr(>|t|)"],
-                                  digits = 5, eps = 1e-16)
+          "Pr(>t) =", format.pval(coef(summary(.x))[2, "Pr(>|t|)"], digits = 5, eps = 1e-16)
         ))
       )
 
@@ -465,7 +462,7 @@ plast <- function(GEN, TMED, STAD, NN, habit = "ind", plot = FALSE) {
       geom_point(size = 3) +
       geom_line(aes(y = pred), size = 1.2) +
       labs(title = "Soybean Plastochron",
-           x = "Accumulated Thermal Sum (ATT, degress Celsius Day)",
+           x = "Accumulated Thermal Sum (ATT, degrees Celsius Day)",
            y = "Number of Nodes (NN)",
            color = "Class",
            shape = "Class") +
@@ -513,6 +510,7 @@ plast <- function(GEN, TMED, STAD, NN, habit = "ind", plot = FALSE) {
   }
 }
 
+
 #'Photothermal Index
 #'@description
 #'Calculation of the photothermal index based on average temperature and
@@ -537,7 +535,7 @@ fototermal <- function(DAY, TMED, RAD, PER) {
   if (length(DAY) != length(TMED)) {
     stop("The length of 'DAY' must be equal to the length of 'TMED'.")
   }
-  if (length(DIA) != length(RAD)) {
+  if (length(DAY) != length(RAD)) {
     stop("The length of 'DAY' must be equal to the length of 'RAD'.")
   }
   if (length(DAY) != length(PER)) {
@@ -585,6 +583,7 @@ fototermal <- function(DAY, TMED, RAD, PER) {
 #'@param details Returns the result in detail if TRUE.
 #'@param dates Only use this argument if type=2. Start and end date for obtaining
 #'weather data for a crop cycle.
+#'@param plot Logical argument. Plots a graphic if 'TRUE'.
 #'@return Returns the ideal application times, considering each scenario.
 #'Taking as a parameter a TDELTA between 2 and 8, wind speed between 3 and 8,
 #'and no precipitation.
@@ -599,16 +598,17 @@ fototermal <- function(DAY, TMED, RAD, PER) {
 #'library(EstimateBreed)
 #'
 #'# Forecasting application conditions
-#'tdelta(-53.696944444444,-28.063888888889,type=1,days=10)
-#'View(forecast)
+#'forecast <- tdelta(-53.696944444444,-28.063888888889,type=1,days=10)
+#'forecast
 #'
 #'# Retrospective analysis of application conditions
-#'tdelta(-53.696944444444,-28.063888888889,type=2,days=10,dates=c("2023-01-01","2023-05-01"))
-#'View(retrospective)
+#'retrospective <- tdelta(-53.696944444444,-28.063888888889,type=2,days=10,
+#'dates=c("2023-01-01","2023-05-01"))
+#'retrospective
 #'}
 
-tdelta <- function(LON,LAT,type=2,days=7,control=NULL,
-                   details=FALSE,dates=NULL,plot=FALSE){
+tdelta <- function(LON,LAT,type=2,days=7,control=NULL,details=FALSE,dates=NULL,
+                   plot=FALSE){
 
   if (type==1) {
     # Tipo 1 - Forecast

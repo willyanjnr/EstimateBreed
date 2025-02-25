@@ -4,7 +4,7 @@
 \alias{GS4}
 \title{Response to Selection by Year}
 \usage{
-GS4(Var, h, VF, P = "1", Ano)
+GS4(Var, h, VF, P = "1", Year)
 }
 \arguments{
 \item{Var}{The column with the variables of interest}

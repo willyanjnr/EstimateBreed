@@ -20,7 +20,8 @@
 #'data("desvamb")
 #'head(desvamb)
 #'
-#'with(desvamb,desv_clim(ENV,TMED,PREC))
+#'#Use DPclim for the ISGR function to identify deviations correctly
+#'DPclim <- with(desvamb,desv_clim(ENV,TMED,PREC))
 #'}
 
 desv_clim <- function(ENV,TMED,PREC) {
@@ -28,14 +29,13 @@ desv_clim <- function(ENV,TMED,PREC) {
   desvio <- data.frame(ENV,TMED,PREC)
 
   resultado <- desvio %>%
-    group_by(ENV) %>%
+    group_by(.data$ENV) %>%
     summarise(
-      STMED = sd(TMED, na.rm = TRUE),
-      TMEDR = mean(TMED, na.rm = TRUE),
-      SPREC = sd(PREC, na.rm = TRUE),
-      PRECIR = sum(PREC, na.rm = TRUE)
+      STMED = sd(.data$TMED, na.rm = TRUE),
+      TMEDR = mean(.data$TMED, na.rm = TRUE),
+      SPREC = sd(.data$PREC, na.rm = TRUE),
+      PRECIR = sum(.data$PREC, na.rm = TRUE)
     )
-  assign("DPclim",resultado,envir = .GlobalEnv)
   return(resultado)
 }
 
@@ -75,94 +75,90 @@ desv_clim <- function(ENV,TMED,PREC) {
 #'#Obtain environmental deviations
 #'data("desvamb")
 #'head(desvamb)
-#'with(desvamb, desv_clim(ENV,TMED,PREC))
+#'
+#'#Use DPclim for the ISGR function to identify deviations correctly
+#'DPclim <- with(desvamb,desv_clim(ENV,TMED,PREC))
 #'
 #'#Calculate the ISGR
 #'data("genot")
 #'head(genot)
-#'with(genot, isgr(GEN,ENV,NG,MG,CICLO))
+#'isgr_index <- with(genot, isgr(GEN,ENV,NG,MG,CICLO))
 #'
 #'#Define the water requirement per stage
-#'with(genot, isgr(GEN,ENV,NG,MG,CICLO,req=5,stage="rep"))
+#'isgr_index <- with(genot, isgr(GEN,ENV,NG,MG,CICLO,req=5,stage="rep"))
 #'}
 
-isgr <- function(GEN, ENV, NG, MG, CICLO,req=3.5, stage=NULL) {
+isgr <- function(GEN, ENV, NG, MG, CICLO, req=3.5, stage=NULL) {
 
   GEN <- as.factor(GEN)
   ENV <- as.factor(ENV)
   NG <- as.numeric(NG)
   MG <- as.numeric(MG)
   CICLO <- as.numeric(CICLO)
-  dados <- data.frame(GEN, ENV, NG, MG,CICLO)
+  dados <- data.frame(GEN, ENV, NG, MG, CICLO)
 
-##############################################################################
-  if(is.null(stage)){
+  if (is.null(stage)) {
     req <- req
-  } else if(stage=="veg"){
+  } else if (stage == "veg") {
     req <- req
-  } else if(stage=="rep"){
+  } else if (stage == "rep") {
     req <- req
   }
+
   desvng <- sd(dados$NG, na.rm = TRUE)
   desvmg <- sd(dados$MG, na.rm = TRUE)
 
   dados <- dados %>%
-    mutate(tipo = ifelse(grepl("^L", as.character(GEN)), "Lin", "Test"))
+    mutate(tipo = ifelse(grepl("^L", as.character(.data$GEN)), "Lin", "Test"))
 
   control <- dados %>%
-    filter(tipo == "Test")
+    filter(.data$tipo == "Test")
 
   if (nrow(control) > 0) {
     NGT <- mean(control$NG, na.rm = TRUE)
     MGT <- mean(control$MG, na.rm = TRUE)
   } else {
-    NGT <- NA
-    MGT <- NA
     stop("No witnesses found!")
   }
 
   SNG <- desvng
   SMG <- desvmg
 
-  if(exists("DPclim")){
-    DPclim <- DPclim
-  } else {
+  if (!exists("DPclim")) {
     stop("The standard deviations must be obtained from the desv_clim!")
   }
 
-  num_lins <- sum(dados$tipo == "Lin")
-  PRECI <- dados %>% group_by(ENV) %>%
-    summarise(PREC=CICLO[1]*req)
+  PRECI <- dados %>%
+    group_by(.data$ENV) %>%
+    summarise(PREC = first(.data$CICLO) * req)
+
   prep1 <- dados %>%
-    filter(tipo == "Lin") %>%
+    filter(.data$tipo == "Lin") %>%
     mutate(
-      NGT = rep(NGT, n()),
-      SNG = rep(SNG, n()),
-      MGT = rep(MGT, n()),
-      SMG = rep(SMG, n())
+      NGT = NGT,
+      SNG = SNG,
+      MGT = MGT,
+      SMG = SMG
     ) %>%
-    mutate(ENV = as.character(ENV)) %>%
+    mutate(ENV = as.character(.data$ENV)) %>%
     as_tibble() %>%
     left_join(PRECI, by = "ENV") %>%
-    select(
-      GEN, ENV, NG, NGL = NG, MGL = MG, NGT, SNG, MGT, SMG, PREC
-    ) %>%
-    left_join(DPclim %>% mutate(ENV = as.character(ENV)), by = "ENV") %>%
-    select(
-      GEN, ENV, NGL, MGL, NGT, SNG, MGT, SMG, PREC, STMED, TMEDR, SPREC, PRECIR
-    )
+    rename(NGL = NG, MGL = MG) %>%
+    left_join(DPclim %>% mutate(ENV = as.character(.data$ENV)), by = "ENV") %>%
+    select(.data$GEN, .data$ENV, .data$NGL, .data$MGL,
+           .data$NGT, .data$SNG, .data$MGT, .data$SMG,
+           .data$PREC, .data$STMED, .data$TMEDR, .data$SPREC, .data$PRECIR)
 
   prep1 <- prep1 %>%
     mutate(
-      ISGR = ((NGT - NGL) / SNG) *
-        ((MGT - MGL) / SMG) *
-        ((PREC - PRECIR) / SPREC) *
-        ((25 - TMEDR) / STMED)
+      ISGR = ((.data$NGT - .data$NGL) / .data$SNG) *
+        ((.data$MGT - .data$MGL) / .data$SMG) *
+        ((.data$PREC - .data$PRECIR) / .data$SPREC) *
+        ((25 - .data$TMEDR) / .data$STMED)
     )
 
-  final <- data.frame(prep1$GEN, prep1$ENV, prep1$ISGR)
-  colnames(final) <- c("Gen", "Env", "ISGR")
-  final <- final[order(final$ISGR),]
-  assign("isgr_index", final, envir = .GlobalEnv)
+  final <- prep1 %>%
+    select(Gen = .data$GEN, Env = .data$ENV, ISGR = .data$ISGR) %>%
+    arrange(.data$ISGR)
   return(final)
 }

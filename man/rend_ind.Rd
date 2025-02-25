@@ -19,6 +19,8 @@ rend_ind(GEN, NG2M, MG, MC, RG, stat = "all", ...)
 
 \item{stat}{Logical argument. Use 'all' to keep all the observations or 'mean'
 to extract the overall average.}
+
+\item{...}{General parameters of ggplot2 for utilization}
 }
 \value{
 Returns the peeling index and industrial yield considering the

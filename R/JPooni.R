@@ -30,7 +30,7 @@ Jinks_Pooni<-function(Pop, Var, VG, Test){
   P<-((1-pnorm(Z, mean = 0, sd = 1, lower.tail = TRUE, log.p = FALSE))*100)
   Gen_Value <- ifelse(P > 50, "High", "Low")
 
-  Parameters <- data.frame(Populations, Z, P, Gen_Value)
+  Parameters <- data.frame(Population, Z, P, Gen_Value)
 
   cat("\n-----------------------------------------------------------------\n")
   cat("Probability of extracting superior strains from populations

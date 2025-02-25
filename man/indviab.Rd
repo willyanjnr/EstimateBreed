@@ -15,6 +15,8 @@ indviab(
 )
 }
 \arguments{
+\item{GEN}{The column with the name of the genotypes}
+
 \item{var1}{The column containing the first variable}
 
 \item{var2}{The column containing the second variable}
@@ -23,9 +25,10 @@ indviab(
 
 \item{xlab}{The name of the chart's X axis}
 
-\item{plot}{Logical argument. Plot a graphic if 'TRUE'.}
+\item{stat}{Logical argument. Use 'all' to return the values obtained for all
+observations or 'mean' to return the mean per genotype.}
 
-\item{genot}{The column with the name of the genotypes}
+\item{plot}{Logical argument. Plot a graphic if 'TRUE'.}
 }
 \value{
 Returns the index obtained between the reported variables. The higher

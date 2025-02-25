@@ -38,10 +38,10 @@ MG <- c(78.5, 80.2, 79.1, 81.3, 82.0, 80.8, 76.9, 78.1, 77.5, 83.2,
 
 data <- data.frame(GEN, REP, MG)
 
-with(data,ph(GEN,MG,crop="trigo"))
+with(data,ph(GEN,MG,crop="trit"))
 
 #Extract the average PH per genotype
-with(data,ph(GEN,MG,crop="trigo",stat="mean"))
+with(data,ph(GEN,MG,crop="trit",stat="mean"))
 }
 }
 \references{

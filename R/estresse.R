@@ -14,6 +14,7 @@
 #'@param plot Plot graph if equal to 'TRUE' (Standard 'FALSE').
 #'@param xlab Adjust the title of the x-axis in the graph.
 #'@param ylab Adjust the title of the y-axis in the graph.
+#'@param ... General parameters of ggplot2 for utilization
 #'@return Returns a table with the genotypes and the selected indices.
 #'The higher the index value, the more resilient the genotype.
 #'@author Willyan Junior Adorian Bandeira
@@ -35,13 +36,13 @@
 #'data("aveia")
 #'
 #'#General
-#'with(aveia,estresse(GEN,MC,MG,index = "ALL",bygen=T))
+#'with(aveia,estresse(GEN,MC,MG,index = "ALL",bygen=TRUE))
 #'
 #'#Only the desired index
-#'with(aveia,estresse(GEN,MC,MG,index = "STI",bygen=T))
+#'with(aveia,estresse(GEN,MC,MG,index = "STI",bygen=TRUE))
 #'}
 
-estresse <- function(GEN,YS,YC,index="ALL",bygen=T,plot=F,xlab="Genotype",ylab="Values",...){
+estresse <- function(GEN,YS,YC,index="ALL",bygen=TRUE,plot=FALSE,xlab="Genotype",ylab="Values",...){
   GEN1 <- as.factor(GEN)
   YS1 <- YS
   YC1 <- YC
@@ -50,7 +51,7 @@ estresse <- function(GEN,YS,YC,index="ALL",bygen=T,plot=F,xlab="Genotype",ylab="
     warning("The data frame contains NA values!")
   }
 
-  if(bygen==T){
+  if(bygen==TRUE){
     media <- data.frame(GEN1,YS1,YC1)
     media_gen <- aggregate(cbind(YS1, YC1) ~ GEN1,
                            data = media,
@@ -63,7 +64,7 @@ estresse <- function(GEN,YS,YC,index="ALL",bygen=T,plot=F,xlab="Genotype",ylab="
       cat("STI Index")
       cat("\n----------------------------\n")
       print(STI)
-      if(plot==T){
+      if(plot==TRUE){
         ggplot(STI, aes(x = GEN, y = STI, fill = GEN)) +
           geom_bar(stat = "identity") +
           theme_minimal() +
@@ -84,7 +85,7 @@ estresse <- function(GEN,YS,YC,index="ALL",bygen=T,plot=F,xlab="Genotype",ylab="
       cat("YI Index")
       cat("\n----------------------------\n")
       print(YI)
-      if(plot==T){
+      if(plot==TRUE){
         ggplot(YI, aes(x = GEN, y = YI, fill = GEN)) +
           geom_bar(stat = "identity") +
           theme_minimal() +
@@ -105,7 +106,7 @@ estresse <- function(GEN,YS,YC,index="ALL",bygen=T,plot=F,xlab="Genotype",ylab="
       cat("GMP Index")
       cat("\n----------------------------\n")
       print(GMP)
-      if(plot==T){
+      if(plot==TRUE){
         ggplot(GMP, aes(x = GEN, y = GMP, fill = GEN)) +
           geom_bar(stat = "identity") +
           theme_minimal() +
@@ -126,7 +127,7 @@ estresse <- function(GEN,YS,YC,index="ALL",bygen=T,plot=F,xlab="Genotype",ylab="
       cat("MP Index")
       cat("\n----------------------------\n")
       print(MP)
-      if(plot==T){
+      if(plot==TRUE){
         ggplot(MP, aes(x = GEN, y = MP, fill = GEN)) +
           geom_bar(stat = "identity") +
           theme_minimal() +
@@ -147,7 +148,7 @@ estresse <- function(GEN,YS,YC,index="ALL",bygen=T,plot=F,xlab="Genotype",ylab="
       cat("MH Index")
       cat("\n----------------------------\n")
       print(MH)
-      if(plot==T){
+      if(plot==TRUE){
         ggplot(MH, aes(x = GEN, y = MH, fill = GEN)) +
           geom_bar(stat = "identity") +
           theme_minimal() +
@@ -170,7 +171,7 @@ estresse <- function(GEN,YS,YC,index="ALL",bygen=T,plot=F,xlab="Genotype",ylab="
       cat("SSI Index")
       cat("\n----------------------------\n")
       print(SSI)
-      if(plot==T){
+      if(plot==TRUE){
         ggplot(SSI, aes(x = GEN, y = SSI, fill = GEN)) +
           geom_bar(stat = "identity") +
           theme_minimal() +
@@ -191,7 +192,7 @@ estresse <- function(GEN,YS,YC,index="ALL",bygen=T,plot=F,xlab="Genotype",ylab="
       cat("YSI Index")
       cat("\n----------------------------\n")
       print(YSI)
-      if(plot==T){
+      if(plot==TRUE){
         ggplot(YSI, aes(x = GEN, y = YSI, fill = GEN)) +
           geom_bar(stat = "identity") +
           theme_minimal() +
@@ -214,7 +215,7 @@ estresse <- function(GEN,YS,YC,index="ALL",bygen=T,plot=F,xlab="Genotype",ylab="
       cat("RSI Index")
       cat("\n----------------------------\n")
       print(RSI)
-      if(plot==T){
+      if(plot==TRUE){
         ggplot(RSI, aes(x = GEN, y = RSI, fill = GEN)) +
           geom_bar(stat = "identity") +
           theme_minimal() +
@@ -245,7 +246,7 @@ estresse <- function(GEN,YS,YC,index="ALL",bygen=T,plot=F,xlab="Genotype",ylab="
       cat("Stress Index")
       cat("\n---------------------------------------------------------------------------------------------\n")
       print(final)
-      if(plot==T){
+      if(plot==TRUE){
         #Mapping
         final <- final %>%
           mutate(across(starts_with("GEN"), as.factor),

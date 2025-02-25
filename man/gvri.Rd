@@ -40,7 +40,6 @@ grain length, width and thickness
 \examples{
 \donttest{
 library(EstimateBreed)
-set.seed(123)
 
 Gen = rep(paste0("G", 1:10), each = 3)
 Rep = rep(1:3, times = 10)
@@ -50,7 +49,7 @@ E = round(rnorm(30, mean = 2.1, sd = 0.2), 2)
 
 data <- data.frame(Gen,Rep,L,C,E)
 
-with(data,gvri(Gen,C,L,E, stat="mean", plot=T))
+with(data,gvri(Gen,C,L,E, stat="mean", plot=TRUE))
 }
 }
 \references{

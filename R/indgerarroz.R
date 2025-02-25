@@ -6,19 +6,18 @@
 #' @param DIA Numerical values for the days tested
 #' @param TSG Name of the column with the total number of seeds germinated in each period
 #' @param NST Default column name with number of seeds tested
+#' @author Willyan Junior Adorian Bandeira
+#' @author Ivan Ricardo Carvalo
+#' @author Murilo Vieira Loro
+#' @author Leonardo Cesar Pradebon
+#' @author Jose Antonio Gonzalez da Silva
 #' @export
 #' @references
 #' Wang, Pan, Li, Dong, Wang, Li-jun and Adhikari, Benu. "Effect of High
 #' Temperature Intermittent Drying on Rice Seed Viability and Vigor" International
 #' Journal of Food Engineering, vol. 13, no. 10, 2017, pp. 20160433.
 #' https://doi.org/10.1515/ijfe-2016-043
-#'@author Willyan Junior Adorian Bandeira
-#'@author Ivan Ricardo Carvalo
-#'@author Murilo Vieira Loro
-#'@author Leonardo Cesar Pradebon
-#'@author Jose Antonio Gonzalez da Silva
-#' @examples
-#' with(data,indviab(genot,var1,var2))
+
 
 #Ainda falta terminar!
 indger <- function(TESTE,DIA,TSG,NST){

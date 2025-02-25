@@ -293,14 +293,14 @@ GS3<-function(Var, h, VF, P = "1"){
 #'@author Jose Antonio Gonzalez da Silva
 #'@export
 
-GS4<-function(Var, h, VF, P = "1", Ano){
+GS4<-function(Var, h, VF, P = "1", Year){
 
   Var <- as.factor(Var)
   h <- h
   VF <- VF
-  Ano <- Ano
+  Year <- Year
   if(P=="1"){
-    GS <- (h*2.7*(sqrt(VF)))/Ano
+    GS <- (h*2.7*(sqrt(VF)))/Year
 
     final <- data.frame(Var,GS)
     cat("\n-----------------------------------------------------------------\n")
@@ -308,7 +308,7 @@ GS4<-function(Var, h, VF, P = "1", Ano){
     cat("\n-----------------------------------------------------------------\n")
     print(final)
   }else if(P=="2"){
-    GS <- (h*2.44*(sqrt(VF)))/Ano
+    GS <- (h*2.44*(sqrt(VF)))/Year
 
     final <- data.frame(Var,GS)
     cat("\n-----------------------------------------------------------------\n")
@@ -316,7 +316,7 @@ GS4<-function(Var, h, VF, P = "1", Ano){
     cat("\n-----------------------------------------------------------------\n")
     print(final)
   }else if(P=="3"){
-    GS <- (h*2.27*(sqrt(VF)))/Ano
+    GS <- (h*2.27*(sqrt(VF)))/Year
 
     final <- data.frame(Var,GS)
     cat("\n-----------------------------------------------------------------\n")
@@ -324,7 +324,7 @@ GS4<-function(Var, h, VF, P = "1", Ano){
     cat("\n-----------------------------------------------------------------\n")
     print(final)
   }else if(P=="4"){
-    GS <- (h*2.16*(sqrt(VF)))/Ano
+    GS <- (h*2.16*(sqrt(VF)))/Year
 
     final <- data.frame(Var,GS)
     cat("\n-----------------------------------------------------------------\n")
@@ -332,7 +332,7 @@ GS4<-function(Var, h, VF, P = "1", Ano){
     cat("\n-----------------------------------------------------------------\n")
     print(final)
   }else if(P=="5"){
-    GS <- (h*2.08*(sqrt(VF)))/Ano
+    GS <- (h*2.08*(sqrt(VF)))/Year
 
     final <- data.frame(Var,GS)
     cat("\n-----------------------------------------------------------------\n")
@@ -340,7 +340,7 @@ GS4<-function(Var, h, VF, P = "1", Ano){
     cat("\n-----------------------------------------------------------------\n")
     print(final)
   }else if(P=="10"){
-    GS <- (h*1.76*(sqrt(VF)))/Ano
+    GS <- (h*1.76*(sqrt(VF)))/Year
 
     final <- data.frame(Var,GS)
     cat("\n-----------------------------------------------------------------\n")
@@ -348,7 +348,7 @@ GS4<-function(Var, h, VF, P = "1", Ano){
     cat("\n-----------------------------------------------------------------\n")
     print(final)
   }else if(P=="20"){
-    GS <- (h*1.4*(sqrt(VF)))/Ano
+    GS <- (h*1.4*(sqrt(VF)))/Year
 
     final <- data.frame(Var,GS)
     cat("\n-----------------------------------------------------------------\n")
@@ -356,7 +356,7 @@ GS4<-function(Var, h, VF, P = "1", Ano){
     cat("\n-----------------------------------------------------------------\n")
     print(final)
   }else if(P=="40"){
-    GS <- (h*0.97*(sqrt(VF)))/Ano
+    GS <- (h*0.97*(sqrt(VF)))/Year
 
     final <- data.frame(Var,GS)
     cat("\n-----------------------------------------------------------------\n")
@@ -364,7 +364,7 @@ GS4<-function(Var, h, VF, P = "1", Ano){
     cat("\n-----------------------------------------------------------------\n")
     print(final)
   }else if(P=="50"){
-    GS <- (h*0.8*(sqrt(VF)))/Ano
+    GS <- (h*0.8*(sqrt(VF)))/Year
 
     final <- data.frame(Var,GS)
     cat("\n-----------------------------------------------------------------\n")
@@ -372,7 +372,7 @@ GS4<-function(Var, h, VF, P = "1", Ano){
     cat("\n-----------------------------------------------------------------\n")
     print(final)
   }else if(P=="60"){
-    GS <- (h*0.64*(sqrt(VF)))/Ano
+    GS <- (h*0.64*(sqrt(VF)))/Year
 
     final <- data.frame(Var,GS)
     cat("\n-----------------------------------------------------------------\n")
@@ -380,7 +380,7 @@ GS4<-function(Var, h, VF, P = "1", Ano){
     cat("\n-----------------------------------------------------------------\n")
     print(final)
   }else if(P=="70"){
-    GS <- (h*0.5*(sqrt(VF)))/Ano
+    GS <- (h*0.5*(sqrt(VF)))/Year
 
     final <- data.frame(Var,GS)
     cat("\n-----------------------------------------------------------------\n")
@@ -388,7 +388,7 @@ GS4<-function(Var, h, VF, P = "1", Ano){
     cat("\n-----------------------------------------------------------------\n")
     print(final)
   }else if(P=="80"){
-    GS <- (h*0.35*(sqrt(VF)))/Ano
+    GS <- (h*0.35*(sqrt(VF)))/Year
 
     final <- data.frame(Var,GS)
     cat("\n-----------------------------------------------------------------\n")
@@ -396,7 +396,7 @@ GS4<-function(Var, h, VF, P = "1", Ano){
     cat("\n-----------------------------------------------------------------\n")
     print(final)
   }else if(P=="90"){
-    GS <- (h*0.2*(sqrt(VF)))/Ano
+    GS <- (h*0.2*(sqrt(VF)))/Year
 
     final <- data.frame(Var,GS)
     cat("\n-----------------------------------------------------------------\n")
@@ -410,7 +410,9 @@ GS4<-function(Var, h, VF, P = "1", Ano){
 #'Selection of Transgressive Genotypes - Selection Differential (SD)
 #'@param Gen The column with the genotype name
 #'@param Var The column with the variable of interest
-#'@param Witness The column with the value of the variable 'X' for the witnesses
+#'@param Control The column with the value of the variable 'X' for the witnesses
+#'@param ylab The name of the Y axis.
+#'@param xlab The name of the X axis.
 #'@author Willyan Junior Adorian Bandeira
 #'@author Ivan Ricardo Carvalo
 #'@author Murilo Vieira Loro
@@ -418,11 +420,11 @@ GS4<-function(Var, h, VF, P = "1", Ano){
 #'@author Jose Antonio Gonzalez da Silva
 #'@export
 
-transgressivos<-function(Gen, Var, Testemunha,ylab="Selection",xlab="Genotypes"){
+transgressivos<-function(Gen, Var, Control,ylab="Selection",xlab="Genotypes"){
 
   Gen <- as.factor(Gen)
   Var <- Var
-  Testemunha <- Testemunha
+  Testemunha <- Control
 
   Media<-mean(Var)
   DSg<-mean(Testemunha)
@@ -820,9 +822,9 @@ ALELICA<-function(type=NULL,ge=NULL){
       efeito_ambiente_1 <- c(60, 70)
       efeito_ambiente_2 <- c(95, 105)
       dados <- data.frame(
-        genotipo = rep(genotipo, times = 2),
-        ambiente = rep(ambientes, each = 2),
-        altura = c(efeito_ambiente_1, efeito_ambiente_2)
+        genotipo <- rep(genotipo, times = 2),
+        ambiente <- rep(ambientes, each = 2),
+        altura <- c(efeito_ambiente_1, efeito_ambiente_2)
       )
       ggplot(dados, aes(x = ambiente, y = altura,
                         group = genotipo, color = genotipo)) +
@@ -838,9 +840,9 @@ ALELICA<-function(type=NULL,ge=NULL){
       efeito_ambiente_1 <- c(60, 80)
       efeito_ambiente_2 <- c(85, 125)
       dados <- data.frame(
-        genotipo = rep(genotipo, times = 2),
-        ambiente = rep(ambientes, each = 2),
-        altura = c(efeito_ambiente_1, efeito_ambiente_2)
+        genotipo <- rep(genotipo, times = 2),
+        ambiente <- rep(ambientes, each = 2),
+        altura <- c(efeito_ambiente_1, efeito_ambiente_2)
       )
       ggplot(dados, aes(x = ambiente, y = altura,
                         group = genotipo, color = genotipo)) +
@@ -856,9 +858,9 @@ ALELICA<-function(type=NULL,ge=NULL){
       efeito_ambiente_1 <- c(60, 100)
       efeito_ambiente_2 <- c(110, 60)
       dados <- data.frame(
-        genotipo = rep(genotipo, times = 2),
-        ambiente = rep(ambientes, each = 2),
-        altura = c(efeito_ambiente_1, efeito_ambiente_2)
+        genotipo <- rep(genotipo, times = 2),
+        ambiente <- rep(ambientes, each = 2),
+        altura <- c(efeito_ambiente_1, efeito_ambiente_2)
       )
       ggplot(dados, aes(x = ambiente, y = altura,
                         group = genotipo, color = genotipo)) +
@@ -905,8 +907,8 @@ gga <- function(GEN, VAR, h2, P) {
 #'of strains within a given population.
 #'@param POP The column with the population under improvement.
 #'@param GEN The column with the selected genotypes within the population.
-#'@param VAR The column with the variable of interest.
 #'@param REP The column with the repetitions (if any).
+#'@param vars The column with the variable of interest.
 #'@param K Selection pressure (Default 0.05).
 #'@param type Type of experiment (balanced or unbalanced). Use
 #''balanced' for balanced and 'unb' for unbalanced.
@@ -948,18 +950,18 @@ genpar <- function(POP, GEN, REP = NULL, vars, K = 0.05, type = "balanced", chec
     if (type == "balanced") {
       repet <- length(unique(varc$REP))
       model <- aov(varc[[var_name]] ~ GEN + REP, data = varc)
-      anova_table <- summary(model)[[1]]
-      MSg <- anova_table["GEN", "Mean Sq"]
-      MSe <- anova_table["Residual", "Mean Sq"]
-      pvalue <- anova_table["GEN", "Pr(>F)"]
+      Yearva_table <- summary(model)[[1]]
+      MSg <- Yearva_table["GEN", "Mean Sq"]
+      MSe <- Yearva_table["Residual", "Mean Sq"]
+      pvalue <- Yearva_table["GEN", "Pr(>F)"]
 
     } else if (type=="unb"){
-      #Modelo Linear Misto ou ANOVA tipo 3
+      #Modelo Linear Misto ou YearVA tipo 3
     }
 
     if (pvalue >= 0.05) {
       print(paste("Results for the variable:", var_name))
-      print(anova_table)
+      print(Yearva_table)
       warning("Effect of genotypes not significant for the variable ", var_name, "!", call. = FALSE)
     } else {
       result <- data.frame(
@@ -968,7 +970,7 @@ genpar <- function(POP, GEN, REP = NULL, vars, K = 0.05, type = "balanced", chec
       )
       colnames(result)[which(colnames(result) == "Valor")] <- var_name
       print(paste("Results for the variable:", var_name))
-      print(anova_table)
+      print(Yearva_table)
       print(result)
     }
   }

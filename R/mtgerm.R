@@ -1,6 +1,12 @@
 #'AIC and black oat seed multitrait
 #'@description
 #'Multitrait selection index for variables of interest
+#'@param fc First germination count.
+#'@param germ Germination percentage.
+#'@param sdm Shoot dry mass.
+#'@param sl Shoot lenght.
+#'@param radl Radicle lenght.
+#'@param index Argument to choose the desired index.
 #'@author Willyan Junior Adorian Bandeira
 #'@author Ivan Ricardo Carvalo
 #'@author Murilo Vieira Loro

@@ -28,7 +28,8 @@ library(EstimateBreed)
 data("desvamb")
 head(desvamb)
 
-with(desvamb,desv_clim(ENV,TMED,PREC))
+#Use DPclim for the ISGR function to identify deviations correctly
+DPclim <- with(desvamb,desv_clim(ENV,TMED,PREC))
 }
 }
 \author{

@@ -37,15 +37,17 @@ library(EstimateBreed)
 #Obtain environmental deviations
 data("desvamb")
 head(desvamb)
-with(desvamb, desv_clim(ENV,TMED,PREC))
+
+#Use DPclim for the ISGR function to identify deviations correctly
+DPclim <- with(desvamb,desv_clim(ENV,TMED,PREC))
 
 #Calculate the ISGR
 data("genot")
 head(genot)
-with(genot, isgr(GEN,ENV,NG,MG,CICLO))
+isgr_index <- with(genot, isgr(GEN,ENV,NG,MG,CICLO))
 
 #Define the water requirement per stage
-with(genot, isgr(GEN,ENV,NG,MG,CICLO,req=5,stage="rep"))
+isgr_index <- with(genot, isgr(GEN,ENV,NG,MG,CICLO,req=5,stage="rep"))
 }
 }
 \references{

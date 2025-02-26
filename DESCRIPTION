@@ -33,13 +33,13 @@ Imports:
     nasapower,
     tidyr,
     viridis,
-    knitr,
     cowplot,
     sommer,
     lme4,
     minque,
     utils
 Suggests:
+    knitr,
     rmarkdown,
     testthat (>= 3.0.0),
     roxygen2,

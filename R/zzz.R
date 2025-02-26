@@ -199,8 +199,6 @@
 #' @source Real field data for use.
 "vig"
 
-
-
 .estimatebreed_env <- new.env(parent = emptyenv())
 
 .onAttach <- function(libname, pkgname) {

@@ -100,7 +100,7 @@ number of nodes
 
     with(pheno, plast(GEN,TMED,EST,NN,habit="ind",plot=TRUE))
 
-\#<img src="man/figures/logo.png" align="center" width="935" height="640" />
+\#<img src="man/figures/plast.png" align="center" width="935" height="640" />
 
 ## Documentation
 

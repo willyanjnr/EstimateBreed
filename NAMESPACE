@@ -48,7 +48,10 @@ import(ggrepel)
 import(grid)
 import(hrbrthemes)
 import(httr)
+<<<<<<< HEAD
 import(knitr)
+=======
+>>>>>>> 0529c93 (Stable)
 import(lme4)
 import(minque)
 import(nasapower)

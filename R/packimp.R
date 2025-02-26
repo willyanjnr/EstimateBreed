@@ -11,7 +11,10 @@
 #' @import nasapower
 #' @import tidyr
 #' @import viridis
+<<<<<<< HEAD
 #' @import knitr
+=======
+>>>>>>> 0529c93 (Stable)
 #' @import cowplot
 #' @import sommer
 #' @import lme4

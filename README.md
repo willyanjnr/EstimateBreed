@@ -25,7 +25,7 @@ You can install the development version of EstimateBreed from
     # install.packages("pak")
     pak::pak("willyanjnr/EstimateBreed")
 
-### Example
+## Genotype selection
 
 Obtain the genetic selection index for resilience (ISGR) for selecting
 genotypes for environmental stressors, as described by [Bandeira et
@@ -78,6 +78,8 @@ al. (2024)](https://www.cropj.com/Carvalho_18_12_2024_825_830.pdf).
     # 3  L277  E2 74.756384
     # 2  L162  E2 86.543916
 
+## Estimation of environmental variables and processes
+
 Predict ∆T to determine the ideal times to apply agricultural
 pesticides.
 
@@ -97,6 +99,9 @@ number of nodes
     data("pheno")
 
     with(pheno, plast(GEN,TMED,EST,NN,habit="ind",plot=TRUE))
+
+<a>&lt;img src=“figures/plast.png” align=“center” width=“935”
+height=“640/&gt;</a>
 
 ## Documentation
 

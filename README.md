@@ -100,8 +100,7 @@ number of nodes
 
     with(pheno, plast(GEN,TMED,EST,NN,habit="ind",plot=TRUE))
 
-<a>&lt;img src=“figures/plast.png” align=“center” width=“935”
-height=“640/&gt;</a>
+    <img src="figures/plast.png" align="center" width="935" height="640" />
 
 ## Documentation
 

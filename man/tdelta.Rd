@@ -47,13 +47,11 @@ Determining the ideal time for pesticide application using TDELTA
 library(EstimateBreed)
 
 # Forecasting application conditions
-forecast <- tdelta(-53.696944444444,-28.063888888889,type=1,days=10)
-forecast
+tdelta(-53.696944444444,-28.063888888889,type=1,days=10)
 
 # Retrospective analysis of application conditions
-retrospective <- tdelta(-53.696944444444,-28.063888888889,type=2,days=10,
-dates=c("2023-01-01","2023-05-01"))
-retrospective
+tdelta(-53.6969,-28.0638,type=2,days=10,dates=c("2023-01-01","2023-05-01"))
+
 }
 }
 \author{

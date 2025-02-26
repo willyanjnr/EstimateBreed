@@ -598,13 +598,11 @@ fototermal <- function(DAY, TMED, RAD, PER) {
 #'library(EstimateBreed)
 #'
 #'# Forecasting application conditions
-#'forecast <- tdelta(-53.696944444444,-28.063888888889,type=1,days=10)
-#'forecast
+#'tdelta(-53.696944444444,-28.063888888889,type=1,days=10)
 #'
 #'# Retrospective analysis of application conditions
-#'retrospective <- tdelta(-53.696944444444,-28.063888888889,type=2,days=10,
-#'dates=c("2023-01-01","2023-05-01"))
-#'retrospective
+#'tdelta(-53.6969,-28.0638,type=2,days=10,dates=c("2023-01-01","2023-05-01"))
+#'
 #'}
 
 tdelta <- function(LON,LAT,type=2,days=7,control=NULL,details=FALSE,dates=NULL,
@@ -649,7 +647,8 @@ tdelta <- function(LON,LAT,type=2,days=7,control=NULL,details=FALSE,dates=NULL,
              Td = (237.7*alpha)/(17.27-alpha),
              DELTAT = Temp-Td)
     dt <- dt %>% select(-alpha,-Td)
-    assign("forecast",dt,envir = .GlobalEnv)
+    assign("forecast", dt, envir = .estimatebreed_env)
+    forecast <- get("forecast", envir = .estimatebreed_env)
     if(details==TRUE){
       print(previsao$hourly_units)
       print(dt)
@@ -713,7 +712,7 @@ tdelta <- function(LON,LAT,type=2,days=7,control=NULL,details=FALSE,dates=NULL,
               lonlat = c(LON, LAT),
               dates = dates,
               temporal_api = "hourly")
-    assign("climate_data",clim,envir = .GlobalEnv)
+    assign("climate_data",clim,envir = .estimatebreed_env)
 
     clim <- clim %>%
       select(-LON,-LAT)
@@ -727,7 +726,7 @@ tdelta <- function(LON,LAT,type=2,days=7,control=NULL,details=FALSE,dates=NULL,
     ideal <- dt %>%
       filter(DELTAT >= 2 & DELTAT <= 8,
              PRECTOTCORR < 2)
-    assign("retrospective",ideal,envir = .GlobalEnv)
+    assign("retrospective",ideal,envir = .estimatebreed_env)
     if(details==TRUE){
       return(ideal)
     }

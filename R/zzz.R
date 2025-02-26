@@ -201,21 +201,19 @@
 
 
 
+.estimatebreed_env <- new.env(parent = emptyenv())
 
-.estimatebreed_env <- NULL
-
-.onLoad <- function(libname, pkgname) {
-  .estimatebreed_env <<- new.env(parent = emptyenv())
+.onAttach <- function(libname, pkgname) {
+  packageStartupMessage("EstimateBreed package loaded.")
 }
 
-store_forecast <- function(dt) {
-  assign("forecast", dt, envir = .estimatebreed_env)
-}
-
-get_forecast <- function() {
-  if (exists("forecast", envir = .estimatebreed_env, inherits = FALSE)) {
-    return(get("forecast", envir = .estimatebreed_env))
-  } else {
-    stop("Objeto 'forecast' não encontrado no ambiente do pacote.")
-  }
-}
+utils::globalVariables(
+  c(
+    ".estimatebreed_env", "Ciclo", "MONTH", "Control", "valores", "dados",
+    "sigmaE", "sigmaG", "sigmaP", "ECV", "GCV", "PCV", "H2", "GA", "GAM",
+    "u", "primeiro_dia_germinacao", "DPclim", "AF", "ALA", "AS", "PotLAI", "RED",
+    "RealLAI", "b2", "HW", "TTd", "ATT", "Class", "modelo", "model",
+    "model_summary", "rsq", "STA", "eq_text", "pred", "RH", "Temp", "Td",
+    "DELTAT", "WindS", "Prec", "RH2M", "T2M", "PRECTOTCORR", ":=", "<<-"
+  )
+)

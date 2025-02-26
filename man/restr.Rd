@@ -36,11 +36,9 @@ data <- data.frame(TEST,REP,Xi)
 
 #Apply the witness variability constraint
 with(data, restr(TEST,REP,Xi,scenario = "restr",zstat = FALSE))
-print(Control)
 
 #Apply witness variability restriction with normalization (Z statistic)
 with(data, restr(TEST,REP,Xi,scenario = "restr",zstat = TRUE))
-print(Control)
 }
 }
 \references{

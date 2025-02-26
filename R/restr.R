@@ -34,19 +34,17 @@
 #'
 #'#Apply the witness variability constraint
 #'with(data, restr(TEST,REP,Xi,scenario = "restr",zstat = FALSE))
-#'print(Control)
 #'
 #'#Apply witness variability restriction with normalization (Z statistic)
 #'with(data, restr(TEST,REP,Xi,scenario = "restr",zstat = TRUE))
-#'print(Control)
 #'}
 
-restr <- function(TEST, REP, Xi, scenario = NULL, zstat = NULL){
-
-  if (is.null(scenario)){
+restr <- function(TEST, REP, Xi, scenario = NULL, zstat = NULL) {
+  if (is.null(scenario)) {
     stop("Please inform if the restriction will be applied!")
   }
-  if (scenario == "restr"){
+
+  if (scenario == "restr") {
     media <- mean(Xi)
     desvio <- sd(Xi)
     lim_1s <- c(media - desvio, media + desvio)
@@ -62,33 +60,35 @@ restr <- function(TEST, REP, Xi, scenario = NULL, zstat = NULL){
     print(gen_rep_removidos)
   }
 
-  if (is.null(zstat)){
+  if (is.null(zstat)) {
     stop("Please inform if standardization will be applied!")
   }
-  if (zstat == FALSE){
-    if (scenario == "restr"){
-      colnames(ream) <- c("GEN","REP","Xi")
-      assign("Control",ream,envir = .GlobalEnv)
-    } else if (scenario == "original"){
-    datatest <- data.frame(TEST,REP,Xi)
-    colnames(datatest) <- c("GEN","REP","Xi")
-    assign("Control",datatest,envir = .GlobalEnv)
+
+  if (zstat == FALSE) {
+    if (scenario == "restr") {
+      colnames(ream) <- c("GEN", "REP", "Xi")
+      assign("Control", ream, envir = .estimatebreed_env)
+    } else if (scenario == "original") {
+      datatest <- data.frame(TEST, REP, Xi)
+      colnames(datatest) <- c("GEN", "REP", "Xi")
+      assign("Control", datatest, envir = .estimatebreed_env)
     }
   }
-  if (zstat == TRUE){
-    if (scenario == "restr"){
+
+  if (zstat == TRUE) {
+    if (scenario == "restr") {
       reamost <- ream %>%
         mutate(znorm = (Xi - n_media) / n_desvio)
-      colnames(reamost) <- c("GEN","REP","Xi","znorm")
-      assign("Control", reamost, envir = .GlobalEnv)
-    } else if (scenario == "original"){
+      colnames(reamost) <- c("GEN", "REP", "Xi", "znorm")
+      assign("Control", reamost, envir = .estimatebreed_env)
+    } else if (scenario == "original") {
       orig <- data.frame(TEST, REP, Xi)
       media <- mean(orig$Xi)
       desvio <- sd(orig$Xi)
       reamost_orig <- orig %>%
         mutate(znorm = (Xi - media) / desvio)
-      colnames(reamos_orig) <- c("GEN","REP","Xi","znorm")
-      assign("Control", reamost_orig, envir = .GlobalEnv)
+      colnames(reamost_orig) <- c("GEN", "REP", "Xi", "znorm")
+      assign("Control", reamost_orig, envir = .estimatebreed_env)
     }
   }
 }
@@ -147,7 +147,7 @@ cvar <- function(GEN,REP,Xi,approach=NULL,zstat=NULL){
   #apIII Modelo Linear Misto
   if(approach=="apIII"){
     mod1 <- lmm(Xi~+1|GEN,method=c("reml"),data=datag)
-    assign("mod1",mod1,envir = .GlobalEnv)
+    assign("mod1",mod1,envir = .estimatebreed_env)
 
     V_GEN <- mod1$Var$Xi["V(GEN)", "Est"]
     V_e <- mod1$Var$Xi["V(e)", "Est"]

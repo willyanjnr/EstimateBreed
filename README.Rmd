@@ -16,7 +16,7 @@ knitr::opts_chunk$set(
 # EstimateBreed  <img src="man/figures/logo.png" align="right" height="140/">
 
 <!-- badges: start -->
-![Lifecycle: experimental](https://lifecycle.r-lib.org/articles/figures/lifecycle-experimental.svg)
+![Lifecycle: experimental](https://lifecycle.r-lib.org/articles/figures/lifecycle-stable.svg)
 <!-- badges: end -->
 
 EstimateBreed is an R package designed to perform analyses and estimate environmental covariates and genetic parameters related to selection strategies and the development of superior genotypes. The package offers two main functionalities: 
@@ -86,12 +86,23 @@ with(genot, isgr(GEN, ENV, NG, MG, CICLO))
 ```
 Predict ∆T to determine the ideal times to apply agricultural pesticides.
 ``` r
+
 library(EstimateBreed)
 
-deltat(-53.91472,-28.38778,type=1,days=10)
-View(forecast)
+# Forecasting application conditions
+tdelta(-53.696944444444,-28.063888888889,type=1,days=10)
+
+# Retrospective analysis of application conditions
+tdelta(-53.6969,-28.0638,type=2,days=10,dates=c("2023-01-01","2023-05-01"))
 ```
 
+Estimation of soybean plastochron using average air temperature and number of nodes
+``` r
+library(EstimateBreed)
+data("pheno")
+
+with(pheno, plast(GEN,TMED,EST,NN,habit="ind",plot=TRUE))
+```
 ## Documentation
 Complete documentation can be found when using the package within R.
 

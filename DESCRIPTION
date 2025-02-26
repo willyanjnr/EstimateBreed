@@ -33,22 +33,14 @@ Imports:
     nasapower,
     tidyr,
     viridis,
-<<<<<<< HEAD
     knitr,
-=======
->>>>>>> 0529c93 (Stable)
     cowplot,
     sommer,
     lme4,
     minque,
     utils
 Suggests:
-<<<<<<< HEAD
-    rmarkdown,  
-=======
     rmarkdown,
-    knitr,
->>>>>>> 0529c93 (Stable)
     testthat (>= 3.0.0),
     roxygen2,
     DT

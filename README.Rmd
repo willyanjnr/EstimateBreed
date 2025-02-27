@@ -29,7 +29,9 @@ EstimateBreed is an R package designed to perform analyses and estimate environm
 You can install the development version of EstimateBreed from [GitHub](https://github.com/) with:
 
 ``` r
-# install.packages("pak")
+if (!requireNamespace("pak", quietly = TRUE)) {
+  install.packages("roxygen2")
+}
 pak::pak("willyanjnr/EstimateBreed")
 ```
 

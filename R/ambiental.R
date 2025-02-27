@@ -1,10 +1,30 @@
 #'Accumulated Thermal Sum
 #'@description
-#'Calculates the daily and accumulated thermal sum of crops
-#'@param TMED The column with the average air temperature values
-#'@param crop Parameter to define the culture. Use "maize", "soybean", "flax",
-#'"trit" or "oat"
+#'Calculates the daily and accumulated thermal sum, considering the subtraction
+#' of the average air temperature by the lower cardinal temperature for each crop.
+#'@param AAT The column with the average air temperature values.
+#'@param crop Parameter to define the culture. Use 'maize' for maize, 'soybean'
+#'for soybean, 'flax' for flaxseed, 'trit' for wheat or 'oat' for oat crop.
+#'@param lbt Parameter to define the value of the lower basal temperature to be
+#'used in the calculation. If not informed, the function will use the values of
+#' 10, 5, 2, 2 and 0 \eqn{^{\circ}C} for maize, soybeans, flaxseed, wheat and
+#'oats, respectively.
 #'@param plot Logical argument. Plot a graph of thermal accumulation if TRUE.
+#' @return Returns the cumulative and total thermal sum considering the
+#' cultivation cycle of the selected crop. Also presents the following parameters:\cr
+#' \cr
+#' * Total Cycle\cr
+#'   The number of cycle days, for verification.\cr
+#' \cr
+#' * TS\cr
+#'   The value of the total thermal sum, in daily degree days (GDD).\cr
+#' \cr
+#' * TBi\cr
+#'   The value used for the lower base temperature.\cr
+#' \cr
+#' * General Parameters\cr
+#'   Considering the reported average air temperature values, it returns
+#'   the maximum, minimum, and coefficient of variation.
 #'@author Willyan Junior Adorian Bandeira
 #'@author Ivan Ricardo Carvalo
 #'@author Murilo Vieira Loro
@@ -19,100 +39,117 @@
 #'clima <- get("clima")[1:150, ]
 #'
 #'with(clima,atsum(TMED,crop="maize"))
+#'
+#'#Adjusting lower basal temperature manually
+#'with(clima,atsum(TMED,crop="maize",lbt=12))
 #'}
 
-atsum <- function(TMED,crop="maize",plot=F){
+atsum <- function(AAT,crop="maize",lbt=NULL,plot=F){
 
   if(crop=="maize"){
-    TBi <- 10
-    ST <- TMED-TBi
+    if(!is.null(lbt)){
+      TBi=lbt
+    } else{TBi <- 10}
+    ST <- AAT-TBi
     STot <- sum(ST)
     STAc <- cumsum(ST)
-    CV <- (sd(TMED)/mean(TMED))*100
-    VMax <- max(TMED)
-    VMin <- min(TMED)
+    CV <- (sd(AAT)/mean(AAT))*100
+    VMax <- max(AAT)
+    VMin <- min(AAT)
     acumulado <- data.frame(STAc)
     acumulado$Ciclo <- 1:nrow(acumulado)
+    print(acumulado)
     cat("\n------------------------------\n")
     cat("Thermal sum for the maize crop")
     cat("\n------------------------------\n")
     cat("Total Cycle =",tail(acumulado$Ciclo, n = 1),"Days\n")
     cat("TS =",paste(STot),"GDD\n")
-    cat("TBi =",paste(TBi),"degrees Celsius\n")
-    cat("Max Value =",paste(VMax),"degrees Celsius\n")
-    cat("Min Value =",paste(VMin),"degrees Celsius\n")
+    cat("TBi =",paste(TBi),"\u00B0C\n")
+    cat("Max Value =",paste(VMax),"\u00B0C\n")
+    cat("Min Value =",paste(VMin),"\u00B0C\n")
     cat("CV(%) =",paste(round(CV,digits = 2)),"\n")
     if(plot==T){
         grafico <- ggplot(acumulado, aes(x=Ciclo, y=STAc)) +
         geom_line(color="red", size=1, alpha=0.9, linetype=1) +
-        ylab("Accumulated TS (degrees Celsius)")+xlab("Maize Cycle")+theme_classic()+
+          ylab("Accumulated TS (\u00B0C)") + xlab("Maize Cycle") +
+          theme_classic() +
         scale_x_continuous(breaks=seq(0,tail(acumulado$Ciclo, n = 1)+5,10))
       plot(grafico)
   }
   }
   else if(crop=="soybean"){
-    TBi <- 5
-    ST <- TMED-TBi
+    if(!is.null(lbt)){
+      TBi=lbt
+    } else{TBi <- 10}
+    ST <- AAT-TBi
     STot <- sum(ST)
     STAc <- cumsum(ST)
-    CV <- (sd(TMED)/mean(TMED))*100
-    VMax <- max(TMED)
-    VMin <- min(TMED)
+    CV <- (sd(AAT)/mean(AAT))*100
+    VMax <- max(AAT)
+    VMin <- min(AAT)
     acumulado <- data.frame(STAc)
     acumulado$Ciclo <- 1:nrow(acumulado)
+    print(acumulado)
     cat("\n----------------------------\n")
     cat("Thermal sum for the soybean crop")
     cat("\n----------------------------\n")
     cat("Total Cycle =",tail(acumulado$Ciclo, n = 1),"Days\n")
     cat("TS =",paste(STot),"GDD\n")
-    cat("TBi =",paste(TBi),"degrees Celsius\n")
-    cat("Max Value =",paste(VMax),"degrees Celsius\n")
-    cat("Min Value =",paste(VMin),"degrees Celsius\n")
+    cat("TBi =",paste(TBi),"\u00B0C\n")
+    cat("Max Value =",paste(VMax),"\u00B0C\n")
+    cat("Min Value =",paste(VMin),"\u00B0C\n")
     cat("CV(%) =",paste(round(CV,digits = 2)),"\n")
     if(plot==T){
       grafico <- ggplot(acumulado, aes(x=Ciclo, y=STAc)) +
         geom_line(color="red", size=1, alpha=0.9, linetype=1) +
-        ylab("Accumulated TS (degrees Celsius)")+xlab("Soybean Cycle")+theme_classic()+
+        ylab("Accumulated TS (\u00B0C)") + xlab("Soybean Cycle") +
+        theme_classic() +
         scale_x_continuous(breaks=seq(0,tail(acumulado$Ciclo, n = 1)+5,10))
       plot(grafico)
     }
   }
   else if (crop=="flax"){
-    TBi <- -4
-    ST <- TMED-TBi
+    if(!is.null(lbt)){
+      TBi=lbt
+    } else{TBi <- 10}
+    ST <- AAT-TBi
     STot <- sum(ST)
     STAc <- cumsum(ST)
-    CV <- (sd(TMED)/mean(TMED))*100
-    VMax <- max(TMED)
-    VMin <- min(TMED)
+    CV <- (sd(AAT)/mean(AAT))*100
+    VMax <- max(AAT)
+    VMin <- min(AAT)
     acumulado <- data.frame(STAc)
     acumulado$Ciclo <- 1:nrow(acumulado)
+    print(acumulado)
     cat("\n----------------------------\n")
     cat("Thermal sum form the flaxseed crop")
     cat("\n----------------------------\n")
     cat("Total Cycle =",tail(acumulado$Ciclo, n = 1),"Days\n")
     cat("TS =",paste(STot),"GDD\n")
-    cat("TBi =",paste(TBi),"degrees Celsius\n")
-    cat("Max Value =",paste(VMax),"degrees Celsius\n")
-    cat("Min Value =",paste(VMin),"degrees Celsius\n")
+    cat("TBi =",paste(TBi),"\u00B0C\n")
+    cat("Max Value =",paste(VMax),"\u00B0C\n")
+    cat("Min Value =",paste(VMin),"\u00B0C\n")
     cat("CV(%) =",paste(round(CV,digits = 2)),"\n")
     if(plot==T){
       grafico <- ggplot(acumulado, aes(x=Ciclo, y=STAc)) +
         geom_line(color="red", size=1, alpha=0.9, linetype=1) +
-        ylab("Accumulated TS (degrees Celsius)")+xlab("Flaxseed Cycle")+theme_classic()+
+        ylab("Accumulated TS (\u00B0C)") + xlab("Flaxseed Cycle") +
+        theme_classic() +
         scale_x_continuous(breaks=seq(0,tail(acumulado$Ciclo, n = 1)+5,10))
       plot(grafico)
     }
   }
   else if (crop=="trit"){
-    TBi <- -4
-    ST <- TMED-TBi
+    if(!is.null(lbt)){
+      TBi=lbt
+    } else{TBi <- 10}
+    ST <- AAT-TBi
     STot <- sum(ST)
     STAc <- cumsum(ST)
-    CV <- (sd(TMED)/mean(TMED))*100
-    VMax <- max(TMED)
-    VMin <- min(TMED)
-    acumulado <- data.frame(ST,STAc,MONTH)
+    CV <- (sd(AAT)/mean(AAT))*100
+    VMax <- max(AAT)
+    VMin <- min(AAT)
+    acumulado <- data.frame(STAc)
     acumulado$Ciclo <- 1:nrow(acumulado)
     print(acumulado)
     cat("\n----------------------------\n")
@@ -120,25 +157,29 @@ atsum <- function(TMED,crop="maize",plot=F){
     cat("\n----------------------------\n")
     cat("Total Cycle =",tail(acumulado$Ciclo, n = 1),"Days\n")
     cat("TS =",paste(STot),"GDD\n")
-    cat("TBi =",paste(TBi),"degrees Celsius\n")
-    cat("Max Value =",paste(VMax),"degrees Celsius\n")
-    cat("Min Value =",paste(VMin),"degrees Celsius\n")
+    cat("TBi =",paste(TBi),"\u00B0C\n")
+    cat("Max Value =",paste(VMax),"\u00B0C\n")
+    cat("Min Value =",paste(VMin),"\u00B0C\n")
     cat("CV(%) =",paste(round(CV,digits = 2)),"\n")
     if(plot==T){
       grafico <- ggplot(acumulado, aes(x=Ciclo, y=STAc)) +
         geom_line(color="red", size=1, alpha=0.9, linetype=1) +
-        ylab("Accumulated TS (degrees Celsius)")+xlab("Wheat Cycle")+theme_classic()+
+        ylab("Accumulated TS (\u00B0C)") + xlab("Wheat Cycle") +
+        theme_classic() +
         scale_x_continuous(breaks=seq(0,tail(acumulado$Ciclo, n = 1)+5,10))
       plot(grafico)
     }
+    }
   else if (crop=="oat"){
-    TBi <- -4
-    ST <- TMED-TBi
+    if(!is.null(lbt)){
+      TBi=lbt
+    } else{TBi <- 10}
+    ST <- AAT-TBi
     STot <- sum(ST)
     STAc <- cumsum(ST)
-    CV <- (sd(TMED)/mean(TMED))*100
-    VMax <- max(TMED)
-    VMin <- min(TMED)
+    CV <- (sd(AAT)/mean(AAT))*100
+    VMax <- max(AAT)
+    VMin <- min(AAT)
     acumulado <- data.frame(STAc)
     acumulado$Ciclo <- 1:nrow(acumulado)
     cat("\n----------------------------\n")
@@ -146,29 +187,34 @@ atsum <- function(TMED,crop="maize",plot=F){
     cat("\n----------------------------\n")
     cat("Total Cycle =",tail(acumulado$Ciclo, n = 1),"Days\n")
     cat("TS =",paste(STot),"GDD\n")
-    cat("TBi =",paste(TBi),"degrees Celsius\n")
-    cat("Max Value =",paste(VMax),"degrees Celsius\n")
-    cat("Min Value =",paste(VMin),"degrees Celsius\n")
+    cat("TBi =",paste(TBi),"\u00B0C\n")
+    cat("Max Value =",paste(VMax),"\u00B0C\n")
+    cat("Min Value =",paste(VMin),"\u00B0C\n")
     cat("CV(%) =",paste(round(CV,digits = 2)),"\n")
     if(plot==T){
       grafico <- ggplot(acumulado, aes(x=Ciclo, y=STAc)) +
         geom_line(color="red", size=1, alpha=0.9, linetype=1) +
-        ylab("Accumulated TS (degrees Celsius)")+xlab("Oat Cycle")+theme_classic()+
+        ylab("Accumulated TS (\u00B0C)") + xlab("Oat Cycle") +
+        theme_classic() +
         scale_x_continuous(breaks=seq(0,tail(acumulado$Ciclo, n = 1)+5,10))
       plot(grafico)
-  }
-  }
+    }
   }
 }
 
 #'Plotting the optimum and cardinal temperatures for crops
 #'@description
-#'Utility function for plotting graphs of thermal preferences for crops
-#'@param DAS Days after sowing
-#'@param Var desc
-#'@param crop Soja, Milho, Trigo
-#'@param ylab desc
-#'@param xlab description
+#'Utility function for plotting graphs of thermal preferences for crops. It is
+#'necessary to inform the  temperature values (minimum, average or maximum).
+#'@param DAS The column with the days after sowing (cycle).
+#'@param VAR The column with air temperature values (minimum, average or
+#'maximum).
+#'@param crop Parameter to define the culture. Use 'soybean' for soybean crop,
+#''maize' for maize crop and 'trit' for wheat crop.
+#'@param ylab The name of the Y axis.
+#'@param xlab The name of the X axis.
+#'@return Returns the parameters of lower basal and optimum temperature, upper
+#'basal and optimum temperature, maximum temperature and average temperature.
 #'@author Willyan Junior Adorian Bandeira
 #'@author Ivan Ricardo Carvalo
 #'@author Murilo Vieira Loro
@@ -179,50 +225,64 @@ atsum <- function(TMED,crop="maize",plot=F){
 #'\donttest{
 #'library(EstimateBreed)
 #'
+#'data("clima")
+#'clima <- get("clima")[1:150, ]
+#'
+#'with(clima,optemp(TMED,crop="soybean"))
 #'}
 
-optemp <-function(DAS,Var,crop = "soybean",ylab = "Meteorological Atribute",
+optemp <-function(VAR,crop = NULL,ylab = "Meteorological Atribute",
                     xlab = "Days After Sowing"){
+  if(is.numeric(VAR)){
+    VAR <- data.frame(VAR)
+  }
+  if(is.null(crop)){
+    stop("Please enter the desired culture!", call. = FALSE)
+  }
+  nlines <- nrow(VAR)
+  dados <- VAR %>%
+    mutate(DAS = seq_len(nlines))
+  dados <- dados[, c("DAS", setdiff(names(dados), "DAS"))]
+  if (crop == "soybean") {
+    TbInferior <- 10
+    TbSuperior <- 35
+    ToInferior <- 20
+    ToSuperior <- 30
+    TGeral <- mean(dados$VAR)
+    Tmax <- max(VAR)
+    Tmin <- min(VAR)
 
-  DAS <- as.numeric(DAS)
-  Var <- Var
-  Cultura <- Cultura
-
-  if(crop=="soybean"){
-    TbInferior<-10
-    TbSuperior<-35
-    ToInferior<-20
-    ToSuperior<-30
-    TGeral<-mean(Var)
-    Tmax<-max(Var)
-    Tmin<-min(Var)
-
-    dados<-data.frame(DAS, Var)
-
-    grafico <- ggplot(dados, aes(x = DAS, y = Var))+
-      geom_line(col = "red", size =0.8, linetype = 2,group=1)+ylab(ylab)+xlab(xlab)+theme_classic()+
-      geom_segment(aes(x = 0, y =TbInferior, xend =DAS, yend = TbInferior), linetype = 1, color = "blue")+
-      geom_label(aes(x=15, y=TbInferior, label="Lower base temperature"))+theme_classic()+
-      geom_segment(aes(x = 0, y =TbSuperior, xend = DAS, yend =TbSuperior), linetype = 1, color = "blue")+
-      geom_label(aes(x=15, y=TbSuperior, label="Upper base temperature"))+theme_classic()+
-      geom_segment(aes(x = 0, y =ToInferior, xend =DAS, yend =ToInferior), linetype = 2, color = "darkgreen")+
-      geom_label(aes(x=15, y=ToInferior, label="Lower optimum temperature"))+theme_classic()+
-      geom_segment(aes(x = 0, y =ToSuperior, xend =DAS, yend =ToSuperior), linetype = 2, color = "darkgreen")+
-      geom_label(aes(x=15, y=ToSuperior, label="Upper optimum temperature"))+theme_classic()
+    grafico <- ggplot(dados, aes(x = DAS, y = VAR)) +
+      geom_line(col = "red", size = 0.8, linetype = 2, group = 1) +
+      ylab(ylab) + xlab(xlab) + theme_classic() +
+      geom_segment(x = 0, y = TbInferior, xend = max(dados$DAS),
+                   yend = TbInferior,linetype = 1, color = "blue") +
+      annotate("label", x = 15, y = TbInferior, label = "Lower base temperature",
+               color = "blue") +
+      geom_segment(x = 0, y = TbSuperior, xend = max(dados$DAS), yend = TbSuperior,
+                   linetype = 1, color = "blue") +
+      annotate("label", x = 15, y = TbSuperior, label = "Upper base temperature",
+               color = "blue") +
+      geom_segment(x = 0, y = ToInferior, xend = max(dados$DAS), yend = ToInferior,
+                   linetype = 2, color = "darkgreen") +
+      annotate("label", x = 15, y = ToInferior, label = "Lower optimum temperature",
+               color = "darkgreen") +
+      geom_segment(x = 0, y = ToSuperior, xend = max(dados$DAS), yend = ToSuperior,
+                   linetype = 2, color = "darkgreen") +
+      annotate("label", x = 15, y = ToSuperior, label = "Upper optimum temperature",
+               color = "darkgreen") +
+      theme_classic()
 
     parameters<-list(
-
-      TbInferior=TbInferior,
-      TbSuperior=TbSuperior,
-      ToInferior=ToInferior,
-      ToSuperior=ToSuperior,
-      TGeral=TGeral,
+      InferiorBT=TbInferior,
+      SuperiorBT=TbSuperior,
+      InferiorOT=ToInferior,
+      SuperiorOT=ToSuperior,
+      AvTemp=TGeral,
       Tmax=Tmax,
       Tmin=Tmin
     )
-
     print(grafico)
-
     cat("\n-----------------------------------------------------------------\n")
     cat("General Parameters - Soybean")
     cat("\n-----------------------------------------------------------------\n")
@@ -233,70 +293,85 @@ optemp <-function(DAS,Var,crop = "soybean",ylab = "Meteorological Atribute",
     TbSuperior<-34
     ToInferior<-18
     ToSuperior<-30
-    TGeral<-mean(Var)
-    Tmax<-max(Var)
-    Tmin<-min(Var)
+    TGeral<-mean(dados$VAR)
+    Tmax<-max(VAR)
+    Tmin<-min(VAR)
 
-    dados<-data.frame(DAS, Var)
-    grafico <- ggplot(dados, aes(x = DAS, y = Var))+
-      geom_line(col = "red", size =0.8, linetype = 2,group=1)+ylab(ylab)+xlab(xlab)+theme_classic()+
-      geom_segment(aes(x = 0, y =TbInferior, xend =DAS, yend = TbInferior), linetype = 1, color = "blue")+
-      geom_label(aes(x=15, y=TbInferior, label="Lower base temperature"))+theme_classic()+
-      geom_segment(aes(x = 0, y =TbSuperior, xend = DAS, yend =TbSuperior), linetype = 1, color = "blue")+
-      geom_label(aes(x=15, y=TbSuperior, label="Upper base temperature"))+theme_classic()+
-      geom_segment(aes(x = 0, y =ToInferior, xend =DAS, yend =ToInferior), linetype = 2, color = "darkgreen")+
-      geom_label(aes(x=15, y=ToInferior, label="Lower optimum temperature"))+theme_classic()+
-      geom_segment(aes(x = 0, y =ToSuperior, xend =DAS, yend =ToSuperior), linetype = 2, color = "darkgreen")+
-      geom_label(aes(x=15, y=ToSuperior, label="Upper optimum temperature"))+theme_classic()
+    grafico <- ggplot(dados, aes(x = DAS, y = VAR)) +
+      geom_line(col = "red", size = 0.8, linetype = 2, group = 1) +
+      ylab(ylab) + xlab(xlab) + theme_classic() +
+      geom_segment(x = 0, y = TbInferior, xend = max(dados$DAS),
+                   yend = TbInferior,linetype = 1, color = "blue") +
+      annotate("label", x = 15, y = TbInferior, label = "Lower base temperature",
+               color = "blue") +
+      geom_segment(x = 0, y = TbSuperior, xend = max(dados$DAS), yend = TbSuperior,
+                   linetype = 1, color = "blue") +
+      annotate("label", x = 15, y = TbSuperior, label = "Upper base temperature",
+               color = "blue") +
+      geom_segment(x = 0, y = ToInferior, xend = max(dados$DAS), yend = ToInferior,
+                   linetype = 2, color = "darkgreen") +
+      annotate("label", x = 15, y = ToInferior, label = "Lower optimum temperature",
+               color = "darkgreen") +
+      geom_segment(x = 0, y = ToSuperior, xend = max(dados$DAS), yend = ToSuperior,
+                   linetype = 2, color = "darkgreen") +
+      annotate("label", x = 15, y = ToSuperior, label = "Upper optimum temperature",
+               color = "darkgreen") +
+      theme_classic()
 
     parameters<-list(
-      TbInferior=TbInferior,
-      TbSuperior=TbSuperior,
-      ToInferior=ToInferior,
-      ToSuperior=ToSuperior,
-      TGeral=TGeral,
+      InferiorBT=TbInferior,
+      SuperiorBT=TbSuperior,
+      InferiorOT=ToInferior,
+      SuperiorOT=ToSuperior,
+      AvTemp=TGeral,
       Tmax=Tmax,
       Tmin=Tmin
     )
-
     print(grafico)
     cat("\n-----------------------------------------------------------------\n")
     cat("General Parameters - Maize")
     cat("\n-----------------------------------------------------------------\n")
     print(parameters)
   }
-
   else if (crop=="trit"){
     TbInferior<-1.5
     TbSuperior<-30
     ToInferior<-17.2
     ToSuperior<-26
-    TGeral<-mean(Var)
-    Tmax<-max(Var)
-    Tmin<-min(Var)
+    TGeral<-mean(dados$VAR)
+    Tmax<-max(VAR)
+    Tmin<-min(VAR)
 
-    dados<-data.frame(DAS, Var)
-    grafico <- ggplot(dados, aes(x = DAS, y = Var))+
-      geom_line(col = "red", size =0.8, linetype = 2,group=1)+ylab(ylab)+xlab(xlab)+theme_classic()+
-      geom_segment(aes(x = 0, y =TbInferior, xend =DAS, yend = TbInferior), linetype = 1, color = "blue")+
-      geom_label(aes(x=15, y=TbInferior, label="Lower base temperature"))+theme_classic()+
-      geom_segment(aes(x = 0, y =TbSuperior, xend = DAS, yend =TbSuperior), linetype = 1, color = "blue")+
-      geom_label(aes(x=15, y=TbSuperior, label="Upper base temperature"))+theme_classic()+
-      geom_segment(aes(x = 0, y =ToInferior, xend =DAS, yend =ToInferior), linetype = 2, color = "darkgreen")+
-      geom_label(aes(x=15, y=ToInferior, label="Lower optimum temperature"))+theme_classic()+
-      geom_segment(aes(x = 0, y =ToSuperior, xend =DAS, yend =ToSuperior), linetype = 2, color = "darkgreen")+
-      geom_label(aes(x=15, y=ToSuperior, label="Upper optimum temperature"))+theme_classic()
+    grafico <- ggplot(dados, aes(x = DAS, y = VAR)) +
+      geom_line(col = "red", size = 0.8, linetype = 2, group = 1) +
+      ylab(ylab) + xlab(xlab) + theme_classic() +
+      geom_segment(x = 0, y = TbInferior, xend = max(dados$DAS),
+                   yend = TbInferior,linetype = 1, color = "blue") +
+      annotate("label", x = 15, y = TbInferior, label = "Lower base temperature",
+               color = "blue") +
+      geom_segment(x = 0, y = TbSuperior, xend = max(dados$DAS), yend = TbSuperior,
+                   linetype = 1, color = "blue") +
+      annotate("label", x = 15, y = TbSuperior, label = "Upper base temperature",
+               color = "blue") +
+      geom_segment(x = 0, y = ToInferior, xend = max(dados$DAS), yend = ToInferior,
+                   linetype = 2, color = "darkgreen") +
+      annotate("label", x = 15, y = ToInferior, label = "Lower optimum temperature",
+               color = "darkgreen") +
+      geom_segment(x = 0, y = ToSuperior, xend = max(dados$DAS), yend = ToSuperior,
+                   linetype = 2, color = "darkgreen") +
+      annotate("label", x = 15, y = ToSuperior, label = "Upper optimum temperature",
+               color = "darkgreen") +
+      theme_classic()
 
     parameters<-list(
-      TbInferior=TbInferior,
-      TbSuperior=TbSuperior,
-      ToInferior=ToInferior,
-      ToSuperior=ToSuperior,
-      TGeral=TGeral,
+      InferiorBT=TbInferior,
+      SuperiorBT=TbSuperior,
+      InferiorOT=ToInferior,
+      SuperiorOT=ToSuperior,
+      AvTemp=TGeral,
       Tmax=Tmax,
       Tmin=Tmin
     )
-
     print(grafico)
     cat("\n-----------------------------------------------------------------\n")
     cat("General Parameters - Wheat")
@@ -310,7 +385,7 @@ optemp <-function(DAS,Var,crop = "soybean",ylab = "Meteorological Atribute",
 #'Estimation of soybean plastochron using average air temperature and number of
 #'nodes
 #'@param GEN The column with the genotype name.
-#'@param TMED The column with the average air temperature values.
+#'@param AAT The column with the average air temperature values.
 #'@param STAD The column with the phenological stages of soybean, as described by
 #' Fehr & Caviness (1977).
 #'@param NN The column with the number of nodes measured in field.
@@ -344,16 +419,16 @@ optemp <-function(DAS,Var,crop = "soybean",ylab = "Meteorological Atribute",
 #'with(pheno, plast(GEN,TMED,EST,NN,habit="ind",plot=TRUE))
 #'}
 
-plast <- function(GEN, TMED, STAD, NN, habit = "ind", plot = FALSE) {
+plast <- function(GEN, AAT, STAD, NN, habit = "ind", plot = FALSE) {
   Tb <- 7.6
   Tot <- 31
   TB <- 40
-  resultado <- data.frame(GEN, TMED, STAD, NN) %>%
+  resultado <- data.frame(GEN, AAT, STAD, NN) %>%
     group_by(GEN) %>%
     mutate(
       TTd = case_when(
-        TMED > Tb & TMED <= Tot ~ (Tot - Tb) * ((TMED - Tb) / (Tot - Tb)) * 1,
-        TMED > Tot & TMED <= TB ~ (Tot - Tb) * ((TMED - TB) / (Tot - TB)) * 1,
+        AAT> Tb & AAT<= Tot ~ (Tot - Tb) * ((AAT- Tb) / (Tot - Tb)) * 1,
+        AAT> Tot & AAT<= TB ~ (Tot - Tb) * ((AAT- TB) / (Tot - TB)) * 1,
         TRUE ~ 0
       ),
       ATT = cumsum(TTd)
@@ -368,9 +443,11 @@ plast <- function(GEN, TMED, STAD, NN, habit = "ind", plot = FALSE) {
       group_by(NN) %>%
       mutate(STA = max(ATT)) %>%
       ungroup() %>%
-      filter(STAD %in% c("V1", "V2", "V3", "V4", "V5", "V6", "V7", "V8", "V9", "V10", "R1", "R2", "R3", "R4", "R5")) %>%
+      filter(STAD %in% c("V1", "V2", "V3", "V4", "V5", "V6", "V7", "V8", "V9",
+                         "V10", "R1", "R2", "R3", "R4", "R5")) %>%
       mutate(Class = case_when(
-        STAD %in% c("V1", "V2", "V3", "V4", "V5", "V6", "V7", "V8", "V9", "V10") ~ "Early",
+        STAD %in% c("V1", "V2", "V3", "V4", "V5", "V6", "V7", "V8", "V9",
+                    "V10") ~ "Early",
         STAD %in% c("R1", "R2") ~ "Intermediate",
         STAD %in% c("R3", "R4", "R5") ~ "Late",
         TRUE ~ "Undefined"
@@ -403,9 +480,11 @@ plast <- function(GEN, TMED, STAD, NN, habit = "ind", plot = FALSE) {
       group_by(NN) %>%
       mutate(STA = max(ATT)) %>%
       ungroup() %>%
-      filter(STAD %in% c("V1", "V2", "V3", "V4", "V5", "V6", "V7", "V8", "V9", "V10", "R1", "R2", "R3")) %>%
+      filter(STAD %in% c("V1", "V2", "V3", "V4", "V5", "V6", "V7", "V8", "V9",
+                         "V10", "R1", "R2", "R3")) %>%
       mutate(Class = case_when(
-        STAD %in% c("V1", "V2", "V3", "V4", "V5", "V6", "V7", "V8", "V9", "V10") ~ "Early",
+        STAD %in% c("V1", "V2", "V3", "V4", "V5", "V6", "V7", "V8", "V9", "V10")
+        ~ "Early",
         STAD %in% c("R1", "R2", "R3") ~ "Late",
         TRUE ~ "Undefined"
       ))
@@ -443,13 +522,15 @@ plast <- function(GEN, TMED, STAD, NN, habit = "ind", plot = FALSE) {
         eq_text = map2(model, rsq, ~ paste(
           "y =", signif(coef(.x)[2], 6), "x +", signif(coef(.x)[1], 6), "\n",
           "R-squared =", signif(.y, 2), "\n",
-          "Pr(>t) =", format.pval(coef(summary(.x))[2, "Pr(>|t|)"], digits = 5, eps = 1e-16)
+          "Pr(>t) =", format.pval(coef(summary(.x))[2, "Pr(>|t|)"], digits = 5,
+                                  eps = 1e-16)
         ))
       )
 
     dadosf <- dadosf %>%
       left_join(modelos, by = "Class") %>%
-      mutate(pred = map2_dbl(model, STA, ~ predict(.x, newdata = data.frame(STA = .y)))) %>%
+      mutate(pred = map2_dbl(model, STA,
+                             ~ predict(.x, newdata = data.frame(STA = .y)))) %>%
       left_join(modelos_stats %>% select(Class, eq_text), by = "Class")
 
     x_limits <- c(min(dadosf$STA), max(dadosf$STA))
@@ -510,16 +591,16 @@ plast <- function(GEN, TMED, STAD, NN, habit = "ind", plot = FALSE) {
   }
 }
 
-
 #'Photothermal Index
 #'@description
 #'Calculation of the photothermal index based on average temperature and
 #'radiation
 #'@param DAY The column with the cycle days
-#'@param TMED The column with the average air temperature values
+#'@param AAT The column with the average air temperature values
 #'@param RAD The column with the incident radiation values
 #'@param PER The column with the period (use VEG for vegetative and REP for
 #'reproductive)
+#'@return Retorna o ind fototermal
 #'@author Willyan Junior Adorian Bandeira
 #'@author Ivan Ricardo Carvalo
 #'@author Murilo Vieira Loro
@@ -530,7 +611,7 @@ plast <- function(GEN, TMED, STAD, NN, habit = "ind", plot = FALSE) {
 #'Visando altas produtividades (2a ed.). Field Crops.
 #'@export
 
-fototermal <- function(DAY, TMED, RAD, PER) {
+fototermal <- function(DAY, AAT, RAD, PER) {
 
   if (length(DAY) != length(TMED)) {
     stop("The length of 'DAY' must be equal to the length of 'TMED'.")
@@ -541,7 +622,7 @@ fototermal <- function(DAY, TMED, RAD, PER) {
   if (length(DAY) != length(PER)) {
       stop("The length of 'DAY' must be equal to the length of 'PER'.")
   }
-  if (!is.numeric(TMED) || any(TMED < 0)) {
+  if (!is.numeric(TMED) || any(AAT< 0)) {
     stop("Average Air Temperature values must be numeric and positive.")
   }
   if (!is.numeric(RAD) || any(RAD <= 0)) {
@@ -560,7 +641,7 @@ fototermal <- function(DAY, TMED, RAD, PER) {
   for (p in periodos) {
     dados_periodo <- subset(data, PER == p)
     T_base <- T_base_dict[p]
-    dados_periodo$Tef <- dados_periodo$TMED - T_base
+    dados_periodo$Tef <- dados_periodo$AAT- T_base
     dados_periodo$Q <- dados_periodo$RAD / dados_periodo$Tef
     dados_periodo$Qac_final <- cumsum(dados_periodo$Q) + offset
     offset <- tail(dados_periodo$Qac_final, 1)
@@ -598,19 +679,18 @@ fototermal <- function(DAY, TMED, RAD, PER) {
 #'library(EstimateBreed)
 #'
 #'# Forecasting application conditions
-#'tdelta(-53.696944444444,-28.063888888889,type=1,days=10)
+#'forecast <- tdelta(-53.6969,-28.0638,type=1,days=10)
 #'
 #'# Retrospective analysis of application conditions
-#'tdelta(-53.6969,-28.0638,type=2,days=10,dates=c("2023-01-01","2023-05-01"))
-#'
+#'tdelta(-53.6969,-28.0638,type=2,days=10,dates=c("2023-01-01","2023-05-01"),
+#'details=TRUE)
 #'}
 
 tdelta <- function(LON,LAT,type=2,days=7,control=NULL,details=FALSE,dates=NULL,
                    plot=FALSE){
 
   if (type==1) {
-    # Tipo 1 - Forecast
-
+    # Type 1 - Forecast
     url <- "https://api.open-meteo.com/v1/forecast"
     res <- GET(url, query = list(
       latitude = LAT,
@@ -648,7 +728,7 @@ tdelta <- function(LON,LAT,type=2,days=7,control=NULL,details=FALSE,dates=NULL,
              DELTAT = Temp-Td)
     dt <- dt %>% select(-alpha,-Td)
     assign("forecast", dt, envir = .estimatebreed_env)
-    forecast <- get("forecast", envir = .estimatebreed_env)
+    return(d)
     if(details==TRUE){
       print(previsao$hourly_units)
       print(dt)
@@ -701,7 +781,6 @@ tdelta <- function(LON,LAT,type=2,days=7,control=NULL,details=FALSE,dates=NULL,
   }
 
   if(type==2){
-
     if(is.null(dates) || length(dates) !=2){
       stop("The 'dates' parameter must be a vector with two dates in the format
           'YYYY-MM-DD'. Example: c('2023-01-01', '2023-05-01').")
@@ -716,8 +795,6 @@ tdelta <- function(LON,LAT,type=2,days=7,control=NULL,details=FALSE,dates=NULL,
 
     clim <- clim %>%
       select(-LON,-LAT)
-
-    #Calculo DELTAT
     dt <- clim %>%
       mutate(alpha = log(RH2M/100)+(17.27*T2M)/(237.7+T2M),
              Td = (237.7*alpha)/(17.27-alpha),

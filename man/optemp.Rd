@@ -5,31 +5,41 @@
 \title{Plotting the optimum and cardinal temperatures for crops}
 \usage{
 optemp(
-  DAS,
-  Var,
-  crop = "soybean",
+  VAR,
+  crop = NULL,
   ylab = "Meteorological Atribute",
   xlab = "Days After Sowing"
 )
 }
 \arguments{
-\item{DAS}{Days after sowing}
+\item{VAR}{The column with air temperature values (minimum, average or
+maximum).}
 
-\item{Var}{desc}
+\item{crop}{Parameter to define the culture. Use 'soybean' for soybean crop,
+'maize' for maize crop and 'trit' for wheat crop.}
 
-\item{crop}{Soja, Milho, Trigo}
+\item{ylab}{The name of the Y axis.}
 
-\item{ylab}{desc}
+\item{xlab}{The name of the X axis.}
 
-\item{xlab}{description}
+\item{DAS}{The column with the days after sowing (cycle).}
+}
+\value{
+Returns the parameters of lower basal and optimum temperature, upper
+basal and optimum temperature, maximum temperature and average temperature.
 }
 \description{
-Utility function for plotting graphs of thermal preferences for crops
+Utility function for plotting graphs of thermal preferences for crops. It is
+necessary to inform the  temperature values (minimum, average or maximum).
 }
 \examples{
 \donttest{
 library(EstimateBreed)
 
+data("clima")
+clima <- get("clima")[1:150, ]
+
+with(clima,optemp(TMED,crop="soybean"))
 }
 }
 \author{

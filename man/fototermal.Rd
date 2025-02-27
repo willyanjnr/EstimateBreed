@@ -4,17 +4,20 @@
 \alias{fototermal}
 \title{Photothermal Index}
 \usage{
-fototermal(DAY, TMED, RAD, PER)
+fototermal(DAY, AAT, RAD, PER)
 }
 \arguments{
 \item{DAY}{The column with the cycle days}
 
-\item{TMED}{The column with the average air temperature values}
+\item{AAT}{The column with the average air temperature values}
 
 \item{RAD}{The column with the incident radiation values}
 
 \item{PER}{The column with the period (use VEG for vegetative and REP for
 reproductive)}
+}
+\value{
+Retorna o ind fototermal
 }
 \description{
 Calculation of the photothermal index based on average temperature and

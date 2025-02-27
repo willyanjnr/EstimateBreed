@@ -4,18 +4,41 @@
 \alias{atsum}
 \title{Accumulated Thermal Sum}
 \usage{
-atsum(TMED, crop = "maize", plot = F)
+atsum(AAT, crop = "maize", lbt = NULL, plot = F)
 }
 \arguments{
-\item{TMED}{The column with the average air temperature values}
+\item{AAT}{The column with the average air temperature values.}
 
-\item{crop}{Parameter to define the culture. Use "maize", "soybean", "flax",
-"trit" or "oat"}
+\item{crop}{Parameter to define the culture. Use 'maize' for maize, 'soybean'
+for soybean, 'flax' for flaxseed, 'trit' for wheat or 'oat' for oat crop.}
+
+\item{lbt}{Parameter to define the value of the lower basal temperature to be
+used in the calculation. If not informed, the function will use the values of
+10, 5, 2, 2 and 0 \eqn{^{\circ}C} for maize, soybeans, flaxseed, wheat and
+oats, respectively.}
 
 \item{plot}{Logical argument. Plot a graph of thermal accumulation if TRUE.}
 }
+\value{
+Returns the cumulative and total thermal sum considering the
+cultivation cycle of the selected crop. Also presents the following parameters:\cr
+\cr
+* Total Cycle\cr
+  The number of cycle days, for verification.\cr
+\cr
+* TS\cr
+  The value of the total thermal sum, in daily degree days (GDD).\cr
+\cr
+* TBi\cr
+  The value used for the lower base temperature.\cr
+\cr
+* General Parameters\cr
+  Considering the reported average air temperature values, it returns
+  the maximum, minimum, and coefficient of variation.
+}
 \description{
-Calculates the daily and accumulated thermal sum of crops
+Calculates the daily and accumulated thermal sum, considering the subtraction
+of the average air temperature by the lower cardinal temperature for each crop.
 }
 \examples{
 \donttest{
@@ -25,6 +48,9 @@ data("clima")
 clima <- get("clima")[1:150, ]
 
 with(clima,atsum(TMED,crop="maize"))
+
+#Adjusting lower basal temperature manually
+with(clima,atsum(TMED,crop="maize",lbt=12))
 }
 }
 \author{

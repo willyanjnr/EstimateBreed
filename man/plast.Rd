@@ -4,12 +4,12 @@
 \alias{plast}
 \title{Soybean plastochron estimation}
 \usage{
-plast(GEN, TMED, STAD, NN, habit = "ind", plot = FALSE)
+plast(GEN, AAT, STAD, NN, habit = "ind", plot = FALSE)
 }
 \arguments{
 \item{GEN}{The column with the genotype name.}
 
-\item{TMED}{The column with the average air temperature values.}
+\item{AAT}{The column with the average air temperature values.}
 
 \item{STAD}{The column with the phenological stages of soybean, as described by
 Fehr & Caviness (1977).}

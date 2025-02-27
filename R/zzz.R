@@ -212,6 +212,7 @@ utils::globalVariables(
     "u", "primeiro_dia_germinacao", "DPclim", "AF", "ALA", "AS", "PotLAI", "RED",
     "RealLAI", "b2", "HW", "TTd", "ATT", "Class", "modelo", "model",
     "model_summary", "rsq", "STA", "eq_text", "pred", "RH", "Temp", "Td",
-    "DELTAT", "WindS", "Prec", "RH2M", "T2M", "PRECTOTCORR", ":=", "<<-"
+    "DELTAT", "WindS", "Prec", "RH2M", "T2M", "PRECTOTCORR", ":=", "<<-",
+    "AAT","DAS"
   )
 )

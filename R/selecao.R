@@ -1,408 +1,91 @@
-#'Selection pressure
-#'@description
-#'Response to selection weighted by selection pressure
-#'@param Var The column with the name of the variables of interest
-#'@param h The column with the restricted heritability values
-#'@param VF The column with the phenotypic variance values
-#'@param P The column with the values observed for the progenies
-#'@author Willyan Junior Adorian Bandeira
-#'@author Ivan Ricardo Carvalo
-#'@author Murilo Vieira Loro
-#'@author Leonardo Cesar Pradebon
-#'@author Jose Antonio Gonzalez da Silva
-#'@export
+#' General Selection Gain Function
+#' @description
+#' Computes selection gain using different selection methods
+#' @param Var The column with the name of the variables of interest
+#' @param h The column with the restricted heritability values
+#' @param VF The column with the phenotypic variance values (optional)
+#' @param P The column with the progeny values or selection pressure (optional)
+#' @param DS The column with the selection differential values (optional)
+#' @param Year The column with the year of selection (optional)
+#' @param method The selection method: 'pressure', 'differential',
+#' 'genitor_control", or 'year_weighted'
+#' @return A data frame with selection gain results
+#' @author Willyan Junior Adorian Bandeira
+#' @author Ivan Ricardo Carvalo
+#' @author Murilo Vieira Loro
+#' @author Leonardo Cesar Pradebon
+#' @author Jose Antonio Gonzalez da Silva
+#' @export
+#' @examples
+#'\donttest{
+#'library(EstimateBreed)
+#'
+#'SG(Var = c("A", "B", "C"), h = 0.5, VF = 1.2, P = "10", method = "pressure")
+#'SG(Var = c("A", "B", "C"), h = 0.5, DS = 1.5, method = "differential")
+#'SG(Var = c("A", "B", "C"), h = 0.5, VF = 1.2, P = "10", method = "genitor_control")
+#'SG(Var = c("A", "B", "C"), h = 0.5, VF = 1.2, P = "10", Year = 5, method = "year_weighted")
+#'}
 
-GS <- function(Var, h, VF, P = "1"){
-
+SG <- function(Var, h, VF = NULL, P = "1", DS = NULL, Year = NULL, method = "pressure") {
   Var <- as.factor(Var)
-  h <- h
-  VF <- VF
-  if(P=="1"){
-    GS <- (h*2.7*(sqrt(VF)))
 
-    final <- data.frame(Var,GS)
-    cat("\n-----------------------------------------------------------------\n")
-    cat("Selection Gain 1% Pressure")
-    cat("\n-----------------------------------------------------------------\n")
-    print(final)
-  }else if(P=="2"){
-    GS <- (h*2.44*(sqrt(VF)))
+  coeficientes <- c("1" = 2.7, "2" = 2.44, "3" = 2.27, "4" = 2.16, "5" = 2.08,
+                    "10" = 1.76, "20" = 1.4, "40" = 0.97, "50" = 0.8, "60" = 0.64,
+                    "70" = 0.5, "80" = 0.35, "90" = 0.2)
 
-    final <- data.frame(Var,GS)
-    cat("\n-----------------------------------------------------------------\n")
-    cat("Selection Gain 2% Pressure")
-    cat("\n-----------------------------------------------------------------\n")
-    print(final)
-  }else if(P=="3"){
-    GS <- (h*2.27*(sqrt(VF)))
+  if (!is.null(P) && !(P %in% names(coeficientes))) {
+    stop("Valor de P inválido. Escolha entre: ", paste(names(coeficientes), collapse = ", "))
+  }
 
-    final <- data.frame(Var,GS)
-    cat("\n-----------------------------------------------------------------\n")
-    cat("Selection Gain 3% Pressure")
-    cat("\n-----------------------------------------------------------------\n")
-    print(final)
-  }else if(P=="4"){
-    GS <- (h*2.16*(sqrt(VF)))
+  GS <- switch(method,
+               "pressure" = {
+                 if (is.null(VF)) stop("VF is required for the 'pressure' method.")
+                 coef <- coeficientes[P]
+                 GS <- h * coef * sqrt(VF)
+                 desc <- paste("Selection Gain with", P, "% pressure")
+                 list(GS = GS, desc = desc, coef = coef)
+               },
+               "differential" = {
+                 if (is.null(DS)) stop("DS is required for the 'differential' method.")
+                 GS <- h * DS
+                 desc <- "Selection Gain using Selection Differential"
+                 list(GS = GS, desc = desc, coef = NA)
+               },
+               "genitor_control" = {
+                 if (is.null(VF)) stop("VF is required for the 'genitor_control' method.")
+                 coef <- coeficientes[P]
+                 GS <- h * coef * 0.5 * sqrt(VF)
+                 desc <- paste("Selection Gain with", P, "% pressure and Genitor Control")
+                 list(GS = GS, desc = desc, coef = coef)
+               },
+               "year_weighted" = {
+                 if (is.null(VF) || is.null(Year)) stop("VF and Year are required for the 'year_weighted' method.")
+                 coef <- coeficientes[P]
+                 GS <- (h * coef * sqrt(VF)) / Year
+                 desc <- paste("Selection Gain with", P, "% pressure weighted by Year")
+                 list(GS = GS, desc = desc, coef = coef)
+               },
+               stop("Invalid method. Choose between 'pressure', 'differential', 'genitor_control' or 'year_weighted'.")
+  )
 
-    final <- data.frame(Var,GS)
-    cat("\n-----------------------------------------------------------------\n")
-    cat("Selection Gain 4% Pressure")
-    cat("\n-----------------------------------------------------------------\n")
-    print(final)
-  }else if(P=="5"){
-    GS <- (h*2.08*(sqrt(VF)))
+  final_list <- list(
+    Variable = Var,
+    SG = GS$GS,
+    H2 = h,
+    PV = if (!is.null(VF)) VF else NULL,
+    SP = if (method %in% c("pressure", "genitor_control", "year_weighted")) P else NULL,
+    SD = if (method == "differential") DS else NULL,
+    Year = if (method == "year_weighted") Year else NULL
+  )
 
-    final <- data.frame(Var,GS)
-    cat("\n-----------------------------------------------------------------\n")
-    cat("Selection Gain 5% Pressure")
-    cat("\n-----------------------------------------------------------------\n")
-    print(final)
-  }else if(P=="10"){
-    GS <- (h*1.76*(sqrt(VF)))
+  final_list <- final_list[!sapply(final_list, is.null)]
+  final <- suppressWarnings(data.frame(final_list, stringsAsFactors = FALSE, row.names = NULL))
 
-    final <- data.frame(Var,GS)
-    cat("\n-----------------------------------------------------------------\n")
-    cat("Selection Gain 10% Pressure")
-    cat("\n-----------------------------------------------------------------\n")
-    print(final)
-  }else if(P=="20"){
-    GS <- (h*1.4*(sqrt(VF)))
-
-    final <- data.frame(Var,GS)
-    cat("\n-----------------------------------------------------------------\n")
-    cat("Selection Gain 20% Pressure")
-    cat("\n-----------------------------------------------------------------\n")
-    print(final)
-  }else if(P=="40"){
-    GS <- (h*0.97*(sqrt(VF)))
-
-    final <- data.frame(Var,GS)
-    cat("\n-----------------------------------------------------------------\n")
-    cat("Selection Gain 40% Pressure")
-    cat("\n-----------------------------------------------------------------\n")
-    print(final)
-  }else if(P=="50"){
-    GS <- (h*0.8*(sqrt(VF)))
-
-    final <- data.frame(Var,GS)
-    cat("\n-----------------------------------------------------------------\n")
-    cat("Selection Gain 50% Pressure")
-    cat("\n-----------------------------------------------------------------\n")
-    print(final)
-  }else if(P=="60"){
-    GS <- (h*0.64*(sqrt(VF)))
-
-    final <- data.frame(Var,GS)
-    cat("\n-----------------------------------------------------------------\n")
-    cat("Selection Gain 60% Pressure")
-    cat("\n-----------------------------------------------------------------\n")
-    print(final)
-  }else if(P=="70"){
-    GS <- (h*0.5*(sqrt(VF)))
-
-    final <- data.frame(Var,GS)
-    cat("\n-----------------------------------------------------------------\n")
-    cat("Selection Gain 70% Pressure")
-    cat("\n-----------------------------------------------------------------\n")
-    print(final)
-  }else if(P=="80"){
-    GS <- (h*0.35*(sqrt(VF)))
-
-    final <- data.frame(Var,GS)
-    cat("\n-----------------------------------------------------------------\n")
-    cat("Selection Gain 80% Pressure")
-    cat("\n-----------------------------------------------------------------\n")
-    print(final)
-  }else if(P=="90"){
-    GS <- (h*0.2*(sqrt(VF)))
-
-    final <- data.frame(Var,GS)
-    cat("\n-----------------------------------------------------------------\n")
-    cat("Selection Gain 90% Pressure")
-    cat("\n-----------------------------------------------------------------\n")
-    print(final)}}
-
-#######
-#'Single Selection Differential
-#'@description
-#'Response to selection weighted by the Simple Selection Differential
-#'@param Var The column with the name of the variables of interest
-#'@param h The column with the heritability values in the strict sense
-#'@param DS The column with the value of the selection differential to be applied
-#'to each variable
-#'@author Willyan Junior Adorian Bandeira
-#'@author Ivan Ricardo Carvalo
-#'@author Murilo Vieira Loro
-#'@author Leonardo Cesar Pradebon
-#'@author Jose Antonio Gonzalez da Silva
-#'@export
-
-GS2 <- function(Var, h, DS){
-
-  Var <- as.factor(Var)
-  h <- h
-  DS <- DS
-  GS <- h*DS
-  final <- data.frame(Var,GS)
-  cat("\n-----------------------------------------------------------------\n")
-  cat("Selection Gain Weighted by Selection Differential")
-  cat("\n-----------------------------------------------------------------\n")
-  print(final)
+  cat("\n", strrep("-", 40), "\n", sep = "")
+  cat(paste("Selection Gain using", method, "\n"))
+  cat(strrep("-", 40), "\n", sep = "")
+  return(final)
 }
-
-####
-#'Response to Selection by Control of Genitors
-#'@description
-#'Consider knowing only the maternal parent, without controlling the pollinator,
-#'or direct selection without parents
-#'@param Var The column with the variables of interest
-#'@param h The column with the restricted heritability values
-#'@param VF The column with the phenotypic variance values
-#'@param P The column with the progeny values
-#'@author Willyan Junior Adorian Bandeira
-#'@author Ivan Ricardo Carvalo
-#'@author Murilo Vieira Loro
-#'@author Leonardo Cesar Pradebon
-#'@author Jose Antonio Gonzalez da Silva
-#'@export
-
-GS3 <- function(Var, h, VF, P = "1"){
-
-  Var <- as.factor(Var)
-  h <- h
-  VF <- VF
-  if(P=="1"){
-    GS <- (h*2.7*0.5*(sqrt(VF)))
-
-    final <- data.frame(Var,GS)
-    cat("\n-----------------------------------------------------------------\n")
-    cat("Selection Gain 1% of Pressure and Control of Genitors")
-    cat("\n-----------------------------------------------------------------\n")
-    print(final)
-  }else if(P=="2"){
-    GS <- (h*2.44*0.5*(sqrt(VF)))
-
-    final <- data.frame(Var,GS)
-    cat("\n-----------------------------------------------------------------\n")
-    cat("Selection Gain 2% of Pressure and Control of Genitors")
-    cat("\n-----------------------------------------------------------------\n")
-    print(final)
-  }else if(P=="3"){
-    GS <- (h*2.27*0.5*(sqrt(VF)))
-
-    final <- data.frame(Var,GS)
-    cat("\n-----------------------------------------------------------------\n")
-    cat("Selection Gain 3% of Pressure and Control of Genitors")
-    cat("\n-----------------------------------------------------------------\n")
-    print(final)
-  }else if(P=="4"){
-    GS <- (h*2.16*0.5*(sqrt(VF)))
-
-    final <- data.frame(Var,GS)
-    cat("\n-----------------------------------------------------------------\n")
-    cat("Selection Gain 4% of Pressure and Control of Genitors")
-    cat("\n-----------------------------------------------------------------\n")
-    print(final)
-  }else if(P=="5"){
-    GS <- (h*2.08*0.5*(sqrt(VF)))
-
-    final <- data.frame(Var,GS)
-    cat("\n-----------------------------------------------------------------\n")
-    cat("Selection Gain 5% of Pressure and Control of Genitors")
-    cat("\n-----------------------------------------------------------------\n")
-    print(final)
-  }else if(P=="10"){
-    GS <- (h*1.76*0.5*(sqrt(VF)))
-
-    final <- data.frame(Var,GS)
-    cat("\n-----------------------------------------------------------------\n")
-    cat("Selection Gain 10% of Pressure and Control of Genitors")
-    cat("\n-----------------------------------------------------------------\n")
-    print(final)
-  }else if(P=="20"){
-    GS <- (h*1.4*0.5*(sqrt(VF)))
-
-    final <- data.frame(Var,GS)
-    cat("\n-----------------------------------------------------------------\n")
-    cat("Selection Gain 20% of Pressure and Control of Genitors")
-    cat("\n-----------------------------------------------------------------\n")
-    print(final)
-  }else if(P=="40"){
-    GS <- (h*0.97*0.5*(sqrt(VF)))
-
-    final <- data.frame(Var,GS)
-    cat("\n-----------------------------------------------------------------\n")
-    cat("Selection Gain 40% of Pressure and Control of Genitors")
-    cat("\n-----------------------------------------------------------------\n")
-    print(final)
-  }else if(P=="50"){
-    GS <- (h*0.8*0.5*(sqrt(VF)))
-
-    final <- data.frame(Var,GS)
-    cat("\n-----------------------------------------------------------------\n")
-    cat("Selection Gain 50% of Pressure and Control of Genitors")
-    cat("\n-----------------------------------------------------------------\n")
-    print(final)
-  }else if(P=="60"){
-    GS <- (h*0.64*0.5*(sqrt(VF)))
-
-    final <- data.frame(Var,GS)
-    cat("\n-----------------------------------------------------------------\n")
-    cat("Selection Gain 60% of Pressure and Control of Genitors")
-    cat("\n-----------------------------------------------------------------\n")
-    print(final)
-  }else if(P=="70"){
-    GS <- (h*0.5*0.5*(sqrt(VF)))
-
-    final <- data.frame(Var,GS)
-    cat("\n-----------------------------------------------------------------\n")
-    cat("Selection Gain 70% of Pressure and Control of Genitors")
-    cat("\n-----------------------------------------------------------------\n")
-    print(final)
-  }else if(P=="80"){
-    GS <- (h*0.35*0.5*(sqrt(VF)))
-
-    final <- data.frame(Var,GS)
-    cat("\n-----------------------------------------------------------------\n")
-    cat("Selection Gain 80% of Pressure and Control of Genitors")
-    cat("\n-----------------------------------------------------------------\n")
-    print(final)
-  }else if(P=="90"){
-    GS <- (h*0.2*0.5*(sqrt(VF)))
-
-    final <- data.frame(Var,GS)
-    cat("\n-----------------------------------------------------------------\n")
-    cat("Selection Gain 90% of Pressure and Control of Genitors")
-    cat("\n-----------------------------------------------------------------\n")
-    print(final)}}
-
-###########
-#'Response to Selection by Year
-#'@description
-#'Response to selection weighted by Pressure Weighted by Year of selection and
-#'Year
-#'@param Var The column with the variables of interest
-#'@param h The column with the restricted heritability values
-#'@param VF The column with the phenotypic variance values
-#'@param P The column with the value obtained for the progenies
-#'@param Year The column with the year of selection
-#'@author Willyan Junior Adorian Bandeira
-#'@author Ivan Ricardo Carvalo
-#'@author Murilo Vieira Loro
-#'@author Leonardo Cesar Pradebon
-#'@author Jose Antonio Gonzalez da Silva
-#'@export
-
-GS4 <- function(Var, h, VF, P = "1", Year){
-
-  Var <- as.factor(Var)
-  h <- h
-  VF <- VF
-  Year <- Year
-  if(P=="1"){
-    GS <- (h*2.7*(sqrt(VF)))/Year
-
-    final <- data.frame(Var,GS)
-    cat("\n-----------------------------------------------------------------\n")
-    cat("Selection Gain 1% Pressure Weighted by Year")
-    cat("\n-----------------------------------------------------------------\n")
-    print(final)
-  }else if(P=="2"){
-    GS <- (h*2.44*(sqrt(VF)))/Year
-
-    final <- data.frame(Var,GS)
-    cat("\n-----------------------------------------------------------------\n")
-    cat("Selection Gain 2% Pressure Weighted by Year")
-    cat("\n-----------------------------------------------------------------\n")
-    print(final)
-  }else if(P=="3"){
-    GS <- (h*2.27*(sqrt(VF)))/Year
-
-    final <- data.frame(Var,GS)
-    cat("\n-----------------------------------------------------------------\n")
-    cat("Selection Gain 3% Pressure Weighted by Year")
-    cat("\n-----------------------------------------------------------------\n")
-    print(final)
-  }else if(P=="4"){
-    GS <- (h*2.16*(sqrt(VF)))/Year
-
-    final <- data.frame(Var,GS)
-    cat("\n-----------------------------------------------------------------\n")
-    cat("Selection Gain 4% Pressure Weighted by Year")
-    cat("\n-----------------------------------------------------------------\n")
-    print(final)
-  }else if(P=="5"){
-    GS <- (h*2.08*(sqrt(VF)))/Year
-
-    final <- data.frame(Var,GS)
-    cat("\n-----------------------------------------------------------------\n")
-    cat("Selection Gain 5% Pressure Weighted by Year")
-    cat("\n-----------------------------------------------------------------\n")
-    print(final)
-  }else if(P=="10"){
-    GS <- (h*1.76*(sqrt(VF)))/Year
-
-    final <- data.frame(Var,GS)
-    cat("\n-----------------------------------------------------------------\n")
-    cat("Selection Gain 10% Pressure Weighted by Year")
-    cat("\n-----------------------------------------------------------------\n")
-    print(final)
-  }else if(P=="20"){
-    GS <- (h*1.4*(sqrt(VF)))/Year
-
-    final <- data.frame(Var,GS)
-    cat("\n-----------------------------------------------------------------\n")
-    cat("Selection Gain 20% Pressure Weighted by Year")
-    cat("\n-----------------------------------------------------------------\n")
-    print(final)
-  }else if(P=="40"){
-    GS <- (h*0.97*(sqrt(VF)))/Year
-
-    final <- data.frame(Var,GS)
-    cat("\n-----------------------------------------------------------------\n")
-    cat("Selection Gain 40% Pressure Weighted by Year")
-    cat("\n-----------------------------------------------------------------\n")
-    print(final)
-  }else if(P=="50"){
-    GS <- (h*0.8*(sqrt(VF)))/Year
-
-    final <- data.frame(Var,GS)
-    cat("\n-----------------------------------------------------------------\n")
-    cat("Selection Gain 50% Pressure Weighted by Year")
-    cat("\n-----------------------------------------------------------------\n")
-    print(final)
-  }else if(P=="60"){
-    GS <- (h*0.64*(sqrt(VF)))/Year
-
-    final <- data.frame(Var,GS)
-    cat("\n-----------------------------------------------------------------\n")
-    cat("Selection Gain 60% Pressure Weighted by Year")
-    cat("\n-----------------------------------------------------------------\n")
-    print(final)
-  }else if(P=="70"){
-    GS <- (h*0.5*(sqrt(VF)))/Year
-
-    final <- data.frame(Var,GS)
-    cat("\n-----------------------------------------------------------------\n")
-    cat("Selection Gain 70% Pressure Weighted by Year")
-    cat("\n-----------------------------------------------------------------\n")
-    print(final)
-  }else if(P=="80"){
-    GS <- (h*0.35*(sqrt(VF)))/Year
-
-    final <- data.frame(Var,GS)
-    cat("\n-----------------------------------------------------------------\n")
-    cat("Selection Gain 80% Pressure Weighted by Year")
-    cat("\n-----------------------------------------------------------------\n")
-    print(final)
-  }else if(P=="90"){
-    GS <- (h*0.2*(sqrt(VF)))/Year
-
-    final <- data.frame(Var,GS)
-    cat("\n-----------------------------------------------------------------\n")
-    cat("Selection Gain 90% Pressure Weighted by Year")
-    cat("\n-----------------------------------------------------------------\n")
-    print(final)}}
 
 ####
 #'Selection by Selection Differential (Mean and Deviations)

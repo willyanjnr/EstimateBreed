@@ -43,10 +43,6 @@
 #'@export
 
 risk <- function(DAY,MONTH,AAT,RH,disease="rust",plot=F){
-  #DIA <- DIA
-  #MES <- as.factor(MES)
-  #TEMP <- TEMP
-  #UR <- UR
   dados <- data.frame(DAY,MONTH,AAT,RH)
   if(disease=="rust"){
   alfa <- log(2)/log(2.30508474576)

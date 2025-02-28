@@ -2,11 +2,8 @@
 
 export(ALELIC)
 export(Coeficiente_endogamia)
-export(GS)
-export(GS2)
-export(GS3)
-export(GS4)
 export(Jinks_Pooni)
+export(SG)
 export(atsum)
 export(cvar)
 export(default_seg)

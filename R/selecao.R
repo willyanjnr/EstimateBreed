@@ -130,7 +130,6 @@ transgressivos <- function(Gen, Var, Control,ylab="Selection",xlab="Genotypes"){
   parametros <- list(Media=Media,DSg=DSg,Desvio=Desvio,DS1S=DS1S,DS2S=DS2S,DS3S=DS3S)
   dados <- data.frame(Gen,Var, Testemunha)
 
-
   grafico <- ggplot(dados, aes(x = Gen, y = Var))+
     geom_text(
       label=rownames(dados),

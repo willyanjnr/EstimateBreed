@@ -209,10 +209,10 @@ utils::globalVariables(
   c(
     ".estimatebreed_env", "Ciclo", "MONTH", "Control", "valores", "dados",
     "sigmaE", "sigmaG", "sigmaP", "ECV", "GCV", "PCV", "H2", "GA", "GAM",
-    "u", "primeiro_dia_germinacao", "DPclim", "AF", "ALA", "AS", "PotLAI", "RED",
+    "u", "primeiro_dia_germinacao", "DPclim", "AF", "ALA", "AS", "PotLAI",
     "RealLAI", "b2", "HW", "TTd", "ATT", "Class", "modelo", "model",
     "model_summary", "rsq", "STA", "eq_text", "pred", "RH", "Temp", "Td",
     "DELTAT", "WindS", "Prec", "RH2M", "T2M", "PRECTOTCORR", ":=", "<<-",
-    "AAT","DAS"
+    "AAT","DAS", "RED",
   )
 )

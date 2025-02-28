@@ -12,7 +12,7 @@
 #'@author Jose Antonio Gonzalez da Silva
 #'@export
 
-GS<-function(Var, h, VF, P = "1"){
+GS <- function(Var, h, VF, P = "1"){
 
   Var <- as.factor(Var)
   h <- h
@@ -137,7 +137,7 @@ GS<-function(Var, h, VF, P = "1"){
 #'@author Jose Antonio Gonzalez da Silva
 #'@export
 
-GS2<-function(Var, h, DS){
+GS2 <- function(Var, h, DS){
 
   Var <- as.factor(Var)
   h <- h
@@ -166,7 +166,7 @@ GS2<-function(Var, h, DS){
 #'@author Jose Antonio Gonzalez da Silva
 #'@export
 
-GS3<-function(Var, h, VF, P = "1"){
+GS3 <- function(Var, h, VF, P = "1"){
 
   Var <- as.factor(Var)
   h <- h
@@ -293,7 +293,7 @@ GS3<-function(Var, h, VF, P = "1"){
 #'@author Jose Antonio Gonzalez da Silva
 #'@export
 
-GS4<-function(Var, h, VF, P = "1", Year){
+GS4 <- function(Var, h, VF, P = "1", Year){
 
   Var <- as.factor(Var)
   h <- h
@@ -420,7 +420,7 @@ GS4<-function(Var, h, VF, P = "1", Year){
 #'@author Jose Antonio Gonzalez da Silva
 #'@export
 
-transgressivos<-function(Gen, Var, Control,ylab="Selection",xlab="Genotypes"){
+transgressivos <- function(Gen, Var, Control,ylab="Selection",xlab="Genotypes"){
 
   Gen <- as.factor(Gen)
   Var <- Var
@@ -758,7 +758,7 @@ reg_GP <- function(ind, Genitor, Progenie) {
 #'@author Jose Antonio Gonzalez da Silva
 #'@export
 
-ALELICA<-function(type=NULL,ge=NULL){
+ALELIC <- function(type=NULL,ge=NULL){
 
   if(!is.null(type)){
   if(type=="ad"){
@@ -1021,7 +1021,7 @@ tamef <- function(GEN,SI,NE){
 #'@export
 
 #Finalizar
-Jinks_Pooni<-function(Pop, Var, VG, Test){
+Jinks_Pooni <- function(Pop, Var, VG, Test){
 
   Population <- Pop
   Var <- Var

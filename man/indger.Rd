@@ -16,6 +16,9 @@ each period}
 
 \item{NST}{Default column name with number of seeds tested}
 }
+\value{
+Returns the germination index by subsequent count.
+}
 \description{
 Estimation of germination index by subsequent seedling count
 germinated in a given period (Wang et al., 2017)

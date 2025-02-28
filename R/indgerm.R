@@ -174,6 +174,7 @@ gvri <- function(GEN,C,L,E,stat="everything",plot=F,ylab="GVRI",xlab="Genotype")
 #' @param TSG Name of the column with the total number of seeds germinated in
 #'  each period
 #' @param NST Default column name with number of seeds tested
+#' @return Returns the germination index by subsequent count.
 #' @author Willyan Junior Adorian Bandeira
 #' @author Ivan Ricardo Carvalo
 #' @author Murilo Vieira Loro

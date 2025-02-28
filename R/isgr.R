@@ -4,7 +4,7 @@
 #'and calculates the standard deviation of these parameters for each environment.
 #'@param ENV Identification of each selection environment (to differentiate if
 #'there is more than one cultivation cycle).
-#'@param TMED Average air temperature (in degree Celsius) during the cycle in
+#'@param AAT Average air temperature (in degree Celsius) during the cycle in
 #'each environment.
 #'@param PREC Rainfall (in mm) during the cultivation cycle in each environment
 #'@return A dataframe containing the identifier of the selection environment and
@@ -25,15 +25,15 @@
 #'DPclim <- with(desvamb,desv_clim(ENV,TMED,PREC))
 #'}
 
-desv_clim <- function(ENV,TMED,PREC) {
+desv_clim <- function(ENV,AAT,PREC) {
 
-  desvio <- data.frame(ENV,TMED,PREC)
+  desvio <- data.frame(ENV,AAT,PREC)
 
   resultado <- desvio %>%
     group_by(.data$ENV) %>%
     summarise(
-      STMED = sd(.data$TMED, na.rm = TRUE),
-      TMEDR = mean(.data$TMED, na.rm = TRUE),
+      STMED = sd(.data$AAT, na.rm = TRUE),
+      TMEDR = mean(.data$AAT, na.rm = TRUE),
       SPREC = sd(.data$PREC, na.rm = TRUE),
       PRECIR = sum(.data$PREC, na.rm = TRUE)
     )

@@ -4,13 +4,13 @@
 \alias{desv_clim}
 \title{Auxiliary function for calculating ISGR}
 \usage{
-desv_clim(ENV, TMED, PREC)
+desv_clim(ENV, AAT, PREC)
 }
 \arguments{
 \item{ENV}{Identification of each selection environment (to differentiate if
 there is more than one cultivation cycle).}
 
-\item{TMED}{Average air temperature (in degree Celsius) during the cycle in
+\item{AAT}{Average air temperature (in degree Celsius) during the cycle in
 each environment.}
 
 \item{PREC}{Rainfall (in mm) during the cultivation cycle in each environment}

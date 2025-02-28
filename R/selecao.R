@@ -34,38 +34,47 @@ SG <- function(Var, h, VF = NULL, P = "1", DS = NULL, Year = NULL, method = "pre
                     "70" = 0.5, "80" = 0.35, "90" = 0.2)
 
   if (!is.null(P) && !(P %in% names(coeficientes))) {
-    stop("Valor de P inválido. Escolha entre: ", paste(names(coeficientes), collapse = ", "))
+    stop("Invalid P value. Choose between: ", paste(names(coeficientes),
+                                                    collapse = ", "))
   }
 
   GS <- switch(method,
                "pressure" = {
-                 if (is.null(VF)) stop("VF is required for the 'pressure' method.")
+                 if (is.null(VF)) stop("VF is required for the 'pressure'
+                                       method.")
                  coef <- coeficientes[P]
                  GS <- h * coef * sqrt(VF)
                  desc <- paste("Selection Gain with", P, "% pressure")
                  list(GS = GS, desc = desc, coef = coef)
                },
                "differential" = {
-                 if (is.null(DS)) stop("DS is required for the 'differential' method.")
+                 if (is.null(DS)) stop("DS is required for the 'differential'
+                                       method.")
                  GS <- h * DS
                  desc <- "Selection Gain using Selection Differential"
                  list(GS = GS, desc = desc, coef = NA)
                },
                "genitor_control" = {
-                 if (is.null(VF)) stop("VF is required for the 'genitor_control' method.")
+                 if (is.null(VF)) stop("VF is required for the 'genitor_control'
+                                       method.")
                  coef <- coeficientes[P]
                  GS <- h * coef * 0.5 * sqrt(VF)
-                 desc <- paste("Selection Gain with", P, "% pressure and Genitor Control")
+                 desc <- paste("Selection Gain with", P, "% pressure and Genitor
+                               Control")
                  list(GS = GS, desc = desc, coef = coef)
                },
                "year_weighted" = {
-                 if (is.null(VF) || is.null(Year)) stop("VF and Year are required for the 'year_weighted' method.")
+                 if (is.null(VF) || is.null(Year)) stop("VF and Year are
+                                                        required for the
+                                                        'year_weighted' method.")
                  coef <- coeficientes[P]
                  GS <- (h * coef * sqrt(VF)) / Year
-                 desc <- paste("Selection Gain with", P, "% pressure weighted by Year")
+                 desc <- paste("Selection Gain with", P, "% pressure weighted
+                               by Year")
                  list(GS = GS, desc = desc, coef = coef)
                },
-               stop("Invalid method. Choose between 'pressure', 'differential', 'genitor_control' or 'year_weighted'.")
+               stop("Invalid method. Choose between 'pressure', 'differential',
+                    'genitor_control' or 'year_weighted'.")
   )
 
   final_list <- list(
@@ -73,13 +82,15 @@ SG <- function(Var, h, VF = NULL, P = "1", DS = NULL, Year = NULL, method = "pre
     SG = GS$GS,
     H2 = h,
     PV = if (!is.null(VF)) VF else NULL,
-    SP = if (method %in% c("pressure", "genitor_control", "year_weighted")) P else NULL,
+    SP = if (method %in% c("pressure", "genitor_control", "year_weighted"))
+      P else NULL,
     SD = if (method == "differential") DS else NULL,
     Year = if (method == "year_weighted") Year else NULL
   )
 
   final_list <- final_list[!sapply(final_list, is.null)]
-  final <- suppressWarnings(data.frame(final_list, stringsAsFactors = FALSE, row.names = NULL))
+  final <- suppressWarnings(data.frame(final_list, stringsAsFactors = FALSE,
+                                       row.names = NULL))
 
   cat("\n", strrep("-", 40), "\n", sep = "")
   cat(paste("Selection Gain using", method, "\n"))
@@ -127,19 +138,24 @@ transgressivos <- function(Gen, Var, Control,ylab="Selection",xlab="Genotypes"){
       size = 10,
       check_overlap = F)+ylab(ylab)+xlab(xlab)+theme_classic()+
 
-    geom_segment(aes(x = 0, y =Media, xend =Gen, yend = Media), linetype = 1, color = "darkred")+
+    geom_segment(aes(x = 0, y =Media, xend =Gen, yend = Media), linetype = 1,
+                 color = "darkred")+
     geom_label(aes(x=0.5, y=Media, label="Mean"))+
 
-    geom_segment(aes(x = 0, y =DSg, xend =Gen, yend =DSg), linetype = 2, color = "darkgray")+
+    geom_segment(aes(x = 0, y =DSg, xend =Gen, yend =DSg), linetype = 2,
+                 color = "darkgray")+
     geom_label(aes(x=0.5, y=DSg, label="DS T"))+
 
-    geom_segment(aes(x = 0, y =DS1S, xend =Gen, yend =DS1S), linetype = 3, color = "blue")+
+    geom_segment(aes(x = 0, y =DS1S, xend =Gen, yend =DS1S), linetype = 3,
+                 color = "blue")+
     geom_label(aes(x=0.5, y=DS1S, label="DS1S"))+
 
-    geom_segment(aes(x = 0, y =DS2S, xend =Gen, yend =DS2S), linetype = 4, color = "darkgreen")+
+    geom_segment(aes(x = 0, y =DS2S, xend =Gen, yend =DS2S), linetype = 4,
+                 color = "darkgreen")+
     geom_label(aes(x=0.5, y=DS2S, label="DS2S"))+
 
-    geom_segment(aes(x = 0, y =DS3S, xend =Gen, yend =DS3S), linetype = 5, color = "darkorange")+
+    geom_segment(aes(x = 0, y =DS3S, xend =Gen, yend =DS3S), linetype = 5,
+                 color = "darkorange")+
     geom_label(aes(x=0.5, y=DS3S, label="DS3S"))+
     ggtitle("Selection of Transgressive Genotypes - Selection Differential (SD)")
 
@@ -448,7 +464,8 @@ ALELIC <- function(type=NULL,ge=NULL){
     genotipo <- c("AA", "Aa", "aa")
     efeito <- c(2, 1, 0)
     altura <- c(120, 70, 20)
-    dados <- data.frame(genotipo = factor(rep(genotipo, each = 10)), altura = rep(altura, each = 10))
+    dados <- data.frame(genotipo = factor(rep(genotipo, each = 10)),
+                        altura = rep(altura, each = 10))
     ggplot(dados, aes(x = genotipo, y = altura, group = 1)) +
       geom_line(aes(color = genotipo), size = 1.2) +
       geom_point(aes(color = genotipo), size = 3) +
@@ -461,7 +478,8 @@ ALELIC <- function(type=NULL,ge=NULL){
     genotipo <- c("AA", "Aa", "aa")
     efeito <- c(2, 1, 0)
     altura <- c(120, 120, 20)
-    dados <- data.frame(genotipo = factor(rep(genotipo, each = 10)), altura = rep(altura, each = 10))
+    dados <- data.frame(genotipo = factor(rep(genotipo, each = 10)),
+                        altura = rep(altura, each = 10))
     ggplot(dados, aes(x = genotipo, y = altura, group = 1)) +
       geom_line(aes(color = genotipo), size = 1.2) +
       geom_point(aes(color = genotipo), size = 3) +
@@ -474,7 +492,8 @@ ALELIC <- function(type=NULL,ge=NULL){
     genotipo <- c("AA", "Aa", "aa")
     efeito <- c(2, 1, 0)
     altura <- c(120, 90, 20)
-    dados <- data.frame(genotipo = factor(rep(genotipo, each = 10)), altura = rep(altura, each = 10))
+    dados <- data.frame(genotipo = factor(rep(genotipo, each = 10)),
+                        altura = rep(altura, each = 10))
     ggplot(dados, aes(x = genotipo, y = altura, group = 1)) +
       geom_line(aes(color = genotipo), size = 1.2) +
       geom_point(aes(color = genotipo), size = 3) +
@@ -487,7 +506,8 @@ ALELIC <- function(type=NULL,ge=NULL){
     genotipo <- c("AA", "Aa", "aa")
     efeito <- c(2, 1, 0)
     altura <- c(120, 160, 20)
-    dados <- data.frame(genotipo = factor(rep(genotipo, each = 10)), altura = rep(altura, each = 10))
+    dados <- data.frame(genotipo = factor(rep(genotipo, each = 10)),
+                        altura = rep(altura, each = 10))
     ggplot(dados, aes(x = genotipo, y = altura, group = 1)) +
       geom_line(aes(color = genotipo), size = 1.2) +
       geom_point(aes(color = genotipo), size = 3) +
@@ -611,7 +631,8 @@ gga <- function(GEN, VAR, h2, P) {
 #'https://doi.org/10.1155/2024/9946332
 #'@export
 
-genpar <- function(POP, GEN, REP = NULL, vars, K = 0.05, type = "balanced", check = FALSE) {
+genpar <- function(POP, GEN, REP = NULL, vars, K = 0.05, type = "balanced",
+                   check = FALSE) {
 
   if (is.null(REP)) {
     stop("Please infomr the replications", call. = FALSE)
@@ -624,7 +645,8 @@ genpar <- function(POP, GEN, REP = NULL, vars, K = 0.05, type = "balanced", chec
 
   for (var_name in vars) {
     if (!(var_name %in% colnames(dados))) {
-      stop(paste("The variable", var_name, "does not exist in the dataset."), call. = FALSE)
+      stop(paste("The variable", var_name, "does not exist in the dataset."),
+           call. = FALSE)
     }
 
     varc <- varc %>% mutate(!!var_name := dados[[var_name]])
@@ -703,9 +725,8 @@ tamef <- function(GEN,SI,NE){
 #'Ciencia Rural, 54, e20230287.
 #'@export
 
-#Finalizar
 Jinks_Pooni <- function(Pop, Var, VG, Test){
-
+#Finalizar
   Population <- Pop
   Var <- Var
   VG <- VG

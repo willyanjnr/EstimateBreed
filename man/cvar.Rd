@@ -3,7 +3,7 @@
 \name{cvar}
 \alias{cvar}
 \title{Estimation of variance components by restricting the variability of the
-witnesses.}
+controls.}
 \usage{
 cvar(GEN, REP, Xi, approach = NULL, zstat = NULL)
 }
@@ -23,7 +23,7 @@ augmented blocks with intercalary parents, 'apIII' for the method with linear
 }
 \description{
 Estimation of variance components and genetic parameters from the restriction
-of witness values
+of controls values
 }
 \references{
 Carvalho, I. R., Silva, J. A. G. da, Moura, N. B., Ferreira, L. L.,

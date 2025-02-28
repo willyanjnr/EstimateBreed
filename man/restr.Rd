@@ -2,7 +2,7 @@
 % Please edit documentation in R/restr.R
 \name{restr}
 \alias{restr}
-\title{Restriction of witness variability}
+\title{Restriction of control variability}
 \usage{
 restr(TEST, REP, Xi, scenario = NULL, zstat = NULL)
 }
@@ -20,7 +20,7 @@ or 'restr' to apply the restriction.}
 \item{zstat}{Logical argument. Applies Z-notation normalization if 'TRUE'.}
 }
 \description{
-Method for restricting the variability of witnesses proposed by Carvalho et al.
+Method for restricting the variability of control proposed by Carvalho et al.
 (2023). It uses the restriction of the mean plus or minus one standard deviation.
 standard deviation, which restricts variation by removing asymmetric values.
 }
@@ -35,10 +35,10 @@ Xi <- rnorm(15, mean=10, sd=2)
 data <- data.frame(TEST,REP,Xi)
 
 #Apply the witness variability constraint
-with(data, restr(TEST,REP,Xi,scenario = "restr",zstat = FALSE))
+Control <- with(data, restr(TEST,REP,Xi,scenario = "restr",zstat = FALSE))
 
 #Apply witness variability restriction with normalization (Z statistic)
-with(data, restr(TEST,REP,Xi,scenario = "restr",zstat = TRUE))
+Control <- with(data, restr(TEST,REP,Xi,scenario = "restr",zstat = TRUE))
 }
 }
 \references{

@@ -1,6 +1,6 @@
-#'Restriction of witness variability
+#'Restriction of control variability
 #'@description
-#'Method for restricting the variability of witnesses proposed by Carvalho et al.
+#'Method for restricting the variability of control proposed by Carvalho et al.
 #'(2023). It uses the restriction of the mean plus or minus one standard deviation.
 #'standard deviation, which restricts variation by removing asymmetric values.
 #'@param TEST The column with the name of the witness
@@ -33,10 +33,10 @@
 #'data <- data.frame(TEST,REP,Xi)
 #'
 #'#Apply the witness variability constraint
-#'with(data, restr(TEST,REP,Xi,scenario = "restr",zstat = FALSE))
+#'Control <- with(data, restr(TEST,REP,Xi,scenario = "restr",zstat = FALSE))
 #'
 #'#Apply witness variability restriction with normalization (Z statistic)
-#'with(data, restr(TEST,REP,Xi,scenario = "restr",zstat = TRUE))
+#'Control <- with(data, restr(TEST,REP,Xi,scenario = "restr",zstat = TRUE))
 #'}
 
 restr <- function(TEST, REP, Xi, scenario = NULL, zstat = NULL) {
@@ -68,10 +68,12 @@ restr <- function(TEST, REP, Xi, scenario = NULL, zstat = NULL) {
     if (scenario == "restr") {
       colnames(ream) <- c("GEN", "REP", "Xi")
       assign("Control", ream, envir = .estimatebreed_env)
+      return(ream)  # Adiciona o return com o objeto ream
     } else if (scenario == "original") {
       datatest <- data.frame(TEST, REP, Xi)
       colnames(datatest) <- c("GEN", "REP", "Xi")
       assign("Control", datatest, envir = .estimatebreed_env)
+      return(datatest)  # Retorna o data frame datatest
     }
   }
 
@@ -81,6 +83,7 @@ restr <- function(TEST, REP, Xi, scenario = NULL, zstat = NULL) {
         mutate(znorm = (Xi - n_media) / n_desvio)
       colnames(reamost) <- c("GEN", "REP", "Xi", "znorm")
       assign("Control", reamost, envir = .estimatebreed_env)
+      return(reamost)
     } else if (scenario == "original") {
       orig <- data.frame(TEST, REP, Xi)
       media <- mean(orig$Xi)
@@ -89,15 +92,16 @@ restr <- function(TEST, REP, Xi, scenario = NULL, zstat = NULL) {
         mutate(znorm = (Xi - media) / desvio)
       colnames(reamost_orig) <- c("GEN", "REP", "Xi", "znorm")
       assign("Control", reamost_orig, envir = .estimatebreed_env)
+      return(reamost_orig)
     }
   }
 }
 
 #'Estimation of variance components by restricting the variability of the
-#'witnesses.
+#'controls.
 #'@description
 #'Estimation of variance components and genetic parameters from the restriction
-#'of witness values
+#'of controls values
 #'@param GEN The column with the name of the genotypes (without controls).
 #'@param REP The column with the repetitions (if any).
 #'@param Xi The column with the observed value for the variable in a given genotype.
@@ -141,7 +145,7 @@ cvar <- function(GEN,REP,Xi,approach=NULL,zstat=NULL){
     }
   } else {
     stop("You have to carry out the operations of the restr function for the
-         witnesses")
+         controls")
   }
 
   #apIII Modelo Linear Misto

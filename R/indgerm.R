@@ -164,3 +164,156 @@ gvri <- function(GEN,C,L,E,stat="everything",plot=F,ylab="GVRI",xlab="Genotype")
     }
   }
 }
+
+#' Germination index by subsequent counting
+#' @description
+#' Estimation of germination index by subsequent seedling count
+#' germinated in a given period (Wang et al., 2017)
+#' @param TESTE Identification number of the test performed
+#' @param DIA Numerical values for the days tested
+#' @param TSG Name of the column with the total number of seeds germinated in
+#'  each period
+#' @param NST Default column name with number of seeds tested
+#' @author Willyan Junior Adorian Bandeira
+#' @author Ivan Ricardo Carvalo
+#' @author Murilo Vieira Loro
+#' @author Leonardo Cesar Pradebon
+#' @author Jose Antonio Gonzalez da Silva
+#' @export
+#' @references
+#' Wang, Pan, Li, Dong, Wang, Li-jun and Adhikari, Benu. "Effect of High
+#' Temperature Intermittent Drying on Rice Seed Viability and Vigor" International
+#' Journal of Food Engineering, vol. 13, no. 10, 2017, pp. 20160433.
+#' https://doi.org/10.1515/ijfe-2016-043
+
+indger <- function(TESTE,DIA,TSG,NST){
+  values <- data.frame(TESTE,DIA,TSG,NST)
+
+  #Posso ter mais de um teste, preciso adicionar uma forma de identificar isso
+  TSD4 <- values$TSG[values$DIA==4]
+
+  #Energia da Germ
+  GE <- (TSD4/values$NST[1])*100
+  #Potencial de Germ
+  GP <- (max(values$TSG)/values$NST[1])*100
+  #Tempo para obter 50 percent da germ
+  #Tempo medio para germ
+  D1 <- values$DIA[which(values$TSG != 0)[1]]
+  vgerm <- values[D1:nrow(values),]
+  vgerm$acum <- cumsum(vgerm$TSG)
+  MGT <- vgerm$acum/sum(values$TSG)
+  #Indice de germ
+  #Sintaxe abaixo obtida no GPT, ajustar
+  dados_simulados$indice_germinacao <- ifelse(
+    dados_simulados$dia >= dados_simulados$dia[primeiro_dia_germinacao],
+    dados_simulados$total_sementes / dados_simulados$sementes_avaliadas * 100,
+    NA
+  )
+  final <- data.frame(GE,GP,MGT)
+
+  cat("\n--------------------\n")
+  cat("Germination Index")
+  cat("\n--------------------\n")
+  print(final)
+}
+
+#'AIC and black oat seed multitrait
+#'@description
+#'Multitrait selection index for variables of interest
+#'@param fc First germination count.
+#'@param germ Germination percentage.
+#'@param sdm Shoot dry mass.
+#'@param sl Shoot lenght.
+#'@param radl Radicle lenght.
+#'@param index Argument to choose the desired index.
+#'@author Willyan Junior Adorian Bandeira
+#'@author Ivan Ricardo Carvalo
+#'@author Murilo Vieira Loro
+#'@author Leonardo Cesar Pradebon
+#'@author Jose Antonio Gonzalez da Silva
+#'@references
+#'Moura, N. B., Carvalho, I. R., Silva, J. A. G., Loro, M. V., Barbosa, M. H.,
+#'Lautenchleger, F., Marchioro, V. S., & Souza, V. Q. (2021). Akaike criteria
+#'and selection of physiological multi-character indexes for the production of
+#'black oat seeds. Current Plant Studies, 11, 1-8.
+#'https://doi.org/10.26814/cps2021003
+#'@export
+
+tindex <- function(fc, germ, sdm, sl, radl, index="PI") {
+  #Funcao nao testada
+
+  variaveis <- list(fc = fc, germ = germ, sdm = sdm, sl = sl, radl = radl)
+  medias <- sapply(variaveis, mean)
+  desvios <- sapply(variaveis, sd)
+
+  #Fenotipicas
+  indices <- lapply(names(variaveis), function(nome) {
+    valores <- variaveis[[nome]]
+    media <- medias[nome]
+    desvio <- desvios[nome]
+    PI <- valores / desvio
+    ZI <- (valores - media) / desvio
+    pesos <- c(0.5, 0.2, 0.125, 0.125, 0.05)
+    WI <- sum(medias * pesos)
+    data.frame(Variavel = nome, Valor_Original = valores, PI = PI, ZI = ZI, WI = WI)
+  })
+
+  #Valor Genetico
+  modelo_fc <- lmer(fc ~ 1 + (1|repeticao), data = dados, REML = TRUE)
+  modelo_germ <- lmer(germ ~ 1 + (1|repeticao), data = dados, REML = TRUE)
+  modelo_sdm <- lmer(sdm ~ 1 + (1|repeticao), data = dados, REML = TRUE)
+  modelo_sl <- lmer(sl ~ 1 + (1|repeticao), data = dados, REML = TRUE)
+  modelo_radl <- lmer(radl ~ 1 + (1|repeticao), data = dados, REML = TRUE)
+  #Multiplicative Index
+  MI <- fixef(modelo_fc)*fixef(modelo_sl)*fixef(modelo_sdm)*
+    fixef(modelo_germ)*fixef(modelo_radl)
+  #Mulamba Mock
+  MMI <- (fixef(modelo_fc)*0.5)+(fixef(modelo_sl)*0.2)+(fixef(modelo_sdm)*0.125)
+  +(fixef(modelo_germ)*0.125)+(fixef(modelo_radl)*0.05)
+  #Resultados finais
+  resultado_final <- do.call(rbind, indices)
+  return(resultado_final)
+}
+
+#'Multivariate seed vigor index
+#'@description
+#'Determining the vigor of seeds obtained from mutation induction processes
+#'@param mut Mutation method
+#'@param MSG The column with the average number of germinated seeds
+#'@param MST The column with the average total seeds
+#'@param GT Number of seedlings germinated per day during 't' time
+#'@param DT Number of evaluation days
+#'@param SL Shoot Length
+#'@author Willyan Junior Adorian Bandeira
+#'@author Ivan Ricardo Carvalo
+#'@author Murilo Vieira Loro
+#'@author Leonardo Cesar Pradebon
+#'@author Jose Antonio Gonzalez da Silva
+#'@references
+#'Zou, M., Tong, S., Zou, T. et al. A new method for mutation inducing in rice
+#'by using DC electrophoresis bath and its mutagenic effects. Sci Rep 13, 6707
+#'(2023). https://doi.org/10.1038/s41598-023-33742-7
+#'@export
+
+mut_index <- function(mut=NULL,MSG,MST,GT,DT,SL) {
+
+  mut <- mut
+  MSG <- MSG
+  MST <- MST
+  GT <- GT
+  DT <- DT
+  PER <- PER
+  SL <- SL
+
+  #Calculo da Germ Relativa (GR)
+  GR <- (MSG/MST)*100
+
+  #Calculo do Indice de Germ (GI)
+  GI <- GT/DT
+
+  #Calculo do Indice de Vitalidade (VI)
+  VI <- SL*GI
+
+  # Retornar os resultados
+  return(list(GR = GR, GI = GI, VI = VI))
+}

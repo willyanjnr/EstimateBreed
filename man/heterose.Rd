@@ -21,6 +21,11 @@ heterose(GEN, GM, GP, PR, REP, param = "all")
 To calculate heterosis only, use 'het'. To calculate only heterobeltiosis,
 use 'hetb'.}
 }
+\value{
+Returns heterosis values based on the performance of the tested
+parents and progenies. The standard error (SE) is also reported for each
+ parameter.
+}
 \description{
 Calculation of heterosis and heterobeltiosis parameters of hybrids
 }

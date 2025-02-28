@@ -21,8 +21,6 @@ maximum).}
 \item{ylab}{The name of the Y axis.}
 
 \item{xlab}{The name of the X axis.}
-
-\item{DAS}{The column with the days after sowing (cycle).}
 }
 \value{
 Returns the parameters of lower basal and optimum temperature, upper

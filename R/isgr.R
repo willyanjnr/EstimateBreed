@@ -4,7 +4,8 @@
 #'and calculates the standard deviation of these parameters for each environment.
 #'@param ENV Identification of each selection environment (to differentiate if
 #'there is more than one cultivation cycle).
-#'@param TMED Average air temperature (in degree Celsius) during the cycle in each environment.
+#'@param TMED Average air temperature (in degree Celsius) during the cycle in
+#'each environment.
 #'@param PREC Rainfall (in mm) during the cultivation cycle in each environment
 #'@return A dataframe containing the identifier of the selection environment and
 #'the standard deviations for temperature and precipitation.

@@ -9,6 +9,9 @@
 #'@param param Value to determine the parameter to be calculated. Default is 'all'.
 #'To calculate heterosis only, use 'het'. To calculate only heterobeltiosis,
 #'use 'hetb'.
+#'@return Returns heterosis values based on the performance of the tested
+#' parents and progenies. The standard error (SE) is also reported for each
+#'  parameter.
 #'@author Willyan Junior Adorian Bandeira
 #'@author Ivan Ricardo Carvalo
 #'@author Murilo Vieira Loro

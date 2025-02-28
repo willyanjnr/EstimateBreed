@@ -4,10 +4,24 @@
 #'Variables meteorological variables (Engers et al., 2024).
 #'@param DAY The column for the day of the month.
 #'@param MONTH The column for the month of the year (numeric value).
-#'@param TEMP The average air temperature column (in degree Celsius).
+#'@param AAT The average air temperature column (in degree Celsius).
 #'@param RH The relative humidity column (in \%).
 #'@param disease Define the soybean disease (Standard = 'rust').
 #'@param plot Plot a graph of the accumulation (Default is F (FALSE)).
+#'@return Returns the parameters of the incidence probability of the selected
+#'disease in the soybean crop, being: \cr
+#' \cr
+#' * RHrisk\cr
+#'   Risk caused by relative humidity.\cr
+#' \cr
+#' * TEMPrisk\cr
+#'   Risk caused by air temperature.\cr
+#' \cr
+#' * TOTALrisk\cr
+#'   Product of the multiplication between RHrisk and TEMPrisk.\cr
+#' \cr
+#' * RELrisk\cr
+#'   Relative risk obtained from the highest value of TOTALrisk.
 #'@references
 #'de Oliveira Engers, L.B., Radons, S.Z., Henck, A.U. et al.
 #'Evaluation of a forecasting system to facilitate decision-making for the
@@ -24,16 +38,16 @@
 #'
 #'# Rust Risk Prediction
 #'data("clima")
-#'with(clima, risco(DY, MO, TMED, RH, disease = "rust"))
+#'with(clima, risk(DY, MO, TMED, RH, disease = "rust"))
 #'}
 #'@export
 
-risco <- function(DAY,MONTH,TEMP,RH,disease="rust",plot=F){
+risk <- function(DAY,MONTH,AAT,RH,disease="rust",plot=F){
   #DIA <- DIA
   #MES <- as.factor(MES)
   #TEMP <- TEMP
   #UR <- UR
-  dados <- data.frame(DAY,MONTH,TEMP,RH)
+  dados <- data.frame(DAY,MONTH,AAT,RH)
   if(disease=="rust"){
   alfa <- log(2)/log(2.30508474576)
   umidade <- aggregate(RH~DAY+MONTH,data=dados,FUN=function(x)sum(x>85))
@@ -44,7 +58,7 @@ risco <- function(DAY,MONTH,TEMP,RH,disease="rust",plot=F){
   mediaUR <- aggregate(RHrisk~Month,data=umidade,FUN=mean)
 
   Temp_f <- subset(dados,RH>85)
-  Temp <- aggregate(TEMP~DAY+MONTH,data=Temp_f,FUN=mean)
+  Temp <- aggregate(AAT~DAY+MONTH,data=Temp_f,FUN=mean)
   colnames(Temp) <- c("Day","Month","TMed")
   Temp <- as.data.frame(Temp)
   Temp$TEMPrisk <- (2*(Temp$TMed-8)*alfa*(22.75-8)*alfa-(Temp$TMed-8)*2*alfa)/(22.75-8)*2*alfa

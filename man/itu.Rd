@@ -4,14 +4,18 @@
 \alias{itu}
 \title{Environmental Stress Index}
 \usage{
-itu(CICLO, TM, UR)
+itu(AAT, RH)
 }
 \arguments{
-\item{CICLO}{The column with the cycle days}
+\item{AAT}{The column with the average air temperature values}
 
-\item{TM}{The column with the average air temperature values}
-
-\item{UR}{The column with the relative humidity values}
+\item{RH}{The column with the relative humidity values}
+}
+\value{
+Returns the stress condition based on the reported air temperature and
+relative humidity values, being: Non-stressful condition (ITU>=70), Heat
+stress condition (ITU between 71 and 78), Severe heat stress (ITU between 79
+and 83), and Critical heat stress condition (ITU above 84).
 }
 \description{
 Determining the UTI (temperature and humidity index) from the air temperature

@@ -207,8 +207,8 @@ indviab <- function(GEN,var1,var2,ylab="Index",xlab="Genotype",stat="all",plot=F
 #'white oats, 'rye' for rye and 'barley' for barley
 #'@param stat  Argument to select the function output type. Use 'all' to estimate
 #' the HW for all replicates, or 'mean' to extract the mean for each genotype.
-#'@return Returns the estimated value of the hectolitre weight (HW) for the ceral
-#'selecionado.
+#'@return Returns the estimated value for the hectoliter weight considering the
+#' selected cereal.
 #'@author Willyan Junior Adorian Bandeira
 #'@author Ivan Ricardo Carvalo
 #'@author Murilo Vieira Loro
@@ -230,13 +230,13 @@ indviab <- function(GEN,var1,var2,ylab="Index",xlab="Genotype",stat="all",plot=F
 #'
 #'data <- data.frame(GEN, REP, MG)
 #'
-#'with(data,ph(GEN,MG,crop="trit"))
+#'with(data,hw(GEN,MG,crop="trit"))
 #'
 #'#Extract the average PH per genotype
-#'with(data,ph(GEN,MG,crop="trit",stat="mean"))
+#'with(data,hw(GEN,MG,crop="trit",stat="mean"))
 #'}
 
-ph <- function(GEN, HL, crop="trit", stat="all") {
+hw <- function(GEN, HL, crop="trit", stat="all") {
 
   dados <- data.frame(GEN, HL)
 

@@ -206,7 +206,6 @@ atsum <- function(AAT,crop="maize",lbt=NULL,plot=F){
 #'@description
 #'Utility function for plotting graphs of thermal preferences for crops. It is
 #'necessary to inform the  temperature values (minimum, average or maximum).
-#'@param DAS The column with the days after sowing (cycle).
 #'@param VAR The column with air temperature values (minimum, average or
 #'maximum).
 #'@param crop Parameter to define the culture. Use 'soybean' for soybean crop,
@@ -611,44 +610,43 @@ plast <- function(GEN, AAT, STAD, NN, habit = "ind", plot = FALSE) {
 #'Visando altas produtividades (2a ed.). Field Crops.
 #'@export
 
-fototermal <- function(DAY, AAT, RAD, PER) {
+ptermal <- function(DAY, AAT, RAD, PER) {
 
-  if (length(DAY) != length(TMED)) {
-    stop("The length of 'DAY' must be equal to the length of 'TMED'.")
+  if (length(DAY) != length(AAT) || length(DAY) != length(RAD) ||
+      length(DAY) != length(PER)) {
+    stop("All input vectors must have the same length.")
   }
-  if (length(DAY) != length(RAD)) {
-    stop("The length of 'DAY' must be equal to the length of 'RAD'.")
-  }
-  if (length(DAY) != length(PER)) {
-      stop("The length of 'DAY' must be equal to the length of 'PER'.")
-  }
-  if (!is.numeric(TMED) || any(AAT< 0)) {
-    stop("Average Air Temperature values must be numeric and positive.")
+  if (!is.numeric(AAT) || any(AAT < 0)) {
+    stop("Average Air Temperature values must be numeric and non-negative.")
   }
   if (!is.numeric(RAD) || any(RAD <= 0)) {
     stop("Radiation values must be numeric and positive.")
   }
 
-  data <- data.frame(DAY, PER, TMED, RAD, stringsAsFactors = FALSE)
+  data <- data.frame(DAY, PER, AAT, RAD, stringsAsFactors = FALSE)
   data <- data[order(data$DAY), ]
-  T_base_dict <- c("vegetativo" = 7.6, "reprodutivo" = 0)
+
+  periodos <- unique(data$PER)
+  T_base_dict <- setNames(rep(0, length(periodos)), periodos)
 
   data$Qac_final <- NA
-  periodos <- unique(data$PER)
   offset <- 0
   resultado <- data.frame()
 
   for (p in periodos) {
     dados_periodo <- subset(data, PER == p)
     T_base <- T_base_dict[p]
-    dados_periodo$Tef <- dados_periodo$AAT- T_base
-    dados_periodo$Q <- dados_periodo$RAD / dados_periodo$Tef
-    dados_periodo$Qac_final <- cumsum(dados_periodo$Q) + offset
+
+    dados_periodo$Tef <- dados_periodo$AAT - T_base
+    dados_periodo$Q <- ifelse(dados_periodo$Tef > 0, dados_periodo$RAD /
+                                dados_periodo$Tef, NA)
+    dados_periodo$Qac_final <- cumsum(ifelse(is.na(dados_periodo$Q), 0,
+                                             dados_periodo$Q)) + offset
     offset <- tail(dados_periodo$Qac_final, 1)
     resultado <- rbind(resultado, dados_periodo)
   }
 
-  resultado <- resultado[order(resultado$DIA),]
+  resultado <- resultado[order(resultado$DAY), ]
   return(resultado)
 }
 
@@ -728,7 +726,7 @@ tdelta <- function(LON,LAT,type=2,days=7,control=NULL,details=FALSE,dates=NULL,
              DELTAT = Temp-Td)
     dt <- dt %>% select(-alpha,-Td)
     assign("forecast", dt, envir = .estimatebreed_env)
-    return(d)
+    return(dt)
     if(details==TRUE){
       print(previsao$hourly_units)
       print(dt)

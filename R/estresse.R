@@ -14,7 +14,7 @@
 #'@param plot Plot graph if equal to 'TRUE' (Standard 'FALSE').
 #'@param xlab Adjust the title of the x-axis in the graph.
 #'@param ylab Adjust the title of the y-axis in the graph.
-#'@param ... General parameters of ggplot2 for utilization
+#'@param ... General ggplot2 parameters for graph customization.
 #'@return Returns a table with the genotypes and the selected indices.
 #'The higher the index value, the more resilient the genotype.
 #'@author Willyan Junior Adorian Bandeira
@@ -247,16 +247,13 @@ estresse <- function(GEN,YS,YC,index="ALL",bygen=TRUE,plot=FALSE,xlab="Genotype"
       cat("\n---------------------------------------------------------------------------------------------\n")
       print(final)
       if(plot==TRUE){
-        #Mapping
         final <- final %>%
           mutate(across(starts_with("GEN"), as.factor),
                  across(c(STI, YI, GMP, MP, MH, SSI, YSI, RSI), as.numeric))
 
-        #Agrupar todos os indices na mesma coluna
         dados_long <- pivot_longer(final, cols = c(STI, YI, GMP, MP, MH, SSI, YSI, RSI),
                                    names_to = "indice", values_to = "valores")
 
-        #Grafico com FW
         ggplot(dados_long, aes(x = GEN, y = valores, fill = GEN)) +
           geom_bar(stat = "identity") +
           facet_wrap(~ indice, ncol = 4) +
@@ -357,9 +354,12 @@ estresse <- function(GEN,YS,YC,index="ALL",bygen=TRUE,plot=FALSE,xlab="Genotype"
 #'@description
 #'Determining the UTI (temperature and humidity index) from the air temperature
 #'and relative humidity values over a given period of time
-#'@param CICLO The column with the cycle days
-#'@param TM The column with the average air temperature values
-#'@param UR The column with the relative humidity values
+#'@param AAT The column with the average air temperature values
+#'@param RH The column with the relative humidity values
+#'@return Returns the stress condition based on the reported air temperature and
+#' relative humidity values, being: Non-stressful condition (ITU>=70), Heat
+#' stress condition (ITU between 71 and 78), Severe heat stress (ITU between 79
+#' and 83), and Critical heat stress condition (ITU above 84).
 #'@author Willyan Junior Adorian Bandeira
 #'@author Ivan Ricardo Carvalo
 #'@author Murilo Vieira Loro
@@ -373,13 +373,10 @@ estresse <- function(GEN,YS,YC,index="ALL",bygen=TRUE,plot=FALSE,xlab="Genotype"
 #'https://doi.org/10.1590/1809-6891v25e-77035Pexport
 #'@export
 
-itu <- function(CICLO,TM,UR){
-  Ciclo <- CICLO
-  TM <- TM
-  UR <- UR
-  Tpo <- ((UR/100)^(1/8))*(112+(0.9*TM))+(0.1*TM)-112
+itu <- function(AAT,RH){
 
-  ITU <- TM+((0.36*Tpo)+41.5)
+  Tpo <- ((RH/100)^(1/8))*(112+(0.9*AAT))+(0.1*AAT)-112
+  ITU <- AAT+((0.36*Tpo)+41.5)
   if(ITU>=70){
     print(ITU)
     cat("\n-----------------------------------------------------------------\n")

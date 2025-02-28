@@ -37,7 +37,7 @@ it will be possible to plot graphs.}
 
 \item{ylab}{Adjust the title of the y-axis in the graph.}
 
-\item{...}{General parameters of ggplot2 for utilization}
+\item{...}{General ggplot2 parameters for graph customization.}
 }
 \value{
 Returns a table with the genotypes and the selected indices.

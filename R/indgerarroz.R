@@ -4,7 +4,8 @@
 #' germinated in a given period (Wang et al., 2017)
 #' @param TESTE Identification number of the test performed
 #' @param DIA Numerical values for the days tested
-#' @param TSG Name of the column with the total number of seeds germinated in each period
+#' @param TSG Name of the column with the total number of seeds germinated in
+#'  each period
 #' @param NST Default column name with number of seeds tested
 #' @author Willyan Junior Adorian Bandeira
 #' @author Ivan Ricardo Carvalo
@@ -18,13 +19,7 @@
 #' Journal of Food Engineering, vol. 13, no. 10, 2017, pp. 20160433.
 #' https://doi.org/10.1515/ijfe-2016-043
 
-
-#Ainda falta terminar!
 indger <- function(TESTE,DIA,TSG,NST){
-  TESTE <- TESTE
-  DIA <- DIA
-  TSG <- TSG
-  NST <- NST
   values <- data.frame(TESTE,DIA,TSG,NST)
 
   #Posso ter mais de um teste, preciso adicionar uma forma de identificar isso

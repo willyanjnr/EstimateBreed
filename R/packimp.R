@@ -21,7 +21,7 @@
 #' @importFrom purrr flatten
 #' @importFrom grDevices rgb
 #' @importFrom graphics boxplot layout
-#' @importFrom stats aggregate aov coef lm nls nls.control pnorm sd
+#' @importFrom stats aggregate aov coef lm nls nls.control pnorm sd setNames
 #'
 #'
 #' @export

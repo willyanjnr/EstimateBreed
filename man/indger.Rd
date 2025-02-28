@@ -11,7 +11,8 @@ indger(TESTE, DIA, TSG, NST)
 
 \item{DIA}{Numerical values for the days tested}
 
-\item{TSG}{Name of the column with the total number of seeds germinated in each period}
+\item{TSG}{Name of the column with the total number of seeds germinated in
+each period}
 
 \item{NST}{Default column name with number of seeds tested}
 }

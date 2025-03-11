@@ -25,7 +25,7 @@ You can install the development version of EstimateBreed from
 
 ``` r
 if (!requireNamespace("pak", quietly = TRUE)) {
-  install.packages("pak")
+  install.packages("roxygen2")
 }
 pak::pak("willyanjnr/EstimateBreed")
 ```

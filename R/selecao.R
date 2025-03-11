@@ -99,12 +99,12 @@ SG <- function(Var, h, VF = NULL, P = "1", DS = NULL, Year = NULL, method = "pre
 }
 
 ####
-#'Selection by Selection Differential (Mean and Deviations)
+#'Selection Differential (Mean and Deviations)
 #'@description
 #'Selection of Transgressive Genotypes - Selection Differential (SD)
 #'@param Gen The column with the genotype name
-#'@param Var The column with the variable of interest
-#'@param Control The column with the value of the variable 'X' for the witnesses
+#'@param Var The column with the values for the variable of interest
+#'@param Control The column with the value of the variable 'X' for the controls
 #'@param ylab The name of the Y axis.
 #'@param xlab The name of the X axis.
 #'@author Willyan Junior Adorian Bandeira
@@ -112,50 +112,71 @@ SG <- function(Var, h, VF = NULL, P = "1", DS = NULL, Year = NULL, method = "pre
 #'@author Murilo Vieira Loro
 #'@author Leonardo Cesar Pradebon
 #'@author Jose Antonio Gonzalez da Silva
+#'@return Plot a representative graph of the selected genotypes based on the
+#'mean and standard deviations
+#' @examples
+#'\donttest{
+#'library(EstimateBreed)
+#'
+#'Gen <- paste0("G", 1:20)
+#'Var <- round(rnorm(20, mean = 3.5, sd = 0.8), 2)
+#'Control <- rep(3.8, 20)
+#'
+#'data <- data.frame(Gen,Var,Control)
+#'
+#'with(data,transg(Gen,Var,Contr))
+#'}
 #'@export
 
-transgressivos <- function(Gen, Var, Control,ylab="Selection",xlab="Genotypes"){
+transg <- function(Gen, Var, Control, ylab="Selection", xlab="Genotypes") {
 
   Gen <- as.factor(Gen)
   Var <- Var
   Testemunha <- Control
 
-  Media<-mean(Var)
-  DSg<-mean(Testemunha)
-  Desvio<-sd(Var)
-  DS1S<-Media+Desvio
-  DS2S<-Media+(2*Desvio)
-  DS3S<-Media+(3*Desvio)
+  Media <- mean(Var)
+  DSg <- mean(Testemunha)
+  Desvio <- sd(Var)
+  DS1S <- Media + Desvio
+  DS2S <- Media + (2 * Desvio)
+  DS3S <- Media + (3 * Desvio)
 
-  parametros <- list(Media=Media,DSg=DSg,Desvio=Desvio,DS1S=DS1S,DS2S=DS2S,DS3S=DS3S)
-  dados <- data.frame(Gen,Var, Testemunha)
+  parametros <- list(Media=Media, DSg=DSg, Desvio=Desvio, DS1S=DS1S, DS2S=DS2S, DS3S=DS3S)
+  dados <- data.frame(Gen, Var, Testemunha)
 
-  grafico <- ggplot(dados, aes(x = Gen, y = Var))+
-    geom_text(
-      label=rownames(dados),
-      nudge_x =0, nudge_y = 0, color = "red",hjust =3,
-      size = 10,
-      check_overlap = F)+ylab(ylab)+xlab(xlab)+theme_classic()+
+  x_min <- 1
+  x_max <- length(levels(Gen))
 
-    geom_segment(aes(x = 0, y =Media, xend =Gen, yend = Media), linetype = 1,
-                 color = "darkred")+
-    geom_label(aes(x=0.5, y=Media, label="Mean"))+
+  grafico <- ggplot(dados, aes(x = Gen, y = Var)) +
+    geom_text(label = rownames(dados), nudge_x = 0, nudge_y = 0, color = "red",
+              hjust = 3, size = 4) +
+    ylab(ylab) + xlab(xlab) + theme_classic() +
 
-    geom_segment(aes(x = 0, y =DSg, xend =Gen, yend =DSg), linetype = 2,
-                 color = "darkgray")+
-    geom_label(aes(x=0.5, y=DSg, label="DS T"))+
+    geom_segment(x = x_min, xend = x_max, y = Media, yend = Media, linetype = 1,
+                 color = "darkred") +
+    annotate("text", x = x_min, y = Media, label = "Mean", color = "darkred",
+             hjust = 0) +
 
-    geom_segment(aes(x = 0, y =DS1S, xend =Gen, yend =DS1S), linetype = 3,
-                 color = "blue")+
-    geom_label(aes(x=0.5, y=DS1S, label="DS1S"))+
+    geom_segment(x = x_min, xend = x_max, y = DSg, yend = DSg, linetype = 2,
+                 color = "darkgray") +
+    annotate("text", x = x_min, y = DSg, label = "DS T", color = "darkgray",
+             hjust = 0) +
 
-    geom_segment(aes(x = 0, y =DS2S, xend =Gen, yend =DS2S), linetype = 4,
-                 color = "darkgreen")+
-    geom_label(aes(x=0.5, y=DS2S, label="DS2S"))+
+    geom_segment(x = x_min, xend = x_max, y = DS1S, yend = DS1S, linetype = 3,
+                 color = "blue") +
+    annotate("text", x = x_min, y = DS1S, label = "DS1S", color = "blue",
+             hjust = 0) +
 
-    geom_segment(aes(x = 0, y =DS3S, xend =Gen, yend =DS3S), linetype = 5,
-                 color = "darkorange")+
-    geom_label(aes(x=0.5, y=DS3S, label="DS3S"))+
+    geom_segment(x = x_min, xend = x_max, y = DS2S, yend = DS2S, linetype = 4,
+                 color = "darkgreen") +
+    annotate("text", x = x_min, y = DS2S, label = "DS2S", color = "darkgreen",
+             hjust = 0) +
+
+    geom_segment(x = x_min, xend = x_max, y = DS3S, yend = DS3S, linetype = 5,
+                 color = "darkorange") +
+    annotate("text", x = x_min, y = DS3S, label = "DS3S", color = "darkorange",
+             hjust = 0) +
+
     ggtitle("Selection of Transgressive Genotypes - Selection Differential (SD)")
 
   print(grafico)
@@ -166,7 +187,6 @@ transgressivos <- function(Gen, Var, Control,ylab="Selection",xlab="Genotypes"){
   cat("Parameters")
   cat("\n-----------------------------------------------------------------\n")
   print(parametros)
-  suppressWarnings()
 }
 
 ###
@@ -213,176 +233,84 @@ default_seg <- function(MELHORAMENTO){
 #'@author Murilo Vieira Loro
 #'@author Leonardo Cesar Pradebon
 #'@author Jose Antonio Gonzalez da Silva
+#'@return Returns the total, additive and dominance variance values based on
+#'the variance components for a given variable.
+#' @examples
+#'\donttest{
+#'library(EstimateBreed)
+#'
+#'var <- c("A","B","C","D","E")
+#'VG <- c(2.5, 3.0, 2.8, 3.2, 2.7)
+#'VF <- c(1.2, 1.5, 1.3, 1.6, 1.4)
+#'data <- data.frame(var,VG,VF)
+#'
+#'#Calculating for all generations
+#'with(data,COI(var,VG,VF,geracao = "all"))
+#'
+#'Calculating for just one generation
+#'with(data,COI(var,VG,VF,geracao = "F3"))
+#'}
 #'@export
 
-Coeficiente_endogamia<-function(var, VG, VF){
-
+COI <- function(var, VG, VF, generation = "all") {
   var <- as.factor(var)
-  VG <- VG
-  VF <- VF
-  ################################
-  VA_total_F3<-VG/1.5
-  VD_total_F3<-VG/0.75
-  VA_Entre_F3<-VG/1
-  VD_Entre_F3<-VG/0.25
-  VA_Dentro_F3<-VG/0.5
-  VD_Dentro_F3<-VG/0.5
-  ###############################
-  VA_total_F4<-VG/0.875
-  VD_total_F4<-VG/0.438
-  VA_Entre_F4<-VG/1.5
-  VD_Entre_F4<-VG/0.188
-  VA_Dentro_F4<-VG/0.250
-  VD_Dentro_F4<-VG/0.250
-  ###############################
-  VA_total_F5<-VG/1.875
-  VD_total_F5<-VG/0.234
-  VA_Entre_F5<-VG/1.750
-  VD_Entre_F5<-VG/0.109
-  VA_Dentro_F5<-VG/0.125
-  VD_Dentro_F5<-VG/0.125
-  ###############################
-  VA_total_F6<-VG/1.938
-  VD_total_F6<-VG/0.121
-  VA_Entre_F6<-VG/1.875
-  VD_Entre_F6<-VG/0.059
-  VA_Dentro_F6<-VG/0.063
-  VD_Dentro_F6<-VG/0.063
-  ###############################
-  F3<-data.frame(var,
-                 VA_total_F3,
-                 VD_total_F3,
-                 VA_Entre_F3,
-                 VD_Entre_F3,
-                 VA_Dentro_F3,
-                 VD_Dentro_F3)
+  factors <- list(
+    F3 = c(1.5, 0.75, 1, 0.25, 0.5, 0.5),
+    F4 = c(0.875, 0.438, 1.5, 0.188, 0.25, 0.25),
+    F5 = c(1.875, 0.234, 1.75, 0.109, 0.125, 0.125),
+    F6 = c(1.938, 0.121, 1.875, 0.059, 0.063, 0.063)
+  )
 
-  F4<-data.frame(var,
-                 VA_total_F4,
-                 VD_total_F4,
-                 VA_Entre_F4,
-                 VD_Entre_F4,
-                 VA_Dentro_F4,
-                 VD_Dentro_F4)
+  if (generation != "all") {
+    if (!(generation %in% names(factors))) {
+      stop("Error: Invalid generation. Choose between 'F3', 'F4', 'F5', 'F6' or 'all'.")
+    }
+    factors <- factors[generation]
+  }
+  variance_list <- list()
+  heritability_list <- list()
 
-  F5<-data.frame(var,
-                 VA_total_F5,
-                 VD_total_F5,
-                 VA_Entre_F5,
-                 VD_Entre_F5,
-                 VA_Dentro_F5,
-                 VD_Dentro_F5)
-  F6<-data.frame(var,
-                 VA_total_F6,
-                 VD_total_F6,
-                 VA_Entre_F6,
-                 VD_Entre_F6,
-                 VA_Dentro_F6,
-                 VD_Dentro_F6)
-  #################################################################
-  hVaTF3<-(VA_total_F3<-VG/1.5)/VF
-  hVdTF3<-(VD_total_F3<-VG/0.75)/VF
-  hVaEF3<-(VA_Entre_F3<-VG/1)/VF
-  hVdEF3<-(VD_Entre_F3<-VG/0.25)/VF
-  hVaDF3<-(VA_Dentro_F3<-VG/0.5)/VF
-  hVdDF3<-(VD_Dentro_F3<-VG/0.5)/VF
+  for (gen in names(factors)) {
+    f <- factors[[gen]]
+    VA_Total <- VG / f[1]
+    VD_Total <- VG / f[2]
+    VA_Between <- VG / f[3]
+    VD_Between <- VG / f[4]
+    VA_Within <- VG / f[5]
+    VD_Within <- VG / f[6]
+    variances <- data.frame(
+      Generation = gen, var, VA_Total, VD_Total, VA_Between, VD_Between,
+      VA_Within, VD_Within
+    )
 
-  hF3<-data.frame(var,
-                  hVaTF3,
-                  hVdTF3,
-                  hVaEF3,
-                  hVdEF3,
-                  hVaDF3,
-                  hVdDF3)
-  #################################################################
-  hVaTF4<-(VA_total_F4<-VG/0.875)/VF
-  hVdTF4<-(VD_total_F4<-VG/0.438)/VF
-  hVaEF4<-(VA_Entre_F4<-VG/1.5)/VF
-  hVdEF4<-(VD_Entre_F4<-VG/0.188)/VF
-  hVaDF4<-(VA_Dentro_F4<-VG/0.250)/VF
-  hVdDF4<-(VD_Dentro_F4<-VG/0.250)/VF
+    hVaT <- VA_Total / VF
+    hVdT <- VD_Total / VF
+    hVaE <- VA_Between / VF
+    hVdE <- VD_Between / VF
+    hVaD <- VA_Within / VF
+    hVdD <- VD_Within / VF
+    heritabilities <- data.frame(
+      Generation = gen, var, hVaT, hVdT, hVaE, hVdE, hVaD, hVdD
+    )
 
-  hF4<-data.frame(var,
-                  hVaTF4,
-                  hVdTF4,
-                  hVaEF4,
-                  hVdEF4,
-                  hVaDF4,
-                  hVdDF4)
-  #################################################################
-  hVaTF5<-(VA_total_F5<-VG/1.875)/VF
-  hVdTF5<-(VD_total_F5<-VG/0.234)/VF
-  hVaEF5<-(VA_Entre_F5<-VG/1.750)/VF
-  hVdEF5<-(VD_Entre_F5<-VG/0.109)/VF
-  hVaDF5<-(VA_Dentro_F5<-VG/0.125)/VF
-  hVdDF5<-(VD_Dentro_F5<-VG/0.125)/VF
+    variance_list[[gen]] <- variances
+    heritability_list[[gen]] <- heritabilities
+  }
+  final_variances <- do.call(rbind, variance_list)
+  final_heritabilities <- do.call(rbind, heritability_list)
 
-  hF5<-data.frame(var,
-                  hVaTF5,
-                  hVdTF5,
-                  hVaEF5,
-                  hVdEF5,
-                  hVaDF5,
-                  hVdDF5)
+  for (gen in names(factors)) {
+    cat("\n---------------------------------------------------------------------------------\n")
+    cat(paste0(gen, " - Corrected Variances"))
+    cat("\n---------------------------------------------------------------------------------\n")
+    print(variance_list[[gen]])
 
-  #################################################################
-  hVaTF6<-(VA_total_F6<-VG/1.938)/VF
-  hVdTF6<-(VD_total_F6<-VG/0.121)/VF
-  hVaEF6<-(VA_Entre_F6<-VG/1.875)/VF
-  hVdEF6<-(VD_Entre_F6<-VG/0.059)/VF
-  hVaDF6<-(VA_Dentro_F6<-VG/0.063)/VF
-  hVdDF6<-(VD_Dentro_F6<-VG/0.063)/VF
-
-  hF6<-data.frame(var,
-                  hVaTF6,
-                  hVdTF6,
-                  hVaEF6,
-                  hVdEF6,
-                  hVaDF6,
-                  hVdDF6)
-
-  final <- bind_rows(F3,F4,F5,F6,hF3,hF4,hF5,hF6)
-
-  cat("\n---------------------------------------------------------------------------------\n")
-  cat("F3 - Corrected Variances")
-  cat("\n---------------------------------------------------------------------------------\n")
-  print(F3)
-
-  cat("\n---------------------------------------------------------------------------------\n")
-  cat("F3- Heritability in the narrow sense")
-  cat("\n---------------------------------------------------------------------------------\n")
-  print(hF3)
-
-  cat("\n---------------------------------------------------------------------------------\n")
-  cat("F4 - Corrected Variances")
-  cat("\n---------------------------------------------------------------------------------\n")
-  print(F4)
-
-  cat("\n---------------------------------------------------------------------------------\n")
-  cat("F4- Heritability in the narrow sense")
-  cat("\n---------------------------------------------------------------------------------\n")
-  print(hF4)
-
-  cat("\n---------------------------------------------------------------------------------\n")
-  cat("F5 - Corrected Variances")
-  cat("\n---------------------------------------------------------------------------------\n")
-  print(F5)
-
-  cat("\n---------------------------------------------------------------------------------\n")
-  cat("F5- Heritability in the narrow sense")
-  cat("\n---------------------------------------------------------------------------------\n")
-  print(hF5)
-
-  cat("\n---------------------------------------------------------------------------------\n")
-  cat("F6 - Corrected Variances")
-  cat("\n---------------------------------------------------------------------------------\n")
-  print(F6)
-
-  cat("\n---------------------------------------------------------------------------------\n")
-  cat("F6- Heritability in the narrow sense")
-  cat("\n---------------------------------------------------------------------------------\n")
-  print(hF6)
-
+    cat("\n---------------------------------------------------------------------------------\n")
+    cat(paste0(gen, " - Heritability in the Narrow Sense"))
+    cat("\n---------------------------------------------------------------------------------\n")
+    print(heritability_list[[gen]])
+  }
+  return(list(Variances = final_variances, Heritabilities = final_heritabilities))
 }
 
 ###

@@ -213,6 +213,6 @@ utils::globalVariables(
     "RealLAI", "b2", "HW", "TTd", "ATT", "Class", "modelo", "model",
     "model_summary", "rsq", "STA", "eq_text", "pred", "RH", "Temp", "Td",
     "DELTAT", "WindS", "Prec", "RH2M", "T2M", "PRECTOTCORR", ":=", "<<-",
-    "AAT","DAS", "RED",
+    "AAT","DAS", "RED"
   )
 )

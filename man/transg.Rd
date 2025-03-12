@@ -18,8 +18,9 @@ transg(Gen, Var, Control, ylab = "Selection", xlab = "Genotypes")
 \item{xlab}{The name of the X axis.}
 }
 \value{
-Plot a representative graph of the selected genotypes based on the
-mean and standard deviations
+Returns the general parameters and the genotypes selected for each
+treshold. Also plot a representative graph of the selected genotypes based on
+the mean and standard deviations.
 }
 \description{
 Selection of Transgressive Genotypes - Selection Differential (SD)
@@ -34,7 +35,7 @@ Control <- rep(3.8, 20)
 
 data <- data.frame(Gen,Var,Control)
 
-with(data,transg(Gen,Var,Contr))
+with(data,transg(Gen,Var,Control))
 }
 }
 \author{

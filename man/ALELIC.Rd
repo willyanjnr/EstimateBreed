@@ -14,8 +14,26 @@ overdominance.}
 \item{ge}{Type of GxE interaction. Use 'aus' for no interaction,
 'simple' for simple interaction and 'complex' for complex interaction.}
 }
+\value{
+Plot graphs representing allelic and genotype x environment
+interactions.
+}
 \description{
-Examples of allelic and gene interactions
+Didactic function - Examples of allelic and gene interactions
+}
+\examples{
+\donttest{
+library(EstimateBreed)
+
+ALELIC (type="ad")
+ALELIC (type="dom")
+ALELIC (type="domp")
+ALELIC (type="sob")
+
+ALELIC (ge="aus")
+ALELIC (ge="simple")
+ALELIC (ge="complex")
+}
 }
 \author{
 Willyan Junior Adorian Bandeira

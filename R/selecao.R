@@ -112,8 +112,9 @@ SG <- function(Var, h, VF = NULL, P = "1", DS = NULL, Year = NULL, method = "pre
 #'@author Murilo Vieira Loro
 #'@author Leonardo Cesar Pradebon
 #'@author Jose Antonio Gonzalez da Silva
-#'@return Plot a representative graph of the selected genotypes based on the
-#'mean and standard deviations
+#'@return Returns the general parameters and the genotypes selected for each
+#'treshold. Also plot a representative graph of the selected genotypes based on
+#'the mean and standard deviations.
 #' @examples
 #'\donttest{
 #'library(EstimateBreed)
@@ -124,7 +125,7 @@ SG <- function(Var, h, VF = NULL, P = "1", DS = NULL, Year = NULL, method = "pre
 #'
 #'data <- data.frame(Gen,Var,Control)
 #'
-#'with(data,transg(Gen,Var,Contr))
+#'with(data,transg(Gen,Var,Control))
 #'}
 #'@export
 
@@ -133,60 +134,84 @@ transg <- function(Gen, Var, Control, ylab="Selection", xlab="Genotypes") {
   Gen <- as.factor(Gen)
   Var <- Var
   Testemunha <- Control
-
   Media <- mean(Var)
   DSg <- mean(Testemunha)
   Desvio <- sd(Var)
   DS1S <- Media + Desvio
   DS2S <- Media + (2 * Desvio)
   DS3S <- Media + (3 * Desvio)
-
-  parametros <- list(Media=Media, DSg=DSg, Desvio=Desvio, DS1S=DS1S, DS2S=DS2S, DS3S=DS3S)
+  parametros <- list(
+    "Overall Mean" = round(Media, 3),
+    "Control Mean" = round(DSg, 3),
+    "Standard Deviation" = round(Desvio, 3),
+    "Mean + 1SD" = round(DS1S, 3),
+    "Mean + 2SD" = round(DS2S, 3),
+    "Mean + 3SD" = round(DS3S, 3)
+  )
   dados <- data.frame(Gen, Var, Testemunha)
+  above_mean <- as.character(dados$Gen[dados$Var>Media])
+  above_cmean <- as.character(dados$Gen[dados$Var>DSg])
+  above_DS1S <- as.character(dados$Gen[dados$Var>DS1S])
+  above_DS2S <- as.character(dados$Gen[dados$Var>DS2S])
+  above_DS3S <- as.character(dados$Gen[dados$Var>DS3S])
 
   x_min <- 1
   x_max <- length(levels(Gen))
-
   grafico <- ggplot(dados, aes(x = Gen, y = Var)) +
     geom_text(label = rownames(dados), nudge_x = 0, nudge_y = 0, color = "red",
               hjust = 3, size = 4) +
     ylab(ylab) + xlab(xlab) + theme_classic() +
-
     geom_segment(x = x_min, xend = x_max, y = Media, yend = Media, linetype = 1,
                  color = "darkred") +
-    annotate("text", x = x_min, y = Media, label = "Mean", color = "darkred",
-             hjust = 0) +
-
-    geom_segment(x = x_min, xend = x_max, y = DSg, yend = DSg, linetype = 2,
-                 color = "darkgray") +
-    annotate("text", x = x_min, y = DSg, label = "DS T", color = "darkgray",
-             hjust = 0) +
-
+    annotate("text", x = x_min, y = Media, label = "Overall Mean",
+             color = "darkred",hjust = 0) +
+    geom_segment(x = x_min, xend = x_max, y = DSg, yend = DSg, linetype = 1,
+                 color = "purple") +
+    annotate("text", x = x_min, y = DSg, label = "Control Mean",
+             color = "purple",hjust = 0) +
     geom_segment(x = x_min, xend = x_max, y = DS1S, yend = DS1S, linetype = 3,
                  color = "blue") +
     annotate("text", x = x_min, y = DS1S, label = "DS1S", color = "blue",
              hjust = 0) +
-
     geom_segment(x = x_min, xend = x_max, y = DS2S, yend = DS2S, linetype = 4,
                  color = "darkgreen") +
     annotate("text", x = x_min, y = DS2S, label = "DS2S", color = "darkgreen",
              hjust = 0) +
-
     geom_segment(x = x_min, xend = x_max, y = DS3S, yend = DS3S, linetype = 5,
                  color = "darkorange") +
     annotate("text", x = x_min, y = DS3S, label = "DS3S", color = "darkorange",
              hjust = 0) +
-
     ggtitle("Selection of Transgressive Genotypes - Selection Differential (SD)")
-
   print(grafico)
 
-  cat("\n-----------------------------------------------------------------\n")
-  cat("Selection of Transgressive Genotypes - Selection Differential (SD)")
-  cat("\n-----------------------------------------------------------------\n")
-  cat("Parameters")
-  cat("\n-----------------------------------------------------------------\n")
-  print(parametros)
+  cat("\n---------------------------------------------------------------------\n")
+  cat("Selection of Transgressive Genotypes - Selection Differential (SD)\n")
+  cat("---------------------------------------------------------------------\n")
+  cat("Parameters:\n")
+  cat("---------------------------------------------------------------------\n")
+  for (param in names(parametros)) {
+    cat(sprintf("%-20s : %.3f\n", param, parametros[[param]]))
+  }
+  cat("\n---------------------------------------------------------------------\n")
+  cat("Genotypes above each threshold:\n")
+  cat("---------------------------------------------------------------------\n")
+
+  print_wrapped_list <- function(label, values, width = 60) {
+    if (length(values) == 0) {
+      cat(sprintf("%-30s : None\n", label))
+    } else {
+      text <- paste(values, collapse = ", ")
+      wrapped_text <- strwrap(text, width = width, prefix = "  ",
+                              initial = paste(label, ": "))
+      cat(paste0(wrapped_text, collapse = "\n"), "\n")
+    }
+  }
+  print_wrapped_list("Genotypes above Control Mean", above_cmean)
+  print_wrapped_list("Genotype above Overall Mean", above_mean)
+  print_wrapped_list("Genotypes above Mean + 1SD", above_DS1S)
+  print_wrapped_list("Genotypes above Mean + 2SD", above_DS2S)
+  print_wrapped_list("Genotypes above Mean + 3SD", above_DS3S)
+  cat("---------------------------------------------------------------------\n")
 }
 
 ###
@@ -203,7 +228,7 @@ transg <- function(Gen, Var, Control, ylab="Selection", xlab="Genotypes") {
 
 default_seg <- function(MELHORAMENTO){
 
-  AUTOGAM<-c("Genitores","F1","F2","F3","F4","F5","F6","F7","F8","F9")
+  AUTOGAM<-c("Parents","F1","F2","F3","F4","F5","F6","F7","F8","F9")
   HETEROZIGOSITY<-c(0,100,50,25,12.5,6.25,3.12,1.56,0.78,0.39)
   ALOGAM<-c("-","-","S0","S1","S2","S3","S4","S5","S6","S7")
   HOMOZIGOSITY<-c(100, 0,50,75,87.5,93.75,96.88,98.44,99.22, 99.61)
@@ -211,14 +236,15 @@ default_seg <- function(MELHORAMENTO){
   SELECTION<-c("N","N","Quali","Quali",
              "Quant","Quanti","Quanti","Quanti",
              "Quanti","Quanti")
-  N_GENES<-c("-","-","1 a 2",
-             "1 a 2", "3 ou +", "3 ou +","3 ou +","3 ou +","3 ou +","3 ou +")
+  N_GENES<-c("-","-","1 to 2",
+             "1 to 2", "3 or more", "3 ou more","3 ou more","3 ou more",
+             "3 ou more","3 ou more")
   ENV_EF<-c("-","-","low",
                 "low", "high", "high","high","high","high","high")
   COEF_F<-c(0.000,0.500,0.750,0.875,0.937,0.969,0.984,0.992,0.996,0.998)
-  TABELA<-data.frame(AUTOGAM,ALOGAM,HETEROZIGOSITY,HOMOZIGOSITY,MUTANTS,
+  TABLESEG<-data.frame(AUTOGAM,ALOGAM,HETEROZIGOSITY,HOMOZIGOSITY,MUTANTS,
                      SELECTION,N_GENES, ENV_EF, COEF_F)
-  return(TABELA)
+  return(TABLESEG)
 }
 
 ###
@@ -228,11 +254,17 @@ default_seg <- function(MELHORAMENTO){
 #'@param var Column with the variable name
 #'@param VG Column with genotypic variance
 #'@param VF Column with phenotypic variance
+#'@param generation Parameter to select the generation. Use 'all' to get the
+#' parameters for all the generations or 'F3', 'F4', 'F5' and 'F6' for just
+#'  one of the generations.
 #'@author Willyan Junior Adorian Bandeira
 #'@author Ivan Ricardo Carvalo
 #'@author Murilo Vieira Loro
 #'@author Leonardo Cesar Pradebon
 #'@author Jose Antonio Gonzalez da Silva
+#'@references
+#'Falconer, D. S., & Mackay, T. F. C. (1996). Introduction to quantitative
+#'genetics (4th ed.). Longman.
 #'@return Returns the total, additive and dominance variance values based on
 #'the variance components for a given variable.
 #' @examples
@@ -245,10 +277,10 @@ default_seg <- function(MELHORAMENTO){
 #'data <- data.frame(var,VG,VF)
 #'
 #'#Calculating for all generations
-#'with(data,COI(var,VG,VF,geracao = "all"))
+#'with(data,COI(var,VG,VF,generation = "all"))
 #'
-#'Calculating for just one generation
-#'with(data,COI(var,VG,VF,geracao = "F3"))
+#'#Calculating for just one generation
+#'with(data,COI(var,VG,VF,generation = "F3"))
 #'}
 #'@export
 
@@ -263,7 +295,8 @@ COI <- function(var, VG, VF, generation = "all") {
 
   if (generation != "all") {
     if (!(generation %in% names(factors))) {
-      stop("Error: Invalid generation. Choose between 'F3', 'F4', 'F5', 'F6' or 'all'.")
+      stop("Error: Invalid generation. Choose between 'F3', 'F4', 'F5',
+           'F6' or 'all'.")
     }
     factors <- factors[generation]
   }
@@ -371,7 +404,7 @@ reg_GP <- function(ind, Genitor, Progenie) {
 ###
 #'Allelic interactions
 #'@description
-#'Examples of allelic and gene interactions
+#'Didactic function - Examples of allelic and gene interactions
 #'@param type Type of allelic interaction. Use 'ad' for additivity, 'dom'
 #'for complete dominance, 'domp' for partial dominance and 'sob' for
 #'overdominance.
@@ -382,6 +415,21 @@ reg_GP <- function(ind, Genitor, Progenie) {
 #'@author Murilo Vieira Loro
 #'@author Leonardo Cesar Pradebon
 #'@author Jose Antonio Gonzalez da Silva
+#'@return Plot graphs representing allelic and genotype x environment
+#'interactions.
+#' @examples
+#'\donttest{
+#'library(EstimateBreed)
+#'
+#'ALELIC (type="ad")
+#'ALELIC (type="dom")
+#'ALELIC (type="domp")
+#'ALELIC (type="sob")
+#'
+#'ALELIC (ge="aus")
+#'ALELIC (ge="simple")
+#'ALELIC (ge="complex")
+#'}
 #'@export
 
 ALELIC <- function(type=NULL,ge=NULL){
@@ -393,7 +441,7 @@ ALELIC <- function(type=NULL,ge=NULL){
     altura <- c(120, 70, 20)
     dados <- data.frame(genotipo = factor(rep(genotipo, each = 10)),
                         altura = rep(altura, each = 10))
-    ggplot(dados, aes(x = genotipo, y = altura, group = 1)) +
+    p <- ggplot(dados, aes(x = genotipo, y = altura, group = 1)) +
       geom_line(aes(color = genotipo), size = 1.2) +
       geom_point(aes(color = genotipo), size = 3) +
       geom_text(aes(label = altura), vjust = -0.5, color = "black", size = 5) +
@@ -401,13 +449,14 @@ ALELIC <- function(type=NULL,ge=NULL){
            x = "Genotype", y = "Plant Height (cm)") +
       theme_minimal()+
       theme(legend.position = "none")
+    print(p)
   } else if(type=="dom"){
     genotipo <- c("AA", "Aa", "aa")
     efeito <- c(2, 1, 0)
     altura <- c(120, 120, 20)
     dados <- data.frame(genotipo = factor(rep(genotipo, each = 10)),
                         altura = rep(altura, each = 10))
-    ggplot(dados, aes(x = genotipo, y = altura, group = 1)) +
+    p <- ggplot(dados, aes(x = genotipo, y = altura, group = 1)) +
       geom_line(aes(color = genotipo), size = 1.2) +
       geom_point(aes(color = genotipo), size = 3) +
       geom_text(aes(label = altura), vjust = -0.5, color = "black", size = 5) +
@@ -415,27 +464,29 @@ ALELIC <- function(type=NULL,ge=NULL){
            x = "Genotype", y = "Plant Height (cm)") +
       theme_minimal()+
       theme(legend.position = "none")
+    print(p)
   } else if(type=="domp"){
     genotipo <- c("AA", "Aa", "aa")
     efeito <- c(2, 1, 0)
     altura <- c(120, 90, 20)
     dados <- data.frame(genotipo = factor(rep(genotipo, each = 10)),
                         altura = rep(altura, each = 10))
-    ggplot(dados, aes(x = genotipo, y = altura, group = 1)) +
+    p <- ggplot(dados, aes(x = genotipo, y = altura, group = 1)) +
       geom_line(aes(color = genotipo), size = 1.2) +
       geom_point(aes(color = genotipo), size = 3) +
       geom_text(aes(label = altura), vjust = -0.5, color = "black", size = 5) +
       labs(title = "Partial Dominance Genetic Interaction",
-           x = "Genotpe", y = "Plant Height (cm)") +
+           x = "Genotype", y = "Plant Height (cm)") +
       theme_minimal()+
       theme(legend.position = "none")
+    print(p)
   } else if(type=="sob"){
     genotipo <- c("AA", "Aa", "aa")
     efeito <- c(2, 1, 0)
     altura <- c(120, 160, 20)
     dados <- data.frame(genotipo = factor(rep(genotipo, each = 10)),
                         altura = rep(altura, each = 10))
-    ggplot(dados, aes(x = genotipo, y = altura, group = 1)) +
+    p <- ggplot(dados, aes(x = genotipo, y = altura, group = 1)) +
       geom_line(aes(color = genotipo), size = 1.2) +
       geom_point(aes(color = genotipo), size = 3) +
       geom_text(aes(label = altura), vjust = -0.5, color = "black", size = 5)+
@@ -443,6 +494,7 @@ ALELIC <- function(type=NULL,ge=NULL){
            x = "Genotype", y = "Plant Height (cm)") +
       theme_minimal()+
       theme(legend.position = "none")
+    print(p)
   }
   }
   if(!is.null(ge)){
@@ -456,7 +508,7 @@ ALELIC <- function(type=NULL,ge=NULL){
         ambiente <- rep(ambientes, each = 2),
         altura <- c(efeito_ambiente_1, efeito_ambiente_2)
       )
-      ggplot(dados, aes(x = ambiente, y = altura,
+      p <- ggplot(dados, aes(x = ambiente, y = altura,
                         group = genotipo, color = genotipo)) +
         geom_line() +
         geom_point() +
@@ -464,6 +516,7 @@ ALELIC <- function(type=NULL,ge=NULL){
         labs(title = "No Genotype-Environment Interaction",
              x = "Environment", y = "Plant Height (cm)") +
         theme_minimal()
+      print(p)
     } else if(ge=="simple"){
       genotipo <- c("AA", "Aa")
       ambientes <- c("Env1", "Env2")
@@ -474,7 +527,7 @@ ALELIC <- function(type=NULL,ge=NULL){
         ambiente <- rep(ambientes, each = 2),
         altura <- c(efeito_ambiente_1, efeito_ambiente_2)
       )
-      ggplot(dados, aes(x = ambiente, y = altura,
+      p <- ggplot(dados, aes(x = ambiente, y = altura,
                         group = genotipo, color = genotipo)) +
         geom_line() +
         geom_point() +
@@ -482,6 +535,7 @@ ALELIC <- function(type=NULL,ge=NULL){
         labs(title = "Simple Genotype-Environment Interaction",
              x = "Environment", y = "Plant Height (cm)") +
         theme_minimal()
+      print(p)
     } else if(ge=="complex"){
       genotipo <- c("AA", "Aa")
       ambientes <- c("Env1", "Env2")
@@ -492,7 +546,7 @@ ALELIC <- function(type=NULL,ge=NULL){
         ambiente <- rep(ambientes, each = 2),
         altura <- c(efeito_ambiente_1, efeito_ambiente_2)
       )
-      ggplot(dados, aes(x = ambiente, y = altura,
+      p <- ggplot(dados, aes(x = ambiente, y = altura,
                         group = genotipo, color = genotipo)) +
         geom_line() +
         geom_point() +
@@ -500,6 +554,7 @@ ALELIC <- function(type=NULL,ge=NULL){
         labs(title = "Complex Genotype-Environment Interaction",
              x = "Environment", y = "Plant Height (cm)") +
         theme_minimal()
+      print(p)
     }
   }
 }
@@ -524,10 +579,10 @@ gga <- function(GEN, VAR, h2, P) {
   data <- data %>%
     group_by(VAR) %>%
     mutate(u=(mean(P))+(mean(P)*0.1))
-  ganho <- data %>%
+  ggain <- data %>%
     group_by(GEN) %>%
     mutate(AGV=h2*(P-u))
-  return(ganho)
+  return(ggain)
 }
 
 #'General parameters for selection

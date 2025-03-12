@@ -12,6 +12,10 @@ COI(var, VG, VF, generation = "all")
 \item{VG}{Column with genotypic variance}
 
 \item{VF}{Column with phenotypic variance}
+
+\item{generation}{Parameter to select the generation. Use 'all' to get the
+parameters for all the generations or 'F3', 'F4', 'F5' and 'F6' for just
+ one of the generations.}
 }
 \value{
 Returns the total, additive and dominance variance values based on
@@ -30,11 +34,15 @@ VF <- c(1.2, 1.5, 1.3, 1.6, 1.4)
 data <- data.frame(var,VG,VF)
 
 #Calculating for all generations
-with(data,COI(var,VG,VF,geracao = "all"))
+with(data,COI(var,VG,VF,generation = "all"))
 
-Calculating for just one generation
-with(data,COI(var,VG,VF,geracao = "F3"))
+#Calculating for just one generation
+with(data,COI(var,VG,VF,generation = "F3"))
 }
+}
+\references{
+Falconer, D. S., & Mackay, T. F. C. (1996). Introduction to quantitative
+genetics (4th ed.). Longman.
 }
 \author{
 Willyan Junior Adorian Bandeira

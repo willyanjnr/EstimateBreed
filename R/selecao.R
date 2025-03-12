@@ -596,7 +596,7 @@ gga <- function(GEN, VAR, h2, P) {
 #'@param POP The column with the population under improvement.
 #'@param GEN The column with the selected genotypes within the population.
 #'@param REP The column with the repetitions (if any).
-#'@param vars The column with the variable of interest.
+#'@param var The column with the variable of interest.
 #'@param K Selection pressure (Default 0.05).
 #'@param type Type of experiment (balanced or unbalanced). Use
 #''balanced' for balanced and 'unb' for unbalanced.

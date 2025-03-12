@@ -37,7 +37,9 @@ Imports:
     sommer,
     lme4,
     minque,
-    utils
+    utils,
+    car,
+    lmtest
 Suggests:
     knitr,
     rmarkdown,

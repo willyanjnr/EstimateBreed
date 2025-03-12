@@ -13,7 +13,7 @@ Jinks_Pooni(Pop, Var, VG, Test)
 
 \item{VG}{The column with the genotypic variance values}
 
-\item{Test}{The column with the witnesses' names}
+\item{Test}{The column with the controls names}
 }
 \description{
 Function for estimating the probability of extracting superior lines from

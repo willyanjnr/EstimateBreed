@@ -358,6 +358,9 @@ COI <- function(var, VG, VF, generation = "all") {
 #'@author Murilo Vieira Loro
 #'@author Leonardo Cesar Pradebon
 #'@author Jose Antonio Gonzalez da Silva
+#'@references
+#'Falconer, D. S., & Mackay, T. F. C. (1996). Introduction to quantitative
+#'genetics (4th ed.). Longman.
 #'@export
 
 reg_GP <- function(ind, Genitor, Progenie) {
@@ -613,51 +616,78 @@ gga <- function(GEN, VAR, h2, P) {
 #'https://doi.org/10.1155/2024/9946332
 #'@export
 
-genpar <- function(POP, GEN, REP = NULL, vars, K = 0.05, type = "balanced",
-                   check = FALSE) {
+genpar <- function(POP,GEN,REP,var,K = 0.05,type = "balanced",check = FALSE) {
 
-  if (is.null(REP)) {
-    stop("Please infomr the replications", call. = FALSE)
-  }
+  POP <- enquo(POP)
+  GEN <- enquo(GEN)
+  REP <- enquo(REP)
+  var <- enquo(var)
+  data <- tibble(POP = !!POP, GEN = !!GEN, REP = !!REP, var = !!var) %>%
+    mutate(across(c(POP, GEN, REP), as.factor))
+  var_name <- names(data)[4]
 
-  varc <- data.frame(POP, GEN, REP)
-  varc$POP <- as.factor(varc$POP)
-  varc$GEN <- as.factor(varc$GEN)
-  varc$REP <- as.factor(varc$REP)
+  for (pop_level in levels(data$POP)) {
+    data_pop <- filter(data, POP == pop_level)
+    cat("\n\n===== Analyzing Population:", pop_level, "=====\n\n")
+    model <- aov(data_pop[[var_name]] ~ GEN + REP, data = data_pop)
+    ANOVA_table <- summary(model)[[1]]
+    MSg <- ANOVA_table["GEN", "Mean Sq"]
+    MSe <- ANOVA_table["Residual", "Mean Sq"]
+    pvalue <- ANOVA_table["GEN", "Pr(>F)"]
+    sigmaG <- (MSg - MSe) / length(unique(data_pop$REP))
+    sigmaE <- MSe
+    sigmaP <- sigmaG + sigmaE
+    ECV <- (sqrt(sigmaE) / mean(data_pop[[var_name]])) * 100
+    GCV <- (sqrt(sigmaG) / mean(data_pop[[var_name]])) * 100
+    PCV <- (sqrt(sigmaP) / mean(data_pop[[var_name]])) * 100
+    H2 <- sigmaG / sigmaP
+    GA <- K * sqrt(sigmaG)
+    GAM <- (GA / mean(data_pop[[var_name]])) * 100
 
-  for (var_name in vars) {
-    if (!(var_name %in% colnames(dados))) {
-      stop(paste("The variable", var_name, "does not exist in the dataset."),
-           call. = FALSE)
+    if (check==TRUE) {
+      cat("Performing assumption tests...\n")
+      model_residuals <- residuals(model)
+      fitted_values <- fitted(model)
+      shapiro_test <- shapiro.test(model_residuals)
+      bartlett_test <- bartlett.test(data_pop[[var_name]] ~ data_pop$GEN)
+      levene_test <- leveneTest(data_pop[[var_name]] ~ data_pop$GEN,
+                                data = data_pop)
+      bp_test <- bptest(model)
+      cat("Shapiro-Wilk normality test p-value:", shapiro_test$p.value, "\n")
+      if (shapiro_test$p.value < 0.05) {
+        cat("Normality assumption is NOT met for population ", pop_level, "!\n")
+      }
+      cat("Bartlett homogeneity test p-value:", bartlett_test$p.value, "\n")
+      if (bartlett_test$p.value < 0.05) {
+        cat("Homogeneity of variances assumption is NOT met for population ",
+            pop_level, "!\n")
+      }
+      cat("Levene homogeneity test p-value:", levene_test$`Pr(>F)`[1], "\n")
+      if (levene_test$`Pr(>F)`[1] < 0.05) {
+        cat("Homogeneity of variances assumption is NOT met for population ",
+            pop_level, "!\n")
+      }
+      cat("Breusch-Pagan heteroscedasticity test p-value:", bp_test$p.value,
+          "\n")
+      if (bp_test$p.value < 0.05) {
+        cat("Heteroscedasticity detected for population ", pop_level, "!\n")
+      }
     }
-
-    varc <- varc %>% mutate(!!var_name := dados[[var_name]])
-    X <- tapply(varc[[var_name]], POP, mean)
-
-    if (type == "balanced") {
-      repet <- length(unique(varc$REP))
-      model <- aov(varc[[var_name]] ~ GEN + REP, data = varc)
-      Yearva_table <- summary(model)[[1]]
-      MSg <- Yearva_table["GEN", "Mean Sq"]
-      MSe <- Yearva_table["Residual", "Mean Sq"]
-      pvalue <- Yearva_table["GEN", "Pr(>F)"]
-
-    } else if (type=="unb"){
-      #Modelo Linear Misto ou YearVA tipo 3
-    }
-
     if (pvalue >= 0.05) {
-      print(paste("Results for the variable:", var_name))
-      print(Yearva_table)
-      warning("Effect of genotypes not significant for the variable ", var_name, "!", call. = FALSE)
+      cat("Genotypic effect was NOT significant for population:", pop_level,
+          "\n\n")
+      print(ANOVA_table)
+      warning("Genotypic effect was not significant for variable ", var_name,
+              " in population ", pop_level, "!", call. = FALSE)
     } else {
+      cat("Genotypic effect was significant for population:", pop_level, "\n\n")
       result <- data.frame(
-        Parameters = c("sigmaE", "sigmaG", "sigmaP", "ECV", "GCV", "PCV", "H2", "GA", "GAM"),
-        Valor = c(sigmaE, sigmaG, sigmaP, ECV, GCV, PCV, H2, GA, GAM)
+        Parameters = c("sigmaE", "sigmaG", "sigmaP", "ECV", "GCV", "PCV",
+                       "H2", "GA", "GAM"),
+        Value = c(sigmaE, sigmaG, sigmaP, ECV, GCV, PCV, H2, GA, GAM)
       )
-      colnames(result)[which(colnames(result) == "Valor")] <- var_name
-      print(paste("Results for the variable:", var_name))
-      print(Yearva_table)
+      colnames(result)[which(colnames(result) == "Value")] <- var_name
+      print(ANOVA_table)
       print(result)
     }
   }
@@ -694,7 +724,7 @@ tamef <- function(GEN,SI,NE){
 #'@param Pop The column with the population name
 #'@param Var The column with the variable name
 #'@param VG The column with the genotypic variance values
-#'@param Test The column with the witnesses' names
+#'@param Test The column with the controls names
 #'@author Willyan Junior Adorian Bandeira
 #'@author Ivan Ricardo Carvalo
 #'@author Murilo Vieira Loro
@@ -708,7 +738,6 @@ tamef <- function(GEN,SI,NE){
 #'@export
 
 Jinks_Pooni <- function(Pop, Var, VG, Test){
-#Finalizar
   Population <- Pop
   Var <- Var
   VG <- VG

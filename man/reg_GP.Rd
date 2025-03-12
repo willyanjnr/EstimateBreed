@@ -16,6 +16,10 @@ reg_GP(ind, Genitor, Progenie)
 \description{
 Estimation of Genitor x Progeny Regression
 }
+\references{
+Falconer, D. S., & Mackay, T. F. C. (1996). Introduction to quantitative
+genetics (4th ed.). Longman.
+}
 \author{
 Willyan Junior Adorian Bandeira
 

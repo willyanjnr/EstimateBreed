@@ -4,7 +4,6 @@
 #' @import ggplot2
 #' @import hrbrthemes
 #' @import broom
-#' @import purrr
 #' @import ggrepel
 #' @import grid
 #' @import httr
@@ -22,7 +21,9 @@
 #' @importFrom grDevices rgb
 #' @importFrom graphics boxplot layout
 #' @importFrom stats aggregate aov coef lm nls nls.control pnorm sd setNames
-#'
+#' @importFrom car some leveneTest
+#' @importFrom lmtest bptest
+#' @importFrom stats shapiro.test bartlett.test
 #'
 #' @export
 packimp <- function() {

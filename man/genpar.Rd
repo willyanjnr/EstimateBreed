@@ -4,7 +4,7 @@
 \alias{genpar}
 \title{General parameters for selection}
 \usage{
-genpar(POP, GEN, REP = NULL, vars, K = 0.05, type = "balanced", check = FALSE)
+genpar(POP, GEN, REP, var, K = 0.05, type = "balanced", check = FALSE)
 }
 \arguments{
 \item{POP}{The column with the population under improvement.}
@@ -13,8 +13,6 @@ genpar(POP, GEN, REP = NULL, vars, K = 0.05, type = "balanced", check = FALSE)
 
 \item{REP}{The column with the repetitions (if any).}
 
-\item{vars}{The column with the variable of interest.}
-
 \item{K}{Selection pressure (Default 0.05).}
 
 \item{type}{Type of experiment (balanced or unbalanced). Use
@@ -22,6 +20,8 @@ genpar(POP, GEN, REP = NULL, vars, K = 0.05, type = "balanced", check = FALSE)
 
 \item{check}{Logical argument. Checks the model's assumptions
 statistical if the value is equal to TRUE.}
+
+\item{vars}{The column with the variable of interest.}
 }
 \description{
 Function for determining selection parameters, based on an experiment

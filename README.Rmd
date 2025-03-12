@@ -44,7 +44,8 @@ library(EstimateBreed)
 
 #Obtain environmental deviations
 data("desvamb")
-with(desvamb,desv_clim(ENV,TMED,PREC))
+DPclim <- with(desvamb,desv_clim(ENV,TMED,PREC))
+DPclim
 # A tibble: 3 × 5
 #  ENV   STMED TMEDR SPREC PRECIR
 #  <chr> <dbl> <dbl> <dbl>  <dbl>
@@ -54,7 +55,8 @@ with(desvamb,desv_clim(ENV,TMED,PREC))
 
 #Get the ISGR
 data("genot")
-with(genot, isgr(GEN, ENV, NG, MG, CICLO))
+isgr_index <- with(genot, isgr(GEN,ENV,NG,MG,CICLO))
+isgr_index
 #    Gen Env      ISGR
 # 26 L454  E1  6.489941
 # 22 L455  E1  7.084315

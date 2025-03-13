@@ -82,6 +82,43 @@ al. (2024)](https://www.cropj.com/Carvalho_18_12_2024_825_830.pdf).
     # 3  L277  E2 74.756384
     # 2  L162  E2 86.543916
 
+Selection of transgressive genotypes with the selection differential
+(mean and standard deviations).
+
+
+    library(EstimateBreed)
+
+    Gen <- paste0("G", 1:20)
+    Var <- round(rnorm(20, mean = 3.5, sd = 0.8), 2)
+    Control <- rep(3.8, 20)
+
+    data <- data.frame(Gen,Var,Control)
+
+    with(data,transg(Gen,Var,Control))
+    ---------------------------------------------------------------------
+    Selection of Transgressive Genotypes - Selection Differential (SD)
+    ---------------------------------------------------------------------
+    Parameters:
+    ---------------------------------------------------------------------
+    Overall Mean         : 3.566
+    Control Mean         : 3.800
+    Standard Deviation   : 0.603
+    Mean + 1SD           : 4.169
+    Mean + 2SD           : 4.771
+    Mean + 3SD           : 5.374
+
+    ---------------------------------------------------------------------
+    Genotypes above each threshold:
+    ---------------------------------------------------------------------
+    Genotypes above Control Mean : G4, G7, G8, G9, G12, G14,
+      G20 
+    Genotype above Overall Mean : G4, G7, G8, G9, G12, G14,
+      G16, G18, G20 
+    Genotypes above Mean + 1SD : G7, G9, G20 
+    Genotypes above Mean + 2SD : G7 
+    Genotypes above Mean + 3SD     : None
+    ---------------------------------------------------------------------
+
 ## Estimation of environmental variables and processes
 
 Predict ∆T to determine the ideal times to apply agricultural

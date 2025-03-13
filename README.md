@@ -95,6 +95,11 @@ Selection of transgressive genotypes with the selection differential
     data <- data.frame(Gen,Var,Control)
 
     with(data,transg(Gen,Var,Control))
+
+Returns the general parameters and the genotypes selected for each
+treshold. Also plot a representative graph of the selected genotypes
+based on the mean and standard deviations.
+
     ---------------------------------------------------------------------
     Selection of Transgressive Genotypes - Selection Differential (SD)
     ---------------------------------------------------------------------

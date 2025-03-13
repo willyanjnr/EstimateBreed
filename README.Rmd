@@ -102,6 +102,11 @@ Control <- rep(3.8, 20)
 data <- data.frame(Gen,Var,Control)
 
 with(data,transg(Gen,Var,Control))
+```
+
+Returns the general parameters and the genotypes selected for each treshold. 
+Also plot a representative graph of the selected genotypes based on the mean and standard deviations.
+``` r
 ---------------------------------------------------------------------
 Selection of Transgressive Genotypes - Selection Differential (SD)
 ---------------------------------------------------------------------

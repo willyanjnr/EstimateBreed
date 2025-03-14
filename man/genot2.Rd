@@ -3,7 +3,7 @@
 \docType{data}
 \name{genot2}
 \alias{genot2}
-\title{Data Set for Seed Vigor Extraction}
+\title{Data Set for obtaining genetic parameters.}
 \format{
 A data.frame with 60 observations and 4 variables:
 \describe{

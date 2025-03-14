@@ -23,6 +23,15 @@ Retorna o ind fototermal
 Calculation of the photothermal index based on average temperature and
 radiation
 }
+\examples{
+\donttest{
+library(EstimateBreed)
+data("termaldata")
+
+termal <- with(termaldata,ptermal(Day,Temperature,Radiation,Period))
+termal
+}
+}
 \references{
 Zanon, A. J., & Tagliapietra, E. L. (2022). Ecofisiologia da soja:
 Visando altas produtividades (2a ed.). Field Crops.

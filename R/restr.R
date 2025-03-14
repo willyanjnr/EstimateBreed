@@ -15,12 +15,14 @@
 #'@author Murilo Vieira Loro
 #'@author Leonardo Cesar Pradebon
 #'@author Jose Antonio Gonzalez da Silva
+#'@return Describes controls that were removed from the dataset to restrict
+#'variability.
 #'@references
 #'Carvalho, I. R., Silva, J. A. G. da, Moura, N. B., Ferreira, L. L.,
 #'Lautenchleger, F., & Souza, V. Q. de. (2023). Methods for estimation of
 #'genetic parameters in soybeans: An alternative to adjust residual variability.
 #'Acta Scientiarum. Agronomy, 45, e56156.
-#'https://doi.org/10.4025/actasciagron.v45i1.56156
+#'\doi{10.4025/actasciagron.v45i1.56156}
 #'@export
 #'@examples
 #'\donttest{
@@ -68,12 +70,12 @@ restr <- function(TEST, REP, Xi, scenario = NULL, zstat = NULL) {
     if (scenario == "restr") {
       colnames(ream) <- c("GEN", "REP", "Xi")
       assign("Control", ream, envir = .estimatebreed_env)
-      return(ream)  # Adiciona o return com o objeto ream
+      return(ream)
     } else if (scenario == "original") {
       datatest <- data.frame(TEST, REP, Xi)
       colnames(datatest) <- c("GEN", "REP", "Xi")
       assign("Control", datatest, envir = .estimatebreed_env)
-      return(datatest)  # Retorna o data frame datatest
+      return(datatest)
     }
   }
 
@@ -94,70 +96,5 @@ restr <- function(TEST, REP, Xi, scenario = NULL, zstat = NULL) {
       assign("Control", reamost_orig, envir = .estimatebreed_env)
       return(reamost_orig)
     }
-  }
-}
-
-#'Estimation of variance components by restricting the variability of the
-#'controls.
-#'@description
-#'Estimation of variance components and genetic parameters from the restriction
-#'of controls values
-#'@param GEN The column with the name of the genotypes (without controls).
-#'@param REP The column with the repetitions (if any).
-#'@param Xi The column with the observed value for the variable in a given genotype.
-#'@param approach Method to be used for estimating variance components. Use 'apI'
-#' for parent-offspring regression, 'apII' for the of the sum of squares of
-#' augmented blocks with intercalary parents, 'apIII' for the method with linear
-#'  mixed models with random genetic effects.
-#'@param zstat Logical argument. Applies Z-notation normalization if 'TRUE'.
-#'@author Willyan Junior Adorian Bandeira
-#'@author Ivan Ricardo Carvalo
-#'@author Murilo Vieira Loro
-#'@author Leonardo Cesar Pradebon
-#'@author Jose Antonio Gonzalez da Silva
-#'@references
-#'Carvalho, I. R., Silva, J. A. G. da, Moura, N. B., Ferreira, L. L.,
-#'Lautenchleger, F., & Souza, V. Q. de. (2023). Methods for estimation of
-#'genetic parameters in soybeans: An alternative to adjust residual variability.
-#'Acta Scientiarum. Agronomy, 45, e56156.
-#'https://doi.org/10.4025/actasciagron.v45i1.56156
-#'@export
-
-cvar <- function(GEN,REP,Xi,approach=NULL,zstat=NULL){
-
-  if(is.null(approach)){
-    stop("Please provide a method for estimating variance components!")
-  }
-  if(is.null(zstat)){
-    stop("Please inform if standardization will be applied!")
-  }
-  if(exists("Control")){
-    control <- Control
-    genot <- data.frame(GEN,REP,Xi)
-    if(zstat==F){
-      datag <- rbind(genot,control)
-    } else if(zstat==T){
-      media <- mean(genot$Xi)
-      desvio <- sd(genot$Xi)
-      datag <- genot %>%
-        mutate(znorm=(Xi-media)/desvio)
-      datag <- rbind(genot,control)
-    }
-  } else {
-    stop("You have to carry out the operations of the restr function for the
-         controls")
-  }
-
-  #apIII Modelo Linear Misto
-  if(approach=="apIII"){
-    mod1 <- lmm(Xi~+1|GEN,method=c("reml"),data=datag)
-    assign("mod1",mod1,envir = .estimatebreed_env)
-
-    V_GEN <- mod1$Var$Xi["V(GEN)", "Est"]
-    V_e <- mod1$Var$Xi["V(e)", "Est"]
-    h2 <- V_GEN / (V_GEN + V_e)
-    Ac <- sqrt(h2)
-    param <- data.frame(V_GEN,V_e,h2,Ac)
-    print(param)
   }
 }

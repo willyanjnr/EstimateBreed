@@ -199,7 +199,7 @@
 #' @source Real field data for use.
 "vig"
 
-#' Data Set for Seed Vigor Extraction
+#' Data Set for obtaining genetic parameters.
 #'
 #' Dataset with two breeding populations, 20 genotypes per population and three
 #'  replicates per genotype.
@@ -213,6 +213,18 @@
 #' }
 #' @source Simulated data for use.
 "genot2"
+
+#' Data Set with air temperature and incident radiation.
+#'
+#' @format A data.frame with 100 observations and 4 variables:
+#' \describe{
+#'   \item{Day}{Column with cycle lenght.}
+#'   \item{Period}{Column with two periods (vegetative and reproductive).}
+#'   \item{Temperature}{Average air temperature values.}
+#'   \item{Radiation}{Incident radiation values.}
+#' }
+#' @source Simulated data for use.
+"termaldata"
 
 .estimatebreed_env <- new.env(parent = emptyenv())
 

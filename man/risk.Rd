@@ -52,7 +52,7 @@ with(clima, risk(DY, MO, TMED, RH, disease = "rust"))
 de Oliveira Engers, L.B., Radons, S.Z., Henck, A.U. et al.
 Evaluation of a forecasting system to facilitate decision-making for the
 chemical control of Asina soybean rust. Trop. plant pathol. 49, 539-546 (2024).
-https://doi.org/10.1007/s40858-024-00649-1
+\doi{10.1007/s40858-024-00649-1}
 }
 \author{
 Willyan Junior Adorian Bandeira

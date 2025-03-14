@@ -3,7 +3,6 @@
 ^LICENSE\.md$
 ^README\.Rmd$
 ^doc$
-^Meta$
 ^\.gitignore$
 ^\.Rproj\.user$
 ^\.git/
@@ -16,3 +15,4 @@
 ^\.Rproj\.user/
 ^\.github/
 ^\.Rcheck/
+^Meta$

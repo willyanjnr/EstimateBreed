@@ -55,7 +55,7 @@ Bandeira, W. J. A., Carvalho, I. R., Loro, M. V., da Silva, J. A. G.,
 Dalla Roza, J. P., Scarton, V. D. B., Bruinsma, G. M. W., & Pradebon, L. C. (2024).
 Identifying soybean progenies with high grain productivity and stress resilience
 to abiotic stresses. Aust J Crop Sci, 18(12), 825-830.
-https://doi.org/10.21475/ajcs.24.18.12.p98
+\doi{10.21475/ajcs.24.18.12.p98}
 }
 \author{
 Willyan Junior Adorian Bandeira

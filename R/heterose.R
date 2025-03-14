@@ -24,16 +24,16 @@
 #'
 #' data("maize")
 #' #Extract heterosis and heterobeltiosis
-#' with(maize,heterose(GEN,GM,GP,PR,REP,param="all"))
+#' with(maize,het(GEN,GM,GP,PR,REP,param="all"))
 #'
 #' #Only extract heterosis
-#' with(maize,heterose(GEN,GM,GP,PR,REP,param = "het"))
+#' with(maize,het(GEN,GM,GP,PR,REP,param = "het"))
 #'
 #' #Extract only heterobeltiosis
-#' with(maize,heterose(GEN,GM,GP,PR,REP,param = "hetb"))
+#' with(maize,het(GEN,GM,GP,PR,REP,param = "hetb"))
 #'}
 
-heterose <- function(GEN, GM, GP, PR, REP, param = "all") {
+het <- function(GEN, GM, GP, PR, REP, param = "all") {
 
   data <- data.frame(GEN, GM, GP, PR, REP)
   model1 <- aov(REP ~ GEN, data = data)

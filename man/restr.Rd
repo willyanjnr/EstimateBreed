@@ -19,6 +19,10 @@ or 'restr' to apply the restriction.}
 
 \item{zstat}{Logical argument. Applies Z-notation normalization if 'TRUE'.}
 }
+\value{
+Describes controls that were removed from the dataset to restrict
+variability.
+}
 \description{
 Method for restricting the variability of control proposed by Carvalho et al.
 (2023). It uses the restriction of the mean plus or minus one standard deviation.
@@ -46,7 +50,7 @@ Carvalho, I. R., Silva, J. A. G. da, Moura, N. B., Ferreira, L. L.,
 Lautenchleger, F., & Souza, V. Q. de. (2023). Methods for estimation of
 genetic parameters in soybeans: An alternative to adjust residual variability.
 Acta Scientiarum. Agronomy, 45, e56156.
-https://doi.org/10.4025/actasciagron.v45i1.56156
+\doi{10.4025/actasciagron.v45i1.56156}
 }
 \author{
 Willyan Junior Adorian Bandeira

@@ -12,14 +12,20 @@ linearest(indep, dep, type = NULL, alpha = 0.05)
 \item{dep}{Name of the dependent variable column}
 
 \item{type}{Type of analysis to be carried out. Use 'MET' to extract the
-maximum technical efficiency, 'x3' to obtain the maximum and minimum points
-and 'plateau' to extract the parameters using the plateau function.}
+maximum technical efficiency or 'plateau' for plateau regression.}
 
 \item{alpha}{Significance of the test.}
 }
 \description{
-Determination of maximum technical efficiency (MET), maximum and minimum points
-and plateau function.
+Determination of maximum technical efficiency (MET) and plateau regression.
+}
+\examples{
+\donttest{
+library(EstimateBreed)
+data("mtcars")
+
+with(mtcars,linearest(wt,mpg,type = "MET"))
+}
 }
 \author{
 Willyan Junior Adorian Bandeira

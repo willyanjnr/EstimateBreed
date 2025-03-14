@@ -27,7 +27,7 @@
 #'A Framework for Selection of High-Yielding and Drought-tolerant
 #'Genotypes of Barley: Applying Yield-Based Indices and Multi-index Selecion
 #'Models. Journal of Crop Health 76, 601-616 (2024).
-#'https://doi.org/10.1007/s10343-024-00981-1
+#'\doi{10.1007/s10343-024-00981-1}
 #'@export
 #'@examples
 #'\donttest{
@@ -36,13 +36,13 @@
 #'data("aveia")
 #'
 #'#General
-#'with(aveia,estresse(GEN,MC,MG,index = "ALL",bygen=TRUE))
+#'with(aveia,stind(GEN,MC,MG,index = "ALL",bygen=TRUE))
 #'
 #'#Only the desired index
-#'with(aveia,estresse(GEN,MC,MG,index = "STI",bygen=TRUE))
+#'with(aveia,stind(GEN,MC,MG,index = "STI",bygen=TRUE))
 #'}
 
-estresse <- function(GEN,YS,YC,index="ALL",bygen=TRUE,plot=FALSE,xlab="Genotype",ylab="Values",...){
+stind <- function(GEN,YS,YC,index="ALL",bygen=TRUE,plot=FALSE,xlab="Genotype",ylab="Values",...){
   GEN1 <- as.factor(GEN)
   YS1 <- YS
   YC1 <- YC
@@ -370,7 +370,7 @@ estresse <- function(GEN,YS,YC,index="ALL",bygen=TRUE,plot=FALSE,xlab="Genotype"
 #'S., & Junges, A. H. (2024). Indice de Temperatura e Umidade (ITU) ao longo do
 #'verao de 2021/2022 e estimativas dos impactos na bovinocultura de leite no Rio
 #'Grande do Sul, Brasil. Ciencia Animal Brasileira, 2,5, e-77035P.
-#'https://doi.org/10.1590/1809-6891v25e-77035Pexport
+#'\doi{10.1590/1809-6891v25e-77035Pexport}
 #'@export
 
 itu <- function(AAT,RH){

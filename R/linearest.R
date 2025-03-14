@@ -1,18 +1,23 @@
 #'Estimates using polynomial equations.
 #'@description
-#'Determination of maximum technical efficiency (MET), maximum and minimum points
-#'and plateau function.
+#'Determination of maximum technical efficiency (MET) and plateau regression.
 #'@param indep Name of the column with the independent variable.
 #'@param dep Name of the dependent variable column
 #'@param type Type of analysis to be carried out. Use 'MET' to extract the
-#'maximum technical efficiency, 'x3' to obtain the maximum and minimum points
-#'and 'plateau' to extract the parameters using the plateau function.
+#'maximum technical efficiency or 'plateau' for plateau regression.
 #'@param alpha Significance of the test.
 #'@author Willyan Junior Adorian Bandeira
 #'@author Ivan Ricardo Carvalo
 #'@author Murilo Vieira Loro
 #'@author Leonardo Cesar Pradebon
 #'@author Jose Antonio Gonzalez da Silva
+#'@examples
+#'\donttest{
+#'library(EstimateBreed)
+#'data("mtcars")
+#'
+#'with(mtcars,linearest(wt,mpg,type = "MET"))
+#'}
 #'@export
 
 linearest <- function(indep,dep,type=NULL,alpha=0.05){
@@ -38,40 +43,6 @@ linearest <- function(indep,dep,type=NULL,alpha=0.05){
       print(resumo)
       return("The quadratic coefficient is not significant")
     }}
-
-  if (type == "x3"){
-
-    mod2 <- lm(dep ~ poly(indep,3,raw = T))
-    coeff <- coef(mod2)
-    cat("Coefficients of the cubic model:\n",coeff,"\n")
-
-    b0 <- coeff[1]
-    b1 <- coeff[2]
-    b3 <- coeff[3]
-    b4 <- coeff[4]
-    der1 <- function(x) b1 + 2 * b2 * x + 3 * b3 * x^2
-
-
-    pontos_criticos <- polyroot(c(b1, 2 * b2, 3 * b3))
-    pontos_criticos <- Re(pontos_criticos[Im(pontos_criticos) == 0])
-
-    cat("Critical points (x):\n", pontos_criticos, "\n")
-
-
-    derivada_2 <- function(x) 2 * b2 + 6 * b3 * x
-
-
-    for (ponto in pontos_criticos) {
-      valor_segunda_derivada <- derivada_2(ponto)
-      if (valor_segunda_derivada > 0) {
-        cat("Point x =", ponto, "is a minimum.\n")
-      } else if (valor_segunda_derivada < 0) {
-        cat("Point x =", ponto, "is a maximum.\n")
-      } else {
-        cat("Point x =", ponto, "is an inflection point.\n")
-      }
-    }
-
   if (type == "plateau") {
     tryCatch({
       L_init <- max(dep)
@@ -97,8 +68,5 @@ linearest <- function(indep,dep,type=NULL,alpha=0.05){
       cat("Model fitting error:", e$message, "\n")
       return(NULL)
     })
-  } else {
-    stop("Type of analysis not recognized")
   }
-}
 }

@@ -83,7 +83,7 @@ Bhattarai, S., Shrestha, S., Yadav, B., Chaudhary, P., & Bhujel, S. (2024).
 Genetic variability, character association, path coefficient, and diversity
 analysis of rice (Oryza sativa L.) genotypes based on agro-morphological
 traits. International Journal of Agronomy, 2024, Article ID 9946332.
-https://doi.org/10.1155/2024/9946332
+\doi{10.1155/2024/9946332}
 }
 \author{
 Willyan Junior Adorian Bandeira

@@ -139,7 +139,7 @@ rend_ind <- function(GEN,NG2M,MG,MC,RG,stat="all",...){
 #'J. P., & Sangiovo, J. P. (2024). Seed and grain yield and quality of wheat
 #'subjected to advanced harvest using a physiological ripening process.
 #'Revista Engenharia na Agricultura - REVENG, 32, 54-64.
-#'https://doi.org/10.13083/reveng.v32i1.17394
+#'\doi{10.13083/reveng.v32i1.17394}
 #'@export
 #'@examples
 #' \donttest{
@@ -153,7 +153,7 @@ rend_ind <- function(GEN,NG2M,MG,MC,RG,stat="all",...){
 #'with(trigo,indviab(TEST,MGE,ME))
 #'
 #'#Spikelet deposition index in the ear
-#'#'with(trigo,indviab(TEST,NEE,CE))
+#'with(trigo,indviab(TEST,NEE,CE))
 #' }
 
 indviab <- function(GEN,var1,var2,ylab="Index",xlab="Genotype",stat="all",plot=F){

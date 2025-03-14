@@ -405,11 +405,10 @@ optemp <-function(VAR,crop = NULL,ylab = "Meteorological Atribute",
 #'& Tura, E. F. (2024). Improving understanding of the plastochron of
 #'determinate and indeterminate soybean cultivars. Revista Brasileira de
 #'Engenharia Agricola e Ambiental, 28(10), e278299.
-#'https://doi.org/10.1590/1807-1929/agriambi.v28n10e278299
+#'\doi{10.1590/1807-1929/agriambi.v28n10e278299}
 #'
 #'Fehr, W. R., & Caviness, C. E. (1977). Stages of soybean development.
 #'Iowa State University of Science and Technology Special Report, 80, 1-11.
-#'@export
 #'@examples
 #'\donttest{
 #'library(EstimateBreed)
@@ -417,6 +416,8 @@ optemp <-function(VAR,crop = NULL,ylab = "Meteorological Atribute",
 #'
 #'with(pheno, plast(GEN,TMED,EST,NN,habit="ind",plot=TRUE))
 #'}
+#'@export
+
 
 plast <- function(GEN, AAT, STAD, NN, habit = "ind", plot = FALSE) {
   Tb <- 7.6
@@ -608,6 +609,14 @@ plast <- function(GEN, AAT, STAD, NN, habit = "ind", plot = FALSE) {
 #'@references
 #'Zanon, A. J., & Tagliapietra, E. L. (2022). Ecofisiologia da soja:
 #'Visando altas produtividades (2a ed.). Field Crops.
+#'@examples
+#'\donttest{
+#'library(EstimateBreed)
+#'data("termaldata")
+#'
+#'termal <- with(termaldata,ptermal(Day,Temperature,Radiation,Period))
+#'termal
+#'}
 #'@export
 
 ptermal <- function(DAY, AAT, RAD, PER) {

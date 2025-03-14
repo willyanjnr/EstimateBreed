@@ -20,11 +20,6 @@ Authors@R:
     person("Jose Antonio Gonzalez", "da Silva",
            role = c("aut","ctb"),
            comment = c(ORCID = "0000-0002-9335-2421")))
-Author: Willyan Jr. A. Bandeira <willyanpacm@gmail.com>, 
-    Ivan R. Carvalho <carvalho.irc@gmail.com>, 
-    Murilo V. Loro <muriloloro@gmail.com>,
-    Leonardo C. Pradebon <leonardopradebon@gmail.com>, 
-    Jose A. G. da Silva <jagsfaem@yahoo.com.br>
 Maintainer: Willyan Jr. A. Bandeira <bandeira.wjab@gmail.com>
 Description: Performs analyzes and estimates of environmental covariates 
     and genetic parameters related to selection strategies and development 

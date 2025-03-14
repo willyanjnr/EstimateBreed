@@ -20,7 +20,8 @@
 #' @importFrom purrr flatten map map_dbl map2 map2_dbl
 #' @importFrom grDevices rgb
 #' @importFrom graphics boxplot layout
-#' @importFrom stats aggregate aov coef lm nls nls.control pnorm sd setNames residuals fitted
+#' @importFrom stats aggregate aov coef lm nls nls.control pnorm sd setNames
+#'  residuals fitted na.omit
 #' @importFrom car some leveneTest
 #' @importFrom lmtest bptest
 #' @importFrom stats shapiro.test bartlett.test

@@ -347,65 +347,7 @@ COI <- function(var, VG, VF, generation = "all") {
 }
 
 ###
-#'Regression Genitor Progeny
-#'@description
-#'Estimation of Genitor x Progeny Regression
-#'@param ind description
-#'@param Genitor description
-#'@param Progenie description
-#'@author Willyan Junior Adorian Bandeira
-#'@author Ivan Ricardo Carvalo
-#'@author Murilo Vieira Loro
-#'@author Leonardo Cesar Pradebon
-#'@author Jose Antonio Gonzalez da Silva
-#'@references
-#'Falconer, D. S., & Mackay, T. F. C. (1996). Introduction to quantitative
-#'genetics (4th ed.). Longman.
-#'@export
-
-reg_GP <- function(ind, Genitor, Progenie) {
-
-  ind <- as.factor(ind)
-  Genitor <- Genitor
-  Progenie <- Progenie
-
-  model <- lm(Progenie ~ Genitor)
-
-  intercept <- coef(model)[1]
-  slope <- coef(model)[2]
-  Progenie_umPai<-0.5*slope
-  Progenie_MPais<-slope
-  Meio_Irmao<-slope*0.25
-  Irmao_Completo<-slope*0.50
-
-  equation <- paste("y =", round(intercept, 2), "+", round(slope, 2), "* x")
-
-  dados<-data.frame(Genitor, Progenie)
-
-  grafico<-ggplot(dados, aes(x=Genitor, y=Progenie)) +
-    geom_line()+
-    geom_point()+geom_smooth(method = "lm", se = T, color = "blue")+
-    theme_minimal()
-
-  print(grafico)
-
-  result<-list(
-    equation = equation,
-    coefficients = coef(model),
-    Progenie_umPai=Progenie_umPai,
-    Progenie_MPais=Progenie_MPais,
-    Meio_Irmao=Meio_Irmao,
-    Irmao_Completo=Irmao_Completo,
-    grafico=grafico)
-
-  cat("\n-----------------------------------------------------------------\n")
-  cat("Parameters")
-  cat("\n-----------------------------------------------------------------\n")
-  print(result)
-}
-
-###
-#'Allelic interactions
+#'Allelic and genotype-environment interactions
 #'@description
 #'Didactic function - Examples of allelic and gene interactions
 #'@param type Type of allelic interaction. Use 'ad' for additivity, 'dom'
@@ -424,18 +366,18 @@ reg_GP <- function(ind, Genitor, Progenie) {
 #'\donttest{
 #'library(EstimateBreed)
 #'
-#'ALELIC (type="ad")
-#'ALELIC (type="dom")
-#'ALELIC (type="domp")
-#'ALELIC (type="sob")
+#'didint (type="ad")
+#'didint (type="dom")
+#'didint (type="domp")
+#'didint (type="sob")
 #'
-#'ALELIC (ge="aus")
-#'ALELIC (ge="simple")
-#'ALELIC (ge="complex")
+#'didint (ge="aus")
+#'didint (ge="simple")
+#'didint (ge="complex")
 #'}
 #'@export
 
-ALELIC <- function(type=NULL,ge=NULL){
+didint <- function(type=NULL,ge=NULL){
 
   if(!is.null(type)){
   if(type=="ad"){
@@ -562,32 +504,6 @@ ALELIC <- function(type=NULL,ge=NULL){
   }
 }
 
-#'Additive Genetic Gain
-#'@description
-#'Estimates the additive genetic gain, as described by Falconer (1987).
-#'@param GEN Vector or dataframe containing the genotypes to be selected.
-#'@param VAR Variable of interest for analysis.
-#'@param h2 Heritability of the character (a value between 0 and 1).
-#'@param P Performance of the progeny (a numerical value or vector).
-#'@author Willyan Junior Adorian Bandeira
-#'@author Ivan Ricardo Carvalo
-#'@author Murilo Vieira Loro
-#'@author Leonardo Cesar Pradebon
-#'@author Jose Antonio Gonzalez da Silva
-#'@export
-
-gga <- function(GEN, VAR, h2, P) {
-
-  data <- data.frame(GEN,VAR,h2,P)
-  data <- data %>%
-    group_by(VAR) %>%
-    mutate(u=(mean(P))+(mean(P)*0.1))
-  ggain <- data %>%
-    group_by(GEN) %>%
-    mutate(AGV=h2*(P-u))
-  return(ggain)
-}
-
 #'General parameters for selection
 #'@description
 #'Function for determining selection parameters, based on an experiment
@@ -598,8 +514,6 @@ gga <- function(GEN, VAR, h2, P) {
 #'@param REP The column with the repetitions (if any).
 #'@param var The column with the variable of interest.
 #'@param K Selection pressure (Default 0.05).
-#'@param type Type of experiment (balanced or unbalanced). Use
-#''balanced' for balanced and 'unb' for unbalanced.
 #'@param check Logical argument. Checks the model's assumptions
 #'statistical if the value is equal to TRUE.
 #'@author Willyan Junior Adorian Bandeira
@@ -614,9 +528,14 @@ gga <- function(GEN, VAR, h2, P) {
 #'analysis of rice (Oryza sativa L.) genotypes based on agro-morphological
 #'traits. International Journal of Agronomy, 2024, Article ID 9946332.
 #'https://doi.org/10.1155/2024/9946332
+#'@examples
+#'\donttest{
+#'library(EstimateBreed)
+#'
+#'}
 #'@export
 
-genpar <- function(POP,GEN,REP,var,K = 0.05,type = "balanced",check = FALSE) {
+genpar <- function(POP,GEN,REP,var,K = 0.05,check = FALSE) {
 
   POP <- enquo(POP)
   GEN <- enquo(GEN)
@@ -694,67 +613,65 @@ genpar <- function(POP,GEN,REP,var,K = 0.05,type = "balanced",check = FALSE) {
 }
 
 #'Effective Population Size
+#'
 #'@description
-#'Estimated effective population size adapted from Morais (1997).
+#'Estimates the effective population size (\eqn{N_e}) adapted from Morais (1997).
+#'The function provides two different calculation methods: 'classic' and 'alternative'.
+#'
+#'The classic method follows the equation:
+#'
+#'\deqn{N_e = \frac{\left(\sum SI\right)^2}{\sum \left(\frac{SI^2}{NE}\right)}}
+#'
+#'The alternative method is calculated as:
+#'
+#'\deqn{N_e = \frac{4 \sum SI}{2 + \sum \left(\frac{SI}{NE}\right)}}
+#'
 #'@param GEN The column with the name of the genotype (progeny).
-#'@param SI The column with the number of individuals selected
+#'@param SI The column with the number of individuals selected.
 #'@param NE Number of individuals conducted during the selection period.
-#'@author Willyan Junior Adorian Bandeira
-#'@author Ivan Ricardo Carvalo
-#'@author Murilo Vieira Loro
-#'@author Leonardo Cesar Pradebon
-#'@author Jose Antonio Gonzalez da Silva
+#'@param remove_na Logical argument. If 'TRUE', missing values will be removed.
+#'@param method Character string specifying the calculation method. Options are
+#'classic' (default) or 'alternative'. 'classic' uses the variance-based
+#'method, while 'alternative' uses an adjusted method that accounts for
+#'reproductive variation.
+#'@references Morais, R. P. (1997). Effective population size and genetic
+#'diversity in improved populations of self-pollinated plants (Doctoral
+#'dissertation, University of Campinas).
+#'@examples
+#'\donttest{
+#'library(EstimateBreed)
+#'
+#'GEN <- c("Genotype1", "Genotype2", "Genotype3", "Genotype4", "Genotype5")
+#'SI <- c(10, 15, 12, 18, 14)
+#'NE <- c(100, 150, 120, 180, 140)
+#'data <- data.frame(GEN,SI,NE)
+#'
+#'with(data, tamef(GEN, SI, NE, method = "classic"))
+#'}
 #'@export
 
-tamef <- function(GEN,SI,NE){
-
-  data <- data.frame(GEN,SI,NE)
-  Sum_SI <- (sum(data$SI))^2
-  data <- data %>%
-    mutate(Gen_SI=SI^2)
-  Pond_SI <- sum(data$Gen_SI/data$NE)
-  Nej <- Sum_SI/Pond_SI
-  return(Nej)
-}
-
-#'Jinks and Pooni method
-#'@description
-#'Function for estimating the probability of extracting superior lines from
-#'populations by the Jinks and Pooni method
-#'@param Pop The column with the population name
-#'@param Var The column with the variable name
-#'@param VG The column with the genotypic variance values
-#'@param Test The column with the controls names
-#'@author Willyan Junior Adorian Bandeira
-#'@author Ivan Ricardo Carvalo
-#'@author Murilo Vieira Loro
-#'@author Leonardo Cesar Pradebon
-#'@author Jose Antonio Gonzalez da Silva
-#'@references
-#'Port, E. D., Carvalho, I. R., Pradebon, L. C., Loro, M. V., Colet, C. D. F.,
-#'Silva, J. A. G. D., & Sausen, N. H. (2024).
-#'Early selection of resilient progenies to seed yield in soybean populations.
-#'Ciencia Rural, 54, e20230287.
-#'@export
-
-Jinks_Pooni <- function(Pop, Var, VG, Test){
-  Population <- Pop
-  Var <- Var
-  VG <- VG
-  Testemunhas <- Test
-
-  Z<-((Testemunhas-Var)/(sqrt(VG)))
-  P<-((1-pnorm(Z, mean = 0, sd = 1, lower.tail = TRUE, log.p = FALSE))*100)
-  Gen_Value <- ifelse(P > 50, "High", "Low")
-
-  Parameters <- data.frame(Population, Z, P, Gen_Value)
-
-  cat("\n-----------------------------------------------------------------\n")
-  cat("Probability of extracting superior strains from populations
-                   - Jinks and Pooni method")
-  cat("\n-----------------------------------------------------------------\n")
-  cat("Parameters")
-  cat("\n-----------------------------------------------------------------\n")
-  print(Parameters)
-  cat("\n-----------------------------------------------------------------\n")
+tamef <- function(GEN, SI, NE, remove_na = TRUE, method = "classic") {
+  data <- data.frame(GEN, SI, NE)
+  if (remove_na) {
+    data <- na.omit(data)
+  }
+  if (any(data$SI <= 0, na.rm = TRUE)) stop("SI must contain only positive values.")
+  if (any(data$NE <= 0, na.rm = TRUE)) stop("NE must contain only positive values.")
+  if (method == "classic") {
+    Sum_SI <- sum(data$SI, na.rm = TRUE)^2
+    Pond_SI <- sum((data$SI^2) / data$NE, na.rm = TRUE)
+    cat("Method used:", method, "\n")
+    cat("Sum_SI:", Sum_SI, "\n")
+    cat("Pond_SI:", Pond_SI, "\n")
+    Ne <- Sum_SI / Pond_SI
+    cat("Effective Population Size: \n")
+    return(Ne)
+  }
+  if (method == "alternative") {
+    cat("Method used:", method, "\n")
+    Ne <- (4 * sum(data$SI, na.rm = TRUE)) / (2 + sum((data$SI / data$NE),
+                                                      na.rm = TRUE))
+    cat("Effective Population Size: \n")
+    return(Ne)
+  }
 }

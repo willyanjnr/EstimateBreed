@@ -4,26 +4,48 @@
 \alias{tamef}
 \title{Effective Population Size}
 \usage{
-tamef(GEN, SI, NE)
+tamef(GEN, SI, NE, remove_na = TRUE, method = "classic")
 }
 \arguments{
 \item{GEN}{The column with the name of the genotype (progeny).}
 
-\item{SI}{The column with the number of individuals selected}
+\item{SI}{The column with the number of individuals selected.}
 
 \item{NE}{Number of individuals conducted during the selection period.}
+
+\item{remove_na}{Logical argument. If 'TRUE', missing values will be removed.}
+
+\item{method}{Character string specifying the calculation method. Options are
+classic' (default) or 'alternative'. 'classic' uses the variance-based
+method, while 'alternative' uses an adjusted method that accounts for
+reproductive variation.}
 }
 \description{
-Estimated effective population size adapted from Morais (1997).
+Estimates the effective population size (\eqn{N_e}) adapted from Morais (1997).
+The function provides two different calculation methods: 'classic' and 'alternative'.
+
+The classic method follows the equation:
+
+\deqn{N_e = \frac{\left(\sum SI\right)^2}{\sum \left(\frac{SI^2}{NE}\right)}}
+
+The alternative method is calculated as:
+
+\deqn{N_e = \frac{4 \sum SI}{2 + \sum \left(\frac{SI}{NE}\right)}}
 }
-\author{
-Willyan Junior Adorian Bandeira
+\examples{
+\donttest{
+library(EstimateBreed)
 
-Ivan Ricardo Carvalo
+GEN <- c("Genotype1", "Genotype2", "Genotype3", "Genotype4", "Genotype5")
+SI <- c(10, 15, 12, 18, 14)
+NE <- c(100, 150, 120, 180, 140)
+data <- data.frame(GEN,SI,NE)
 
-Murilo Vieira Loro
-
-Leonardo Cesar Pradebon
-
-Jose Antonio Gonzalez da Silva
+with(data, tamef(GEN, SI, NE, method = "classic"))
+}
+}
+\references{
+Morais, R. P. (1997). Effective population size and genetic
+diversity in improved populations of self-pollinated plants (Doctoral
+dissertation, University of Campinas).
 }

@@ -4,7 +4,7 @@
 \alias{genpar}
 \title{General parameters for selection}
 \usage{
-genpar(POP, GEN, REP, var, K = 0.05, type = "balanced", check = FALSE)
+genpar(POP, GEN, REP, var, K = 0.05, check = FALSE)
 }
 \arguments{
 \item{POP}{The column with the population under improvement.}
@@ -17,9 +17,6 @@ genpar(POP, GEN, REP, var, K = 0.05, type = "balanced", check = FALSE)
 
 \item{K}{Selection pressure (Default 0.05).}
 
-\item{type}{Type of experiment (balanced or unbalanced). Use
-'balanced' for balanced and 'unb' for unbalanced.}
-
 \item{check}{Logical argument. Checks the model's assumptions
 statistical if the value is equal to TRUE.}
 }
@@ -27,6 +24,12 @@ statistical if the value is equal to TRUE.}
 Function for determining selection parameters, based on an experiment
 carried out on the rice crop. Intended for isolated evaluation of the performance
 of strains within a given population.
+}
+\examples{
+\donttest{
+library(EstimateBreed)
+
+}
 }
 \references{
 Yadav, S. P. S., Bhandari, S., Ghimire, N. P., Mehata, D. K., Majhi, S. K.,

@@ -204,7 +204,7 @@
 #' Dataset with two breeding populations, 20 genotypes per population and three
 #'  replicates per genotype.
 #'
-#' @format A data.frame with 120 observations and 4 variables:
+#' @format A data.frame with 60 observations and 4 variables:
 #' \describe{
 #'   \item{Pop}{Column with population names.}
 #'   \item{Gen}{Column with genotype names.}

@@ -504,15 +504,15 @@ didint <- function(type=NULL,ge=NULL){
   }
 }
 
-#'General parameters for selection
+#'Genetic parameters for selection
 #'@description
 #'Function for determining selection parameters, based on an experiment
 #'carried out on the rice crop. Intended for isolated evaluation of the performance
-#'of strains within a given population.
-#'@param POP The column with the population under improvement.
+#'of lines within a given population.
+#'@param .data The name of the object containing data.
 #'@param GEN The column with the selected genotypes within the population.
 #'@param REP The column with the repetitions (if any).
-#'@param var The column with the variable of interest.
+#'@param vars The column with the variable of interest.
 #'@param K Selection pressure (Default 0.05).
 #'@param check Logical argument. Checks the model's assumptions
 #'statistical if the value is equal to TRUE.
@@ -521,6 +521,43 @@ didint <- function(type=NULL,ge=NULL){
 #'@author Murilo Vieira Loro
 #'@author Leonardo Cesar Pradebon
 #'@author Jose Antonio Gonzalez da Silva
+#'@return A list containing the following components:
+#'
+#'\item{Environmental variance (σ2e)}{The environmental variance (σ2e) represents
+#' the variability in phenotypic traits attributable to environmental factors.
+#'  This variance is important for understanding how environmental conditions
+#'   influence the observed phenotype.}
+#'\item{Genotypic variance (σ2g)}{The genotypic variance (σ2g) reflects the
+#'variability in phenotypic traits attributable to genetic differences between
+#' individuals. It is crucial for assessing the genetic potential of a population
+#'  for a specific trait.}
+#'\item{Phenotypic variance (σ2p)}{The phenotypic variance (σ2p) is the total
+#' observed variability in the phenotype, which is the sum of environmental and
+#'  genotypic variances. This measure helps understand the overall range of
+#'  variation observed in a given dataset.}
+#'\item{Environmental coefficient of variance (ECV)}{The environmental
+#'coefficient of variance (ECV) is the ratio of environmental variance to the
+#'mean of the phenotypic value, expressed as a percentage. It gives an idea of
+#'the magnitude of environmental variation relative to the mean value.}
+#'\item{Genotypic coefficient of variance (GCV)}{The genotypic coefficient of
+#'variance (GCV) is the ratio of genotypic variance to the mean of the phenotypic
+#' value, also expressed as a percentage. It is used to estimate how much genetic
+#'  variability can be exploited for improving desirable traits.}
+#'\item{Phenotypic coefficient of variance (PCV)}{The phenotypic coefficient of
+#'variance (PCV) is the ratio of phenotypic variance to the mean of the phenotypic
+#' value, expressed as a percentage. It provides insight into the overall impact
+#'  of both genetic and environmental factors on the observed variation.}
+#'\item{Heritability (h2b)}{Heritability (h2b) is the proportion of phenotypic
+#' variance attributable to genotypic variance. It indicates the potential for
+#' selecting specific traits within a population.}
+#'\item{Genetic advance (GA)}{Genetic advance (GA) represents the amount of
+#'genetic progress that can be achieved in one generation by selecting the best
+#' individuals for specific traits.}
+#'\item{Genetic advance as percentage of the mean (GAM)}{Genetic advance as a
+#' percentage of the mean (GAM) is a measure of how much genetic progress
+#' represents relative to the population's mean. This value helps assess the
+#' effectiveness of selection strategies.}
+#'
 #'@references
 #'Yadav, S. P. S., Bhandari, S., Ghimire, N. P., Mehata, D. K., Majhi, S. K.,
 #'Bhattarai, S., Shrestha, S., Yadav, B., Chaudhary, P., & Bhujel, S. (2024).
@@ -531,85 +568,85 @@ didint <- function(type=NULL,ge=NULL){
 #'@examples
 #'\donttest{
 #'library(EstimateBreed)
+#'data("genot2")
 #'
+#'#Geting parameters without cheking model assumptions
+#'parameters <- genpar(genot2,Gen,Rep,var =c("VAR1", "VAR2"))
+#'parameters
+#'
+#'#Checking model assumptions
+#'parameters <- genpar(genot2,Gen,Rep,var =c("VAR1", "VAR2"),check=TRUE)
+#'parameters
 #'}
 #'@export
 
-genpar <- function(POP,GEN,REP,var,K = 0.05,check = FALSE) {
+genpar <- function(.data, GEN, REP, vars, K = 0.05, check = FALSE) {
 
-  POP <- enquo(POP)
   GEN <- enquo(GEN)
   REP <- enquo(REP)
-  var <- enquo(var)
-  data <- tibble(POP = !!POP, GEN = !!GEN, REP = !!REP, var = !!var) %>%
-    mutate(across(c(POP, GEN, REP), as.factor))
-  var_name <- names(data)[4]
-
-  for (pop_level in levels(data$POP)) {
-    data_pop <- filter(data, POP == pop_level)
-    cat("\n\n===== Analyzing Population:", pop_level, "=====\n\n")
-    model <- aov(data_pop[[var_name]] ~ GEN + REP, data = data_pop)
+  if (!is.character(vars)) {
+    stop("'vars' must be a character vector containing variable names.")
+  }
+  data <- .data %>%
+    select(!!GEN, !!REP, all_of(vars)) %>%
+    mutate(across(c(!!GEN, !!REP), as.factor))
+  colnames(data)[1:2] <- c("GEN", "REP")
+  results_list <- list()
+  for (var_name in vars) {
+    cat("\n==================================================\n")
+    cat("Analyzing Variable:", var_name, "\n")
+    cat("==================================================\n")
+    formula <- as.formula(paste(var_name, "~ GEN + REP"))
+    model <- aov(formula, data = data)
     ANOVA_table <- summary(model)[[1]]
     MSg <- ANOVA_table["GEN", "Mean Sq"]
-    MSe <- ANOVA_table["Residual", "Mean Sq"]
+    MSe <- ANOVA_table["Residuals", "Mean Sq"]
     pvalue <- ANOVA_table["GEN", "Pr(>F)"]
-    sigmaG <- (MSg - MSe) / length(unique(data_pop$REP))
+    sigmaG <- (MSg - MSe) / length(unique(data$REP))
     sigmaE <- MSe
     sigmaP <- sigmaG + sigmaE
-    ECV <- (sqrt(sigmaE) / mean(data_pop[[var_name]])) * 100
-    GCV <- (sqrt(sigmaG) / mean(data_pop[[var_name]])) * 100
-    PCV <- (sqrt(sigmaP) / mean(data_pop[[var_name]])) * 100
+    mean_var <- mean(data[[var_name]], na.rm = TRUE)
+    ECV <- (sqrt(sigmaE) / mean_var) * 100
+    GCV <- (sqrt(sigmaG) / mean_var) * 100
+    PCV <- (sqrt(sigmaP) / mean_var) * 100
     H2 <- sigmaG / sigmaP
     GA <- K * sqrt(sigmaG)
-    GAM <- (GA / mean(data_pop[[var_name]])) * 100
-
-    if (check==TRUE) {
-      cat("Performing assumption tests...\n")
-      model_residuals <- residuals(model)
-      fitted_values <- fitted(model)
-      shapiro_test <- shapiro.test(model_residuals)
-      bartlett_test <- bartlett.test(data_pop[[var_name]] ~ data_pop$GEN)
-      levene_test <- leveneTest(data_pop[[var_name]] ~ data_pop$GEN,
-                                data = data_pop)
+    GAM <- (GA / mean_var) * 100
+    if (check) {
+      cat("\nPerforming assumption tests...\n")
+      residuals_model <- residuals(model)
+      shapiro_test <- shapiro.test(residuals_model)
+      bartlett_test <- bartlett.test(data[[var_name]] ~ data$GEN)
+      levene_test <- leveneTest(data[[var_name]] ~ data$GEN, data = data)
       bp_test <- bptest(model)
-      cat("Shapiro-Wilk normality test p-value:", shapiro_test$p.value, "\n")
-      if (shapiro_test$p.value < 0.05) {
-        cat("Normality assumption is NOT met for population ", pop_level, "!\n")
-      }
-      cat("Bartlett homogeneity test p-value:", bartlett_test$p.value, "\n")
-      if (bartlett_test$p.value < 0.05) {
-        cat("Homogeneity of variances assumption is NOT met for population ",
-            pop_level, "!\n")
-      }
-      cat("Levene homogeneity test p-value:", levene_test$`Pr(>F)`[1], "\n")
-      if (levene_test$`Pr(>F)`[1] < 0.05) {
-        cat("Homogeneity of variances assumption is NOT met for population ",
-            pop_level, "!\n")
-      }
-      cat("Breusch-Pagan heteroscedasticity test p-value:", bp_test$p.value,
-          "\n")
-      if (bp_test$p.value < 0.05) {
-        cat("Heteroscedasticity detected for population ", pop_level, "!\n")
-      }
+      cat("Shapiro-Wilk Normality Test: p-value =", round(shapiro_test$p.value, 5), "\n")
+      if (shapiro_test$p.value < 0.05) cat("Normality assumption NOT met!\n")
+      cat("Bartlett Homogeneity Test: p-value =", round(bartlett_test$p.value, 5), "\n")
+      if (bartlett_test$p.value < 0.05) cat("Homogeneity of variances NOT met!\n")
+      cat("Levene Homogeneity Test: p-value =", round(levene_test$`Pr(>F)`[1], 5), "\n")
+      if (levene_test$`Pr(>F)`[1] < 0.05) cat("Homogeneity of variances NOT met!\n")
+      cat("Breusch-Pagan Heteroscedasticity Test: p-value =", round(bp_test$p.value, 5), "\n")
+      if (bp_test$p.value < 0.05) cat("Heteroscedasticity detected!\n")
+      cat("\n--------------------------------------------------\n")
     }
     if (pvalue >= 0.05) {
-      cat("Genotypic effect was NOT significant for population:", pop_level,
-          "\n\n")
+      cat("\nGenotypic effect was NOT significant for variable:", var_name, "\n")
       print(ANOVA_table)
-      warning("Genotypic effect was not significant for variable ", var_name,
-              " in population ", pop_level, "!", call. = FALSE)
+      warning("Genotypic effect was not significant for variable ", var_name, "!", call. = FALSE)
     } else {
-      cat("Genotypic effect was significant for population:", pop_level, "\n\n")
+      cat("\nGenotypic effect was significant for variable:", var_name, "\n")
       result <- data.frame(
-        Parameters = c("sigmaE", "sigmaG", "sigmaP", "ECV", "GCV", "PCV",
-                       "H2", "GA", "GAM"),
+        Parameter = c("sigmaE", "sigmaG", "sigmaP", "ECV", "GCV", "PCV", "H2", "GA", "GAM"),
         Value = c(sigmaE, sigmaG, sigmaP, ECV, GCV, PCV, H2, GA, GAM)
       )
-      colnames(result)[which(colnames(result) == "Value")] <- var_name
-      print(ANOVA_table)
+      colnames(result)[2] <- var_name
+      cat("\nGenetic Parameter Estimates:\n")
       print(result)
+      results_list[[var_name]] <- result
     }
+    cat("\n==================================================\n")
   }
+  return(results_list)
 }
 
 #'Effective Population Size

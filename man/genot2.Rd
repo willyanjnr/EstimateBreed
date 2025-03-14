@@ -5,7 +5,7 @@
 \alias{genot2}
 \title{Data Set for Seed Vigor Extraction}
 \format{
-A data.frame with 120 observations and 4 variables:
+A data.frame with 60 observations and 4 variables:
 \describe{
   \item{Pop}{Column with population names.}
   \item{Gen}{Column with genotype names.}

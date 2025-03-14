@@ -2,33 +2,79 @@
 % Please edit documentation in R/selecao.R
 \name{genpar}
 \alias{genpar}
-\title{General parameters for selection}
+\title{Genetic parameters for selection}
 \usage{
-genpar(POP, GEN, REP, var, K = 0.05, check = FALSE)
+genpar(.data, GEN, REP, vars, K = 0.05, check = FALSE)
 }
 \arguments{
-\item{POP}{The column with the population under improvement.}
+\item{.data}{The name of the object containing data.}
 
 \item{GEN}{The column with the selected genotypes within the population.}
 
 \item{REP}{The column with the repetitions (if any).}
 
-\item{var}{The column with the variable of interest.}
+\item{vars}{The column with the variable of interest.}
 
 \item{K}{Selection pressure (Default 0.05).}
 
 \item{check}{Logical argument. Checks the model's assumptions
 statistical if the value is equal to TRUE.}
 }
+\value{
+A list containing the following components:
+
+\item{Environmental variance (σ2e)}{The environmental variance (σ2e) represents
+the variability in phenotypic traits attributable to environmental factors.
+ This variance is important for understanding how environmental conditions
+  influence the observed phenotype.}
+\item{Genotypic variance (σ2g)}{The genotypic variance (σ2g) reflects the
+variability in phenotypic traits attributable to genetic differences between
+individuals. It is crucial for assessing the genetic potential of a population
+ for a specific trait.}
+\item{Phenotypic variance (σ2p)}{The phenotypic variance (σ2p) is the total
+observed variability in the phenotype, which is the sum of environmental and
+ genotypic variances. This measure helps understand the overall range of
+ variation observed in a given dataset.}
+\item{Environmental coefficient of variance (ECV)}{The environmental
+coefficient of variance (ECV) is the ratio of environmental variance to the
+mean of the phenotypic value, expressed as a percentage. It gives an idea of
+the magnitude of environmental variation relative to the mean value.}
+\item{Genotypic coefficient of variance (GCV)}{The genotypic coefficient of
+variance (GCV) is the ratio of genotypic variance to the mean of the phenotypic
+value, also expressed as a percentage. It is used to estimate how much genetic
+ variability can be exploited for improving desirable traits.}
+\item{Phenotypic coefficient of variance (PCV)}{The phenotypic coefficient of
+variance (PCV) is the ratio of phenotypic variance to the mean of the phenotypic
+value, expressed as a percentage. It provides insight into the overall impact
+ of both genetic and environmental factors on the observed variation.}
+\item{Heritability (h2b)}{Heritability (h2b) is the proportion of phenotypic
+variance attributable to genotypic variance. It indicates the potential for
+selecting specific traits within a population.}
+\item{Genetic advance (GA)}{Genetic advance (GA) represents the amount of
+genetic progress that can be achieved in one generation by selecting the best
+individuals for specific traits.}
+\item{Genetic advance as percentage of the mean (GAM)}{Genetic advance as a
+percentage of the mean (GAM) is a measure of how much genetic progress
+represents relative to the population's mean. This value helps assess the
+effectiveness of selection strategies.}
+}
 \description{
 Function for determining selection parameters, based on an experiment
 carried out on the rice crop. Intended for isolated evaluation of the performance
-of strains within a given population.
+of lines within a given population.
 }
 \examples{
 \donttest{
 library(EstimateBreed)
+data("genot2")
 
+#Geting parameters without cheking model assumptions
+parameters <- genpar(genot2,Gen,Rep,var =c("VAR1", "VAR2"))
+parameters
+
+#Checking model assumptions
+parameters <- genpar(genot2,Gen,Rep,var =c("VAR1", "VAR2"),check=TRUE)
+parameters
 }
 }
 \references{

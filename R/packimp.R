@@ -21,7 +21,7 @@
 #' @importFrom grDevices rgb
 #' @importFrom graphics boxplot layout
 #' @importFrom stats aggregate aov coef lm nls nls.control pnorm sd setNames
-#'  residuals fitted na.omit
+#'  residuals fitted na.omit as.formula
 #' @importFrom car some leveneTest
 #' @importFrom lmtest bptest
 #' @importFrom stats shapiro.test bartlett.test

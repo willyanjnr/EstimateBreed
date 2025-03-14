@@ -199,6 +199,21 @@
 #' @source Real field data for use.
 "vig"
 
+#' Data Set for Seed Vigor Extraction
+#'
+#' Dataset with two breeding populations, 20 genotypes per population and three
+#'  replicates per genotype.
+#'
+#' @format A data.frame with 120 observations and 4 variables:
+#' \describe{
+#'   \item{Pop}{Column with population names.}
+#'   \item{Gen}{Column with genotype names.}
+#'   \item{Rep}{Column with replications.}
+#'   \item{VAR1}{Column with numerical values of the random variable.}
+#' }
+#' @source Simulated data for use.
+"genot2"
+
 .estimatebreed_env <- new.env(parent = emptyenv())
 
 .onAttach <- function(libname, pkgname) {

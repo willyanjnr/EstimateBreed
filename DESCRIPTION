@@ -20,7 +20,7 @@ Authors@R:
     person("Jose Antonio Gonzalez", "da Silva",
            role = c("aut","ctb"),
            comment = c(ORCID = "0000-0002-9335-2421")))
-Maintainer: Willyan Jr. A. Bandeira <bandeira.wjab@gmail.com>
+Maintainer: Willyan Junior Adorian Bandeira <bandeira.wjab@gmail.com>
 Description: Performs analyzes and estimates of environmental covariates 
     and genetic parameters related to selection strategies and development 
     of superior genotypes. It has two main functionalities, the first being 

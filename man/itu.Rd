@@ -26,7 +26,6 @@ Tazzo, I. F., Tarouco, A. K., Allem Junior P. H. C., Bremm, C., Cardoso, L.
 S., & Junges, A. H. (2024). Indice de Temperatura e Umidade (ITU) ao longo do
 verao de 2021/2022 e estimativas dos impactos na bovinocultura de leite no Rio
 Grande do Sul, Brasil. Ciencia Animal Brasileira, 2,5, e-77035P.
-\doi{10.1590/1809-6891v25e-77035Pexport}
 }
 \author{
 Willyan Junior Adorian Bandeira

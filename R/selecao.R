@@ -523,15 +523,15 @@ didint <- function(type=NULL,ge=NULL){
 #'@author Jose Antonio Gonzalez da Silva
 #'@return A list containing the following components:
 #'
-#'\item{Environmental variance (σ2e)}{The environmental variance (σ2e) represents
+#'\item{Environmental variance (sigmaE)}{The environmental variance (sigmaE) represents
 #' the variability in phenotypic traits attributable to environmental factors.
 #'  This variance is important for understanding how environmental conditions
 #'   influence the observed phenotype.}
-#'\item{Genotypic variance (σ2g)}{The genotypic variance (σ2g) reflects the
+#'\item{Genotypic variance (sigmaG)}{The genotypic variance (sigmaG) reflects the
 #'variability in phenotypic traits attributable to genetic differences between
 #' individuals. It is crucial for assessing the genetic potential of a population
 #'  for a specific trait.}
-#'\item{Phenotypic variance (σ2p)}{The phenotypic variance (σ2p) is the total
+#'\item{Phenotypic variance (sigmaP)}{The phenotypic variance (sigmaP) is the total
 #' observed variability in the phenotype, which is the sum of environmental and
 #'  genotypic variances. This measure helps understand the overall range of
 #'  variation observed in a given dataset.}

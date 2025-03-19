@@ -10,7 +10,7 @@
 #'@return A dataframe containing the identifier of the selection environment and
 #'the standard deviations for temperature and precipitation.
 #'@author Willyan Junior Adorian Bandeira
-#'@author Ivan Ricardo Carvalo
+#'@author Ivan Ricardo Carvalho
 #'@author Murilo Vieira Loro
 #'@author Leonardo Cesar Pradebon
 #'@author Jose Antonio Gonzalez da Silva
@@ -60,7 +60,7 @@ desv_clim <- function(ENV,AAT,PREC) {
 #'  air temperature and rainfall offered by the environment. The lower the index,
 #'   the more resilient the genotype.
 #'@author Willyan Junior Adorian Bandeira
-#'@author Ivan Ricardo Carvalo
+#'@author Ivan Ricardo Carvalho
 #'@author Murilo Vieira Loro
 #'@author Leonardo Cesar Pradebon
 #'@author Jose Antonio Gonzalez da Silva

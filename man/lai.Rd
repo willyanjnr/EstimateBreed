@@ -55,7 +55,7 @@ indeterminado. Revista Cultivando o Saber, 8(2), 184-200.
 \author{
 Willyan Junior Adorian Bandeira
 
-Ivan Ricardo Carvalo
+Ivan Ricardo Carvalho
 
 Murilo Vieira Loro
 

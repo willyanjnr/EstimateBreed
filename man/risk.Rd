@@ -57,7 +57,7 @@ chemical control of Asina soybean rust. Trop. plant pathol. 49, 539-546 (2024).
 \author{
 Willyan Junior Adorian Bandeira
 
-Ivan Ricardo Carvalo
+Ivan Ricardo Carvalho
 
 Murilo Vieira Loro
 

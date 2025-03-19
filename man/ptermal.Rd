@@ -39,7 +39,7 @@ Visando altas produtividades (2a ed.). Field Crops.
 \author{
 Willyan Junior Adorian Bandeira
 
-Ivan Ricardo Carvalo
+Ivan Ricardo Carvalho
 
 Murilo Vieira Loro
 

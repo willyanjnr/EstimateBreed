@@ -30,7 +30,7 @@ Grande do Sul, Brasil. Ciencia Animal Brasileira, 2,5, e-77035P.
 \author{
 Willyan Junior Adorian Bandeira
 
-Ivan Ricardo Carvalo
+Ivan Ricardo Carvalho
 
 Murilo Vieira Loro
 

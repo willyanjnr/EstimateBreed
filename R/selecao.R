@@ -12,7 +12,7 @@
 #' @param verbose Logical argument. Runs the code silently if FALSE.
 #' @return A data frame with selection gain results
 #' @author Willyan Junior Adorian Bandeira
-#' @author Ivan Ricardo Carvalo
+#' @author Ivan Ricardo Carvalho
 #' @author Murilo Vieira Loro
 #' @author Leonardo Cesar Pradebon
 #' @author Jose Antonio Gonzalez da Silva
@@ -111,7 +111,7 @@ SG <- function(Var, h, VF = NULL, P = "1", DS = NULL, Year = NULL, method = "pre
 #'@param plot Logical argument. Plots a graphic if 'TRUE'.
 #'@param verbose Logical argument. Runs the code silently if FALSE.
 #'@author Willyan Junior Adorian Bandeira
-#'@author Ivan Ricardo Carvalo
+#'@author Ivan Ricardo Carvalho
 #'@author Murilo Vieira Loro
 #'@author Leonardo Cesar Pradebon
 #'@author Jose Antonio Gonzalez da Silva
@@ -229,7 +229,7 @@ transg <- function(Gen, Var, Control, verbose=FALSE, plot=FALSE,
 #' heterozygosity, probable number of genes, environmental effect and Wright's
 #' probabilistic coefficient.
 #'@author Willyan Junior Adorian Bandeira
-#'@author Ivan Ricardo Carvalo
+#'@author Ivan Ricardo Carvalho
 #'@author Murilo Vieira Loro
 #'@author Leonardo Cesar Pradebon
 #'@author Jose Antonio Gonzalez da Silva
@@ -273,7 +273,7 @@ default_seg <- function(verbose=TRUE){
 #'  one of the generations.
 #'@param verbose Logical argument. Runs the code silently if FALSE.
 #'@author Willyan Junior Adorian Bandeira
-#'@author Ivan Ricardo Carvalo
+#'@author Ivan Ricardo Carvalho
 #'@author Murilo Vieira Loro
 #'@author Leonardo Cesar Pradebon
 #'@author Jose Antonio Gonzalez da Silva
@@ -371,7 +371,7 @@ COI <- function(var, VG, VF, generation = "all", verbose=FALSE) {
 #'@param ge Type of GxE interaction. Use 'aus' for no interaction,
 #''simple' for simple interaction and 'complex' for complex interaction.
 #'@author Willyan Junior Adorian Bandeira
-#'@author Ivan Ricardo Carvalo
+#'@author Ivan Ricardo Carvalho
 #'@author Murilo Vieira Loro
 #'@author Leonardo Cesar Pradebon
 #'@author Jose Antonio Gonzalez da Silva
@@ -531,7 +531,7 @@ didint <- function(type=NULL,ge=NULL){
 #'statistical if the value is equal to TRUE.
 #'@param verbose Logical argument. Runs the code silently if FALSE.
 #'@author Willyan Junior Adorian Bandeira
-#'@author Ivan Ricardo Carvalo
+#'@author Ivan Ricardo Carvalho
 #'@author Murilo Vieira Loro
 #'@author Leonardo Cesar Pradebon
 #'@author Jose Antonio Gonzalez da Silva
@@ -579,6 +579,7 @@ didint <- function(type=NULL,ge=NULL){
 #'analysis of rice (Oryza sativa L.) genotypes based on agro-morphological
 #'traits. International Journal of Agronomy, 2024, Article ID 9946332.
 #'\doi{10.1155/2024/9946332}
+#'
 #'@examples
 #'library(EstimateBreed)
 #'data("genot2")
@@ -702,6 +703,11 @@ genpar <- function(.data, GEN, REP, vars, K = 0.05, check = FALSE, verbose = FAL
 #'@references Morais, R. P. (1997). Effective population size and genetic
 #'diversity in improved populations of self-pollinated plants (Doctoral
 #'dissertation, University of Campinas).
+#'@author Willyan Junior Adorian Bandeira
+#'@author Ivan Ricardo Carvalho
+#'@author Murilo Vieira Loro
+#'@author Leonardo Cesar Pradebon
+#'@author Jose Antonio Gonzalez da Silva
 #'@examples
 #'library(EstimateBreed)
 #'

@@ -42,7 +42,7 @@ American Journal of Plant Sciences, 8(13), 3324.
 \author{
 Willyan Junior Adorian Bandeira
 
-Ivan Ricardo Carvalo
+Ivan Ricardo Carvalho
 
 Murilo Vieira Loro
 

@@ -61,7 +61,7 @@ retrosp <- tdelta(-53.6969,-28.0638,type=2,days=10,
 \author{
 Willyan Junior Adorian Bandeira
 
-Ivan Ricardo Carvalo
+Ivan Ricardo Carvalho
 
 Murilo Vieira Loro
 

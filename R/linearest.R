@@ -16,7 +16,7 @@
 #' - The growth rate: \deqn{\beta_1}
 #' - The inflection point: \deqn{X_{inflection} = -\frac{\beta_1}{2\beta_2}}
 #'@author Willyan Junior Adorian Bandeira
-#'@author Ivan Ricardo Carvalo
+#'@author Ivan Ricardo Carvalho
 #'@author Murilo Vieira Loro
 #'@author Leonardo Cesar Pradebon
 #'@author Jose Antonio Gonzalez da Silva

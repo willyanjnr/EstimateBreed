@@ -19,7 +19,7 @@
 #'@return Returns a table with the genotypes and the selected indices.
 #'The higher the index value, the more resilient the genotype.
 #'@author Willyan Junior Adorian Bandeira
-#'@author Ivan Ricardo Carvalo
+#'@author Ivan Ricardo Carvalho
 #'@author Murilo Vieira Loro
 #'@author Leonardo Cesar Pradebon
 #'@author Jose Antonio Gonzalez da Silva
@@ -310,7 +310,7 @@ stind <- function(GEN,YS,YC,index="ALL",bygen=TRUE,verbose=FALSE,plot=FALSE,
 #' stress condition (ITU between 71 and 78), Severe heat stress (ITU between 79
 #' and 83), and Critical heat stress condition (ITU above 84).
 #'@author Willyan Junior Adorian Bandeira
-#'@author Ivan Ricardo Carvalo
+#'@author Ivan Ricardo Carvalho
 #'@author Murilo Vieira Loro
 #'@author Leonardo Cesar Pradebon
 #'@author Jose Antonio Gonzalez da Silva

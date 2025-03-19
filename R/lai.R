@@ -17,7 +17,7 @@
 #'(considering the total number of leaves) and the actual leaf area index
 #'(making the adjustment considering the number of dry leaves) for each genotype
 #'@author Willyan Junior Adorian Bandeira
-#'@author Ivan Ricardo Carvalo
+#'@author Ivan Ricardo Carvalho
 #'@author Murilo Vieira Loro
 #'@author Leonardo Cesar Pradebon
 #'@author Jose Antonio Gonzalez da Silva

@@ -44,7 +44,7 @@ with(aveia, rend_ind(GEN,NG2M,MG,MC,RG,stat="mean"))
 \author{
 Willyan Junior Adorian Bandeira
 
-Ivan Ricardo Carvalo
+Ivan Ricardo Carvalho
 
 Murilo Vieira Loro
 

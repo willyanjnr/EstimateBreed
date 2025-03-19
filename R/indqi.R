@@ -10,7 +10,7 @@
 #'@return Determines the industrial quality index for wheat crops, when
 #'considering variables used to classify wheat cultivars.
 #'@author Willyan Junior Adorian Bandeira
-#'@author Ivan Ricardo Carvalo
+#'@author Ivan Ricardo Carvalho
 #'@author Murilo Vieira Loro
 #'@author Leonardo Cesar Pradebon
 #'@author Jose Antonio Gonzalez da Silva
@@ -72,7 +72,7 @@ is_qindustrial <- function(GEN, NQ, W, PTN, verbose=TRUE){
 #'@return Returns the peeling index and industrial yield considering the
 #'standards desired by the industry.
 #'@author Willyan Junior Adorian Bandeira
-#'@author Ivan Ricardo Carvalo
+#'@author Ivan Ricardo Carvalho
 #'@author Murilo Vieira Loro
 #'@author Leonardo Cesar Pradebon
 #'@author Jose Antonio Gonzalez da Silva
@@ -138,7 +138,7 @@ rend_ind <- function(GEN,NG2M,MG,MC,RG,stat="all",verbose=FALSE,...){
 #'@return Returns the index obtained between the reported variables. The higher
 #'the index, the better the genotype.
 #'@author Willyan Junior Adorian Bandeira
-#'@author Ivan Ricardo Carvalo
+#'@author Ivan Ricardo Carvalho
 #'@author Murilo Vieira Loro
 #'@author Leonardo Cesar Pradebon
 #'@author Jose Antonio Gonzalez da Silva
@@ -223,7 +223,7 @@ indviab <- function(GEN,var1,var2,ylab="Index",xlab="Genotype",stat="all",
 #'@return Returns the estimated value for the hectoliter weight considering the
 #' selected cereal.
 #'@author Willyan Junior Adorian Bandeira
-#'@author Ivan Ricardo Carvalo
+#'@author Ivan Ricardo Carvalho
 #'@author Murilo Vieira Loro
 #'@author Leonardo Cesar Pradebon
 #'@author Jose Antonio Gonzalez da Silva
@@ -288,7 +288,7 @@ hw <- function(GEN, HL, crop="trit", stat="all") {
 #'grain yield.
 #'@param verbose Logical argument. Runs the code silently if FALSE.
 #'@author Willyan Junior Adorian Bandeira
-#'@author Ivan Ricardo Carvalo
+#'@author Ivan Ricardo Carvalho
 #'@author Murilo Vieira Loro
 #'@author Leonardo Cesar Pradebon
 #'@author Jose Antonio Gonzalez da Silva

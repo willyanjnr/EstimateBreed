@@ -53,3 +53,14 @@ Morais, R. P. (1997). Effective population size and genetic
 diversity in improved populations of self-pollinated plants (Doctoral
 dissertation, University of Campinas).
 }
+\author{
+Willyan Junior Adorian Bandeira
+
+Ivan Ricardo Carvalho
+
+Murilo Vieira Loro
+
+Leonardo Cesar Pradebon
+
+Jose Antonio Gonzalez da Silva
+}

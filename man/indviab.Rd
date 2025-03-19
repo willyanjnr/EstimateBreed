@@ -63,7 +63,7 @@ Revista Engenharia na Agricultura - REVENG, 32, 54-64.
 \author{
 Willyan Junior Adorian Bandeira
 
-Ivan Ricardo Carvalo
+Ivan Ricardo Carvalho
 
 Murilo Vieira Loro
 

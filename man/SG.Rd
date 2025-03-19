@@ -50,7 +50,7 @@ SG(Var = c("A", "B", "C"), h = 0.5, VF = 1.2, P = "10", Year = 5, method = "year
 \author{
 Willyan Junior Adorian Bandeira
 
-Ivan Ricardo Carvalo
+Ivan Ricardo Carvalho
 
 Murilo Vieira Loro
 

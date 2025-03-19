@@ -90,7 +90,7 @@ traits. International Journal of Agronomy, 2024, Article ID 9946332.
 \author{
 Willyan Junior Adorian Bandeira
 
-Ivan Ricardo Carvalo
+Ivan Ricardo Carvalho
 
 Murilo Vieira Loro
 

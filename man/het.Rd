@@ -47,7 +47,7 @@ hetb <- with(maize,het(GEN,GM,GP,PR,REP,param = "hetb"))
 \author{
 Willyan Junior Adorian Bandeira
 
-Ivan Ricardo Carvalo
+Ivan Ricardo Carvalho
 
 Murilo Vieira Loro
 

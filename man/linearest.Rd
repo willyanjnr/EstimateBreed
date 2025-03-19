@@ -40,7 +40,7 @@ met<-with(mtcars,linearest(wt,mpg,type = "MTE",verbose=TRUE))
 \author{
 Willyan Junior Adorian Bandeira
 
-Ivan Ricardo Carvalo
+Ivan Ricardo Carvalho
 
 Murilo Vieira Loro
 

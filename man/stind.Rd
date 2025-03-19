@@ -71,7 +71,7 @@ Models. Journal of Crop Health 76, 601-616 (2024).
 \author{
 Willyan Junior Adorian Bandeira
 
-Ivan Ricardo Carvalo
+Ivan Ricardo Carvalho
 
 Murilo Vieira Loro
 

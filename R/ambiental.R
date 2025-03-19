@@ -27,7 +27,7 @@
 #'   Considering the reported average air temperature values, it returns
 #'   the maximum, minimum, and coefficient of variation.
 #'@author Willyan Junior Adorian Bandeira
-#'@author Ivan Ricardo Carvalo
+#'@author Ivan Ricardo Carvalho
 #'@author Murilo Vieira Loro
 #'@author Leonardo Cesar Pradebon
 #'@author Jose Antonio Gonzalez da Silva
@@ -227,7 +227,7 @@ atsum <- function(AAT,crop="maize",lbt=NULL,verbose=FALSE,plot=FALSE){
 #'@return Returns the parameters of lower basal and optimum temperature, upper
 #'basal and optimum temperature, maximum temperature and average temperature.
 #'@author Willyan Junior Adorian Bandeira
-#'@author Ivan Ricardo Carvalo
+#'@author Ivan Ricardo Carvalho
 #'@author Murilo Vieira Loro
 #'@author Leonardo Cesar Pradebon
 #'@author Jose Antonio Gonzalez da Silva
@@ -417,7 +417,7 @@ optemp <-function(VAR,crop = NULL,verbose=FALSE,plot=TRUE,
 #'models: Early Pheno (V1 to R1), Intermediate Pheno (R1 to R3) and Late Pheno
 #'(R3 to R5).
 #'@author Willyan Junior Adorian Bandeira
-#'@author Ivan Ricardo Carvalo
+#'@author Ivan Ricardo Carvalho
 #'@author Murilo Vieira Loro
 #'@author Leonardo Cesar Pradebon
 #'@author Jose Antonio Gonzalez da Silva
@@ -623,7 +623,7 @@ plast <- function(GEN, AAT, STAD, NN, habit = "ind",verbose=FALSE, plot = FALSE)
 #'@param verbose Logical argument. Runs the code silently if FALSE.
 #'@return Retorna o ind fototermal
 #'@author Willyan Junior Adorian Bandeira
-#'@author Ivan Ricardo Carvalo
+#'@author Ivan Ricardo Carvalho
 #'@author Murilo Vieira Loro
 #'@author Leonardo Cesar Pradebon
 #'@author Jose Antonio Gonzalez da Silva
@@ -696,7 +696,7 @@ ptermal <- function(DAY, AAT, RAD, PER,verbose=FALSE) {
 #'Taking as a parameter a TDELTA between 2 and 8, wind speed between 3 and 8,
 #'and no precipitation.
 #'@author Willyan Junior Adorian Bandeira
-#'@author Ivan Ricardo Carvalo
+#'@author Ivan Ricardo Carvalho
 #'@author Murilo Vieira Loro
 #'@author Leonardo Cesar Pradebon
 #'@author Jose Antonio Gonzalez da Silva

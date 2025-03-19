@@ -54,7 +54,7 @@ Iowa State University of Science and Technology Special Report, 80, 1-11.
 \author{
 Willyan Junior Adorian Bandeira
 
-Ivan Ricardo Carvalo
+Ivan Ricardo Carvalho
 
 Murilo Vieira Loro
 

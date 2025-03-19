@@ -63,7 +63,7 @@ to abiotic stresses. Aust J Crop Sci, 18(12), 825-830.
 \author{
 Willyan Junior Adorian Bandeira
 
-Ivan Ricardo Carvalo
+Ivan Ricardo Carvalho
 
 Murilo Vieira Loro
 

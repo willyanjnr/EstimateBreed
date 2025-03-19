@@ -50,7 +50,7 @@ Brasilia: MAPA/ACS, 2009. 399 p. ISBN 978-85-99851-70-8.
 \author{
 Willyan Junior Adorian Bandeira
 
-Ivan Ricardo Carvalo
+Ivan Ricardo Carvalho
 
 Murilo Vieira Loro
 

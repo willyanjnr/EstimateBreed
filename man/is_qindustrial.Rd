@@ -41,7 +41,7 @@ Genetics and Molecular Research, 18(3), 1-14.
 \author{
 Willyan Junior Adorian Bandeira
 
-Ivan Ricardo Carvalo
+Ivan Ricardo Carvalho
 
 Murilo Vieira Loro
 

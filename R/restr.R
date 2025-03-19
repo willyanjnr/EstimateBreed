@@ -12,7 +12,7 @@
 #'@param zstat Logical argument. Applies Z-notation normalization if 'TRUE'.
 #'@param verbose Logical argument. Runs the code silently if FALSE.
 #'@author Willyan Junior Adorian Bandeira
-#'@author Ivan Ricardo Carvalo
+#'@author Ivan Ricardo Carvalho
 #'@author Murilo Vieira Loro
 #'@author Leonardo Cesar Pradebon
 #'@author Jose Antonio Gonzalez da Silva

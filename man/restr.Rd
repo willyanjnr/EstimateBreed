@@ -55,7 +55,7 @@ Acta Scientiarum. Agronomy, 45, e56156.
 \author{
 Willyan Junior Adorian Bandeira
 
-Ivan Ricardo Carvalo
+Ivan Ricardo Carvalho
 
 Murilo Vieira Loro
 

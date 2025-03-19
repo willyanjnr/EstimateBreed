@@ -47,7 +47,7 @@ with(clima,optemp(TMED,crop="soybean"))
 \author{
 Willyan Junior Adorian Bandeira
 
-Ivan Ricardo Carvalo
+Ivan Ricardo Carvalho
 
 Murilo Vieira Loro
 

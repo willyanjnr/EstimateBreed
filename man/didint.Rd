@@ -22,7 +22,6 @@ interactions.
 Didactic function - Examples of allelic and gene interactions
 }
 \examples{
-\donttest{
 library(EstimateBreed)
 
 didint (type="ad")
@@ -33,7 +32,6 @@ didint (type="sob")
 didint (ge="aus")
 didint (ge="simple")
 didint (ge="complex")
-}
 }
 \author{
 Willyan Junior Adorian Bandeira

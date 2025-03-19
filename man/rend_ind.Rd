@@ -4,7 +4,7 @@
 \alias{rend_ind}
 \title{Peeling Index and Industrial Yield}
 \usage{
-rend_ind(GEN, NG2M, MG, MC, RG, stat = "all", ...)
+rend_ind(GEN, NG2M, MG, MC, RG, stat = "all", verbose = FALSE, ...)
 }
 \arguments{
 \item{GEN}{The column with the name of the genotypes.}
@@ -20,6 +20,8 @@ rend_ind(GEN, NG2M, MG, MC, RG, stat = "all", ...)
 \item{stat}{Logical argument. Use 'all' to keep all the observations or 'mean'
 to extract the overall average.}
 
+\item{verbose}{Logical argument. Runs the code silently if FALSE.}
+
 \item{...}{General parameters of ggplot2 for utilization}
 }
 \value{
@@ -30,7 +32,6 @@ standards desired by the industry.
 Calculating the Hulling Index and Industrial Yield of White Oats
 }
 \examples{
-\donttest{
 library(EstimateBreed)
 
 data("aveia")
@@ -39,7 +40,6 @@ with(aveia, rend_ind(GEN,NG2M,MG,MC,RG))
 
 # Calculate the industrial yield by extracting the average per genotype
 with(aveia, rend_ind(GEN,NG2M,MG,MC,RG,stat="mean"))
-}
 }
 \author{
 Willyan Junior Adorian Bandeira

@@ -4,7 +4,7 @@
 \alias{restr}
 \title{Restriction of control variability}
 \usage{
-restr(TEST, REP, Xi, scenario = NULL, zstat = NULL)
+restr(TEST, REP, Xi, scenario = NULL, zstat = NULL, verbose = FALSE)
 }
 \arguments{
 \item{TEST}{The column with the name of the witness}
@@ -18,6 +18,8 @@ do not restrict the witnesses by the mean plus or minus the standard deviations,
 or 'restr' to apply the restriction.}
 
 \item{zstat}{Logical argument. Applies Z-notation normalization if 'TRUE'.}
+
+\item{verbose}{Logical argument. Runs the code silently if FALSE.}
 }
 \value{
 Describes controls that were removed from the dataset to restrict
@@ -29,7 +31,6 @@ Method for restricting the variability of control proposed by Carvalho et al.
 standard deviation, which restricts variation by removing asymmetric values.
 }
 \examples{
-\donttest{
 library(EstimateBreed)
 
 TEST <- rep(paste("T", 1:5, sep=""), each=3)
@@ -38,12 +39,11 @@ Xi <- rnorm(15, mean=10, sd=2)
 
 data <- data.frame(TEST,REP,Xi)
 
-#Apply the witness variability constraint
+#Apply the control variability constraint
 Control <- with(data, restr(TEST,REP,Xi,scenario = "restr",zstat = FALSE))
 
-#Apply witness variability restriction with normalization (Z statistic)
+#Apply control variability restriction with normalization (Z statistic)
 Control <- with(data, restr(TEST,REP,Xi,scenario = "restr",zstat = TRUE))
-}
 }
 \references{
 Carvalho, I. R., Silva, J. A. G. da, Moura, N. B., Ferreira, L. L.,

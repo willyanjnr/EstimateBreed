@@ -7,6 +7,7 @@
 #'@param AAT The average air temperature column (in degree Celsius).
 #'@param RH The relative humidity column (in \%).
 #'@param disease Define the soybean disease (Standard = 'rust').
+#'@param verbose Logical argument. Runs the code silently if FALSE.
 #'@param plot Plot a graph of the accumulation (Default is F (FALSE)).
 #'@return Returns the parameters of the incidence probability of the selected
 #'disease in the soybean crop, being: \cr
@@ -33,16 +34,14 @@
 #'@author Leonardo Cesar Pradebon
 #'@author Jose Antonio Gonzalez da Silva
 #'@examples
-#'\donttest{
 #'library(EstimateBreed)
 #'
 #'# Rust Risk Prediction
 #'data("clima")
 #'with(clima, risk(DY, MO, TMED, RH, disease = "rust"))
-#'}
 #'@export
 
-risk <- function(DAY,MONTH,AAT,RH,disease="rust",plot=F){
+risk <- function(DAY,MONTH,AAT,RH,disease="rust",verbose=FALSE,plot=FALSE){
   dados <- data.frame(DAY,MONTH,AAT,RH)
   if(disease=="rust"){
   alfa <- log(2)/log(2.30508474576)
@@ -68,18 +67,21 @@ risk <- function(DAY,MONTH,AAT,RH,disease="rust",plot=F){
   diarioGeral <- merge(umidade,Temp)
   diarioGeral$TOTALrisk <- diarioGeral$RHrisk * diarioGeral$TEMPrisk
   diarioGeral$TOTALrisk <- ifelse(diarioGeral$TOTALrisk > 100, 100, diarioGeral$TOTALrisk)
-  cat("\n--------------------------------------------------\n")
-  cat("Risk of Asian Rust Occurrence")
-  cat("\n--------------------------------------------------\n")
-  print(riscofinal)
-    if(plot==T){
+  if(verbose==TRUE){
+    cat("\n--------------------------------------------------\n")
+    cat("Risk of Asian Rust Occurrence")
+    cat("\n--------------------------------------------------\n")
+    print(riscofinal)
+  }
+  return(riscofinal)
+    if(plot==TRUE){
       layout(matrix(c(1,3,2,3), 2, 2, byrow = TRUE))
       boxplot(Temp$riscoTEMP ~ Temp$Month, col=rgb(0.3,0.5,0.4,0.6),
-              ylab="Temperature Risk (%)",xlab="Month",outline=F)
+              ylab="Temperature Risk (%)",xlab="Month",outline=FALSE)
       boxplot(umidade$riscoUR ~ umidade$Mponth, col=rgb(0.3,0.5,0.4,0.6),
-              ylab="Relative Humidity Risk (%)",xlab="Month",outline=F)
+              ylab="Relative Humidity Risk (%)",xlab="Month",outline=FALSE)
       boxplot(diarioGeral$TOTALrisk ~ diarioGeral$Month, col=rgb(0.3,0.5,0.4,0.6),
-              ylab="Total Risk (%)",xlab="Month",outline=F)
+              ylab="Total Risk (%)",xlab="Month",outline=FALSE)
     }
   }#ELSEIF - ###ENVARG
   }

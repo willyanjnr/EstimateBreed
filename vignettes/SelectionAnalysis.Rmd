@@ -154,9 +154,11 @@ data("genot2")
 
 #Geting parameters without cheking model assumptions
 parameters <- genpar(genot2,Gen,Rep,var =c("VAR1", "VAR2"))
-parameters
+parameters$anova
+parameters$gp
 
 #Checking model assumptions
 parameters <- genpar(genot2,Gen,Rep,var =c("VAR1", "VAR2"),check=TRUE)
-parameters
+parameters$anova
+parameters$gp
 ```

@@ -4,7 +4,7 @@
 \alias{atsum}
 \title{Accumulated Thermal Sum}
 \usage{
-atsum(AAT, crop = "maize", lbt = NULL, plot = F)
+atsum(AAT, crop = "maize", lbt = NULL, verbose = FALSE, plot = FALSE)
 }
 \arguments{
 \item{AAT}{The column with the average air temperature values.}
@@ -16,6 +16,8 @@ for soybean, 'flax' for flaxseed, 'trit' for wheat or 'oat' for oat crop.}
 used in the calculation. If not informed, the function will use the values of
 10, 5, 2, 2 and 0 \eqn{^{\circ}C} for maize, soybeans, flaxseed, wheat and
 oats, respectively.}
+
+\item{verbose}{Logical argument. Runs the code silently if FALSE.}
 
 \item{plot}{Logical argument. Plot a graph of thermal accumulation if TRUE.}
 }
@@ -41,7 +43,6 @@ Calculates the daily and accumulated thermal sum, considering the subtraction
 of the average air temperature by the lower cardinal temperature for each crop.
 }
 \examples{
-\donttest{
 library(EstimateBreed)
 
 data("clima")
@@ -51,7 +52,6 @@ with(clima,atsum(TMED,crop="maize"))
 
 #Adjusting lower basal temperature manually
 with(clima,atsum(TMED,crop="maize",lbt=12))
-}
 }
 \author{
 Willyan Junior Adorian Bandeira

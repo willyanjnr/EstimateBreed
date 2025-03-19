@@ -4,7 +4,7 @@
 \alias{het}
 \title{Heterosis and Heterobeltiosis}
 \usage{
-het(GEN, GM, GP, PR, REP, param = "all")
+het(GEN, GM, GP, PR, REP, param = "all", verbose = FALSE)
 }
 \arguments{
 \item{GEN}{The column with the genotype name}
@@ -20,6 +20,8 @@ het(GEN, GM, GP, PR, REP, param = "all")
 \item{param}{Value to determine the parameter to be calculated. Default is 'all'.
 To calculate heterosis only, use 'het'. To calculate only heterobeltiosis,
 use 'hetb'.}
+
+\item{verbose}{Logical argument. Runs the code silently if FALSE.}
 }
 \value{
 Returns heterosis values based on the performance of the tested
@@ -30,19 +32,17 @@ parents and progenies. The standard error (SE) is also reported for each
 Calculation of heterosis and heterobeltiosis parameters of hybrids
 }
 \examples{
-\donttest{
 library(EstimateBreed)
 
 data("maize")
 #Extract heterosis and heterobeltiosis
-with(maize,het(GEN,GM,GP,PR,REP,param="all"))
+general <- with(maize,het(GEN,GM,GP,PR,REP,param="all"))
 
 #Only extract heterosis
-with(maize,het(GEN,GM,GP,PR,REP,param = "het"))
+het <- with(maize,het(GEN,GM,GP,PR,REP,param = "het"))
 
 #Extract only heterobeltiosis
-with(maize,het(GEN,GM,GP,PR,REP,param = "hetb"))
-}
+hetb <- with(maize,het(GEN,GM,GP,PR,REP,param = "hetb"))
 }
 \author{
 Willyan Junior Adorian Bandeira

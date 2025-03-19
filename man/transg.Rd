@@ -4,7 +4,15 @@
 \alias{transg}
 \title{Selection Differential (Mean and Deviations)}
 \usage{
-transg(Gen, Var, Control, ylab = "Selection", xlab = "Genotypes")
+transg(
+  Gen,
+  Var,
+  Control,
+  verbose = FALSE,
+  plot = FALSE,
+  ylab = "Selection",
+  xlab = "Genotypes"
+)
 }
 \arguments{
 \item{Gen}{The column with the genotype name}
@@ -12,6 +20,10 @@ transg(Gen, Var, Control, ylab = "Selection", xlab = "Genotypes")
 \item{Var}{The column with the values for the variable of interest}
 
 \item{Control}{The column with the value of the variable 'X' for the controls}
+
+\item{verbose}{Logical argument. Runs the code silently if FALSE.}
+
+\item{plot}{Logical argument. Plots a graphic if 'TRUE'.}
 
 \item{ylab}{The name of the Y axis.}
 
@@ -26,7 +38,6 @@ the mean and standard deviations.
 Selection of Transgressive Genotypes - Selection Differential (SD)
 }
 \examples{
-\donttest{
 library(EstimateBreed)
 
 Gen <- paste0("G", 1:20)
@@ -35,8 +46,7 @@ Control <- rep(3.8, 20)
 
 data <- data.frame(Gen,Var,Control)
 
-with(data,transg(Gen,Var,Control))
-}
+transg_sel <- with(data,transg(Gen,Var,Control,verbose=FALSE,plot=TRUE))
 }
 \author{
 Willyan Junior Adorian Bandeira

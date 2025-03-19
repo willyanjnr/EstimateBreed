@@ -7,6 +7,8 @@
 optemp(
   VAR,
   crop = NULL,
+  verbose = FALSE,
+  plot = TRUE,
   ylab = "Meteorological Atribute",
   xlab = "Days After Sowing"
 )
@@ -17,6 +19,10 @@ maximum).}
 
 \item{crop}{Parameter to define the culture. Use 'soybean' for soybean crop,
 'maize' for maize crop and 'trit' for wheat crop.}
+
+\item{verbose}{Logical argument. Runs the code silently if FALSE.}
+
+\item{plot}{Logical argument. Plot a graph of optimal temperatures if TRUE.}
 
 \item{ylab}{The name of the Y axis.}
 
@@ -31,14 +37,12 @@ Utility function for plotting graphs of thermal preferences for crops. It is
 necessary to inform the  temperature values (minimum, average or maximum).
 }
 \examples{
-\donttest{
 library(EstimateBreed)
 
 data("clima")
 clima <- get("clima")[1:150, ]
 
 with(clima,optemp(TMED,crop="soybean"))
-}
 }
 \author{
 Willyan Junior Adorian Bandeira

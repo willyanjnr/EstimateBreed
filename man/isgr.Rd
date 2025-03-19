@@ -26,12 +26,17 @@ May change depending on the phenological stage.}
 Use 'veg' for vegetative and 'rep' for reproductive, if the
 evaluations have only been carried out in a given period.}
 }
+\value{
+The ISGR - Genetic Selection Index for Resilience defines the ability
+of genotypes to express their productivity components under the conditions of
+ air temperature and rainfall offered by the environment. The lower the index,
+  the more resilient the genotype.
+}
 \description{
 Estimation of the selection index for environmental resilience
 (Bandeira et al., 2024).
 }
 \examples{
-\donttest{
 library(EstimateBreed)
 
 #Obtain environmental deviations
@@ -48,7 +53,6 @@ isgr_index <- with(genot, isgr(GEN,ENV,NG,MG,CICLO))
 
 #Define the water requirement per stage
 isgr_index <- with(genot, isgr(GEN,ENV,NG,MG,CICLO,req=5,stage="rep"))
-}
 }
 \references{
 Bandeira, W. J. A., Carvalho, I. R., Loro, M. V., da Silva, J. A. G.,

@@ -4,7 +4,7 @@
 \alias{lai}
 \title{Leaf Area Index (LAI)}
 \usage{
-lai(GEN, W, L, TNL, TDL, crop = "soy", sp = 0.45, sden = 14)
+lai(GEN, W, L, TNL, TDL, crop = "soy", sp = 0.45, sden = 14, verbose = TRUE)
 }
 \arguments{
 \item{GEN}{The column with the genotype name}
@@ -25,6 +25,8 @@ for wheat, 'rice' for rice, 'bean' for bean, 'sunflower' for sunflower,
 \item{sp}{Row spacing (Standard sp=0.45).}
 
 \item{sden}{Sowing density, in plants per linear meter (standard sden=14).}
+
+\item{verbose}{Logical argument. Runs the code silently if FALSE.}
 }
 \value{
 Returns the accumulated leaf area, the potential leaf area index
@@ -35,16 +37,14 @@ Returns the accumulated leaf area, the potential leaf area index
 Utility function for estimating crop LAI
 }
 \examples{
-\donttest{
 library(EstimateBreed)
 
 data("leafarea")
 #Crop selection
-with(leafarea,lai(GEN,C,L,TNL,TDL,crop="soy"))
+soy_lai<-with(leafarea,lai(GEN,C,L,TNL,TDL,crop="soy"))
 
 #Changing row spacing and sowing density
-with(leafarea,lai(GEN,C,L,TNL,TDL,crop="maize",sp=0.45,sden=4))
-}
+maize_lai<-with(leafarea,lai(GEN,C,L,TNL,TDL,crop="maize",sp=0.45,sden=4))
 }
 \references{
 Meira, D., Queiroz de Souza, V., Carvalho, I. R., Nardino, M., Follmann,

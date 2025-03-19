@@ -1,31 +1,38 @@
 #'Estimates using polynomial equations.
 #'@description
-#'Determination of maximum technical efficiency (MET) and plateau regression.
+#'Determination of maximum technical efficiency (MTE) and plateau regression.
 #'@param indep Name of the column with the independent variable.
 #'@param dep Name of the dependent variable column
-#'@param type Type of analysis to be carried out. Use 'MET' to extract the
+#'@param type Type of analysis to be carried out. Use 'MTE' to extract the
 #'maximum technical efficiency or 'plateau' for plateau regression.
 #'@param alpha Significance of the test.
+#'@param verbose Logical argument. Runs the code silently if FALSE.
+#' @return Calculates the maximum technical efficiency (MTE) based on a quadratic
+#' polynomial model, if it is significant. The MTE is given by:
+#' \deqn{MTE = -\frac{\beta_1}{2\beta_2}}
+#'
+#' It also calculates plateau regression parameters, returning:
+#' - The plateau value: \deqn{Y_{plateau} = \beta_0 + \beta_1 X_{plateau} + \beta_2 X_{plateau}^2}
+#' - The growth rate: \deqn{\beta_1}
+#' - The inflection point: \deqn{X_{inflection} = -\frac{\beta_1}{2\beta_2}}
 #'@author Willyan Junior Adorian Bandeira
 #'@author Ivan Ricardo Carvalo
 #'@author Murilo Vieira Loro
 #'@author Leonardo Cesar Pradebon
 #'@author Jose Antonio Gonzalez da Silva
 #'@examples
-#'\donttest{
 #'library(EstimateBreed)
 #'data("mtcars")
 #'
-#'with(mtcars,linearest(wt,mpg,type = "MET"))
-#'}
+#'met<-with(mtcars,linearest(wt,mpg,type = "MTE",verbose=TRUE))
 #'@export
 
-linearest <- function(indep,dep,type=NULL,alpha=0.05){
+linearest <- function(indep,dep,type=NULL,alpha=0.05,verbose=FALSE){
   if (is.null(type)) {
     stop("Enter the analysis to be carried out in the 'type'")
   }
 
-  if(type=="MET") {
+  if(type=="MTE") {
     mod1 <- lm(dep ~ indep + I(indep^2))
     resumo <- summary(mod1)
     pvalue <- resumo$coefficients[3, 4]
@@ -36,9 +43,12 @@ linearest <- function(indep,dep,type=NULL,alpha=0.05){
       cval <- as.numeric(mod1$coefficients["I(indep^2)"])
       MET <- -bval / (2 * cval)
       est_y <- intercept + bval * MET + cval * MET^2
-      print(resumo)
-      cat("MET =", round(MET, digits = 5), "\n")
-      cat("y_MET =", round(est_y, digits = 5), "\n")
+      if(verbose==TRUE){
+        print(resumo)
+        cat("MTE =", paste0(round(MET, digits = 5), "\n"))
+        cat("y_MTE =", paste0(round(est_y, digits = 5), "\n"))
+      }
+      return(resumo)
     } else {
       print(resumo)
       return("The quadratic coefficient is not significant")
@@ -59,10 +69,11 @@ linearest <- function(indep,dep,type=NULL,alpha=0.05){
       L <- coef(modelo_logistico)["L"]
       k <- coef(modelo_logistico)["k"]
       x0 <- coef(modelo_logistico)["x0"]
-
-      cat("Plateau value (L):", round(L, digits = 5), "\n")
-      cat("Growth rate (k):", round(k, digits = 5), "\n")
-      cat("Inflection point (x0):", round(x0, digits = 5), "\n")
+      if(verbose==TRUE){
+        cat("Plateau value (L):", round(L, digits = 5), "\n")
+        cat("Growth rate (k):", round(k, digits = 5), "\n")
+        cat("Inflection point (x0):", round(x0, digits = 5), "\n")
+      }
       return(list(plato = L, taxa_crescimento = k, ponto_inflexao = x0))
     }, error = function(e) {
       cat("Model fitting error:", e$message, "\n")

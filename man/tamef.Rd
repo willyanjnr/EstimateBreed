@@ -4,7 +4,7 @@
 \alias{tamef}
 \title{Effective Population Size}
 \usage{
-tamef(GEN, SI, NE, remove_na = TRUE, method = "classic")
+tamef(GEN, SI, NE, remove_na = TRUE, method = "classic", verbose = TRUE)
 }
 \arguments{
 \item{GEN}{The column with the name of the genotype (progeny).}
@@ -19,6 +19,12 @@ tamef(GEN, SI, NE, remove_na = TRUE, method = "classic")
 classic' (default) or 'alternative'. 'classic' uses the variance-based
 method, while 'alternative' uses an adjusted method that accounts for
 reproductive variation.}
+
+\item{verbose}{Logical argument. Runs the code silently if FALSE.}
+}
+\value{
+The result is the effective population size for any variable, based
+on the number of individuals conducted and selected.
 }
 \description{
 Estimates the effective population size (\eqn{N_e}) adapted from Morais (1997).
@@ -33,7 +39,6 @@ The alternative method is calculated as:
 \deqn{N_e = \frac{4 \sum SI}{2 + \sum \left(\frac{SI}{NE}\right)}}
 }
 \examples{
-\donttest{
 library(EstimateBreed)
 
 GEN <- c("Genotype1", "Genotype2", "Genotype3", "Genotype4", "Genotype5")
@@ -42,7 +47,6 @@ NE <- c(100, 150, 120, 180, 140)
 data <- data.frame(GEN,SI,NE)
 
 with(data, tamef(GEN, SI, NE, method = "classic"))
-}
 }
 \references{
 Morais, R. P. (1997). Effective population size and genetic

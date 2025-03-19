@@ -4,7 +4,7 @@
 \alias{genpar}
 \title{Genetic parameters for selection}
 \usage{
-genpar(.data, GEN, REP, vars, K = 0.05, check = FALSE)
+genpar(.data, GEN, REP, vars, K = 0.05, check = FALSE, verbose = FALSE)
 }
 \arguments{
 \item{.data}{The name of the object containing data.}
@@ -19,6 +19,8 @@ genpar(.data, GEN, REP, vars, K = 0.05, check = FALSE)
 
 \item{check}{Logical argument. Checks the model's assumptions
 statistical if the value is equal to TRUE.}
+
+\item{verbose}{Logical argument. Runs the code silently if FALSE.}
 }
 \value{
 A list containing the following components:
@@ -64,18 +66,18 @@ carried out on the rice crop. Intended for isolated evaluation of the performanc
 of lines within a given population.
 }
 \examples{
-\donttest{
 library(EstimateBreed)
 data("genot2")
 
 #Geting parameters without cheking model assumptions
 parameters <- genpar(genot2,Gen,Rep,var =c("VAR1", "VAR2"))
-parameters
+parameters$anova
+parameters$gp
 
 #Checking model assumptions
 parameters <- genpar(genot2,Gen,Rep,var =c("VAR1", "VAR2"),check=TRUE)
-parameters
-}
+parameters$anova
+parameters$gp
 }
 \references{
 Yadav, S. P. S., Bhandari, S., Ghimire, N. P., Mehata, D. K., Majhi, S. K.,

@@ -10,6 +10,7 @@ stind(
   YC,
   index = "ALL",
   bygen = TRUE,
+  verbose = FALSE,
   plot = FALSE,
   xlab = "Genotype",
   ylab = "Values",
@@ -31,6 +32,8 @@ Stability Index, 'YSI' - Yield Stability Index, 'RSI' - Relative Stress Index.}
 \item{bygen}{Returns the average of each genotype if 'TRUE'. Only in this way
 it will be possible to plot graphs.}
 
+\item{verbose}{Logical argument. Runs the code silently if FALSE.}
+
 \item{plot}{Plot graph if equal to 'TRUE' (Standard 'FALSE').}
 
 \item{xlab}{Adjust the title of the x-axis in the graph.}
@@ -48,17 +51,15 @@ Selection indices for genotypes conducted under stress conditions cited
 by Ghazvini et al. (2024).
 }
 \examples{
-\donttest{
 library(EstimateBreed)
 
 data("aveia")
 
 #General
-with(aveia,stind(GEN,MC,MG,index = "ALL",bygen=TRUE))
+index <- with(aveia,stind(GEN,MC,MG,index = "ALL",bygen=TRUE))
 
 #Only the desired index
-with(aveia,stind(GEN,MC,MG,index = "STI",bygen=TRUE))
-}
+STI <- with(aveia,stind(GEN,MC,MG,index = "STI",bygen=TRUE))
 }
 \references{
 Ghazvini, H., Pour-Aboughadareh, A., Jasemi, S.S. et al.

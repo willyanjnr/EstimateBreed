@@ -4,7 +4,7 @@
 \alias{COI}
 \title{Inbreeding coefficient}
 \usage{
-COI(var, VG, VF, generation = "all")
+COI(var, VG, VF, generation = "all", verbose = FALSE)
 }
 \arguments{
 \item{var}{Column with the variable name}
@@ -16,6 +16,8 @@ COI(var, VG, VF, generation = "all")
 \item{generation}{Parameter to select the generation. Use 'all' to get the
 parameters for all the generations or 'F3', 'F4', 'F5' and 'F6' for just
  one of the generations.}
+
+\item{verbose}{Logical argument. Runs the code silently if FALSE.}
 }
 \value{
 Returns the total, additive and dominance variance values based on
@@ -25,7 +27,6 @@ the variance components for a given variable.
 Function for calculating the inbreeding coefficient
 }
 \examples{
-\donttest{
 library(EstimateBreed)
 
 var <- c("A","B","C","D","E")
@@ -34,11 +35,10 @@ VF <- c(1.2, 1.5, 1.3, 1.6, 1.4)
 data <- data.frame(var,VG,VF)
 
 #Calculating for all generations
-with(data,COI(var,VG,VF,generation = "all"))
+inbr1 <- with(data,COI(var,VG,VF,generation = "all"))
 
 #Calculating for just one generation
-with(data,COI(var,VG,VF,generation = "F3"))
-}
+inbr2 <- with(data,COI(var,VG,VF,generation = "F3"))
 }
 \references{
 Falconer, D. S., & Mackay, T. F. C. (1996). Introduction to quantitative

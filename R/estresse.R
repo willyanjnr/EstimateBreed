@@ -11,6 +11,7 @@
 #' Stability Index, 'YSI' - Yield Stability Index, 'RSI' - Relative Stress Index.
 #'@param bygen Returns the average of each genotype if 'TRUE'. Only in this way
 #'it will be possible to plot graphs.
+#'@param verbose Logical argument. Runs the code silently if FALSE.
 #'@param plot Plot graph if equal to 'TRUE' (Standard 'FALSE').
 #'@param xlab Adjust the title of the x-axis in the graph.
 #'@param ylab Adjust the title of the y-axis in the graph.
@@ -28,21 +29,20 @@
 #'Genotypes of Barley: Applying Yield-Based Indices and Multi-index Selecion
 #'Models. Journal of Crop Health 76, 601-616 (2024).
 #'\doi{10.1007/s10343-024-00981-1}
-#'@export
 #'@examples
-#'\donttest{
 #'library(EstimateBreed)
 #'
 #'data("aveia")
 #'
 #'#General
-#'with(aveia,stind(GEN,MC,MG,index = "ALL",bygen=TRUE))
+#'index <- with(aveia,stind(GEN,MC,MG,index = "ALL",bygen=TRUE))
 #'
 #'#Only the desired index
-#'with(aveia,stind(GEN,MC,MG,index = "STI",bygen=TRUE))
-#'}
+#'STI <- with(aveia,stind(GEN,MC,MG,index = "STI",bygen=TRUE))
+#'@export
 
-stind <- function(GEN,YS,YC,index="ALL",bygen=TRUE,plot=FALSE,xlab="Genotype",ylab="Values",...){
+stind <- function(GEN,YS,YC,index="ALL",bygen=TRUE,verbose=FALSE,plot=FALSE,
+                  xlab="Genotype",ylab="Values",...){
   GEN1 <- as.factor(GEN)
   YS1 <- YS
   YC1 <- YC
@@ -61,9 +61,12 @@ stind <- function(GEN,YS,YC,index="ALL",bygen=TRUE,plot=FALSE,xlab="Genotype",yl
     if(index=="STI"){
       STI <- ((YS*YC)/(YC^2))
       STI <- data.frame(GEN,STI)
-      cat("STI Index")
-      cat("\n----------------------------\n")
-      print(STI)
+      return(STI)
+      if(verbose==TRUE){
+        cat("STI Index")
+        cat("\n----------------------------\n")
+        print(STI)
+      }
       if(plot==TRUE){
         ggplot(STI, aes(x = GEN, y = STI, fill = GEN)) +
           geom_bar(stat = "identity") +
@@ -82,9 +85,12 @@ stind <- function(GEN,YS,YC,index="ALL",bygen=TRUE,plot=FALSE,xlab="Genotype",yl
     else if(index=="YI"){
       YI <- YS/YC
       YI <- data.frame(GEN,YI)
-      cat("YI Index")
-      cat("\n----------------------------\n")
-      print(YI)
+      return(YI)
+      if(verbose==TRUE){
+        cat("YI Index")
+        cat("\n----------------------------\n")
+        print(YI)
+      }
       if(plot==TRUE){
         ggplot(YI, aes(x = GEN, y = YI, fill = GEN)) +
           geom_bar(stat = "identity") +
@@ -103,9 +109,12 @@ stind <- function(GEN,YS,YC,index="ALL",bygen=TRUE,plot=FALSE,xlab="Genotype",yl
     else if(index=="GMP"){
       GMP <- sqrt(YS*YC)
       GMP <- data.frame(GEN,GMP)
-      cat("GMP Index")
-      cat("\n----------------------------\n")
-      print(GMP)
+      return(GMP)
+      if(verbose==TRUE){
+        cat("GMP Index")
+        cat("\n----------------------------\n")
+        print(GMP)
+      }
       if(plot==TRUE){
         ggplot(GMP, aes(x = GEN, y = GMP, fill = GEN)) +
           geom_bar(stat = "identity") +
@@ -124,9 +133,12 @@ stind <- function(GEN,YS,YC,index="ALL",bygen=TRUE,plot=FALSE,xlab="Genotype",yl
     else if(index=="MP"){
       MP <- (YS*YC)/2
       MP <- data.frame(GEN,MP)
-      cat("MP Index")
-      cat("\n----------------------------\n")
-      print(MP)
+      return(MP)
+      if(verbose==TRUE){
+        cat("MP Index")
+        cat("\n----------------------------\n")
+        print(MP)
+      }
       if(plot==TRUE){
         ggplot(MP, aes(x = GEN, y = MP, fill = GEN)) +
           geom_bar(stat = "identity") +
@@ -145,9 +157,12 @@ stind <- function(GEN,YS,YC,index="ALL",bygen=TRUE,plot=FALSE,xlab="Genotype",yl
     else if(index=="MH"){
       MH <- (2*(YC-YS))/(YC+YS)
       MH <- data.frame(GEN,MH)
-      cat("MH Index")
-      cat("\n----------------------------\n")
-      print(MH)
+      return(MH)
+      if(verbose==TRUE){
+        cat("MH Index")
+        cat("\n----------------------------\n")
+        print(MH)
+      }
       if(plot==TRUE){
         ggplot(MH, aes(x = GEN, y = MH, fill = GEN)) +
           geom_bar(stat = "identity") +
@@ -168,9 +183,12 @@ stind <- function(GEN,YS,YC,index="ALL",bygen=TRUE,plot=FALSE,xlab="Genotype",yl
       xYS <- mean(media_gen$YS)
       SSI <- (1-(YC/YS))/(1-(xYC/xYS))
       SSI <- data.frame(GEN,SSI)
-      cat("SSI Index")
-      cat("\n----------------------------\n")
-      print(SSI)
+      return(SSI)
+      if(verbose==TRUE){
+        cat("SSI Index")
+        cat("\n----------------------------\n")
+        print(SSI)
+      }
       if(plot==TRUE){
         ggplot(SSI, aes(x = GEN, y = SSI, fill = GEN)) +
           geom_bar(stat = "identity") +
@@ -189,9 +207,12 @@ stind <- function(GEN,YS,YC,index="ALL",bygen=TRUE,plot=FALSE,xlab="Genotype",yl
     else if(index=="YSI"){
       YSI <- YS/YC
       YSI <- data.frame(GEN,YSI)
-      cat("YSI Index")
-      cat("\n----------------------------\n")
-      print(YSI)
+      return(YSI)
+      if(verbose==TRUE){
+        cat("YSI Index")
+        cat("\n----------------------------\n")
+        print(YSI)
+      }
       if(plot==TRUE){
         ggplot(YSI, aes(x = GEN, y = YSI, fill = GEN)) +
           geom_bar(stat = "identity") +
@@ -212,9 +233,12 @@ stind <- function(GEN,YS,YC,index="ALL",bygen=TRUE,plot=FALSE,xlab="Genotype",yl
       xYS <- mean(media_gen$YS)
       RSI <- (YC/YS)/(xYC/xYS)
       RSI <- data.frame(GEN,RSI)
-      cat("RSI Index")
-      cat("\n----------------------------\n")
-      print(RSI)
+      return(RSI)
+      if(verbose==TRUE){
+        cat("RSI Index")
+        cat("\n----------------------------\n")
+        print(RSI)
+      }
       if(plot==TRUE){
         ggplot(RSI, aes(x = GEN, y = RSI, fill = GEN)) +
           geom_bar(stat = "identity") +
@@ -242,10 +266,13 @@ stind <- function(GEN,YS,YC,index="ALL",bygen=TRUE,plot=FALSE,xlab="Genotype",yl
       YSI <- YS/YC
       RSI <- (YC/YS)/(xYC/xYS)
       final <- data.frame(GEN,STI,YI,GMP,MP,MH,SSI,YSI,RSI)
-      cat("\n---------------------------------------------------------------------------------------------\n")
-      cat("Stress Index")
-      cat("\n---------------------------------------------------------------------------------------------\n")
-      print(final)
+      return(final)
+      if(verbose==TRUE){
+        cat("\n---------------------------------------------------------------------------------------------\n")
+        cat("Stress Index")
+        cat("\n---------------------------------------------------------------------------------------------\n")
+        print(final)
+      }
       if(plot==TRUE){
         final <- final %>%
           mutate(across(starts_with("GEN"), as.factor),
@@ -269,84 +296,6 @@ stind <- function(GEN,YS,YC,index="ALL",bygen=TRUE,plot=FALSE,xlab="Genotype",yl
           scale_fill_viridis_d()
       }
     }
-  }
-  else if(index=="STI"){
-    STI <- ((YS*YC)/(YC^2))
-    STI <- data.frame(GEN,STI)
-    cat("STI Index")
-    cat("\n----------------------------\n")
-    print(STI)
-  }
-  else if(index=="YI"){
-    YI <- YS/YC
-    YI <- data.frame(GEN,YI)
-    cat("YI Index")
-    cat("\n----------------------------\n")
-    print(YI)
-  }
-  else if(index=="GMP"){
-    GMP <- sqrt(YS*YC)
-    GMP <- data.frame(GEN,GMP)
-    cat("GMP Index")
-    cat("\n----------------------------\n")
-    print(GMP)
-  }
-  else if(index=="MP"){
-    MP <- (YS*YC)/2
-    MP <- data.frame(GEN,MP)
-    cat("MP Index")
-    cat("\n----------------------------\n")
-    print(MP)
-  }
-  else if(index=="MH"){
-    MH <- (2*(YC-YS))/(YC+YS)
-    MH <- data.frame(GEN,MH)
-    cat("MH Index")
-    cat("\n----------------------------\n")
-    print(MH)
-  }
-  else if(index=="SSI"){
-    xYC <- mean(media$YC)
-    xYS <- mean(media$YS)
-    SSI <- (1-(YC/YS))/(1-(xYC/xYS))
-    SSI <- data.frame(GEN,SSI)
-    cat("SSI Index")
-    cat("\n----------------------------\n")
-    print(SSI)
-  }
-  else if(index=="YSI"){
-    YSI <- YS/YC
-    YSI <- data.frame(GEN,YSI)
-    cat("YSI Index")
-    cat("\n----------------------------\n")
-    print(YSI)
-  }
-  else if(index=="RSI"){
-    xYC <- mean(media$YC)
-    xYS <- mean(media$YS)
-    RSI <- (YC/YS)/(xYC/xYS)
-    RSI <- data.frame(GEN,RSI)
-    cat("RSI Index")
-    cat("\n----------------------------\n")
-    print(RSI)
-  }
-  else if(index=="ALL"){
-    media <- data.frame(GEN1,YS1,YC1)
-    STI <- ((YS*YC)/(YC^2))
-    YI <- YS/YC
-    GMP <- sqrt(YS*YC)
-    MP <- (YS*YC)/2
-    MH <- (2*(YC-YS))/(YC+YS)
-    xYC <- mean(media$YC)
-    xYS <- mean(media$YS)
-    SSI <- (1-(YC/YS))/(1-(xYC/xYS))
-    YSI <- YS/YC
-    RSI <- (YC/YS)/(xYC/xYS)
-    final <- data.frame(GEN,STI,YI,GMP,MP,MH,SSI,YSI,RSI)
-    cat("\n-----------------------------------------------------------------------------------------------\n")
-    cat("Stress Index")
-    cat("\n-----------------------------------------------------------------------------------------------\n")
-    print(final)
   }
 }
 

@@ -9,24 +9,24 @@
 #' @param Year The column with the year of selection (optional)
 #' @param method The selection method: 'pressure', 'differential',
 #' 'genitor_control", or 'year_weighted'
+#' @param verbose Logical argument. Runs the code silently if FALSE.
 #' @return A data frame with selection gain results
 #' @author Willyan Junior Adorian Bandeira
 #' @author Ivan Ricardo Carvalo
 #' @author Murilo Vieira Loro
 #' @author Leonardo Cesar Pradebon
 #' @author Jose Antonio Gonzalez da Silva
-#' @export
 #' @examples
-#'\donttest{
 #'library(EstimateBreed)
 #'
 #'SG(Var = c("A", "B", "C"), h = 0.5, VF = 1.2, P = "10", method = "pressure")
 #'SG(Var = c("A", "B", "C"), h = 0.5, DS = 1.5, method = "differential")
 #'SG(Var = c("A", "B", "C"), h = 0.5, VF = 1.2, P = "10", method = "genitor_control")
 #'SG(Var = c("A", "B", "C"), h = 0.5, VF = 1.2, P = "10", Year = 5, method = "year_weighted")
-#'}
+#' @export
 
-SG <- function(Var, h, VF = NULL, P = "1", DS = NULL, Year = NULL, method = "pressure") {
+SG <- function(Var, h, VF = NULL, P = "1", DS = NULL, Year = NULL, method = "pressure",
+               verbose=FALSE) {
   Var <- as.factor(Var)
 
   coeficientes <- c("1" = 2.7, "2" = 2.44, "3" = 2.27, "4" = 2.16, "5" = 2.08,
@@ -91,10 +91,11 @@ SG <- function(Var, h, VF = NULL, P = "1", DS = NULL, Year = NULL, method = "pre
   final_list <- final_list[!sapply(final_list, is.null)]
   final <- suppressWarnings(data.frame(final_list, stringsAsFactors = FALSE,
                                        row.names = NULL))
-
-  cat("\n", strrep("-", 40), "\n", sep = "")
-  cat(paste("Selection Gain using", method, "\n"))
-  cat(strrep("-", 40), "\n", sep = "")
+  if(verbose==TRUE){
+    cat("\n", strrep("-", 40), "\n", sep = "")
+    cat(paste("Selection Gain using", method, "\n"))
+    cat(strrep("-", 40), "\n", sep = "")
+  }
   return(final)
 }
 
@@ -107,6 +108,8 @@ SG <- function(Var, h, VF = NULL, P = "1", DS = NULL, Year = NULL, method = "pre
 #'@param Control The column with the value of the variable 'X' for the controls
 #'@param ylab The name of the Y axis.
 #'@param xlab The name of the X axis.
+#'@param plot Logical argument. Plots a graphic if 'TRUE'.
+#'@param verbose Logical argument. Runs the code silently if FALSE.
 #'@author Willyan Junior Adorian Bandeira
 #'@author Ivan Ricardo Carvalo
 #'@author Murilo Vieira Loro
@@ -115,8 +118,7 @@ SG <- function(Var, h, VF = NULL, P = "1", DS = NULL, Year = NULL, method = "pre
 #'@return Returns the general parameters and the genotypes selected for each
 #'treshold. Also plot a representative graph of the selected genotypes based on
 #'the mean and standard deviations.
-#' @examples
-#'\donttest{
+#'@examples
 #'library(EstimateBreed)
 #'
 #'Gen <- paste0("G", 1:20)
@@ -125,11 +127,11 @@ SG <- function(Var, h, VF = NULL, P = "1", DS = NULL, Year = NULL, method = "pre
 #'
 #'data <- data.frame(Gen,Var,Control)
 #'
-#'with(data,transg(Gen,Var,Control))
-#'}
+#'transg_sel <- with(data,transg(Gen,Var,Control,verbose=FALSE,plot=TRUE))
 #'@export
 
-transg <- function(Gen, Var, Control, ylab="Selection", xlab="Genotypes") {
+transg <- function(Gen, Var, Control, verbose=FALSE, plot=FALSE,
+                   ylab="Selection", xlab="Genotypes") {
 
   Gen <- as.factor(Gen)
   Var <- Var
@@ -157,94 +159,106 @@ transg <- function(Gen, Var, Control, ylab="Selection", xlab="Genotypes") {
 
   x_min <- 1
   x_max <- length(levels(Gen))
-  grafico <- ggplot(dados, aes(x = Gen, y = Var)) +
-    geom_text(label = rownames(dados), nudge_x = 0, nudge_y = 0, color = "red",
-              hjust = 3, size = 4) +
-    ylab(ylab) + xlab(xlab) + theme_classic() +
-    geom_segment(x = x_min, xend = x_max, y = Media, yend = Media, linetype = 1,
-                 color = "darkred") +
-    annotate("text", x = x_min, y = Media, label = "Overall Mean",
-             color = "darkred",hjust = 0) +
-    geom_segment(x = x_min, xend = x_max, y = DSg, yend = DSg, linetype = 1,
-                 color = "purple") +
-    annotate("text", x = x_min, y = DSg, label = "Control Mean",
-             color = "purple",hjust = 0) +
-    geom_segment(x = x_min, xend = x_max, y = DS1S, yend = DS1S, linetype = 3,
-                 color = "blue") +
-    annotate("text", x = x_min, y = DS1S, label = "DS1S", color = "blue",
-             hjust = 0) +
-    geom_segment(x = x_min, xend = x_max, y = DS2S, yend = DS2S, linetype = 4,
-                 color = "darkgreen") +
-    annotate("text", x = x_min, y = DS2S, label = "DS2S", color = "darkgreen",
-             hjust = 0) +
-    geom_segment(x = x_min, xend = x_max, y = DS3S, yend = DS3S, linetype = 5,
-                 color = "darkorange") +
-    annotate("text", x = x_min, y = DS3S, label = "DS3S", color = "darkorange",
-             hjust = 0) +
-    ggtitle("Selection of Transgressive Genotypes - Selection Differential (SD)")
-  print(grafico)
-
-  cat("\n---------------------------------------------------------------------\n")
-  cat("Selection of Transgressive Genotypes - Selection Differential (SD)\n")
-  cat("---------------------------------------------------------------------\n")
-  cat("Parameters:\n")
-  cat("---------------------------------------------------------------------\n")
-  for (param in names(parametros)) {
-    cat(sprintf("%-20s : %.3f\n", param, parametros[[param]]))
+  if(plot==TRUE){
+    grafico <- ggplot(dados, aes(x = Gen, y = Var)) +
+      geom_text(label = rownames(dados), nudge_x = 0, nudge_y = 0, color = "red",
+                hjust = 3, size = 4) +
+      ylab(ylab) + xlab(xlab) + theme_classic() +
+      geom_segment(x = x_min, xend = x_max, y = Media, yend = Media, linetype = 1,
+                   color = "darkred") +
+      annotate("text", x = x_min, y = Media, label = "Overall Mean",
+               color = "darkred",hjust = 0) +
+      geom_segment(x = x_min, xend = x_max, y = DSg, yend = DSg, linetype = 1,
+                   color = "purple") +
+      annotate("text", x = x_min, y = DSg, label = "Control Mean",
+               color = "purple",hjust = 0) +
+      geom_segment(x = x_min, xend = x_max, y = DS1S, yend = DS1S, linetype = 3,
+                   color = "blue") +
+      annotate("text", x = x_min, y = DS1S, label = "DS1S", color = "blue",
+               hjust = 0) +
+      geom_segment(x = x_min, xend = x_max, y = DS2S, yend = DS2S, linetype = 4,
+                   color = "darkgreen") +
+      annotate("text", x = x_min, y = DS2S, label = "DS2S", color = "darkgreen",
+               hjust = 0) +
+      geom_segment(x = x_min, xend = x_max, y = DS3S, yend = DS3S, linetype = 5,
+                   color = "darkorange") +
+      annotate("text", x = x_min, y = DS3S, label = "DS3S", color = "darkorange",
+               hjust = 0) +
+      ggtitle("Selection of Transgressive Genotypes - Selection Differential (SD)")
+    print(grafico)
   }
-  cat("\n---------------------------------------------------------------------\n")
-  cat("Genotypes above each threshold:\n")
-  cat("---------------------------------------------------------------------\n")
-
-  print_wrapped_list <- function(label, values, width = 60) {
-    if (length(values) == 0) {
-      cat(sprintf("%-30s : None\n", label))
-    } else {
-      text <- paste(values, collapse = ", ")
-      wrapped_text <- strwrap(text, width = width, prefix = "  ",
-                              initial = paste(label, ": "))
-      cat(paste0(wrapped_text, collapse = "\n"), "\n")
+  if(verbose==TRUE){
+    cat("\n---------------------------------------------------------------------\n")
+    cat("Selection of Transgressive Genotypes - Selection Differential (SD)\n")
+    cat("---------------------------------------------------------------------\n")
+    cat("Parameters:\n")
+    cat("---------------------------------------------------------------------\n")
+    for (param in names(parametros)) {
+      cat(sprintf("%-20s : %.3f\n", param, parametros[[param]]))
     }
+    cat("\n---------------------------------------------------------------------\n")
+    cat("Genotypes above each threshold:\n")
+    cat("---------------------------------------------------------------------\n")
+
+    print_wrapped_list <- function(label, values, width = 60) {
+      if (length(values) == 0) {
+        cat(sprintf("%-30s : None\n", label))
+      } else {
+        text <- paste(values, collapse = ", ")
+        wrapped_text <- strwrap(text, width = width, prefix = "  ",
+                                initial = paste(label, ": "))
+        cat(paste0(wrapped_text, collapse = "\n"), "\n")
+      }
+    }
+    print_wrapped_list("Genotypes above Control Mean", above_cmean)
+    print_wrapped_list("Genotype above Overall Mean", above_mean)
+    print_wrapped_list("Genotypes above Mean + 1SD", above_DS1S)
+    print_wrapped_list("Genotypes above Mean + 2SD", above_DS2S)
+    print_wrapped_list("Genotypes above Mean + 3SD", above_DS3S)
+    cat("---------------------------------------------------------------------\n")
   }
-  print_wrapped_list("Genotypes above Control Mean", above_cmean)
-  print_wrapped_list("Genotype above Overall Mean", above_mean)
-  print_wrapped_list("Genotypes above Mean + 1SD", above_DS1S)
-  print_wrapped_list("Genotypes above Mean + 2SD", above_DS2S)
-  print_wrapped_list("Genotypes above Mean + 3SD", above_DS3S)
-  cat("---------------------------------------------------------------------\n")
 }
 
 ###
 #'Standard Segregation
 #'@description
 #'Didactic table of standard segregation by generation
-#'@param MELHORAMENTO Base parameter for the print table function
+#'@param verbose Logical argument. Runs the code silently if FALSE.
+#'@return Create a didactic table of standard segregation, considering allogamous
+#' and autogamous species and mutants. It shows the expected level of
+#' heterozygosity, probable number of genes, environmental effect and Wright's
+#' probabilistic coefficient.
 #'@author Willyan Junior Adorian Bandeira
 #'@author Ivan Ricardo Carvalo
 #'@author Murilo Vieira Loro
 #'@author Leonardo Cesar Pradebon
 #'@author Jose Antonio Gonzalez da Silva
+#'@examples
+#'library(EstimateBreed)
+#'
+#'default_seg(verbose=TRUE)
 #'@export
 
-default_seg <- function(MELHORAMENTO){
-
-  AUTOGAM<-c("Parents","F1","F2","F3","F4","F5","F6","F7","F8","F9")
-  HETEROZIGOSITY<-c(0,100,50,25,12.5,6.25,3.12,1.56,0.78,0.39)
-  ALOGAM<-c("-","-","S0","S1","S2","S3","S4","S5","S6","S7")
-  HOMOZIGOSITY<-c(100, 0,50,75,87.5,93.75,96.88,98.44,99.22, 99.61)
-  MUTANTS<-c("-", "M0", "M1","M2", "M3","M4","M5","M6", "M7", "M8")
-  SELECTION<-c("N","N","Quali","Quali",
-             "Quant","Quanti","Quanti","Quanti",
-             "Quanti","Quanti")
-  N_GENES<-c("-","-","1 to 2",
-             "1 to 2", "3 or more", "3 ou more","3 ou more","3 ou more",
-             "3 ou more","3 ou more")
-  ENV_EF<-c("-","-","low",
-                "low", "high", "high","high","high","high","high")
-  COEF_F<-c(0.000,0.500,0.750,0.875,0.937,0.969,0.984,0.992,0.996,0.998)
-  TABLESEG<-data.frame(AUTOGAM,ALOGAM,HETEROZIGOSITY,HOMOZIGOSITY,MUTANTS,
-                     SELECTION,N_GENES, ENV_EF, COEF_F)
-  return(TABLESEG)
+default_seg <- function(verbose=TRUE){
+  if(verbose==TRUE){
+    AUTOGAM<-c("Parents","F1","F2","F3","F4","F5","F6","F7","F8","F9")
+    HETEROZIGOSITY<-c(0,100,50,25,12.5,6.25,3.12,1.56,0.78,0.39)
+    ALOGAM<-c("-","-","S0","S1","S2","S3","S4","S5","S6","S7")
+    HOMOZIGOSITY<-c(100, 0,50,75,87.5,93.75,96.88,98.44,99.22, 99.61)
+    MUTANTS<-c("-", "M0", "M1","M2", "M3","M4","M5","M6", "M7", "M8")
+    SELECTION<-c("N","N","Quali","Quali",
+                 "Quant","Quanti","Quanti","Quanti",
+                 "Quanti","Quanti")
+    N_GENES<-c("-","-","1 to 2",
+               "1 to 2", "3 or more", "3 or more","3 or more","3 or more",
+               "3 or more","3 or more")
+    ENV_EF<-c("-","-","low",
+              "low", "high", "high","high","high","high","high")
+    COEF_F<-c(0.000,0.500,0.750,0.875,0.937,0.969,0.984,0.992,0.996,0.998)
+    TABLESEG<-data.frame(AUTOGAM,ALOGAM,HETEROZIGOSITY,HOMOZIGOSITY,MUTANTS,
+                         SELECTION,N_GENES, ENV_EF, COEF_F)
+    return(TABLESEG)
+  }
 }
 
 ###
@@ -257,6 +271,7 @@ default_seg <- function(MELHORAMENTO){
 #'@param generation Parameter to select the generation. Use 'all' to get the
 #' parameters for all the generations or 'F3', 'F4', 'F5' and 'F6' for just
 #'  one of the generations.
+#'@param verbose Logical argument. Runs the code silently if FALSE.
 #'@author Willyan Junior Adorian Bandeira
 #'@author Ivan Ricardo Carvalo
 #'@author Murilo Vieira Loro
@@ -267,8 +282,7 @@ default_seg <- function(MELHORAMENTO){
 #'genetics (4th ed.). Longman.
 #'@return Returns the total, additive and dominance variance values based on
 #'the variance components for a given variable.
-#' @examples
-#'\donttest{
+#'@examples
 #'library(EstimateBreed)
 #'
 #'var <- c("A","B","C","D","E")
@@ -277,14 +291,13 @@ default_seg <- function(MELHORAMENTO){
 #'data <- data.frame(var,VG,VF)
 #'
 #'#Calculating for all generations
-#'with(data,COI(var,VG,VF,generation = "all"))
+#'inbr1 <- with(data,COI(var,VG,VF,generation = "all"))
 #'
 #'#Calculating for just one generation
-#'with(data,COI(var,VG,VF,generation = "F3"))
-#'}
+#'inbr2 <- with(data,COI(var,VG,VF,generation = "F3"))
 #'@export
 
-COI <- function(var, VG, VF, generation = "all") {
+COI <- function(var, VG, VF, generation = "all", verbose=FALSE) {
   var <- as.factor(var)
   factors <- list(
     F3 = c(1.5, 0.75, 1, 0.25, 0.5, 0.5),
@@ -333,15 +346,17 @@ COI <- function(var, VG, VF, generation = "all") {
   final_heritabilities <- do.call(rbind, heritability_list)
 
   for (gen in names(factors)) {
-    cat("\n---------------------------------------------------------------------------------\n")
-    cat(paste0(gen, " - Corrected Variances"))
-    cat("\n---------------------------------------------------------------------------------\n")
-    print(variance_list[[gen]])
+    if(verbose==TRUE){
+      cat("\n---------------------------------------------------------------------------------\n")
+      cat(paste0(gen, " - Corrected Variances"))
+      cat("\n---------------------------------------------------------------------------------\n")
+      print(variance_list[[gen]])
 
-    cat("\n---------------------------------------------------------------------------------\n")
-    cat(paste0(gen, " - Heritability in the Narrow Sense"))
-    cat("\n---------------------------------------------------------------------------------\n")
-    print(heritability_list[[gen]])
+      cat("\n---------------------------------------------------------------------------------\n")
+      cat(paste0(gen, " - Heritability in the Narrow Sense"))
+      cat("\n---------------------------------------------------------------------------------\n")
+      print(heritability_list[[gen]])
+    }
   }
   return(list(Variances = final_variances, Heritabilities = final_heritabilities))
 }
@@ -362,8 +377,7 @@ COI <- function(var, VG, VF, generation = "all") {
 #'@author Jose Antonio Gonzalez da Silva
 #'@return Plot graphs representing allelic and genotype x environment
 #'interactions.
-#' @examples
-#'\donttest{
+#'@examples
 #'library(EstimateBreed)
 #'
 #'didint (type="ad")
@@ -374,7 +388,6 @@ COI <- function(var, VG, VF, generation = "all") {
 #'didint (ge="aus")
 #'didint (ge="simple")
 #'didint (ge="complex")
-#'}
 #'@export
 
 didint <- function(type=NULL,ge=NULL){
@@ -516,6 +529,7 @@ didint <- function(type=NULL,ge=NULL){
 #'@param K Selection pressure (Default 0.05).
 #'@param check Logical argument. Checks the model's assumptions
 #'statistical if the value is equal to TRUE.
+#'@param verbose Logical argument. Runs the code silently if FALSE.
 #'@author Willyan Junior Adorian Bandeira
 #'@author Ivan Ricardo Carvalo
 #'@author Murilo Vieira Loro
@@ -566,22 +580,21 @@ didint <- function(type=NULL,ge=NULL){
 #'traits. International Journal of Agronomy, 2024, Article ID 9946332.
 #'\doi{10.1155/2024/9946332}
 #'@examples
-#'\donttest{
 #'library(EstimateBreed)
 #'data("genot2")
 #'
 #'#Geting parameters without cheking model assumptions
 #'parameters <- genpar(genot2,Gen,Rep,var =c("VAR1", "VAR2"))
-#'parameters
+#'parameters$anova
+#'parameters$gp
 #'
 #'#Checking model assumptions
 #'parameters <- genpar(genot2,Gen,Rep,var =c("VAR1", "VAR2"),check=TRUE)
-#'parameters
-#'}
+#'parameters$anova
+#'parameters$gp
 #'@export
 
-genpar <- function(.data, GEN, REP, vars, K = 0.05, check = FALSE) {
-
+genpar <- function(.data, GEN, REP, vars, K = 0.05, check = FALSE, verbose = FALSE) {
   GEN <- enquo(GEN)
   REP <- enquo(REP)
   if (!is.character(vars)) {
@@ -591,7 +604,8 @@ genpar <- function(.data, GEN, REP, vars, K = 0.05, check = FALSE) {
     select(!!GEN, !!REP, all_of(vars)) %>%
     mutate(across(c(!!GEN, !!REP), as.factor))
   colnames(data)[1:2] <- c("GEN", "REP")
-  results_list <- list()
+  anova_results <- list()
+  genpar_results <- list()
   for (var_name in vars) {
     cat("\n==================================================\n")
     cat("Analyzing Variable:", var_name, "\n")
@@ -612,7 +626,7 @@ genpar <- function(.data, GEN, REP, vars, K = 0.05, check = FALSE) {
     H2 <- sigmaG / sigmaP
     GA <- K * sqrt(sigmaG)
     GAM <- (GA / mean_var) * 100
-    if (check) {
+    if (check == TRUE) {
       cat("\nPerforming assumption tests...\n")
       residuals_model <- residuals(model)
       shapiro_test <- shapiro.test(residuals_model)
@@ -631,8 +645,8 @@ genpar <- function(.data, GEN, REP, vars, K = 0.05, check = FALSE) {
     }
     if (pvalue >= 0.05) {
       cat("\nGenotypic effect was NOT significant for variable:", var_name, "\n")
-      print(ANOVA_table)
-      warning("Genotypic effect was not significant for variable ", var_name, "!", call. = FALSE)
+      anova_results[[var_name]] <- ANOVA_table
+      genpar_results[[var_name]] <- NULL
     } else {
       cat("\nGenotypic effect was significant for variable:", var_name, "\n")
       result <- data.frame(
@@ -640,14 +654,25 @@ genpar <- function(.data, GEN, REP, vars, K = 0.05, check = FALSE) {
         Value = c(sigmaE, sigmaG, sigmaP, ECV, GCV, PCV, H2, GA, GAM)
       )
       colnames(result)[2] <- var_name
-      cat("\nGenetic Parameter Estimates:\n")
-      print(result)
-      results_list[[var_name]] <- result
+      anova_results[[var_name]] <- ANOVA_table
+      genpar_results[[var_name]] <- result
     }
-    cat("\n==================================================\n")
+    if (verbose==TRUE) {
+      cat("\n-- ANOVA Results for", var_name, ":\n")
+      print(ANOVA_table)
+      if (!is.null(genpar_results[[var_name]])) {
+        cat("\n-- Genetic Parameter Estimates for", var_name, ":\n")
+        print(genpar_results[[var_name]])
+      }
+    }
   }
-  return(results_list)
+  parameters <- list(
+    anova = anova_results,
+    gp = genpar_results
+  )
+  return(parameters)
 }
+
 
 #'Effective Population Size
 #'
@@ -671,11 +696,13 @@ genpar <- function(.data, GEN, REP, vars, K = 0.05, check = FALSE) {
 #'classic' (default) or 'alternative'. 'classic' uses the variance-based
 #'method, while 'alternative' uses an adjusted method that accounts for
 #'reproductive variation.
+#'@param verbose Logical argument. Runs the code silently if FALSE.
+#'@return The result is the effective population size for any variable, based
+#'on the number of individuals conducted and selected.
 #'@references Morais, R. P. (1997). Effective population size and genetic
 #'diversity in improved populations of self-pollinated plants (Doctoral
 #'dissertation, University of Campinas).
 #'@examples
-#'\donttest{
 #'library(EstimateBreed)
 #'
 #'GEN <- c("Genotype1", "Genotype2", "Genotype3", "Genotype4", "Genotype5")
@@ -684,10 +711,9 @@ genpar <- function(.data, GEN, REP, vars, K = 0.05, check = FALSE) {
 #'data <- data.frame(GEN,SI,NE)
 #'
 #'with(data, tamef(GEN, SI, NE, method = "classic"))
-#'}
 #'@export
 
-tamef <- function(GEN, SI, NE, remove_na = TRUE, method = "classic") {
+tamef <- function(GEN, SI, NE, remove_na = TRUE, method = "classic",verbose=TRUE) {
   data <- data.frame(GEN, SI, NE)
   if (remove_na) {
     data <- na.omit(data)
@@ -697,18 +723,23 @@ tamef <- function(GEN, SI, NE, remove_na = TRUE, method = "classic") {
   if (method == "classic") {
     Sum_SI <- sum(data$SI, na.rm = TRUE)^2
     Pond_SI <- sum((data$SI^2) / data$NE, na.rm = TRUE)
-    cat("Method used:", method, "\n")
-    cat("Sum_SI:", Sum_SI, "\n")
-    cat("Pond_SI:", Pond_SI, "\n")
-    Ne <- Sum_SI / Pond_SI
-    cat("Effective Population Size: \n")
+    if(verbose==TRUE){
+      cat("Method used:", method, "\n")
+      cat("Sum_SI:", Sum_SI, "\n")
+      cat("Pond_SI:", Pond_SI, "\n")
+      Ne <- Sum_SI / Pond_SI
+      cat("Effective Population Size: \n")
+    }
     return(Ne)
   }
   if (method == "alternative") {
-    cat("Method used:", method, "\n")
     Ne <- (4 * sum(data$SI, na.rm = TRUE)) / (2 + sum((data$SI / data$NE),
                                                       na.rm = TRUE))
-    cat("Effective Population Size: \n")
+    if(verbose==TRUE){
+      cat("Method used:", method, "\n")
+      cat("Effective Population Size: \n")
+      print(Ne)
+    }
     return(Ne)
   }
 }

@@ -14,16 +14,14 @@
 #'@author Murilo Vieira Loro
 #'@author Leonardo Cesar Pradebon
 #'@author Jose Antonio Gonzalez da Silva
-#'@export
 #'@examples
-#'\donttest{
 #'library(EstimateBreed)
 #'data("desvamb")
 #'head(desvamb)
 #'
 #'#Use DPclim for the ISGR function to identify deviations correctly
 #'DPclim <- with(desvamb,desv_clim(ENV,TMED,PREC))
-#'}
+#'@export
 
 desv_clim <- function(ENV,AAT,PREC) {
 
@@ -57,6 +55,10 @@ desv_clim <- function(ENV,AAT,PREC) {
 #'@param stage Parameter to define the phenological stage the crop is in
 #'Use 'veg' for vegetative and 'rep' for reproductive, if the
 #'evaluations have only been carried out in a given period.
+#'@return The ISGR - Genetic Selection Index for Resilience defines the ability
+#' of genotypes to express their productivity components under the conditions of
+#'  air temperature and rainfall offered by the environment. The lower the index,
+#'   the more resilient the genotype.
 #'@author Willyan Junior Adorian Bandeira
 #'@author Ivan Ricardo Carvalo
 #'@author Murilo Vieira Loro
@@ -67,9 +69,12 @@ desv_clim <- function(ENV,AAT,PREC) {
 #'Dalla Roza, J. P., Scarton, V. D. B., Bruinsma, G. M. W., & Pradebon, L. C. (2024).
 #'Identifying soybean progenies with high grain productivity and stress resilience
 #'to abiotic stresses. Aust J Crop Sci, 18(12), 825-830.
+<<<<<<< HEAD
 #'@export
+=======
+#'\doi{10.21475/ajcs.24.18.12.p98}
+>>>>>>> bcc4c11 (CRAN Fix)
 #'@examples
-#'\donttest{
 #'library(EstimateBreed)
 #'
 #'#Obtain environmental deviations
@@ -86,7 +91,7 @@ desv_clim <- function(ENV,AAT,PREC) {
 #'
 #'#Define the water requirement per stage
 #'isgr_index <- with(genot, isgr(GEN,ENV,NG,MG,CICLO,req=5,stage="rep"))
-#'}
+#'@export
 
 isgr <- function(GEN, ENV, NG, MG, CICLO, req=3.5, stage=NULL) {
 
@@ -118,7 +123,7 @@ isgr <- function(GEN, ENV, NG, MG, CICLO, req=3.5, stage=NULL) {
     NGT <- mean(control$NG, na.rm = TRUE)
     MGT <- mean(control$MG, na.rm = TRUE)
   } else {
-    stop("No witnesses found!")
+    stop("No control found!")
   }
 
   SNG <- desvng

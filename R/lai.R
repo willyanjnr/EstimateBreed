@@ -12,6 +12,7 @@
 #''tomato' for tomato.
 #'@param sp Row spacing (Standard sp=0.45).
 #'@param sden Sowing density, in plants per linear meter (standard sden=14).
+#'@param verbose Logical argument. Runs the code silently if FALSE.
 #'@return Returns the accumulated leaf area, the potential leaf area index
 #'(considering the total number of leaves) and the actual leaf area index
 #'(making the adjustment considering the number of dry leaves) for each genotype
@@ -25,20 +26,19 @@
 #'D. N., Meier, C., Brezolin, P., Ferrari, M., & Pelegrin, A. J. (2015).
 #'Plastocrono e caracteres morfologicos da soja com habito de crescimento
 #'indeterminado. Revista Cultivando o Saber, 8(2), 184-200.
-#'@export
 #'@examples
-#'\donttest{
 #'library(EstimateBreed)
 #'
 #'data("leafarea")
 #'#Crop selection
-#'with(leafarea,lai(GEN,C,L,TNL,TDL,crop="soy"))
+#'soy_lai<-with(leafarea,lai(GEN,C,L,TNL,TDL,crop="soy"))
 #'
 #'#Changing row spacing and sowing density
-#'with(leafarea,lai(GEN,C,L,TNL,TDL,crop="maize",sp=0.45,sden=4))
-#'}
+#'maize_lai<-with(leafarea,lai(GEN,C,L,TNL,TDL,crop="maize",sp=0.45,sden=4))
+#'@export
 
-lai <- function(GEN, W, L, TNL, TDL, crop = "soy", sp = 0.45, sden = 14) {
+lai <- function(GEN, W, L, TNL, TDL, crop = "soy", sp = 0.45, sden = 14,
+                verbose=TRUE) {
 
   k_correction <- c(
     soy = 0.7,
@@ -68,7 +68,7 @@ lai <- function(GEN, W, L, TNL, TDL, crop = "soy", sp = 0.45, sden = 14) {
     stop("Please enter the genotype", call. = FALSE)
   }
   if(!is.numeric(W) || !is.numeric(L)){
-    stop("The width and length of the leaf must be numerical",call. = F)
+    stop("The width and length of the leaf must be numerical",call. = FALSE)
   }
     a1 <- data.frame(GEN, W, L, TNL, TDL)
     a1 <- a1 %>%
@@ -85,8 +85,10 @@ lai <- function(GEN, W, L, TNL, TDL, crop = "soy", sp = 0.45, sden = 14) {
       )
     resultado_f <- resultado %>%
       select(GEN,ALA,PotLAI,RealLAI)
-    cat("Selected crop:",paste(crop),"\n")
-    cat("Row spacing used: ",paste(sp),"\n")
-    cat("Sowing density used: ",paste(sden),"\n")
     return(resultado_f)
+    if(verbose==TRUE){
+      cat("Selected crop:",paste(crop),"\n")
+      cat("Row spacing used: ",paste(sp),"\n")
+      cat("Sowing density used: ",paste(sden),"\n")
+    }
   }

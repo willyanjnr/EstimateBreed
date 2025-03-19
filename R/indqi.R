@@ -6,6 +6,7 @@
 #'@param NQ The column with the falling number
 #'@param W The column with the gluten force (W)
 #'@param PTN The column with the protein values
+#'@param verbose Logical argument. Runs the code silently if FALSE.
 #'@return Determines the industrial quality index for wheat crops, when
 #'considering variables used to classify wheat cultivars.
 #'@author Willyan Junior Adorian Bandeira
@@ -19,16 +20,14 @@
 #'Genetic and phenotypic multi-character approach applied to multivariate
 #'models for wheat industrial quality analysis.
 #'Genetics and Molecular Research, 18(3), 1-14.
-#'@export
 #'@examples
-#'\donttest{
 #'library(EstimateBreed)
 #'
 #'data("ptn")
 #'with(ptn,is_qindustrial(Cult,NQ,W,PTN))
-#'}
+#'@export
 
-is_qindustrial <- function(GEN, NQ, W, PTN){
+is_qindustrial <- function(GEN, NQ, W, PTN, verbose=TRUE){
 
   genot <- as.factor(GEN)
   variav1 <- NQ
@@ -45,14 +44,17 @@ is_qindustrial <- function(GEN, NQ, W, PTN){
 
   dadosfinal <- data.frame(genot,indice)
   colnames(dadosfinal) <- c("GEN","Index")
-  cat("\n-----------------------------\n")
-  cat("Wheat Quality Index")
-  cat("\n-----------------------------\n")
-  print(dadosfinal)
-  cat("\n-----------------------------\n")
-  cat("Deviations")
-  cat("\n-----------------------------\n")
-  print(desvios)
+  return(dadosfinal)
+  if(verbose==TRUE){
+    cat("\n-----------------------------\n")
+    cat("Wheat Quality Index")
+    cat("\n-----------------------------\n")
+    print(dadosfinal)
+    cat("\n-----------------------------\n")
+    cat("Deviations")
+    cat("\n-----------------------------\n")
+    print(desvios)
+  }
 }
 
 #'Peeling Index and Industrial Yield
@@ -65,6 +67,7 @@ is_qindustrial <- function(GEN, NQ, W, PTN){
 #'@param RG The column with the grain yield values (kg per ha).
 #'@param stat Logical argument. Use 'all' to keep all the observations or 'mean'
 #'to extract the overall average.
+#'@param verbose Logical argument. Runs the code silently if FALSE.
 #'@param ... General parameters of ggplot2 for utilization
 #'@return Returns the peeling index and industrial yield considering the
 #'standards desired by the industry.
@@ -73,9 +76,7 @@ is_qindustrial <- function(GEN, NQ, W, PTN){
 #'@author Murilo Vieira Loro
 #'@author Leonardo Cesar Pradebon
 #'@author Jose Antonio Gonzalez da Silva
-#'@export
 #'@examples
-#'\donttest{
 #'library(EstimateBreed)
 #'
 #'data("aveia")
@@ -84,9 +85,9 @@ is_qindustrial <- function(GEN, NQ, W, PTN){
 #'
 #'# Calculate the industrial yield by extracting the average per genotype
 #'with(aveia, rend_ind(GEN,NG2M,MG,MC,RG,stat="mean"))
-#'}
+#'@export
 
-rend_ind <- function(GEN,NG2M,MG,MC,RG,stat="all",...){
+rend_ind <- function(GEN,NG2M,MG,MC,RG,stat="all",verbose=FALSE,...){
 
   GEN <- as.factor(GEN)
   NG2M <- NG2M
@@ -97,10 +98,13 @@ rend_ind <- function(GEN,NG2M,MG,MC,RG,stat="all",...){
     ID <- MC/MG
     RI <- RG*(NG2M/100)*ID
     final <- data.frame(GEN,ID,RI)
-    cat("\n-----------------------------------------------------------------\n")
-    cat("Peeling Index and Industrial Yield")
-    cat("\n-----------------------------------------------------------------\n")
-    print(final)
+    return(final)
+    if(verbose==TRUE){
+      cat("\n-----------------------------------------------------------------\n")
+      cat("Peeling Index and Industrial Yield")
+      cat("\n-----------------------------------------------------------------\n")
+      print(final)
+    }
   }else if (stat=="mean"){
     ID <- MC/MG
     RI <- RG*(NG2M/100)*ID
@@ -109,10 +113,13 @@ rend_ind <- function(GEN,NG2M,MG,MC,RG,stat="all",...){
                            data = dados,
                            FUN = mean,
                            na.rm = TRUE)
-    cat("\n-----------------------------------------------------------------\n")
-    cat("Peeling Index and Industrial Yield (Mean by Genotype)")
-    cat("\n-----------------------------------------------------------------\n")
-    print(media_gen)
+    return(media_gen)
+    if(verbose==TRUE){
+      cat("\n-----------------------------------------------------------------\n")
+      cat("Peeling Index and Industrial Yield (Mean by Genotype)")
+      cat("\n-----------------------------------------------------------------\n")
+      print(media_gen)
+    }
   }
 }
 
@@ -126,6 +133,7 @@ rend_ind <- function(GEN,NG2M,MG,MC,RG,stat="all",...){
 #'@param xlab The name of the chart's X axis
 #'@param stat Logical argument. Use 'all' to return the values obtained for all
 #' observations or 'mean' to return the mean per genotype.
+#'@param verbose Logical argument. Runs the code silently if FALSE.
 #'@param plot Logical argument. Plot a graphic if 'TRUE'.
 #'@return Returns the index obtained between the reported variables. The higher
 #'the index, the better the genotype.
@@ -140,23 +148,22 @@ rend_ind <- function(GEN,NG2M,MG,MC,RG,stat="all",...){
 #'subjected to advanced harvest using a physiological ripening process.
 #'Revista Engenharia na Agricultura - REVENG, 32, 54-64.
 #'\doi{10.13083/reveng.v32i1.17394}
-#'@export
 #'@examples
-#' \donttest{
 #'library(EstimateBreed)
 #'
 #'data("trigo")
 #'#Ear viability index
-#'with(trigo,indviab(TEST,NGE,NEE))
+#'index1 <- with(trigo,indviab(TEST,NGE,NEE))
 #'
 #'#Ear harvest index
-#'with(trigo,indviab(TEST,MGE,ME))
+#'index2 <- with(trigo,indviab(TEST,MGE,ME))
 #'
 #'#Spikelet deposition index in the ear
-#'with(trigo,indviab(TEST,NEE,CE))
-#' }
+#'index3 <- with(trigo,indviab(TEST,NEE,CE))
+#'@export
 
-indviab <- function(GEN,var1,var2,ylab="Index",xlab="Genotype",stat="all",plot=F){
+indviab <- function(GEN,var1,var2,ylab="Index",xlab="Genotype",stat="all",
+                    verbose=FALSE,plot=FALSE){
 
   GEN <- as.factor(GEN)
   variav1 <- var1
@@ -167,12 +174,15 @@ indviab <- function(GEN,var1,var2,ylab="Index",xlab="Genotype",stat="all",plot=F
     mediaind <- mean(indesp)
     dados <- data.frame(GEN,indesp)
     colnames(dados) <- c("Genotype","Index")
-    cat("\n-----------------------------------------------------------------\n")
-    cat("General Viability Index")
-    cat("\n-----------------------------------------------------------------\n")
-    print(dados)
-    if(plot==T){
-      warning("The graph can only be plotted when stat='mean'",call. = FALSE)
+    return(dados)
+    if(verbose==TRUE){
+      cat("\n-----------------------------------------------------------------\n")
+      cat("General Viability Index")
+      cat("\n-----------------------------------------------------------------\n")
+      print(dados)
+    }
+    if(plot==TRUE){
+      stop("The graph can only be plotted when stat='mean'",call. = FALSE)
     }
   }
   else if (stat=="mean"){
@@ -183,16 +193,19 @@ indviab <- function(GEN,var1,var2,ylab="Index",xlab="Genotype",stat="all",plot=F
                            FUN = mean,
                            na.rm = TRUE)
     colnames(media_gen) <- c("Genotype","Index")
-    if(plot==T){
+    return(media_gen)
+    if(plot==TRUE){
       grafico <- ggplot(media_gen, aes(x=GEN, y=indesp)) +
         geom_bar(stat = "identity")+
         ylab(ylab)+xlab(xlab)+theme_classic()
       print(grafico)
     }
-    cat("\n-----------------------------------------------------------------\n")
-    cat("Viability Index (Average per Genotype))")
-    cat("\n-----------------------------------------------------------------\n")
-    print(media_gen)
+    if(verbose==TRUE){
+      cat("\n-----------------------------------------------------------------\n")
+      cat("Viability Index (Average per Genotype))")
+      cat("\n-----------------------------------------------------------------\n")
+      print(media_gen)
+    }
   }}
 
 #'Hectolitre weight of cereals
@@ -218,9 +231,7 @@ indviab <- function(GEN,var1,var2,ylab="Index",xlab="Genotype",stat="all",plot=F
 #'Brasil. Ministerio da Agricultura, Pecuaria e Abastecimento.
 #'Secretaria de Defesa Agropecuaria. Regras para Analise de Sementes.
 #' Brasilia: MAPA/ACS, 2009. 399 p. ISBN 978-85-99851-70-8.
-#'@export
 #'@examples
-#'\donttest{
 #'library(EstimateBreed)
 #'
 #'GEN <- rep(paste("G", 1:5, sep=""), each = 3)
@@ -230,11 +241,11 @@ indviab <- function(GEN,var1,var2,ylab="Index",xlab="Genotype",stat="all",plot=F
 #'
 #'data <- data.frame(GEN, REP, MG)
 #'
-#'with(data,hw(GEN,MG,crop="trit"))
+#'trit <- with(data,hw(GEN,MG,crop="trit"))
 #'
 #'#Extract the average PH per genotype
-#'with(data,hw(GEN,MG,crop="trit",stat="mean"))
-#'}
+#'trit <- with(data,hw(GEN,MG,crop="trit",stat="mean"))
+#'@export
 
 hw <- function(GEN, HL, crop="trit", stat="all") {
 
@@ -275,6 +286,7 @@ hw <- function(GEN, HL, crop="trit", stat="all") {
 #'@param RG The column with the grain yield values (in kg per ha)
 #'@return Returns an industrial wheat quality index based solely on protein and
 #'grain yield.
+#'@param verbose Logical argument. Runs the code silently if FALSE.
 #'@author Willyan Junior Adorian Bandeira
 #'@author Ivan Ricardo Carvalo
 #'@author Murilo Vieira Loro
@@ -285,9 +297,7 @@ hw <- function(GEN, HL, crop="trit", stat="all") {
 #'V. J., Barbosa, M. H., ... & da Maia, L. C. (2017).
 #'Adaptability, stability and multivariate selection by mixed models.
 #'American Journal of Plant Sciences, 8(13), 3324.
-#'@export
 #'@examples
-#'\donttest{
 #'library(EstimateBreed)
 #'
 #'Gen <- c("G1", "G2", "G3", "G4", "G5")
@@ -296,10 +306,10 @@ hw <- function(GEN, HL, crop="trit", stat="all") {
 #'
 #'data <- data.frame(Gen,PTN,RG)
 #'
-#'with(data,is_ptnerg(Gen,PTN,RG))
-#'}
+#'iqptn <- with(data,is_ptnerg(Gen,PTN,RG))
+#'@export
 
-is_ptnerg <- function(GEN, PTN, RG){
+is_ptnerg <- function(GEN, PTN, RG, verbose=TRUE){
 
   genot <- as.factor(GEN)
   variav1 <- PTN
@@ -312,8 +322,11 @@ is_ptnerg <- function(GEN, PTN, RG){
   index <- ((variav1/sd_ptn)*(variav2/sd_rg))
 
   dadosfinal <- data.frame(genot,index)
-  cat("\n-----------------------------------------------------------------\n")
-  cat("Genotype")
-  cat("\n-----------------------------------------------------------------\n")
-  print(dadosfinal)
+  return(dadosfinal)
+  if(verbose==TRUE){
+    cat("\n-----------------------------------------------------------------\n")
+    cat("Genotype")
+    cat("\n-----------------------------------------------------------------\n")
+    print(dadosfinal)
+  }
 }

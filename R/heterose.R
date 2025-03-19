@@ -9,6 +9,7 @@
 #'@param param Value to determine the parameter to be calculated. Default is 'all'.
 #'To calculate heterosis only, use 'het'. To calculate only heterobeltiosis,
 #'use 'hetb'.
+#'@param verbose Logical argument. Runs the code silently if FALSE.
 #'@return Returns heterosis values based on the performance of the tested
 #' parents and progenies. The standard error (SE) is also reported for each
 #'  parameter.
@@ -17,23 +18,21 @@
 #'@author Murilo Vieira Loro
 #'@author Leonardo Cesar Pradebon
 #'@author Jose Antonio Gonzalez da Silva
-#'@export
 #'@examples
-#'\donttest{
 #' library(EstimateBreed)
 #'
 #' data("maize")
 #' #Extract heterosis and heterobeltiosis
-#' with(maize,het(GEN,GM,GP,PR,REP,param="all"))
+#' general <- with(maize,het(GEN,GM,GP,PR,REP,param="all"))
 #'
 #' #Only extract heterosis
-#' with(maize,het(GEN,GM,GP,PR,REP,param = "het"))
+#' het <- with(maize,het(GEN,GM,GP,PR,REP,param = "het"))
 #'
 #' #Extract only heterobeltiosis
-#' with(maize,het(GEN,GM,GP,PR,REP,param = "hetb"))
-#'}
+#' hetb <- with(maize,het(GEN,GM,GP,PR,REP,param = "hetb"))
+#'@export
 
-het <- function(GEN, GM, GP, PR, REP, param = "all") {
+het <- function(GEN, GM, GP, PR, REP, param = "all",verbose=FALSE) {
 
   data <- data.frame(GEN, GM, GP, PR, REP)
   model1 <- aov(REP ~ GEN, data = data)
@@ -52,23 +51,30 @@ het <- function(GEN, GM, GP, PR, REP, param = "all") {
     )
 
   if (param == "all") {
-    cat("Parameters\n")
-    cat("SE_Heterosis:",paste(first(data$SE_Heterosis)),"\n")
-    cat("SE_Heterobeltiosis:",paste(first(data$SE_Heterobeltiosis)),"\n")
-    cat("-------------------------------------------\n")
     return(data[, c("GEN", "Heterosis", "Heterobeltiosis")])
-
+    if(verbose==TRUE){
+      cat("Parameters\n")
+      cat("SE_Heterosis:",paste(first(data$SE_Heterosis)),"\n")
+      cat("SE_Heterobeltiosis:",paste(first(data$SE_Heterobeltiosis)),"\n")
+      cat("-------------------------------------------\n")
+      print(data[, c("GEN", "Heterosis", "Heterobeltiosis")])
+    }
   } else if (param == "het") {
-    cat("Parameters\n")
-    cat("SE_Heterosis:",paste(first(data$SE_Heterosis)),"\n")
-    cat("-------------------------------------------\n")
     return(data[, c("GEN", "Heterosis")])
-
+    if(verbose==TRUE){
+      cat("Parameters\n")
+      cat("SE_Heterosis:",paste(first(data$SE_Heterosis)),"\n")
+      cat("-------------------------------------------\n")
+      print(data[, c("GEN", "Heterosis")])
+    }
   } else if (param == "hetb") {
-    cat("Parameters\n")
-    cat("SE_Heterobeltiosis:",paste(first(data$SE_Heterobeltiosis)),"\n")
-    cat("-------------------------------------------\n")
-    print(first(data$SE_Heterobeltiosis))
     return(data[, c("GEN", "Heterobeltiosis")])
+    if(verbose==TRUE){
+      cat("Parameters\n")
+      cat("SE_Heterobeltiosis:",paste(first(data$SE_Heterobeltiosis)),"\n")
+      cat("-------------------------------------------\n")
+      print(first(data$SE_Heterobeltiosis))
+      print(data[, c("GEN", "Heterobeltiosis")])
+    }
   }
 }

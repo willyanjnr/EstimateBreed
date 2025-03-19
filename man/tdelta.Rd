@@ -11,6 +11,7 @@ tdelta(
   days = 7,
   control = NULL,
   details = FALSE,
+  verbose = TRUE,
   dates = NULL,
   plot = FALSE
 )
@@ -28,6 +29,8 @@ tdelta(
 'herb' for herbicide, 'ins' for insecticides, 'bio' for biological products.}
 
 \item{details}{Returns the result in detail if TRUE.}
+
+\item{verbose}{Logical argument. Runs the code silently if FALSE.}
 
 \item{dates}{Only use this argument if type=2. Start and end date for obtaining
 weather data for a crop cycle.}
@@ -47,14 +50,12 @@ Determining the ideal time for pesticide application using TDELTA
 library(EstimateBreed)
 
 # Forecasting application conditions
-forecast <- tdelta(-53.6969,-28.0638,type=1,days=10)
-forecast
+forecast <- tdelta(-53.6969,-28.0638,type=1,days=10,verbose=TRUE)
 
 # Retrospective analysis of application conditions
 retrosp <- tdelta(-53.6969,-28.0638,type=2,days=10,
                  dates=c("2023-01-01","2023-05-01"),
-                 details=TRUE)
-retrosp
+                 verbose=TRUE)
 }
 }
 \author{

@@ -4,7 +4,7 @@
 \alias{risk}
 \title{Risk of Disease Occurrence in Soybeans}
 \usage{
-risk(DAY, MONTH, AAT, RH, disease = "rust", plot = F)
+risk(DAY, MONTH, AAT, RH, disease = "rust", verbose = FALSE, plot = FALSE)
 }
 \arguments{
 \item{DAY}{The column for the day of the month.}
@@ -16,6 +16,8 @@ risk(DAY, MONTH, AAT, RH, disease = "rust", plot = F)
 \item{RH}{The relative humidity column (in \%).}
 
 \item{disease}{Define the soybean disease (Standard = 'rust').}
+
+\item{verbose}{Logical argument. Runs the code silently if FALSE.}
 
 \item{plot}{Plot a graph of the accumulation (Default is F (FALSE)).}
 }
@@ -40,13 +42,11 @@ Calculation of the Risk of Disease Occurrence in Soybeans as a Function of
 Variables meteorological variables (Engers et al., 2024).
 }
 \examples{
-\donttest{
 library(EstimateBreed)
 
 # Rust Risk Prediction
 data("clima")
 with(clima, risk(DY, MO, TMED, RH, disease = "rust"))
-}
 }
 \references{
 de Oliveira Engers, L.B., Radons, S.Z., Henck, A.U. et al.

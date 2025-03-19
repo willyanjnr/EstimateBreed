@@ -24,14 +24,12 @@ This function receives a dataframe with temperature and precipitation data
 and calculates the standard deviation of these parameters for each environment.
 }
 \examples{
-\donttest{
 library(EstimateBreed)
 data("desvamb")
 head(desvamb)
 
 #Use DPclim for the ISGR function to identify deviations correctly
 DPclim <- with(desvamb,desv_clim(ENV,TMED,PREC))
-}
 }
 \author{
 Willyan Junior Adorian Bandeira

@@ -4,7 +4,7 @@
 \alias{is_ptnerg}
 \title{Selection index for protein and grain yield}
 \usage{
-is_ptnerg(GEN, PTN, RG)
+is_ptnerg(GEN, PTN, RG, verbose = TRUE)
 }
 \arguments{
 \item{GEN}{The column with the name of the genotype}
@@ -12,6 +12,8 @@ is_ptnerg(GEN, PTN, RG)
 \item{PTN}{The column with the crude protein values}
 
 \item{RG}{The column with the grain yield values (in kg per ha)}
+
+\item{verbose}{Logical argument. Runs the code silently if FALSE.}
 }
 \value{
 Returns an industrial wheat quality index based solely on protein and
@@ -21,7 +23,6 @@ grain yield.
 Selection index for protein and grain yield (Pelegrin et al., 2017).
 }
 \examples{
-\donttest{
 library(EstimateBreed)
 
 Gen <- c("G1", "G2", "G3", "G4", "G5")
@@ -30,8 +31,7 @@ RG <- c(3500, 4000, 3700, 3300, 4100)
 
 data <- data.frame(Gen,PTN,RG)
 
-with(data,is_ptnerg(Gen,PTN,RG))
-}
+iqptn <- with(data,is_ptnerg(Gen,PTN,RG))
 }
 \references{
 de Pelegrin, A. J., Carvalho, I. R., Nunes, A. C. P., Demari, G. H., Szareski,

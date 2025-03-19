@@ -4,7 +4,7 @@
 \alias{plast}
 \title{Soybean plastochron estimation}
 \usage{
-plast(GEN, AAT, STAD, NN, habit = "ind", plot = FALSE)
+plast(GEN, AAT, STAD, NN, habit = "ind", verbose = FALSE, plot = FALSE)
 }
 \arguments{
 \item{GEN}{The column with the genotype name.}
@@ -18,6 +18,8 @@ Fehr & Caviness (1977).}
 
 \item{habit}{Growth habit of the genotype (default = "ind"). Use "ind" for
 indeterminate and "det" for determinate.}
+
+\item{verbose}{Logical argument. Runs the code silently if FALSE.}
 
 \item{plot}{Logical argument. Returns a graph with the linear models if TRUE.}
 }
@@ -33,12 +35,11 @@ Estimation of soybean plastochron using average air temperature and number of
 nodes
 }
 \examples{
-\donttest{
 library(EstimateBreed)
 data("pheno")
 
-with(pheno, plast(GEN,TMED,EST,NN,habit="ind",plot=TRUE))
-}
+mod1 <- with(pheno, plast(GEN,TMED,EST,NN,habit="ind",plot=TRUE))
+mod1
 }
 \references{
 Porta, F. S. D., Streck, N. A., Alberto, C. M., da Silva, M. R.,

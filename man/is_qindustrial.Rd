@@ -4,7 +4,7 @@
 \alias{is_qindustrial}
 \title{Industrial quality of wheat}
 \usage{
-is_qindustrial(GEN, NQ, W, PTN)
+is_qindustrial(GEN, NQ, W, PTN, verbose = TRUE)
 }
 \arguments{
 \item{GEN}{The column with the genotype name}
@@ -14,6 +14,8 @@ is_qindustrial(GEN, NQ, W, PTN)
 \item{W}{The column with the gluten force (W)}
 
 \item{PTN}{The column with the protein values}
+
+\item{verbose}{Logical argument. Runs the code silently if FALSE.}
 }
 \value{
 Determines the industrial quality index for wheat crops, when
@@ -24,12 +26,10 @@ Function for determining industrial quality indices of wheat genotypes,
 described by Szareski et al. (2019).
 }
 \examples{
-\donttest{
 library(EstimateBreed)
 
 data("ptn")
 with(ptn,is_qindustrial(Cult,NQ,W,PTN))
-}
 }
 \references{
 Szareski, V. J., Carvalho, I. R., Kehl, K., Levien, A. M.,

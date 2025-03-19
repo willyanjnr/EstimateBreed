@@ -28,7 +28,6 @@ Useful function for characterizing the hectolitre weight (HW) of experiments
 with cereals.
 }
 \examples{
-\donttest{
 library(EstimateBreed)
 
 GEN <- rep(paste("G", 1:5, sep=""), each = 3)
@@ -38,11 +37,10 @@ MG <- c(78.5, 80.2, 79.1, 81.3, 82.0, 80.8, 76.9, 78.1, 77.5, 83.2,
 
 data <- data.frame(GEN, REP, MG)
 
-with(data,hw(GEN,MG,crop="trit"))
+trit <- with(data,hw(GEN,MG,crop="trit"))
 
 #Extract the average PH per genotype
-with(data,hw(GEN,MG,crop="trit",stat="mean"))
-}
+trit <- with(data,hw(GEN,MG,crop="trit",stat="mean"))
 }
 \references{
 Brasil. Ministerio da Agricultura, Pecuaria e Abastecimento.

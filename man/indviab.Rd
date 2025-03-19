@@ -11,7 +11,8 @@ indviab(
   ylab = "Index",
   xlab = "Genotype",
   stat = "all",
-  plot = F
+  verbose = FALSE,
+  plot = FALSE
 )
 }
 \arguments{
@@ -28,6 +29,8 @@ indviab(
 \item{stat}{Logical argument. Use 'all' to return the values obtained for all
 observations or 'mean' to return the mean per genotype.}
 
+\item{verbose}{Logical argument. Runs the code silently if FALSE.}
+
 \item{plot}{Logical argument. Plot a graphic if 'TRUE'.}
 }
 \value{
@@ -38,19 +41,17 @@ the index, the better the genotype.
 Estimating the viability index from the combination of two field variables.
 }
 \examples{
-\donttest{
 library(EstimateBreed)
 
 data("trigo")
 #Ear viability index
-with(trigo,indviab(TEST,NGE,NEE))
+index1 <- with(trigo,indviab(TEST,NGE,NEE))
 
 #Ear harvest index
-with(trigo,indviab(TEST,MGE,ME))
+index2 <- with(trigo,indviab(TEST,MGE,ME))
 
 #Spikelet deposition index in the ear
-with(trigo,indviab(TEST,NEE,CE))
-}
+index3 <- with(trigo,indviab(TEST,NEE,CE))
 }
 \references{
 Rigotti, E. J., Carvalho, I. R., Loro, M. V., Pradebon, L. C., Dalla Roza,

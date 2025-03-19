@@ -4,7 +4,7 @@
 \alias{ptermal}
 \title{Photothermal Index}
 \usage{
-ptermal(DAY, AAT, RAD, PER)
+ptermal(DAY, AAT, RAD, PER, verbose = FALSE)
 }
 \arguments{
 \item{DAY}{The column with the cycle days}
@@ -15,6 +15,8 @@ ptermal(DAY, AAT, RAD, PER)
 
 \item{PER}{The column with the period (use VEG for vegetative and REP for
 reproductive)}
+
+\item{verbose}{Logical argument. Runs the code silently if FALSE.}
 }
 \value{
 Retorna o ind fototermal
@@ -24,13 +26,11 @@ Calculation of the photothermal index based on average temperature and
 radiation
 }
 \examples{
-\donttest{
 library(EstimateBreed)
 data("termaldata")
 
 termal <- with(termaldata,ptermal(Day,Temperature,Radiation,Period))
 termal
-}
 }
 \references{
 Zanon, A. J., & Tagliapietra, E. L. (2022). Ecofisiologia da soja:

@@ -10,6 +10,7 @@
 #'do not restrict the witnesses by the mean plus or minus the standard deviations,
 #' or 'restr' to apply the restriction.
 #'@param zstat Logical argument. Applies Z-notation normalization if 'TRUE'.
+#'@param verbose Logical argument. Runs the code silently if FALSE.
 #'@author Willyan Junior Adorian Bandeira
 #'@author Ivan Ricardo Carvalo
 #'@author Murilo Vieira Loro
@@ -23,9 +24,7 @@
 #'genetic parameters in soybeans: An alternative to adjust residual variability.
 #'Acta Scientiarum. Agronomy, 45, e56156.
 #'\doi{10.4025/actasciagron.v45i1.56156}
-#'@export
 #'@examples
-#'\donttest{
 #'library(EstimateBreed)
 #'
 #'TEST <- rep(paste("T", 1:5, sep=""), each=3)
@@ -34,14 +33,14 @@
 #'
 #'data <- data.frame(TEST,REP,Xi)
 #'
-#'#Apply the witness variability constraint
+#'#Apply the control variability constraint
 #'Control <- with(data, restr(TEST,REP,Xi,scenario = "restr",zstat = FALSE))
 #'
-#'#Apply witness variability restriction with normalization (Z statistic)
+#'#Apply control variability restriction with normalization (Z statistic)
 #'Control <- with(data, restr(TEST,REP,Xi,scenario = "restr",zstat = TRUE))
-#'}
+#'@export
 
-restr <- function(TEST, REP, Xi, scenario = NULL, zstat = NULL) {
+restr <- function(TEST, REP, Xi, scenario = NULL, zstat = NULL,verbose=FALSE) {
   if (is.null(scenario)) {
     stop("Please inform if the restriction will be applied!")
   }
@@ -58,8 +57,10 @@ restr <- function(TEST, REP, Xi, scenario = NULL, zstat = NULL) {
     gen_rep_removidos <- paste(removidos, rep_removidos, sep = "R")
     n_desvio <- sd(ream$Xi)
     n_media <- mean(ream$Xi)
-    cat("Removed Controls\n")
-    print(gen_rep_removidos)
+    if(verbose==TRUE){
+      cat("Removed Controls\n")
+      print(gen_rep_removidos)
+    }
   }
 
   if (is.null(zstat)) {

@@ -4,7 +4,16 @@
 \alias{SG}
 \title{General Selection Gain Function}
 \usage{
-SG(Var, h, VF = NULL, P = "1", DS = NULL, Year = NULL, method = "pressure")
+SG(
+  Var,
+  h,
+  VF = NULL,
+  P = "1",
+  DS = NULL,
+  Year = NULL,
+  method = "pressure",
+  verbose = FALSE
+)
 }
 \arguments{
 \item{Var}{The column with the name of the variables of interest}
@@ -21,6 +30,8 @@ SG(Var, h, VF = NULL, P = "1", DS = NULL, Year = NULL, method = "pressure")
 
 \item{method}{The selection method: 'pressure', 'differential',
 'genitor_control", or 'year_weighted'}
+
+\item{verbose}{Logical argument. Runs the code silently if FALSE.}
 }
 \value{
 A data frame with selection gain results
@@ -29,14 +40,12 @@ A data frame with selection gain results
 Computes selection gain using different selection methods
 }
 \examples{
-\donttest{
 library(EstimateBreed)
 
 SG(Var = c("A", "B", "C"), h = 0.5, VF = 1.2, P = "10", method = "pressure")
 SG(Var = c("A", "B", "C"), h = 0.5, DS = 1.5, method = "differential")
 SG(Var = c("A", "B", "C"), h = 0.5, VF = 1.2, P = "10", method = "genitor_control")
 SG(Var = c("A", "B", "C"), h = 0.5, VF = 1.2, P = "10", Year = 5, method = "year_weighted")
-}
 }
 \author{
 Willyan Junior Adorian Bandeira

@@ -4,13 +4,24 @@
 \alias{default_seg}
 \title{Standard Segregation}
 \usage{
-default_seg(MELHORAMENTO)
+default_seg(verbose = TRUE)
 }
 \arguments{
-\item{MELHORAMENTO}{Base parameter for the print table function}
+\item{verbose}{Logical argument. Runs the code silently if FALSE.}
+}
+\value{
+Create a didactic table of standard segregation, considering allogamous
+and autogamous species and mutants. It shows the expected level of
+heterozygosity, probable number of genes, environmental effect and Wright's
+probabilistic coefficient.
 }
 \description{
 Didactic table of standard segregation by generation
+}
+\examples{
+library(EstimateBreed)
+
+default_seg(verbose=TRUE)
 }
 \author{
 Willyan Junior Adorian Bandeira

@@ -69,11 +69,6 @@ desv_clim <- function(ENV,AAT,PREC) {
 #'Dalla Roza, J. P., Scarton, V. D. B., Bruinsma, G. M. W., & Pradebon, L. C. (2024).
 #'Identifying soybean progenies with high grain productivity and stress resilience
 #'to abiotic stresses. Aust J Crop Sci, 18(12), 825-830.
-<<<<<<< HEAD
-#'@export
-=======
-#'\doi{10.21475/ajcs.24.18.12.p98}
->>>>>>> bcc4c11 (CRAN Fix)
 #'@examples
 #'library(EstimateBreed)
 #'

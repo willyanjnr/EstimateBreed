@@ -216,7 +216,7 @@ indviab <- function(GEN,var1,var2,ylab="Index",xlab="Genotype",stat="all",
 #'@param HL Weight obtained on a 1qt lt scale, as determined by the
 #'Rules for Seed Analysis (RAS), Ministry of Agriculture,
 #'Livestock and Supply (2009).
-#'@param crop Argument for selecting culture. Use 'trit' for wheat, 'oats' for
+#'@param crop Argument for selecting culture. Use 'trit' for wheat, 'oat' for
 #'white oats, 'rye' for rye and 'barley' for barley
 #'@param stat  Argument to select the function output type. Use 'all' to estimate
 #' the HW for all replicates, or 'mean' to extract the mean for each genotype.

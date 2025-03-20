@@ -30,8 +30,8 @@ Function for calculating the inbreeding coefficient
 library(EstimateBreed)
 
 var <- c("A","B","C","D","E")
-VG <- c(2.5, 3.0, 2.8, 3.2, 2.7)
-VF <- c(1.2, 1.5, 1.3, 1.6, 1.4)
+VF <- c(2.5, 3.0, 2.8, 3.2, 2.7)
+VG <- c(1.2, 1.5, 1.3, 1.6, 1.4)
 data <- data.frame(var,VG,VF)
 
 #Calculating for all generations

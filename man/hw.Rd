@@ -13,7 +13,7 @@ hw(GEN, HL, crop = "trit", stat = "all")
 Rules for Seed Analysis (RAS), Ministry of Agriculture,
 Livestock and Supply (2009).}
 
-\item{crop}{Argument for selecting culture. Use 'trit' for wheat, 'oats' for
+\item{crop}{Argument for selecting culture. Use 'trit' for wheat, 'oat' for
 white oats, 'rye' for rye and 'barley' for barley}
 
 \item{stat}{Argument to select the function output type. Use 'all' to estimate

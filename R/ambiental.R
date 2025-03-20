@@ -676,6 +676,7 @@ ptermal <- function(DAY, AAT, RAD, PER,verbose=FALSE) {
 
   resultado <- resultado[order(resultado$DAY), ]
   if(verbose==TRUE){return(resultado)}
+  return(resultado)
 }
 
 #'Optimum conditions for pesticide application

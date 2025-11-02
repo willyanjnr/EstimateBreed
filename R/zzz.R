@@ -246,7 +246,6 @@ utils::globalVariables(
 
 #' @import dplyr
 #' @import ggplot2
-#' @import hrbrthemes
 #' @import broom
 #' @import ggrepel
 #' @import grid

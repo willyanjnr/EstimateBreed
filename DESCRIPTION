@@ -1,8 +1,8 @@
 Package: EstimateBreed
 Type: Package
 Title: Estimation of Environmental Variables and Genetic Parameters
-Version: 1.0.0
-Date: 2025-03-16
+Version: 1.0.1
+Date: 2025-04-17
 Authors@R: 
   c(person("Willyan Junior Adorian","Bandeira",
            role = c("aut", "cre"),

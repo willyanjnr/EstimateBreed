@@ -54,7 +54,8 @@ with(pheno, plast(GEN,TMED,EST,NN,habit="ind",plot=TRUE))
 
 Delta T, the difference between air temperature and dew point, is crucial for agrochemical application. The `tdelta()` function performs forecasting or retrospective analysis of climate data to understand the best time for application.
 
-```{r}
+```{r, eval = FALSE}
+# This function requires an internet connection to access the weather API.
 library(EstimateBreed)
 
 # Forecasting application conditions
